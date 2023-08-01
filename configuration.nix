@@ -43,17 +43,18 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
+  # Display Manager
   services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
 
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+  # Enable Hyprland
+  programs.hyprland.enable = true;
+  programs.hyprland.xwayland.enable = true;
+
+  # XDG Desktop Portal
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   };
 
   # Enable CUPS to print documents.
@@ -69,7 +70,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -90,14 +91,32 @@
     ];
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  # Enable Flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    
+    # Hyprland Stuff/Basic System Functionality
+    eww
+    libnotify
+    mako
+    polkit_gnome
+    swww
+    udiskie
+
+    # System Utils/I want this to be OS installed
+    micro
+    fluent-icon-theme
+    xfce.thunar
+    xfce.thunar-volman
+    xfce.thunar-archive-plugin
+
+    # Applications/To move to Flatpaks
+    kitty
+    #blackbox-terminal
+    
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
