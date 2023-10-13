@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+args@{ inputs, config, pkgs, ... }:
 
 {
     # Import default configs so flakes know how to behave by default
@@ -12,7 +12,7 @@
     home.homeDirectory = "/home/justinhs";
 
     # User-specific packages. I usually like having them at the system level.
-    home.packages = with pkgs; [];
+    home.packages = with pkgs; [ blackbox-terminal ];
 
     # Shell default environment variables
     # https://nix-community.github.io/home-manager/options.html#opt-home.sessionVariables
@@ -21,7 +21,12 @@
     };
 
     # hyprland config imported from file
-    wayland.windowManager.hyprland.extraConfig = import ../dotfiles/hypr.nix;
+    wayland.windowManager.hyprland = {
+        enable = true;
+        # the expression in the file is technically a lambda that needs args
+        # so this is how we give it args https://stackoverflow.com/a/58055106
+        extraConfig = import ../dotfiles/hypr.nix args; 
+    };
 
     # enable eww and link config location
     programs.eww = {
@@ -35,13 +40,13 @@
 
         config = {
             plugins = [ # Everything except randr, stdin, and dictionary
-                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/applications"
-                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/kidex"
-                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/rink"
-                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/shell"
-                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/symbols"
-                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/translate"
-                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/websearch"
+                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libapplications.so"
+                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libkidex.so"
+                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/librink.so"
+                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libshell.so"
+                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libsymbols.so"
+                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libtranslate.so"
+                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libwebsearch.so"
             ];
         };
 
