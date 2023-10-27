@@ -40,11 +40,25 @@
         # packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
         # packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
 
+        nixosConfigurations.justinhs-go = nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs system; };
+            modules = [ 
+                ./hardware-configuration.nix 
+                ./modules/core.nix
+                ./modules/desktop.nix
+                ./modules/dev.nix
+                ./users/justinhs.nix
+                { networking.hostName = "justinhs-go"; } 
+            ];
+        };
+
         nixosConfigurations.justinhs-tv = nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system; };
             modules = [ 
                 ./hardware-configuration.nix 
-                ./configs/configuration.nix 
+                ./modules/core.nix
+                ./modules/desktop.nix
+                ./users/justinhs.nix
                 { networking.hostName = "justinhs-tv"; } 
             ];
         };
