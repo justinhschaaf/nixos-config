@@ -2,20 +2,42 @@
 
 {
 
-    # Bootloader.
-    boot.loader.grub.enable = true;
-    boot.loader.grub.device = "/dev/sda";
-    boot.loader.grub.useOSProber = true;
+    # Bootloader. If you wanna use systemd, it's boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.grub = {
 
-    # networking.hostName = "nixos"; # Define your hostname. Moved to flake
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+        useOSProber = true;
+
+        # CA Keys Secure Boot support https://wiki.archlinux.org/title/GRUB#CA_Keys
+        # Bootloader still doesn't like it, likely need UKI support before it works https://wiki.archlinux.org/title/Unified_kernel_image
+        #extraGrubInstallArgs = [ "--bootloader-id=GRUB" "--modules=tpm" "--disable-shim-lock" ];
+
+        # UEFI Bootloader entry, based on auto-generated Fedora config
+        # and https://unix.stackexchange.com/questions/528454/how-do-i-add-firmware-setup-option-to-grub#532183
+        extraEntries = ''
+            if [ "$grub_platform" = "efi" ]; then
+                menuentry 'UEFI Firmware Settings' $menuentry_id_option 'uefi-firmware' {
+                    fwsetup
+                }
+            fi
+        '';
+
+        # Disable the NixOS theme
+        theme = null;
+        splashImage = null;
+
+    };
+
+    # Enable networking
+    networking.networkmanager.enable = true;
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-    # Enable networking
-    networking.networkmanager.enable = true;
 
     # Set your time zone.
     time.timeZone = "America/Los_Angeles";
@@ -35,38 +57,18 @@
         LC_TIME = "en_US.UTF-8";
     };
 
-    # Nix settings
-    nix.settings = {
-
-        # Enable Flakes
-        experimental-features = [ "nix-command" "flakes" ];
-
-        # Enable binary caching so the flake stuff isn't constantly recompiled
-        builders-use-substitutes = true;
-
-        substituters = [
-            "https://nix-community.cachix.org/"
-            "https://hyprland.cachix.org"
-            "https://anyrun.cachix.org"
-        ];
-
-        trusted-public-keys = [
-            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-            "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-            "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
-        ];
-
-    }; 
-
     # Automatically run updates using fcron instead of system.autoUpgrade
     # https://man.archlinux.org/man/fcrontab.5.en
     # TODO make this fetch the latest config from GitHub and setup GitHub CI to update the flake.lock
-    services.fcron = {
-        enable = true;
-        systab = ''
-            & 0 12 * * * sudo nixos-rebuild boot --upgrade
-            '';
-    };
+    #services.fcron = {
+    #    enable = true;
+    #    systab = ''
+    #        & 0 12 * * * sudo nixos-rebuild boot --upgrade
+    #        '';
+    #};
+
+    # Allow unfree packages
+    nixpkgs.config.allowUnfree = true;
 
     # List packages installed in system profile. To search, run:
     # $ nix search wget

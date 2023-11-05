@@ -4,6 +4,12 @@
 
     imports = [ 
 
+        # These can be imported here and not imported in subsequent modules
+        # Importing in subsequent modules causes an "already declared" error
+
+        # Import home manager so we can manage home
+        inputs.home-manager.nixosModules.home-manager 
+
         # Declarative flatpaks
         inputs.flatpaks.nixosModules.default
 
@@ -17,7 +23,7 @@
     services.xserver.displayManager.gdm.enable = true;
 
     # Enable touchpad support (enabled default in most desktopManager).
-    # services.xserver.libinput.enable = true;
+    services.xserver.libinput.enable = true;
 
     # XDG Desktop Portal
     xdg.portal = {
@@ -49,9 +55,17 @@
         #media-session.enable = true;
     };
 
+    # General Home Manager config
+    home-manager = {
+        extraSpecialArgs = { inherit inputs; };
+        useGlobalPkgs = true;
+        useUserPackages = true;
+    };
+
     environment.systemPackages = [
         
         # Hyprland Stuff/Basic System Functionality
+        pkgs.hyprland
         pkgs.eww
         pkgs.libnotify
         pkgs.mako
@@ -68,25 +82,33 @@
         # Applications
         pkgs.blackbox-terminal
         pkgs.gnome.gnome-system-monitor
+        pkgs.gparted
         
     ];
 
     # Flatpak config
     services.flatpak = {
 
-        # Enable and add repo
-        enable = true;
+        # Add repo
         remotes.flathub = "https://dl.flathub.org/repo/flathub.flatpakrepo";
 
         # Add Flatpaks. Format is <repo>:<ref>/<arch>/<branch>:<commit>
         # Branch is almost always "stable"
         packages = [
-            "flathub:com.github.tchx84.Flatseal//stable"
-            "flathub:org.mozilla.firefox//stable"
-            "flathub:org.nomacs.ImageLounge//stable"
-            "flathub:org.gnome.FileRoller//stable"
+            "flathub:app/com.gitlab.davem.ClamTk//stable"
+            "flathub:app/com.github.tchx84.Flatseal//stable"
+            "flathub:app/org.mozilla.firefox//stable"
+            "flathub:app/org.nomacs.ImageLounge//stable"
+            "flathub:app/org.gnome.FileRoller//stable"
+            "flathub:app/org.videolan.VLC//stable"
         ];
 
+    };
+
+    # Enable Hyprland. It has to be enabled on the system level too
+    programs.hyprland = {
+        enable = true;
+        xwayland.enable = true;
     };
 
     # Enable thunar here instead of using it with packages

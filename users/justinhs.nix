@@ -1,11 +1,6 @@
 { inputs, config, pkgs, ... }:
 
 {
-
-    imports = [ 
-        # Import home manager so we can manage home
-        inputs.home-manager.nixosModules.home-manager 
-    ];
   
     # Define people so Home Manager can find them
     users.users.justinhs = {
@@ -15,10 +10,6 @@
     };
 
     # Home Manager manages people
-    home-manager = {
-        extraSpecialArgs = { inherit inputs; };
-        useGlobalPkgs = true;
-        users.justinhs = import ../hmusers/justinhs.nix;
-    };
+    home-manager.users.justinhs = import ../hmusers/justinhs.nix;
 
 }

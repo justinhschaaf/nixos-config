@@ -4,11 +4,6 @@
 
 {
 
-    imports = [ 
-        # Declarative flatpaks
-        inputs.flatpaks.nixosModules.default
-    ];
-
     # Enable OpenGL
     hardware.opengl = {
         enable = true;
@@ -59,21 +54,11 @@
     ];
 
     # Flatpak config
-    services.flatpak = {
-
-        # Enable and add repo
-        enable = true;
-        remotes.flathub = "https://dl.flathub.org/repo/flathub.flatpakrepo";
-
-        # Add Flatpaks. Format is <repo>:<ref>/<arch>/<branch>:<commit>
-        # Branch is almost always "stable"
-        packages = [
-            "flathub:com.valvesoftware.Steam//stable"
-            "flathub:com.valvesoftware.Steam.CompatibilityTool.Proton-GE//stable"
-            "flathub:com.mojang.Minecraft//stable"
-            "flathub:fr.romainvigier.zap//stable"
-        ];
-
-    };
+    services.flatpak.packages = [
+        "flathub:app/com.valvesoftware.Steam//stable"
+        "flathub:runtime/com.valvesoftware.Steam.CompatibilityTool.Proton-GE//stable"
+        "flathub:app/com.mojang.Minecraft//stable"
+        "flathub:app/fr.romainvigier.zap//stable"
+    ];
 
 }

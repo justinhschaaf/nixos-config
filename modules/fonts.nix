@@ -2,6 +2,9 @@
 
 {
 
+    # Accept JoyPixels' special license
+    nixpkgs.config.joypixels.acceptLicense = true;
+
     # Fonts https://nixos.wiki/wiki/Fonts
     fonts = {
 
@@ -15,7 +18,7 @@
             comic-neue
             corefonts
             crimson-pro
-            dotcolon-fonts # includes alieron
+            dotcolon-fonts
             fira
             fraunces
             gelasio
@@ -54,11 +57,10 @@
         ];
 
         # What fonts to use as default
-        enableDefaultFonts = true;
-        fontConfig.defaultFonts = {
-            serif = [ "Blobmoji" "Gelasio" "Unifont" ];
-            sansSerif = [ "Blobmoji" "Alieron" "Unifont" ]; # TODO Vercetti
-            monospace = [ "Blobmoji" "Cascadia Code" "Unifont" ]; # TODO IBM Plex Mono
+        fontconfig.defaultFonts = {
+            serif = [ "Blobmoji Regular" "Gelasio Regular" "Unifont" ];
+            sansSerif = [ "Blobmoji Regular" "Nacelle Regular" "Unifont" ]; # TODO Vercetti
+            monospace = [ "Blobmoji Regular" "Cascadia Mono Regular" "Unifont" ]; # TODO IBM Plex Mono
         };
 
     };

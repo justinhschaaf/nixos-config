@@ -2,6 +2,29 @@
 
     description = "A very basic flake";
 
+    # Nix settings
+    nixConfig = {
+
+        # Enable Flakes
+        experimental-features = [ "nix-command" "flakes" ];
+
+        # Enable binary caching so the flake stuff isn't constantly recompiled
+        builders-use-substitutes = true;
+
+        substituters = [
+            "https://nix-community.cachix.org/"
+            "https://hyprland.cachix.org"
+            "https://anyrun.cachix.org"
+        ];
+
+        trusted-public-keys = [
+            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+            "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+            "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
+        ];
+
+    }; 
+
     inputs = {
 
         # Packages
@@ -13,9 +36,6 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        # Hyprland, even though it's in the repos we have to do this because flake
-        hyprland.url = "github:hyprwm/Hyprland";
-
         # anyrun https://github.com/Kirottu/anyrun
         anyrun = {
             url = "github:Kirottu/anyrun";
@@ -23,7 +43,10 @@
         };
 
         # Declarative flatpaks
-        flatpaks.url = "github:GermanBread/declarative-flatpak/stable";
+        flatpaks = { 
+            url = "github:GermanBread/declarative-flatpak/stable"; 
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 
     };
 

@@ -7,7 +7,7 @@
 {
     # Import default configs so flakes know how to behave by default
     imports = [ 
-        inputs.hyprland.homeManagerModules.default
+        inputs.anyrun.homeManagerModules.default
     ];
 
     # hyprland config imported from file
@@ -61,7 +61,7 @@
                 shadow_render_power = 3;
                 col.shadow = "rgba(1a1a1aee)";
 
-                blur {
+                blur = {
                     enabled = true;
                     size = 3;
                     passes = 1;
@@ -107,10 +107,14 @@
                 # Application keybinds, see https://wiki.hyprland.org/Configuring/Binds/ for more
                 "$mainMod, space, exec, anyrun"
                 "$mainMod, T, exec, blackbox"
-                "$mainMod, Q, killactive,"
                 "$mainMod, E, exec, thunar"
+                "$mainMod, R, exec, gnome-system-monitor"
+                "$mainMod, period, exec, flatpak run dev.krtirtho.Flemozi" # same as windows
+                "$mainMod SHIFT, C, exec, flatpak run com.github.finefindus.eyedropper" # same as powertoys
+
+                # Application interactions
+                "$mainMod, Q, killactive,"
                 "$mainMod, V, togglefloating," 
-                "$mainMod, R, exec, wofi --show drun"
                 "$mainMod, P, pseudo," # dwindle
                 "$mainMod, J, togglesplit," # dwindle
 
@@ -156,7 +160,7 @@
                 "$mainMod, mouse:273, resizewindow"
             ];
 
-        }
+        };
 
     };
 
