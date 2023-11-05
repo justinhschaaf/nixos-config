@@ -58,9 +58,10 @@
 
         # What fonts to use as default
         fontconfig.defaultFonts = {
-            serif = [ "Blobmoji Regular" "Gelasio Regular" "Unifont" ];
-            sansSerif = [ "Blobmoji Regular" "Nacelle Regular" "Unifont" ]; # TODO Vercetti
-            monospace = [ "Blobmoji Regular" "Cascadia Mono Regular" "Unifont" ]; # TODO IBM Plex Mono
+            serif = [ "Gelasio" "Unifont" ];
+            sansSerif = [ "Nacelle" "Unifont" ]; # TODO Vercetti
+            monospace = [ "Cascadia Mono" "Unifont" ]; # TODO IBM Plex Mono
+            emoji = [ "Blobmoji" ]
         };
 
     };
