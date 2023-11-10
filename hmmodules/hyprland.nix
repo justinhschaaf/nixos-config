@@ -46,10 +46,15 @@
             };
 
             general = {
+
                 gaps_in = 5;
                 gaps_out = 20;
                 border_size = 2;
                 layout = "dwindle";
+
+                "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+                "col.inactive_border" = "rgba(595959aa)";
+
             };
 
             decoration = {
@@ -59,7 +64,7 @@
                 drop_shadow = true;
                 shadow_range = 4;
                 shadow_render_power = 3;
-                col.shadow = "rgba(1a1a1aee)";
+                "col.shadow" = "rgba(1a1a1aee)";
 
                 blur = {
                     enabled = true;
@@ -92,12 +97,6 @@
 
             # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
             master.new_is_master = true;
-
-            # These options moved here in v0.31.0 https://github.com/hyprwm/Hyprland/releases/tag/v0.31.0
-            group = {
-                col.border_active = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-                col.border_inactive = "rgba(595959aa)";
-            };
 
             # See https://wiki.hyprland.org/Configuring/Keywords/ for more
             "$mainMod" = "SUPER";
