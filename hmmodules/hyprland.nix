@@ -2,7 +2,7 @@
 # Hyprland and helper applications
 #
 
-{ inputs, config, pkgs, ... }:
+{ inputs, osConfig, config, pkgs, ... }:
 
 {
     # Import default configs so flakes know how to behave by default
@@ -22,7 +22,9 @@
             # For a full list, see the wiki
 
             # See https://wiki.hyprland.org/Configuring/Monitors/
-            monitor = ",preferred,auto,auto";
+            monitor = if "${osConfig.system.name}" == "justinhs-go" 
+                then ",preferred,auto,1.5" 
+                else ",preferred,auto,auto";
 
             # Startup apps
             # & after each applications means launch in background
