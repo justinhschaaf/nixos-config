@@ -9,6 +9,7 @@
         experimental-features = [ "nix-command" "flakes" ];
 
         # Enable binary caching so the flake stuff isn't constantly recompiled
+        accept-flake-config = true;
         builders-use-substitutes = true;
 
         substituters = [
@@ -28,14 +29,7 @@
     inputs = {
 
         # Packages
-  	    nixpkgs = {
-            url = "github:nixos/nixpkgs/nixos-unstable";
-            config.packageOverrides = pkgs: {
-                justinhs = pkgs.callPackage (import (builtins.fetchGit {
-                    url = "https://github.com/justinhschaaf/nix-packages";
-                })) {};
-            };
-        };
+  	    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
         # Home Manager
         home-manager = {
@@ -63,6 +57,11 @@
         pkgs = import nixpkgs {
             inherit system;
             config.allowUnfree = true;
+            config.packageOverrides = pkgs: {
+                justinhs = pkgs.callPackage (import (builtins.fetchGit {
+                    url = "https://github.com/justinhschaaf/nix-packages";
+                })) {};
+            };
         };
     in
     {

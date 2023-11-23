@@ -67,7 +67,7 @@
             serif = [ "Gelasio" "Unifont" ];
             sansSerif = [ "Vercetti" "Nacelle" "Unifont" ];
             monospace = [ "IBM Plex Mono" "Cascadia Mono" "Unifont" ];
-            emoji = [ "Blobmoji" ]
+            emoji = [ "Blobmoji" ];
         };
 
     };
