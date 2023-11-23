@@ -28,7 +28,14 @@
     inputs = {
 
         # Packages
-  	    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+  	    nixpkgs = {
+            url = "github:nixos/nixpkgs/nixos-unstable";
+            config.packageOverrides = pkgs: {
+                justinhs = pkgs.callPackage (import (builtins.fetchGit {
+                    url = "https://github.com/justinhschaaf/nix-packages";
+                })) {};
+            };
+        };
 
         # Home Manager
         home-manager = {

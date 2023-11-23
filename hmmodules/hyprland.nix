@@ -22,9 +22,11 @@
             # For a full list, see the wiki
 
             # See https://wiki.hyprland.org/Configuring/Monitors/
-            monitor = if "${osConfig.system.name}" == "justinhs-go" 
-                then ",preferred,auto,1.5" 
-                else ",preferred,auto,auto";
+            # Custom config superseded by wdisplays, hopefully
+            #monitor = if "${osConfig.system.name}" == "justinhs-go" 
+            #    then ",preferred,auto,1.5" 
+            #    else ",preferred,auto,auto";
+            monitor = ",preferred,auto,auto";
 
             # Startup apps
             # & after each applications means launch in background

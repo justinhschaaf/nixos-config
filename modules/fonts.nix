@@ -19,16 +19,20 @@
             corefonts
             crimson-pro
             dotcolon-fonts
+            justinhs.dripicons
             fira
             fraunces
             gelasio
             helvetica-neue-lt-std
+            ibm-plex
             iwona
             jost
             joypixels
             junction-font
+            justinhs.kenney-fonts
             lexend
             liberation_ttf
+            justinhs.major-mono-display
             manrope
             merriweather
             merriweather-sans
@@ -47,8 +51,10 @@
             rubik
             scientifica
             the-neue-black
+            justinhs.typewithpride
             ubuntu_font_family
             unifont
+            justinhs.vercetti
             victor-mono
             vistafonts
             vollkorn
@@ -59,8 +65,8 @@
         # What fonts to use as default
         fontconfig.defaultFonts = {
             serif = [ "Gelasio" "Unifont" ];
-            sansSerif = [ "Nacelle" "Unifont" ]; # TODO Vercetti
-            monospace = [ "Cascadia Mono" "Unifont" ]; # TODO IBM Plex Mono
+            sansSerif = [ "Vercetti" "Nacelle" "Unifont" ];
+            monospace = [ "IBM Plex Mono" "Cascadia Mono" "Unifont" ];
             emoji = [ "Blobmoji" ]
         };
 

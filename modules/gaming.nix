@@ -47,7 +47,12 @@
     # Not sure if this applies because homemanager mostly manages hyprland
     programs.hyprland.enableNvidiaPatches = true;
 
+    # Let Steam play nice with the firewall
+    programs.steam.dedicatedServer.openFirewall = true;
+    programs.steam.remotePlay.openFirewall = true;
+
     environment.systemPackages = with pkgs; [
+        davinci-resolve
         gamemode
         gamescope
         nvidia-system-monitor-qt

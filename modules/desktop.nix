@@ -65,24 +65,28 @@
     environment.systemPackages = [
         
         # Hyprland Stuff/Basic System Functionality
+        pkgs.eww-wayland
+        pkgs.gvfs
         pkgs.hyprland
-        pkgs.eww
         pkgs.libnotify
         pkgs.mako
         pkgs.polkit_gnome
         pkgs.swww
         pkgs.udiskie
+        pkgs.wl-clipboard
+        pkgs.wl-clipboard-x11
+        pkgs.wl-clip-persist
         inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
-        # https://github.com/ArtsyMacaw/wlogout
         # https://github.com/ErikReider/SwayOSD
-
-        # System Utils
-        pkgs.fluent-icon-theme
+        # https://github.com/Big-B/swaylock-fancy
+        # https://github.com/swaywm/swayidle
+        # https://github.com/gabm/satty
 
         # Applications
         pkgs.blackbox-terminal
         pkgs.gnome.gnome-system-monitor
         pkgs.gparted
+        pkgs.wdisplays
         
     ];
 
