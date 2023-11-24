@@ -11,6 +11,7 @@
         # Enable binary caching so the flake stuff isn't constantly recompiled
         accept-flake-config = true;
         builders-use-substitutes = true;
+        no-eval-cache = true; # https://github.com/NixOS/nix/issues/3872#issuecomment-1637052258
 
         substituters = [
             "https://cache.nixos.org"
@@ -32,6 +33,12 @@
 
         # Packages
   	    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+        # justinhs packages
+        justinhs-packages = {
+            url = "github:justinhschaaf/nix-packages/main";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 
         # Home Manager
         home-manager = {
@@ -56,15 +63,8 @@
     outputs = { self, nixpkgs, ... }@inputs:
     let
         system = "x86_64-linux";
-        pkgs = import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-            config.packageOverrides = pkgs: {
-                justinhs = pkgs.callPackage (import (builtins.fetchGit {
-                    url = "https://github.com/justinhschaaf/nix-packages";
-                })) {};
-            };
-        };
+        pkgs = import nixpkgs { inherit system; };
+        jspkgs = import justinhs-packages { inherit system; };
     in
     {
 
@@ -72,7 +72,7 @@
         # packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
 
         nixosConfigurations.justinhs-go = nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system; };
+            specialArgs = { inherit inputs system jspkgs; };
             modules = [ 
                 ./hardware-configuration.nix 
                 ./modules/core.nix
@@ -84,7 +84,7 @@
         };
 
         nixosConfigurations.justinhs-tv = nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system; };
+            specialArgs = { inherit inputs system jspkgs; };
             modules = [ 
                 ./hardware-configuration.nix 
                 ./modules/core.nix

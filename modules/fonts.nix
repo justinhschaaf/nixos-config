@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, jspkgs, ... }:
 
 {
 
@@ -10,56 +10,61 @@
 
         # What fonts to install
         # Many here because a) i'm a font addict, and b) gimme some options like Windows
-        packages = with pkgs; [
-            b612
-            barlow
-            cascadia-code
-            chonburi-font
-            comic-neue
-            corefonts
-            crimson-pro
-            dotcolon-fonts
-            justinhs.dripicons
-            fira
-            fraunces
-            gelasio
-            helvetica-neue-lt-std
-            ibm-plex
-            iwona
-            jost
-            joypixels
-            junction-font
-            justinhs.kenney-fonts
-            lexend
-            liberation_ttf
-            justinhs.major-mono-display
-            manrope
-            merriweather
-            merriweather-sans
-            monocraft
-            mplus-outline-fonts.githubRelease
-            nanum
-            norwester-font
-            #noto-fonts # I'm afraid of this adding all 200 fonts
-            noto-fonts-emoji-blob-bin
-            ostrich-sans
-            overpass
-            poly
-            prociono
-            raleway
-            recursive
-            rubik
-            scientifica
-            the-neue-black
-            justinhs.typewithpride
-            ubuntu_font_family
-            unifont
-            justinhs.vercetti
-            victor-mono
-            vistafonts
-            vollkorn
-            work-sans
-            zilla-slab
+        packages = [
+
+            # Personal package repo
+            jspkgs.dripicons
+            jspkgs.kenney-fonts
+            jspkgs.major-mono-display
+            jspkgs.typewithpride
+            jspkgs.vercetti
+
+            # From nixpkgs
+            pkgs.b612
+            pkgs.barlow
+            pkgs.cascadia-code
+            pkgs.chonburi-font
+            pkgs.comic-neue
+            pkgs.corefonts
+            pkgs.crimson-pro
+            pkgs.dotcolon-fonts
+            pkgs.fira
+            pkgs.fraunces
+            pkgs.gelasio
+            pkgs.helvetica-neue-lt-std
+            pkgs.ibm-plex
+            pkgs.iwona
+            pkgs.jost
+            pkgs.joypixels
+            pkgs.junction-font
+            pkgs.lexend
+            pkgs.liberation_ttf
+            pkgs.manrope
+            pkgs.merriweather
+            pkgs.merriweather-sans
+            pkgs.monocraft
+            pkgs.mplus-outline-fonts.githubRelease
+            pkgs.nanum
+            pkgs.norwester-font
+            #pkgs.noto-fonts # I'm afraid of this adding all 200 fonts
+            pkgs.noto-fonts-emoji-blob-bin
+            pkgs.ostrich-sans
+            pkgs.overpass
+            pkgs.poly
+            pkgs.prociono
+            pkgs.raleway
+            pkgs.recursive
+            pkgs.rubik
+            pkgs.scientifica
+            pkgs.the-neue-black
+            pkgs.ubuntu_font_family
+            pkgs.unifont
+            pkgs.victor-mono
+            pkgs.vistafonts
+            pkgs.vollkorn
+            pkgs.work-sans
+            pkgs.zilla-slab
+            
         ];
 
         # What fonts to use as default
