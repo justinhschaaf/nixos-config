@@ -28,11 +28,17 @@
             #    else ",preferred,auto,auto";
             monitor = ",preferred,auto,auto";
 
+            # Idle lock https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
+            "$lock" = "swaylock --daemonize";
+
             # Startup apps
             # & after each applications means launch in background
             # e.g. exec-once = waybar & hyprpaper & firefox
             # launch location for gnome polkit: https://nixos.wiki/wiki/Polkit
-            exec-once = "mako & ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 & udiskie &";
+            exec-once = ''
+            mako & ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 & udiskie & sway-audio-idle-inhibit &
+            swayidle -w timeout 300 '$lock' timeout 300 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep '$lock' &
+            '';
 
             # Some default env vars.
             env = "XCURSOR_SIZE,24";
@@ -114,6 +120,9 @@
                 "$mainMod, R, exec, gnome-system-monitor"
                 "$mainMod, period, exec, flatpak run dev.krtirtho.Flemozi" # same as windows
                 "$mainMod SHIFT, C, exec, flatpak run com.github.finefindus.eyedropper" # same as powertoys
+
+                # System keybinds
+                "$mainMod, L, exec, $lock"
 
                 # Application interactions
                 "$mainMod, Q, killactive,"

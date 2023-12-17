@@ -34,6 +34,13 @@
     # Enable CUPS to print documents.
     services.printing.enable = true;
 
+    # Let us sign back in after locking the computer https://github.com/NixOS/nixpkgs/issues/143365
+    security.pam.services.swaylock = {};
+
+    # Enable GVFS and Tumbler for Thunar features
+    services.gvfs.enable = true;
+    services.tumbler.enable = true;
+
     # Enable udisks2 for udiskie
     services.udisks2.enable = true;
     services.udisks2.mountOnMedia = true;
@@ -66,21 +73,36 @@
         
         # Hyprland Stuff/Basic System Functionality
         pkgs.eww-wayland
-        pkgs.gvfs
         pkgs.hyprland
         pkgs.libnotify
         pkgs.mako
         pkgs.polkit_gnome
         pkgs.swww
         pkgs.udiskie
+        inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
+        # https://github.com/ErikReider/SwayOSD
+
+        # Clipboard
         pkgs.wl-clipboard
         pkgs.wl-clipboard-x11
         pkgs.wl-clip-persist
-        inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
-        # https://github.com/ErikReider/SwayOSD
-        # https://github.com/Big-B/swaylock-fancy
-        # https://github.com/swaywm/swayidle
-        # https://github.com/gabm/satty
+
+        # Screenshots
+        pkgs.grim
+        pkgs.satty
+        pkgs.slurp
+
+        # Sleep
+        pkgs.sway-audio-idle-inhibit
+        pkgs.swayidle
+        pkgs.swaylock
+
+        # File thumbnails
+        pkgs.f3d
+        pkgs.ffmpegthumbnailer
+        pkgs.libgsf
+        pkgs.poppler
+        pkgs.webp-pixbuf-loader
 
         # Applications
         pkgs.blackbox-terminal
@@ -92,6 +114,9 @@
 
     # Flatpak config
     services.flatpak = {
+
+        # Turn on here, don't do anywhere else
+        enable = true;
 
         # Add repo
         remotes.flathub = "https://dl.flathub.org/repo/flathub.flatpakrepo";

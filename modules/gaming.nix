@@ -53,6 +53,7 @@
 
     environment.systemPackages = with pkgs; [
         davinci-resolve
+        ffmpeg
         gamemode
         gamescope
         nvidia-system-monitor-qt

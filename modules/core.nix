@@ -67,6 +67,10 @@
     #        '';
     #};
 
+    # Allow flakes and nix-command systemwide
+    # this is declared in the flake why tf do i have to do it again
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
