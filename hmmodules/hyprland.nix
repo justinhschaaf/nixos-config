@@ -30,6 +30,9 @@
             # Idle lock https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
             "$lock" = "swaylock --daemonize";
 
+            # Screenshot editor
+            "$satty" = "satty --filename - --fullscreen --copy-command 'wl-copy' --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H%M%S').png";
+
             # Startup apps
             # & after each applications means launch in background
             # e.g. exec-once = waybar & hyprpaper & firefox
@@ -125,10 +128,13 @@
                 "$mainMod, E, exec, thunar"
                 "$mainMod, R, exec, gnome-system-monitor"
                 "$mainMod, period, exec, flatpak run dev.krtirtho.Flemozi" # same as windows
-                "$mainMod SHIFT, C, exec, flatpak run com.github.finefindus.eyedropper" # same as powertoys, TODO broken app
+                "$mainMod SHIFT, C, exec, notify-send -a 'hyprpicker' 'Color: $(hyprpicker -anr)' 'The selected color has been copied to your clipboard.'" # same as powertoys
 
                 # System keybinds
                 "$mainMod, L, exec, $lock"
+                ",Print, exec, grimblast --freeze save area - | $satty"
+                "CTRL,Print, exec, grimblast --freeze save active - | $satty"
+                "ALT,Print, exec, grimblast --freeze save output - | $satty"
 
                 # Application interactions
                 "$mainMod, Q, killactive,"

@@ -89,6 +89,9 @@
 
         # Screenshots
         pkgs.grim
+        pkgs.grimblast
+        pkgs.hyprpicker
+        pkgs.jq
         pkgs.satty
         pkgs.slurp
 

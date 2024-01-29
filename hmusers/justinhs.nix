@@ -30,7 +30,6 @@
         packages = [
             "flathub:app/com.bitwarden.desktop//stable"
             "flathub:app/com.github.PintaProject.Pinta//stable"
-            "flathub:app/com.github.finefindus.eyedropper//stable"
             "flathub:app/com.github.marktext.marktext//stable"
             "flathub:app/com.github.micahflee.torbrowser-launcher//stable"
             "flathub:app/com.obsproject.Studio//stable"
