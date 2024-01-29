@@ -12,7 +12,12 @@
     home.homeDirectory = "/home/justinhs";
 
     # User-specific packages. I usually like having them at the system level.
-    #home.packages = with pkgs; [ blackbox-terminal ];
+    home.packages = with pkgs; [ 
+        cmatrix
+        dotacat
+        jp2a
+        pipes-rs
+    ];
 
     # Flatpak config
     services.flatpak = {

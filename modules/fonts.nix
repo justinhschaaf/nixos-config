@@ -13,6 +13,7 @@
         packages = [
 
             # Personal package repo
+            jspkgs.bayon
             jspkgs.dripicons
             jspkgs.kenney-fonts
             jspkgs.major-mono-display

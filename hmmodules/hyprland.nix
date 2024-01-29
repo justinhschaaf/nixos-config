@@ -22,11 +22,10 @@
             # For a full list, see the wiki
 
             # See https://wiki.hyprland.org/Configuring/Monitors/
-            # Custom config superseded by wdisplays, hopefully
-            #monitor = if "${osConfig.system.name}" == "justinhs-go" 
-            #    then ",preferred,auto,1.5" 
-            #    else ",preferred,auto,auto";
-            monitor = ",preferred,auto,auto";
+            # Wdisplays exists and is installed, but config doesn't save between restarts
+            monitor = if "${osConfig.system.name}" == "justinhs-go" 
+                then ",preferred,auto,1.5" 
+                else ",preferred,auto,auto";
 
             # Idle lock https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
             "$lock" = "swaylock --daemonize";

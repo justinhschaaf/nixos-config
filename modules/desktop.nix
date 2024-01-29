@@ -120,6 +120,7 @@
 
         # Add repo
         remotes.flathub = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+        remotes.flathub-beta = "https://flathub.org/beta-repo/flathub-beta.flatpakrepo";
 
         # Add Flatpaks. Format is <repo>:<ref>/<arch>/<branch>:<commit>
         # Branch is almost always "stable"

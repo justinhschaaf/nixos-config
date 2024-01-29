@@ -24,6 +24,14 @@
         };
     };
 
+    # Clean up old generations weekly
+    # https://github.com/kjhoerr/dotfiles/blob/trunk/.config/nixos/os/upgrade.nix
+    nix.gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 30d";
+    };
+
     # We need git and libnotify for this to work
     # yes it's declared elsewhere, no i don't care
     environment.systemPackages = with pkgs; [
