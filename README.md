@@ -14,14 +14,14 @@ For now, if you're interested enough to see what I'm making here, feel free to s
 
 - [x] Have this file hosted in a GitHub repo justinhschaaf/nixos-config
 - [x] Actually comment shit so I know what it does
-- [ ] Automatic updates which pull from the GitHub repo
+- [x] Automatic updates which pull from the GitHub repo
 - [x] Perhaps have separate configs for each machine defined, need some way to specify which profile to build
 - [x] Use the on-disk hardware-configuration.nix instead of having to pull it from GitHub
 - [x] Setup Home Manager
 - [x] Configure hyprland through home manager
 - [x] Declarative Flatpaks
 - [ ] Mimetypes https://mipmip.github.io/home-manager-option-search/?query=mime https://github.com/nix-community/home-manager/issues/96 https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
-- [ ] Zsh config https://nixos.wiki/wiki/Zsh
+- [ ] Fish config https://nixos.wiki/wiki/Fish
 - [ ] Frosted glass for theming. maybe soft rainbow gradients too?
 - [ ] EWW vertical taskbar, control center, and maybe notification daemon (history at least)
 - [ ] Mako notification config https://github.com/emersion/mako/issues/91#issuecomment-1750748445

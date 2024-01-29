@@ -75,6 +75,7 @@
             specialArgs = { inherit inputs system jspkgs; };
             modules = [ 
                 ./hardware-configuration.nix 
+                ./modules/autoupdate.nix
                 ./modules/core.nix
                 ./modules/desktop.nix
                 ./modules/dev.nix
@@ -87,6 +88,7 @@
             specialArgs = { inherit inputs system jspkgs; };
             modules = [ 
                 ./hardware-configuration.nix 
+                ./modules/autoupdate.nix
                 ./modules/core.nix
                 ./modules/desktop.nix
                 ./users/justinhs.nix

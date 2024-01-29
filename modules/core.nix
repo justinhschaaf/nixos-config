@@ -57,16 +57,6 @@
         LC_TIME = "en_US.UTF-8";
     };
 
-    # Automatically run updates using fcron instead of system.autoUpgrade
-    # https://man.archlinux.org/man/fcrontab.5.en
-    # TODO make this fetch the latest config from GitHub and setup GitHub CI to update the flake.lock
-    #services.fcron = {
-    #    enable = true;
-    #    systab = ''
-    #        & 0 12 * * * sudo nixos-rebuild boot --upgrade
-    #        '';
-    #};
-
     # Allow flakes and nix-command systemwide
     # this is declared in the flake why tf do i have to do it again
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
