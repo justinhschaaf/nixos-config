@@ -67,14 +67,28 @@
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment.systemPackages = with pkgs; [
+
         hyfetch
         micro
+
+        # fish plugins
+        fishPlugins.colored-man-pages
+        fishPlugins.done
+        fishPlugins.pisces
+        fishPlugins.puffer
+        fishPlugins.sponge
+        fishPlugins.tide
+        
     ];
 
     # No more nano
     environment.variables = {
         EDITOR = "micro";
     };
+
+    # No more bash https://nixos.wiki/wiki/Fish
+    programs.fish.enable = true;
+    users.defaultUserShell = pkgs.fish;
 
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
