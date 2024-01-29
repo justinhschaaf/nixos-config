@@ -43,12 +43,6 @@
 
     };
 
-    # Shell default environment variables
-    # https://nix-community.github.io/home-manager/options.html#opt-home.sessionVariables
-    home.sessionVariables = {
-        EDITOR = "micro";
-    };
-
     # micro editor config https://github.com/zyedidia/micro/blob/master/runtime/help/options.md
     programs.micro.settings = {
         rmtrailingws = true;

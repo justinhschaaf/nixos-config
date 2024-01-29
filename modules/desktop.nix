@@ -105,7 +105,7 @@
         pkgs.webp-pixbuf-loader
 
         # Applications
-        pkgs.blackbox-terminal
+        pkgs.kitty
         pkgs.gnome.gnome-system-monitor
         pkgs.gparted
         pkgs.wdisplays
@@ -124,7 +124,6 @@
         # Add Flatpaks. Format is <repo>:<ref>/<arch>/<branch>:<commit>
         # Branch is almost always "stable"
         packages = [
-            "flathub:app/com.gitlab.davem.ClamTk//stable"
             "flathub:app/com.github.tchx84.Flatseal//stable"
             "flathub:app/org.mozilla.firefox//stable"
             "flathub:app/org.nomacs.ImageLounge//stable"

@@ -115,11 +115,11 @@
 
                 # Application keybinds, see https://wiki.hyprland.org/Configuring/Binds/ for more
                 "$mainMod, space, exec, anyrun"
-                "$mainMod, T, exec, blackbox"
+                "$mainMod, T, exec, kitty"
                 "$mainMod, E, exec, thunar"
                 "$mainMod, R, exec, gnome-system-monitor"
                 "$mainMod, period, exec, flatpak run dev.krtirtho.Flemozi" # same as windows
-                "$mainMod SHIFT, C, exec, flatpak run com.github.finefindus.eyedropper" # same as powertoys
+                "$mainMod SHIFT, C, exec, flatpak run com.github.finefindus.eyedropper" # same as powertoys, TODO broken app
 
                 # System keybinds
                 "$mainMod, L, exec, $lock"
