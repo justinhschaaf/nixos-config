@@ -42,6 +42,7 @@
             "flathub:app/org.mozilla.Thunderbird//stable"
             "flathub:app/org.signal.Signal//stable"
             "flathub:app/org.tenacityaudio.Tenacity//stable"
+            "flathub:app/org.torproject.torbrowser-launcher//stable"
             "flathub:app/us.zoom.Zoom//stable"
         ];
 
