@@ -35,10 +35,17 @@
             # & after each applications means launch in background
             # e.g. exec-once = waybar & hyprpaper & firefox
             # launch location for gnome polkit: https://nixos.wiki/wiki/Polkit
-            exec-once = ''
-            mako & ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 & udiskie & sway-audio-idle-inhibit &
-            swayidle -w timeout 300 '$lock' timeout 300 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep '$lock' &
-            '';
+            exec-once = [
+
+                "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+                "udiskie"
+                "mako"
+
+                # System sleep
+                "sway-audio-idle-inhibit"
+                "swayidle -w timeout 300 '$lock' timeout 300 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep '$lock'"
+            
+            ];
 
             # Some default env vars.
             env = "XCURSOR_SIZE,24";
