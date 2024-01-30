@@ -22,6 +22,10 @@
         rustup # includes cargo
         jetbrains.rust-rover # No flatpak yet
 
+        # Misc
+        etcher
+        vial
+
     ];
 
     # Flatpak config

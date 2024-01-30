@@ -23,7 +23,7 @@
         enable = true;
         settings = {
             default_session = {
-                # yes, the Hyprland command starts with a capital letter https://discourse.nixos.org/t/gtkgreet-or-regreeter-with-greetd-with-hyprland/29202
+                # yes, the Hyprland command starts with a capital letter https://wiki.hyprland.org/Nix/
                 command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks --time --user-menu --cmd Hyprland";
             };
         };
@@ -35,7 +35,14 @@
     # XDG Desktop Portal
     xdg.portal = {
         enable = true;
-        extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+        extraPortals = with pkgs; [
+            xdg-desktop-portal-gtk # Needed for file picker
+            xdg-desktop-portal-hyprland # Needed for screen sharing
+        ];
+        config.common = {
+            default = [ "hyprland" ];
+            "org.freedesktop.impl.portal.FileChooser" = "gtk";
+        };
     };
 
     # Enable CUPS to print documents.
@@ -106,6 +113,7 @@
         pkgs.sway-audio-idle-inhibit
         pkgs.swayidle
         pkgs.swaylock
+        pkgs.graphicsmagick
 
         # File thumbnails
         pkgs.f3d
@@ -135,6 +143,7 @@
         # Add Flatpaks. Format is <repo>:<ref>/<arch>/<branch>:<commit>
         # Branch is almost always "stable"
         packages = [
+            "flathub:app/app.drey.Warp//stable"
             "flathub:app/com.github.tchx84.Flatseal//stable"
             "flathub:app/org.mozilla.firefox//stable"
             "flathub:app/org.nomacs.ImageLounge//stable"
@@ -149,6 +158,9 @@
         enable = true;
         xwayland.enable = true;
     };
+
+    # Tell Electron apps to use Wayland
+    environment.sessionVariables.NIXOS_OZONE_WL = 1;
 
     # Enable thunar here instead of using it with packages
     # see https://nixos.org/manual/nixos/stable/#sec-xfce-thunar-plugins
