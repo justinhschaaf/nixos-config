@@ -18,9 +18,16 @@
 
     ];
 
-    # Display Manager
-    services.xserver.enable = true;
-    services.xserver.displayManager.gdm.enable = true;
+    # greetd, declare multiple sessions as per https://github.com/apognu/tuigreet?tab=readme-ov-file#sessions
+    services.greetd = {
+        enable = true;
+        settings = {
+            default_session = {
+                # yes, the Hyprland command starts with a capital letter https://discourse.nixos.org/t/gtkgreet-or-regreeter-with-greetd-with-hyprland/29202
+                command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks --time --user-menu --cmd Hyprland";
+            };
+        };
+    };
 
     # Enable touchpad support (enabled default in most desktopManager).
     services.xserver.libinput.enable = true;

@@ -34,8 +34,6 @@
             "$satty" = "satty --filename - --fullscreen --copy-command 'wl-copy' --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H%M%S').png";
 
             # Startup apps
-            # & after each applications means launch in background
-            # e.g. exec-once = waybar & hyprpaper & firefox
             # launch location for gnome polkit: https://nixos.wiki/wiki/Polkit
             exec-once = [
 

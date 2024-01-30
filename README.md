@@ -21,13 +21,14 @@ For now, if you're interested enough to see what I'm making here, feel free to s
 - [x] Configure hyprland through home manager
 - [x] Declarative Flatpaks
 - [ ] Mimetypes https://mipmip.github.io/home-manager-option-search/?query=mime https://github.com/nix-community/home-manager/issues/96 https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
-- [ ] Fish config https://nixos.wiki/wiki/Fish
+- [x] Fish config https://nixos.wiki/wiki/Fish
 - [ ] Frosted glass for theming. maybe soft rainbow gradients too?
 - [ ] EWW vertical taskbar, control center, and maybe notification daemon (history at least)
 - [ ] Mako notification config https://github.com/emersion/mako/issues/91#issuecomment-1750748445
 - [ ] Migrate from Blackbox to Kitty and make it as beautiful as Blackbox https://sw.kovidgoyal.net/kitty/conf/ (kangawabones color theme)
 - [ ] Make Anyrun look like Spotlight Search but two column results
 - [ ] Dark theme, make sure it works in Thunar
+- [ ] Add generic `root` and `user` users for TV config
 
 ## References
 
