@@ -69,14 +69,14 @@
                 border_size = 2;
                 layout = "dwindle";
 
-                "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+                "col.active_border" = "rgba(ffffffff)";
                 "col.inactive_border" = "rgba(595959aa)";
 
             };
 
             decoration = {
 
-                rounding = 10;
+                rounding = 0;
 
                 drop_shadow = true;
                 shadow_range = 4;
@@ -85,8 +85,8 @@
 
                 blur = {
                     enabled = true;
-                    size = 3;
-                    passes = 1;
+                    size = 10;
+                    passes = 2;
                     new_optimizations = true;
                 };
                 
@@ -130,9 +130,18 @@
 
                 # System keybinds
                 "$mainMod, L, exec, $lock"
-                ",Print, exec, grimblast --freeze save area - | $satty"
-                "CTRL,Print, exec, grimblast --freeze save active - | $satty"
-                "ALT,Print, exec, grimblast --freeze save output - | $satty"
+
+                # Screenshot
+                ", Print, exec, grimblast --freeze save area - | $satty"
+                "CTRL, Print, exec, grimblast --freeze save active - | $satty"
+                "ALT, Print, exec, grimblast --freeze save output - | $satty"
+
+                # Brightness and volume https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
+                ", xf86monbrightnessup, exec, brightnessctl set 5%+"
+                ", xf86monbrightnessdown, exec, brightnessctl set 5%-"
+                ", xf86audioraisevolume, exec, wpctl set-volume -l 1.0 @DEFAULT_SINK@ 5%+"
+                ", xf86audiolowervolume, exec, wpctl set-volume -l 1.0 @DEFAULT_SINK@ 5%-"
+                ", xf86audiomute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
 
                 # Application interactions
                 "$mainMod, Q, killactive,"

@@ -5,6 +5,7 @@
     imports = [
         inputs.flatpaks.homeManagerModules.default
         ../hmmodules/hyprland.nix
+        ../hmmodules/terminal.nix
     ];
 
     # Personal info and the home path to manage
@@ -12,12 +13,7 @@
     home.homeDirectory = "/home/justinhs";
 
     # User-specific packages. I usually like having them at the system level.
-    home.packages = with pkgs; [ 
-        cmatrix
-        dotacat
-        jp2a
-        pipes-rs
-    ];
+    #home.packages = with pkgs; []; # Terminal toys moved to hmmodules/terminal.nix
 
     # Flatpak config
     services.flatpak = {
@@ -45,13 +41,6 @@
             "flathub:app/us.zoom.Zoom//stable"
         ];
 
-    };
-
-    # micro editor config https://github.com/zyedidia/micro/blob/master/runtime/help/options.md
-    programs.micro.settings = {
-        rmtrailingws = true;
-        saveundo = true;
-        tabstospaces = true;
     };
 
     ######## Stuff that shouldn't be touched is below this line ########

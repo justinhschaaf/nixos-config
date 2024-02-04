@@ -86,6 +86,7 @@
     environment.systemPackages = [
         
         # Hyprland Stuff/Basic System Functionality
+        pkgs.brightnessctl
         pkgs.eww-wayland
         pkgs.hyprland
         pkgs.libnotify

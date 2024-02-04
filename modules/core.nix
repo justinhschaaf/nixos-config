@@ -70,6 +70,7 @@
 
         hyfetch
         micro
+        thefuck
 
         # fish plugins
         fishPlugins.colored-man-pages
