@@ -62,9 +62,8 @@
     # Flatpak config
     services.flatpak.packages = [
         "flathub:app/com.valvesoftware.Steam//stable"
-        "flathub:runtime/com.valvesoftware.Steam.CompatibilityTool.Proton-GE//stable"
         "flathub:app/com.mojang.Minecraft//stable"
-        "flathub:app/fr.romainvigier.zap//stable"
+        "flathub:app/net.davidotek.pupgui2//stable"
     ];
 
 }
