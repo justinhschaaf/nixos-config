@@ -83,6 +83,9 @@
     ];
 
     # No more nano
+    # I'd also like to change the default nix-shell to fish
+    # It's theoretically possible, but naturally, I can't get it to work
+    # fml https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#environment-variables
     environment.variables = {
         EDITOR = "micro";
     };

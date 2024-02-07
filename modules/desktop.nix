@@ -29,6 +29,30 @@
         };
     };
 
+    # these don't work lmao
+    # Make sure TTY2 is loaded, remember to re-add the lib import when uncommenting
+    #systemd.services.greetd.unitConfig.After = lib.mkForce [
+    #    "systemd-user-sessions.service"
+    #    "plymouth-quit-wait.service"
+    #    "getty@tty2.service" 
+    #];
+
+    # Make sure tuigreet doesn't get covered in logs https://github.com/apognu/tuigreet/issues/68#issuecomment-1586359960
+    #systemd.services.greetd.serviceConfig = {
+
+    #    Type = "idle";
+    #    StandardInput = "tty";
+    #    StandardOutput = "tty";
+    #    StandardError = "journal"; # Without this errors will spam on screen
+
+    #    # Without these bootlogs will spam on screen
+    #    TTYPath = "/dev/tty2";
+    #    TTYReset = true;
+    #    TTYVHangup = true;
+    #    TTYVTDisallocate = true;
+
+    #};
+
     # Enable touchpad support (enabled default in most desktopManager).
     services.xserver.libinput.enable = true;
 

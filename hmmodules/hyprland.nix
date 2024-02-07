@@ -40,6 +40,7 @@
                 "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
                 "udiskie"
                 "mako"
+                "swww init"
 
                 # System sleep
                 "sway-audio-idle-inhibit"

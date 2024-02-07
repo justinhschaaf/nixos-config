@@ -1,4 +1,10 @@
-#!/bin/bash
+#! /usr/bin/env nix-shell
+#! nix-shell -i bash -p git
+# https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#use-as-a--interpreter
+
+# Needs to be ran as sudo unless your CFGDIR is in userspace
+# "If you do not have Bash or the GNU Coreutils installed when running this, God help you."
+# https://theportalwiki.com/wiki/Announcer_voice_lines#Chamber_06
 
 CFGDIR="/etc/nixos/"
 

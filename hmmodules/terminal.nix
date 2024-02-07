@@ -1,5 +1,6 @@
 #
 # Fish, Kitty, and Micro
+# https://youtu.be/cT-BBr4d314?feature=shared
 #
 
 { inputs, config, pkgs, ... }:
