@@ -32,8 +32,13 @@
     };
 
     # Enable networking, usuable with nmtui
-    networking.networkmanager.enable = true;
-    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    # Also enable privacy tweaks to hide MAC address https://privsec.dev/posts/linux/desktop-linux-hardening/#privacy-tweaks
+    networking.networkmanager = {
+        enable = true;
+        ethernet.macAddress = "random";
+        wifi.macAddress = "random";
+        wifi.scanRandMacAddress = true;
+    };
 
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";
@@ -68,6 +73,11 @@
     # $ nix search wget
     environment.systemPackages = with pkgs; [
 
+        # security tools
+        lynis
+        vulnix
+
+        # terminal utils
         hyfetch
         micro
         thefuck
