@@ -31,6 +31,11 @@
 
     };
 
+    # Hardened Linux kernel, this shouldn't work linuxPackages_hardened isn't a thing in nixpkgs
+    # https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=linuxPackages_hardened
+    # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/profiles/hardened.nix#L18
+    boot.kernelPackages = pkgs.linuxPackages_hardened;
+
     # Enable networking, usuable with nmtui
     # Also enable privacy tweaks to hide MAC address https://privsec.dev/posts/linux/desktop-linux-hardening/#privacy-tweaks
     networking.networkmanager = {
