@@ -61,6 +61,11 @@
     # https://www.baeldung.com/linux/systemd-tmpfiles-configure-temporary-files
     systemd.tmpfiles.rules = [ "D! %T 1777 root root" ];
 
+    # Replace sudo with sudo-rs and only let wheel use it
+    security.sudo.enable = false;
+    security.sudo-rs.enable = true;
+    security.sudo-rs.execWheelOnly = true;
+
     # Set your time zone.
     time.timeZone = "America/Los_Angeles";
 
