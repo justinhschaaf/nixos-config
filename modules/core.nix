@@ -44,6 +44,17 @@
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+    # Configure DNSSEC with systemd-resolved https://nixos.wiki/wiki/Systemd-resolved
+    networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+
+    services.resolved = {
+        enable = true;
+        dnssec = "true"; # yes, these are strings
+        dnsovertls = "true";
+        domains = [ "~." ];
+        fallbackDns = [ "1.1.1.1" "1.0.0.1" ];
+    };
+
     # Cleanup tmp upon boot, why tf is this documentation shit
     # https://github.com/NixOS/nixpkgs/issues/96753
     # https://man.archlinux.org/man/tmpfiles.d.5
