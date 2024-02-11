@@ -44,6 +44,12 @@
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+    # Cleanup tmp upon boot, why tf is this documentation shit
+    # https://github.com/NixOS/nixpkgs/issues/96753
+    # https://man.archlinux.org/man/tmpfiles.d.5
+    # https://www.baeldung.com/linux/systemd-tmpfiles-configure-temporary-files
+    systemd.tmpfiles.rules = [ "D! %T 1777 root root" ];
+
     # Set your time zone.
     time.timeZone = "America/Los_Angeles";
 
