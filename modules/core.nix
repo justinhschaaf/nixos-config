@@ -55,6 +55,35 @@
         fallbackDns = [ "1.1.1.1" "1.0.0.1" ];
     };
 
+    # Setup Chrony with NTS for time server security
+    # https://privsec.dev/posts/linux/desktop-linux-hardening/#time-synchronization
+    services.chrony = {
+
+        enable = true;
+        enableNTS = true;
+        extraFlags = [ "-F 1" ];
+
+        # https://github.com/jauderho/nts-servers
+        # https://netfuture.ch/public-nts-server-list/
+        servers = [
+            "time.cloudflare.com"
+            "oregon.time.system76.com"
+            "virginia.time.system76.com"
+            "time.cifelli.xyz"
+            "time.txryan.com"
+            "ntppool1.time.nl"
+            "ntppool2.time.nl"
+            "nts.netnod.se"
+            "nts.ntstime.de"
+            "time.bolha.one"
+        ];
+
+        extraConfig = ''
+            minsources 4
+        '';
+
+    };
+
     # Cleanup tmp upon boot, why tf is this documentation shit
     # https://github.com/NixOS/nixpkgs/issues/96753
     # https://man.archlinux.org/man/tmpfiles.d.5
