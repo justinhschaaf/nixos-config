@@ -122,6 +122,9 @@
     # this is declared in the flake why tf do i have to do it again
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+    # Only allow sudoers to use nix
+    nix.allowedUsers = [ "@wheel" ];
+
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
