@@ -114,6 +114,9 @@
 
     # List services that you want to enable:
 
+    # Enable Linux Vendor Firmware Service https://nixos.wiki/wiki/Fwupd
+    services.fwupd.enable = true;
+
     # Enable the OpenSSH daemon.
     # services.openssh.enable = true;
 

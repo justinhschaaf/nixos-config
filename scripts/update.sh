@@ -28,6 +28,12 @@ if git diff-index --quiet HEAD --; then
         exit 1
     fi
 
+    fwupdmgr update
+    if [ "$?" -eq 1 ]; then
+        notify-send "Update Failed" 'There was a problem updating the system firmware, please run "fwupdmgr update" manually for more details.'
+        exit 1
+    fi
+
     nofity-send "System Config Updated" "The system was successfully rebuilt with the latest config."
     exit 0
 
