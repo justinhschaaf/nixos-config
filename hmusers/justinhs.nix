@@ -28,6 +28,7 @@
             "flathub:app/com.github.PintaProject.Pinta//stable"
             "flathub:app/com.github.marktext.marktext//stable"
             "flathub:app/com.obsproject.Studio//stable"
+            "flathub:app/com.simplenote.Simplenote//stable"
             "flathub:app/dev.geopjr.Collision//stable"
             "flathub:app/dev.krtirtho.Flemozi//stable"
             "flathub:app/im.riot.Riot//stable"
