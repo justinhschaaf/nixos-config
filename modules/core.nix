@@ -100,6 +100,11 @@
     security.sudo-rs.enable = true;
     security.sudo-rs.execWheelOnly = true;
 
+    # Allow unprivileged users to create namespaces. It's recommended to keep
+    # this off when using linux_hardened for security, but it's necessary for
+    # Flatpaks to work
+    security.unprivilegedUsernsClone = true;
+
     # Set your time zone.
     time.timeZone = "America/Los_Angeles";
 
