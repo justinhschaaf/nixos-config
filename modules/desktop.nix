@@ -178,6 +178,10 @@
 
     };
 
+    # GNOME apps depend on global config
+    # https://nixos.wiki/wiki/GNOME#Running_GNOME_programs_outside_of_GNOME
+    programs.dconf.enable = true;
+
     # Enable Hyprland. It has to be enabled on the system level too
     programs.hyprland = {
         enable = true;

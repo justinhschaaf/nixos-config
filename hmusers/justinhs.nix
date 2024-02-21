@@ -6,6 +6,7 @@
         inputs.flatpaks.homeManagerModules.default
         ../hmmodules/hyprland.nix
         ../hmmodules/terminal.nix
+        ../hmmodules/theme.nix
     ];
 
     # Personal info and the home path to manage
