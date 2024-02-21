@@ -38,7 +38,7 @@
             exec-once = [
 
                 "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
-                "udiskie"
+                "udiskie -A" # -A = no automount
                 "mako"
                 "swww init"
 
@@ -65,8 +65,8 @@
 
             general = {
 
-                gaps_in = 5;
-                gaps_out = 20;
+                gaps_in = 4;
+                gaps_out = 12;
                 border_size = 2;
                 layout = "dwindle";
 

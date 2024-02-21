@@ -1,0 +1,31 @@
+* {
+	border-radius: 0;
+}
+
+window {
+	background: none;
+	font-size: 16px;
+	color: #fff;
+}
+
+button {
+	/* 
+	if we don't unset everything the styles are weird 
+	but don't unset everything everywhere or else that removes hover text formatting
+	*/
+	all: unset;
+	font-family: "dripicons-v2", sans-serif;
+	margin: 12px 12px 12px 0;
+	padding: 6px;
+	font-size: 22px;
+	color: #fff;
+	background-color: rgba(31, 31, 31, .6);
+	min-height: 32px; /* actual width/height doesn't exist, only min */
+}
+
+.clock {
+	font-family: monospace;
+	margin: 12px 12px 12px 0;
+	padding: 6px;
+	background: rgba(31, 31, 31, .6);
+}

@@ -1,0 +1,41 @@
+; reload easily with `eww kill & sudo nixos-rebuild switch && eww open bar`
+
+(defwindow bar
+	:monitor 0
+	:geometry (geometry 
+		:x "0%"
+		:y "0%"
+		:width "56px"
+		:height "100%"
+		:anchor "center right")
+	:stacking "fg"
+	:exclusive true
+	:focusable false
+	:namespace "eww"
+	(barlayout))
+
+(defwidget barlayout []
+	(box
+		:orientation "v"
+		:vexpand true
+		:hexpand true
+		(start)
+		(clock)))
+	
+(defwidget start []
+	(button
+		:class "start"
+		:valign "start"
+		:width 44
+		:height 44
+		:onclick "anyrun"
+		:timeout "60000ms"
+		""))
+
+(defwidget clock []
+	(label
+		:class "clock"
+		:valign "end"
+		:width 44
+		:tooltip "${formattime(EWW_TIME, '%Y-%m-%d')}"
+		:text {formattime(EWW_TIME, "%H%n%M%n%S")}))
