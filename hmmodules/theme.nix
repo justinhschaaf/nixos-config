@@ -2,24 +2,20 @@
 
 {
 
-    home.packages = with pkgs; [
-        nordzy-icon-theme
-        volantes-cursors
-        # quintom-cursor-theme
-        # banana-cursor :3
-    ];
-
-    # Cursor Theme
-    # if Posy's Cursors had a PROPER Linux version I'd probably be using that here
-    home.pointerCursor.name = "Volantes Cursors";
+    # Dark theme can be forced on stubborn GTK apps by launching them with GRK_THEME=Adwaita:dark
 
     # Icons
-    gtk.iconTheme.name = "Nordzy";
+    gtk = {
+        enable = true;
+        iconTheme.package = pkgs.nordzy-icon-theme;
+        iconTheme.name = "Nordzy-dark";
+    };
 
     # Tell GNOME to use dark mode
     # https://nixos.wiki/wiki/GNOME#Dark_mode
     dconf = {
         enable = true;
+        settings."org/gnome/desktop/interface".gtk-theme = "Adwaita-dark";
         settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
     };
 

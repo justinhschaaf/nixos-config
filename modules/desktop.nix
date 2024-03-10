@@ -191,6 +191,11 @@
     # Tell Electron apps to use Wayland
     environment.sessionVariables.NIXOS_OZONE_WL = 1;
 
+    # Tell GTK apps to use dark mode
+    # This feels more natural than putting it in the user file
+    # Plus this MUST be system-side or it doesn't work...
+    environment.sessionVariables.GTK_THEME = "Adwaita:dark";
+
     # Enable thunar here instead of using it with packages
     # see https://nixos.org/manual/nixos/stable/#sec-xfce-thunar-plugins
     programs.thunar = {

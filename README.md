@@ -27,7 +27,7 @@ For now, if you're interested enough to see what I'm making here, feel free to s
 - [ ] Mako notification config https://github.com/emersion/mako/issues/91#issuecomment-1750748445
 - [x] Migrate from Blackbox to Kitty and make it as beautiful as Blackbox https://sw.kovidgoyal.net/kitty/conf/ (kangawabones color theme)
 - [ ] Make Anyrun look like Spotlight Search but two column results
-- [ ] Dark theme, make sure it works in Thunar
+- [x] Dark theme, make sure it works in Thunar
 - [ ] Add generic `root` and `user` users for TV config
 
 ## References
