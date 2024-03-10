@@ -45,7 +45,7 @@
 
             # Notifications
             enable_audio_bell = "no";
-            notify_on_cmd_finish = "invisible notify";
+            notify_on_cmd_finish = "invisible 10.0 notify";
 
             # Tomorrow Night theme from Blackbox Terminal
             # see https://gitlab.gnome.org/raggesilver/blackbox/-/blob/55f34e75d16c51a12b2522bc30e1f53a417ac973/data/schemes/tommorow-night.json

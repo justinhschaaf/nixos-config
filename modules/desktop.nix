@@ -111,7 +111,7 @@
         
         # Hyprland Stuff/Basic System Functionality
         pkgs.brightnessctl
-        pkgs.eww-wayland
+        pkgs.eww
         pkgs.hyprland
         pkgs.libnotify
         pkgs.mako

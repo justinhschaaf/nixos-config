@@ -27,6 +27,11 @@
                 then ",preferred,auto,1.5" 
                 else ",preferred,auto,auto";
 
+            # This is necessary to force Hyprland to stfu about using 1.5 scale
+            # IT WAS WORKING FINE BEFORE V34
+            # https://github.com/hyprwm/Hyprland/issues/4225
+            debug.disable_scale_checks = 1;
+
             # Idle lock https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
             "$lock" = "grim /tmp/lock.png && gm mogrify -blur 20x20 -fill black -colorize 80 file /tmp/lock.png && swaylock -fklr --image /tmp/lock.png --separator-color 00000000";
 
@@ -227,6 +232,8 @@
         '';
 
     };
+
+    # TODO https://mipmip.github.io/home-manager-option-search/?query=mako
 
 }
 
