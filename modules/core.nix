@@ -36,6 +36,12 @@
     # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/profiles/hardened.nix#L18
     boot.kernelPackages = pkgs.linuxPackages_hardened;
 
+    # Enable nodev and nosuid on most file systems
+    # Not enabling noexec on most since I'm a developer, I need to do dev stuff!
+    # noexec was enabled for /root, /home, /srv, and /var/log but Nix complained those aren't actual mounts
+    fileSystems."/".options =           [ "nodev" "nosuid" ];
+    fileSystems."/boot".options =       [ "nodev" "noexec" "nosuid" ];
+
     # Enable networking, usuable with nmtui
     # Also enable privacy tweaks to hide MAC address https://privsec.dev/posts/linux/desktop-linux-hardening/#privacy-tweaks
     networking.networkmanager = {
@@ -126,6 +132,9 @@
     # Allow flakes and nix-command systemwide
     # this is declared in the flake why tf do i have to do it again
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+    # Automatically optimise the store
+    nix.optimise.automatic = true;
 
     # Only allow sudoers to use nix
     nix.allowedUsers = [ "@wheel" ];
