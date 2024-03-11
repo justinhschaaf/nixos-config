@@ -60,12 +60,13 @@
     xdg.portal = {
         enable = true;
         extraPortals = with pkgs; [
-            xdg-desktop-portal-gtk # Needed for file picker
             xdg-desktop-portal-hyprland # Needed for screen sharing
+            kdePackages.xdg-desktop-portal-kde # Needed for file picker
         ];
         config.common = {
-            default = [ "hyprland" ];
-            "org.freedesktop.impl.portal.FileChooser" = "gtk";
+            # Setting 2 defaults uses KDE for everything else Hyprland can't do
+            # https://forum.manjaro.org/t/link-in-flatpak-apps-wont-open-on-click-since-anymore-last-update/149907/22
+            default = [ "hyprland" "kde" ];
         };
     };
 
@@ -152,7 +153,22 @@
         pkgs.gnome.gnome-system-monitor
         pkgs.gparted
         pkgs.wdisplays
-        
+        pkgs.cinnamon.xreader
+        pkgs.mpv
+
+    ];
+
+    nixpkgs.overlays = [
+        (self: super: {
+            mpv = super.mpv.override {
+                scripts = with self.mpvScripts; [
+                    mpris
+                    uosc
+                    visualizer
+                    vr-reversal
+                ];
+            };
+        })
     ];
 
     # Flatpak config
@@ -163,7 +179,6 @@
 
         # Add repo
         remotes.flathub = "https://dl.flathub.org/repo/flathub.flatpakrepo";
-        remotes.flathub-beta = "https://flathub.org/beta-repo/flathub-beta.flatpakrepo";
 
         # Add Flatpaks. Format is <repo>:<ref>/<arch>/<branch>:<commit>
         # Branch is almost always "stable"
@@ -172,8 +187,6 @@
             "flathub:app/com.github.tchx84.Flatseal//stable"
             "flathub:app/org.mozilla.firefox//stable"
             "flathub:app/org.nomacs.ImageLounge//stable"
-            "flathub:app/org.gnome.FileRoller//stable"
-            "flathub:app/org.videolan.VLC//stable"
         ];
 
     };
@@ -189,7 +202,7 @@
     };
 
     # Tell Electron apps to use Wayland
-    environment.sessionVariables.NIXOS_OZONE_WL = 1;
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
     # Tell GTK apps to use dark mode
     # This feels more natural than putting it in the user file
@@ -201,9 +214,11 @@
     programs.thunar = {
         enable = true;
         plugins = with pkgs.xfce; [
-            thunar-volman
             thunar-archive-plugin
+            thunar-media-tags-plugin
+            thunar-volman
         ];
     };
 
 }
+

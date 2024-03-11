@@ -20,7 +20,7 @@ For now, if you're interested enough to see what I'm making here, feel free to s
 - [x] Setup Home Manager
 - [x] Configure hyprland through home manager
 - [x] Declarative Flatpaks
-- [ ] Mimetypes https://mipmip.github.io/home-manager-option-search/?query=mime https://github.com/nix-community/home-manager/issues/96 https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
+- [x] Mimetypes https://mipmip.github.io/home-manager-option-search/?query=mime https://github.com/nix-community/home-manager/issues/96 https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
 - [x] Fish config https://nixos.wiki/wiki/Fish
 - [ ] Frosted glass for theming. maybe soft rainbow gradients too?
 - [ ] EWW vertical taskbar, control center, and maybe notification daemon (history at least)
@@ -29,6 +29,7 @@ For now, if you're interested enough to see what I'm making here, feel free to s
 - [ ] Make Anyrun look like Spotlight Search but two column results
 - [x] Dark theme, make sure it works in Thunar
 - [ ] Add generic `root` and `user` users for TV config
+- [ ] Japanese keyboard
 
 ## References
 

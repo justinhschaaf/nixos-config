@@ -49,6 +49,7 @@
 
             # Tomorrow Night theme from Blackbox Terminal
             # see https://gitlab.gnome.org/raggesilver/blackbox/-/blob/55f34e75d16c51a12b2522bc30e1f53a417ac973/data/schemes/tommorow-night.json
+            # and https://github.com/ccharles/Tomorrow-Theme
             foreground = "#c5c8c6";
             background = "#1d1f21";
             color0 = "#000000";
@@ -73,8 +74,10 @@
     };
 
     # micro editor config https://github.com/zyedidia/micro/blob/master/runtime/help/options.md
+    # TODO https://github.com/zyedidia/micro/issues/2778
     programs.micro.enable = true;
     programs.micro.settings = {
+        mkparents = true;
         rmtrailingws = true;
         saveundo = true;
         tabstospaces = true;

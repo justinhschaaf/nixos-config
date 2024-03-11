@@ -26,8 +26,9 @@
         # Branch is almost always "stable"
         packages = [
             "flathub:app/com.bitwarden.desktop//stable"
-            "flathub:app/com.github.PintaProject.Pinta//stable"
+            "flathub:app/com.github.Eloston.UngoogledChromium//stable"
             "flathub:app/com.github.marktext.marktext//stable"
+            "flathub:app/com.github.PintaProject.Pinta//stable"
             "flathub:app/com.obsproject.Studio//stable"
             "flathub:app/com.simplenote.Simplenote//stable"
             "flathub:app/dev.geopjr.Collision//stable"
@@ -43,6 +44,45 @@
             "flathub:app/us.zoom.Zoom//stable"
         ];
 
+    };
+
+    # Add micro desktop entry
+    xdg.desktopEntries.micro = {
+        type = "Application";
+        exec = "kitty micro %F"; # cursed but it actually works
+        name = "micro";
+        genericName = "Text Editor";
+        comment = "Modern and intuitive terminal-based text editor";
+        categories = [ "Development" "IDE" "TextEditor" "Utility" ];
+        icon = "terminal";
+    };
+
+    # Set default apps
+    xdg.mimeApps.enable = true;
+    xdg.mimeApps.defaultApplications = {
+        "application/pdf" = [ "xreader.desktop" ];
+        "application/xml" = [ "micro.desktop" ];
+        "audio/flac" = [ "mpv.desktop" ];
+        "audio/mpeg" = [ "mpv.desktop" ];
+        "audio/x-vorbis+ogg" = [ "mpv.desktop" ];
+        "image/avif" = [ "org.nomacs.ImageLounge.desktop" ];
+        "image/bmp" = [ "org.nomacs.ImageLounge.desktop" ];
+        "image/gif" = [ "org.nomacs.ImageLounge.desktop" ];
+        "image/jpeg" = [ "org.nomacs.ImageLounge.desktop" ];
+        "image/png" = [ "org.nomacs.ImageLounge.desktop" ];
+        "image/svg+xml" = [ "org.inkscape.Inkscape" ];
+        "image/tiff" = [ "org.nomacs.ImageLounge.desktop" ];
+        "image/webp" = [ "org.nomacs.ImageLounge.desktop" ];
+        "text/html" = [ "org.mozilla.firefox.desktop" ];
+        "text/plain" = [ "micro.desktop" ];
+        "video/mp4" = [ "mpv.desktop" ];
+        "video/quicktime" = [ "mpv.desktop" ];
+        "video/x-matroska" = [ "mpv.desktop" ];
+        "x-scheme-handler/about" = [ "org.mozilla.firefox.desktop" ];
+        "x-scheme-handler/http" = [ "org.mozilla.firefox.desktop" ];
+        "x-scheme-handler/https" = [ "org.mozilla.firefox.desktop" ];
+        "x-scheme-handler/mailto" = [ "org.mozilla.thunderbird.desktop" ];
+        "x-scheme-handler/unknown" = [ "org.mozilla.firefox.desktop" ];
     };
 
     ######## Stuff that shouldn't be touched is below this line ########
@@ -61,3 +101,4 @@
     programs.home-manager.enable = true;
 
 }
+

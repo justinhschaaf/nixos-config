@@ -53,6 +53,15 @@
             
             ];
 
+            # Get KDE file picker to show up properly
+            # At least I can actually paste in a file path now
+            # https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
+            windowrulev2 = [
+                "float,class:^(org.freedesktop.impl.portal.desktop.kde)$"
+                "center,class:^(org.freedesktop.impl.portal.desktop.kde)$"
+                "maximize,class:^(org.freedesktop.impl.portal.desktop.kde)$"
+            ];
+
             # Some default env vars.
             env = "XCURSOR_SIZE,24";
 

@@ -61,9 +61,11 @@
 
     # Flatpak config
     services.flatpak.packages = [
-        "flathub:app/com.valvesoftware.Steam//stable"
         "flathub:app/com.mojang.Minecraft//stable"
+        "flathub:app/com.valvesoftware.Steam//stable"
+        "flathub:app/fr.handbrake.ghb//stable"
         "flathub:app/net.davidotek.pupgui2//stable"
     ];
 
 }
+

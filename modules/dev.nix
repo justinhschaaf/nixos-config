@@ -30,7 +30,6 @@
 
     # Flatpak config
     services.flatpak.packages = [
-        "flathub-beta:app/com.github.akiraux.akira//beta"
         "flathub:app/com.jetbrains.IntelliJ-IDEA-Community//stable"
         "flathub:app/com.jetpackduba.Gitnuro//stable"
         "flathub:app/com.vscodium.codium//stable"
@@ -43,3 +42,4 @@
     };
 
 }
+
