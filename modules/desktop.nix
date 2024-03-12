@@ -172,6 +172,7 @@
     ];
 
     # Flatpak config
+    # TODO wayland by default
     services.flatpak = {
 
         # Turn on here, don't do anywhere else
@@ -203,6 +204,13 @@
 
     # Tell Electron apps to use Wayland
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+    # Properly pass bin locations to systemd so desktop portals can access
+    # Mimetype handlers and let Flatpaks open the browser
+    # https://github.com/NixOS/nixpkgs/issues/189851#issuecomment-1759954096
+    systemd.user.extraConfig = ''
+        DefaultEnvironment="PATH=/run/wrappers/bin:/etc/profiles/per-user/%u/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin"
+    '';
 
     # Tell GTK apps to use dark mode
     # This feels more natural than putting it in the user file
