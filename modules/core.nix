@@ -182,6 +182,9 @@
     # It automatically sets up the fish hook too, so no need to do so ourselves.
     programs.direnv.enable = true;
 
+    # Enable nix-index for easier package search
+    programs.nix-index.enable = true;
+
     # List services that you want to enable:
 
     # Enable Linux Vendor Firmware Service https://nixos.wiki/wiki/Fwupd
