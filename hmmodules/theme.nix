@@ -2,7 +2,7 @@
 
 {
 
-    # Dark theme can be forced on stubborn GTK apps by launching them with GRK_THEME=Adwaita:dark
+    # Dark theme can be forced on stubborn GTK apps by launching them with GTK_THEME=Adwaita:dark
     # TODO https://wiki.hyprland.org/Hypr-Ecosystem/hyprcursor/
 
     # Icons

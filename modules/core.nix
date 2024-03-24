@@ -177,13 +177,10 @@
     programs.fish.enable = true;
     users.defaultUserShell = pkgs.fish;
 
-    # Some programs need SUID wrappers, can be configured further or are
-    # started in user sessions.
-    # programs.mtr.enable = true;
-    # programs.gnupg.agent = {
-    #   enable = true;
-    #   enableSSHSupport = true;
-    # };
+    # Enable direnv for easy shells. I have a feeling this is useful for more 
+    # than just dev environments, so it goes here instead of the dev.nix module. 
+    # It automatically sets up the fish hook too, so no need to do so ourselves.
+    programs.direnv.enable = true;
 
     # List services that you want to enable:
 
