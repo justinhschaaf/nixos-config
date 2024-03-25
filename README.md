@@ -29,7 +29,7 @@ For now, if you're interested enough to see what I'm making here, feel free to s
 - [ ] Make Anyrun look like Spotlight Search but two column results
 - [x] Dark theme, make sure it works in Thunar
 - [ ] Add generic `root` and `user` users for TV config
-- [ ] Japanese keyboard
+- [x] Japanese keyboard
 
 ## References
 

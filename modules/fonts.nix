@@ -70,10 +70,18 @@
 
         # What fonts to use as default
         fontconfig.defaultFonts = {
-            serif = [ "Gelasio" "Unifont" ];
-            sansSerif = [ "Vercetti" "Nacelle" "Unifont" ];
+            serif = [ 
+                "Gelasio" "IBM Plex Sans Arabic" "IBM Plex Sans Devanagari"
+                "IBM Plex Sans Hebrew" "IBM Plex Sans JP" "IBM Plex Sans KR" 
+                "IBM Plex Sans Thai" "Unifont"
+            ];
+            sansSerif = [ 
+                "Vercetti" "Nacelle" "IBM Plex Sans Arabic" 
+                "IBM Plex Sans Devanagari" "IBM Plex Sans Hebrew" "IBM Plex Sans JP" 
+                "IBM Plex Sans KR" "IBM Plex Sans Thai" "Unifont" 
+            ];
             monospace = [ "IBM Plex Mono" "Cascadia Mono" "Unifont" ];
-            emoji = [ "Blobmoji" ];
+            emoji = [ "Blobmoji" "Joypixels" ];
         };
 
     };

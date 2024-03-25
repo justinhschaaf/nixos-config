@@ -70,6 +70,32 @@
         };
     };
 
+    # Japanese Input
+    i18n.inputMethod.enabled = "fcitx5";
+    i18n.inputMethod.fcitx5 = {
+        waylandFrontend = true;
+        addons = with pkgs; [
+            fcitx5-mozc
+            fcitx5-nord
+        ];
+        settings.inputMethod = {
+            "Groups/0" = {
+                "Name" = "Default";
+                "Default Layout" = "us";
+                "DefaultIM" = "mozc";
+            };
+            "Groups/0/Items/0"."Name" = "keyboard-us";
+            "Groups/0/Items/1"."Name" = "mozc";
+            "GroupOrder"."0" = "Default";
+        };
+        settings.globalOptions = {
+            "Hotkey/TriggerKeys"."0" = "Alt+space";
+        };
+    };
+
+    environment.sessionVariables.GTK_IM_MODULE = "wayland";
+    environment.sessionVariables.GLFW_IM_MODULE = "ibus";
+
     # Enable CUPS to print documents.
     services.printing.enable = true;
 

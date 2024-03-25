@@ -33,6 +33,7 @@
             debug.disable_scale_checks = 1;
 
             # Idle lock https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
+            # TODO replace swayidle with hypridle
             "$lock" = "grim /tmp/lock.png && gm mogrify -blur 20x20 -fill black -colorize 80 file /tmp/lock.png && swaylock -fklr --image /tmp/lock.png --separator-color 00000000";
 
             # Screenshot editor
@@ -46,6 +47,7 @@
                 "udiskie -A" # -A = no automount
                 "mako"
                 "swww init"
+                "fcitx5 -d" # -d = daemon
 
                 # System sleep
                 "sway-audio-idle-inhibit"

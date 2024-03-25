@@ -155,7 +155,6 @@
         micro
 
         # fish plugins
-        fishPlugins.colored-man-pages
         fishPlugins.done
         fishPlugins.pisces
         fishPlugins.puffer
