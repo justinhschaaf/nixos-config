@@ -34,7 +34,7 @@
 
             # Idle lock https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
             # TODO replace swayidle with hypridle
-            "$lock" = "grim /tmp/lock.png && gm mogrify -blur 20x20 -fill black -colorize 80 file /tmp/lock.png && swaylock -fklr --image /tmp/lock.png --separator-color 00000000";
+            "$lock" = "grim /tmp/lock.png && gm mogrify -blur 20x10 -fill black -colorize 20 file /tmp/lock.png && swaylock -fklr --image /tmp/lock.png --separator-color 00000000";
 
             # Screenshot editor
             "$satty" = "satty --filename - --fullscreen --copy-command 'wl-copy' --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H%M%S').png";

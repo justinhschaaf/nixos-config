@@ -28,7 +28,7 @@ For now, if you're interested enough to see what I'm making here, feel free to s
 - [x] Migrate from Blackbox to Kitty and make it as beautiful as Blackbox https://sw.kovidgoyal.net/kitty/conf/ (kangawabones color theme)
 - [ ] Make Anyrun look like Spotlight Search but two column results
 - [x] Dark theme, make sure it works in Thunar
-- [ ] Add generic `root` and `user` users for TV config
+- [ ] Add generic user for TV config
 - [x] Japanese keyboard
 
 ## References
