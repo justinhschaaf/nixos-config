@@ -1,13 +1,4 @@
-{ inputs, config, pkgs, ... }:
-
-{
-    # Import default configs so flakes know how to behave by default
-    imports = [
-        inputs.flatpaks.homeManagerModules.default
-        ../hmmodules/hyprland.nix
-        ../hmmodules/terminal.nix
-        ../hmmodules/theme.nix
-    ];
+{ inputs, lib, osConfig, config, pkgs, ... }: {
 
     # Personal info and the home path to manage
     home.username = "justinhs";
@@ -17,7 +8,7 @@
     #home.packages = with pkgs; []; # Terminal toys moved to hmmodules/terminal.nix
 
     # Flatpak config
-    services.flatpak = {
+    services.flatpak = lib.mkIf osConfig.js.programs.desktop.enable {
 
         # Add repo
         remotes.flathub = "https://dl.flathub.org/repo/flathub.flatpakrepo";
@@ -45,9 +36,9 @@
         ];
 
     };
-
+        
     # Add micro desktop entry
-    xdg.desktopEntries.micro = {
+    xdg.desktopEntries.micro = lib.mkIf osConfig.js.programs.desktop.enable {
         type = "Application";
         exec = "kitty micro %F"; # cursed but it actually works
         name = "micro";
@@ -57,32 +48,18 @@
         icon = "terminal";
     };
 
-    # Set default apps
-    xdg.mimeApps.enable = true;
-    xdg.mimeApps.defaultApplications = {
-        "application/pdf" = [ "xreader.desktop" ];
-        "application/xml" = [ "micro.desktop" ];
-        "audio/flac" = [ "mpv.desktop" ];
-        "audio/mpeg" = [ "mpv.desktop" ];
-        "audio/x-vorbis+ogg" = [ "mpv.desktop" ];
-        "image/avif" = [ "org.nomacs.ImageLounge.desktop" ];
-        "image/bmp" = [ "org.nomacs.ImageLounge.desktop" ];
-        "image/gif" = [ "org.nomacs.ImageLounge.desktop" ];
-        "image/jpeg" = [ "org.nomacs.ImageLounge.desktop" ];
-        "image/png" = [ "org.nomacs.ImageLounge.desktop" ];
-        "image/svg+xml" = [ "org.inkscape.Inkscape" ];
-        "image/tiff" = [ "org.nomacs.ImageLounge.desktop" ];
-        "image/webp" = [ "org.nomacs.ImageLounge.desktop" ];
-        "text/html" = [ "org.mozilla.firefox.desktop" ];
-        "text/plain" = [ "micro.desktop" ];
-        "video/mp4" = [ "mpv.desktop" ];
-        "video/quicktime" = [ "mpv.desktop" ];
-        "video/x-matroska" = [ "mpv.desktop" ];
-        "x-scheme-handler/about" = [ "org.mozilla.firefox.desktop" ];
-        "x-scheme-handler/http" = [ "org.mozilla.firefox.desktop" ];
-        "x-scheme-handler/https" = [ "org.mozilla.firefox.desktop" ];
-        "x-scheme-handler/mailto" = [ "org.mozilla.thunderbird.desktop" ];
-        "x-scheme-handler/unknown" = [ "org.mozilla.firefox.desktop" ];
+    # Set Mimetypes
+    js.hm.mime = lib.mkIf osConfig.js.programs.desktop.enable {
+        enable = true;
+        apps = {
+            audio = [ "mpv.desktop" ];
+            docs = [ "xreader.desktop" ];
+            browser = [ "org.mozilla.firefox.desktop" ];
+            image = [ "org.nomacs.ImageLounge.desktop" ];
+            mail = [ "org.mozilla.thunderbird.desktop" ];
+            text = [ "micro.desktop" ];
+            video = [ "mpv.desktop" ];
+        };
     };
 
     ######## Stuff that shouldn't be touched is below this line ########

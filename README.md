@@ -37,6 +37,7 @@ For now, if you're interested enough to see what I'm making here, feel free to s
 
 - [davidak/nixos-config](https://github.com/davidak/nixos-config/tree/master)
 - [MayNiklas/nixos](https://github.com/MayNiklas/nixos)
+- [Modularize NixOS and Home Manager | Great Practices](https://www.youtube.com/watch?v=vYc6IzKvAJQ)
 
 ### Aesthetics
 

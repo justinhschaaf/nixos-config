@@ -5,7 +5,7 @@
     # Define people so Home Manager can find them
     users.users.justinhs = {
         isNormalUser = true;
-        description = "Justin Schaaf";
+        description = "Justin";
         extraGroups = [ "networkmanager" "wheel" ]; # wheel = admin. don't remove it like i did...
     };
 

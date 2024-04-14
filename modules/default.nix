@@ -1,6 +1,13 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, lib, config, pkgs, ... }: {
 
-{
+    imports = [ 
+
+        # Everything is imported here
+        ./desktop
+        ./programs
+        ./autoupdate.nix
+
+    ];
 
     # Bootloader. If you wanna use systemd, it's boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
@@ -106,11 +113,6 @@
     security.sudo-rs.enable = true;
     security.sudo-rs.execWheelOnly = true;
 
-    # Allow unprivileged users to create namespaces. It's recommended to keep
-    # this off when using linux_hardened for security, but it's necessary for
-    # Flatpaks to work
-    security.unprivilegedUsernsClone = true;
-
     # Set your time zone.
     time.timeZone = "America/Los_Angeles";
 
@@ -133,64 +135,20 @@
     # this is declared in the flake why tf do i have to do it again
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+    # Only allow sudoers to use nix
+    nix.settings.allowedUsers = [ "@wheel" ];
+
     # Automatically optimise the store
     nix.optimise.automatic = true;
-
-    # Only allow sudoers to use nix
-    nix.allowedUsers = [ "@wheel" ];
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
-    # List packages installed in system profile. To search, run:
-    # $ nix search wget
-    environment.systemPackages = with pkgs; [
-
-        # security tools
-        lynis
-        vulnix
-
-        # terminal utils
-        hyfetch
-        micro
-
-        # fish plugins
-        fishPlugins.done
-        fishPlugins.pisces
-        fishPlugins.puffer
-        fishPlugins.sponge
-        fishPlugins.tide
-        
-    ];
-
-    # No more nano
-    # I'd also like to change the default nix-shell to fish
-    # It's theoretically possible, but naturally, I can't get it to work
-    # fml https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#environment-variables
-    environment.variables = {
-        EDITOR = "micro";
-    };
-
-    # No more bash https://nixos.wiki/wiki/Fish
-    programs.fish.enable = true;
-    users.defaultUserShell = pkgs.fish;
-
-    # Enable direnv for easy shells. I have a feeling this is useful for more 
-    # than just dev environments, so it goes here instead of the dev.nix module. 
-    # It automatically sets up the fish hook too, so no need to do so ourselves.
-    programs.direnv.enable = true;
-
-    # Enable nix-index for easier package search
-    programs.nix-index.enable = true;
-
-    # Enable thefuck for fucking ( ͡° ͜ʖ ͡°)
-    # automatically sets up fish integration
-    programs.thefuck.enable = true;
+    # Add TUI programs and enable firmware updates by default
+    js.programs.tui.enable = lib.mkDefault true;
+    js.autoUpdate.firmware = lib.mkDefault true;
 
     # List services that you want to enable:
-
-    # Enable Linux Vendor Firmware Service https://nixos.wiki/wiki/Fwupd
-    services.fwupd.enable = true;
 
     # Enable the OpenSSH daemon.
     # services.openssh.enable = true;

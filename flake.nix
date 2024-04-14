@@ -75,12 +75,9 @@
             specialArgs = { inherit inputs system jspkgs; };
             modules = [ 
                 ./hardware-configuration.nix 
-                ./modules/autoupdate.nix
-                ./modules/core.nix
-                ./modules/desktop.nix
-                ./modules/dev.nix
+                ./modules
+                ./systems/go.nix
                 ./users/justinhs.nix
-                { networking.hostName = "justinhs-go"; } 
             ];
         };
 
@@ -88,13 +85,13 @@
             specialArgs = { inherit inputs system jspkgs; };
             modules = [ 
                 ./hardware-configuration.nix 
-                ./modules/autoupdate.nix
-                ./modules/core.nix
-                ./modules/desktop.nix
+                ./modules
+                ./systems/tv.nix
                 ./users/justinhs.nix
-                { networking.hostName = "justinhs-tv"; } 
             ];
         };
+
+        homeManagerModules.default = ./hmmodules;
 
     };
     
