@@ -10,6 +10,8 @@
         # $ nix search wget
         environment.systemPackages = with pkgs; [
 
+            nix-inspect
+
             # security tools
             lynis
             vulnix
