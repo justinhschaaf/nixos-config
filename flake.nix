@@ -60,11 +60,11 @@
 
     };
 
-    outputs = { self, nixpkgs, jspkgs, ... }@inputs:
+    outputs = { self, nixpkgs, ... }@inputs:
     let
         system = "x86_64-linux";
         pkgs = import nixpkgs { inherit system; };
-        jspkgs = import jspkgs { inherit system; };
+        jspkgs = import inputs.jspkgs { inherit system; };
     in
     {
 
