@@ -28,7 +28,8 @@
         '';
 
         # Let us sign back in after locking the computer https://github.com/NixOS/nixpkgs/issues/143365
-        security.pam.services.swaylock = {};
+        # Using mkDefault so laptop can override it
+        security.pam.services.swaylock = lib.mkDefault {};
 
         # Enable Hyprland. It has to be enabled on the system level too
         programs.hyprland = {
@@ -82,3 +83,4 @@
     };
 
 }
+

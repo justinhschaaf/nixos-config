@@ -39,6 +39,7 @@
         ];
 
         # Enable automatic firmware updates https://nixos.wiki/wiki/Fwupd
+        # TODO actually run firmware updates without thinking about it
         services.fwupd.enable = lib.mkIf config.js.autoUpdate.firmware true;
 
         # Clean up old generations weekly
