@@ -21,8 +21,7 @@
             gamemode
             gamescope
             steam
-        # Only install Nvidia system monitor if Nvidia is enabled
-        ] ++ lib.optional config.js.desktop.nvidia.enable pkgs.nvidia-system-monitor-qt;
+        ];
 
         # Flatpak config
         # According to `flatpak info --show-extensions fr.handbrake.ghb`,

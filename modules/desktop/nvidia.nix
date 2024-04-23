@@ -48,6 +48,12 @@
 
         };
 
+        # Install GPU system monitor
+        environment.systemPackages = with pkgs; [
+            nvidia-system-monitor-qt
+        ];
+
     };
 
 }
+
