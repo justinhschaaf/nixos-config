@@ -1,5 +1,10 @@
 ; reload easily with `eww kill & sudo nixos-rebuild switch && eww open bar`
 
+; 
+; THE TASKBAR
+;
+
+; taskbar window
 (defwindow bar
 	:monitor 0
 	:geometry (geometry 
@@ -14,14 +19,23 @@
 	:namespace "eww"
 	(barlayout))
 
+; the taskbar itself
 (defwidget barlayout []
 	(box
 		:orientation "v"
 		:vexpand true
 		:hexpand true
 		(start)
-		(clock)))
-	
+		(box ; this is necessary to make both the tray and clock stick to the end of the bar
+			:valign "end"
+			:orientation "v"
+			:spacing 0
+			:space-evenly true
+			(tray)
+			(clock))))
+
+; start button
+; TODO fix: any programs anyrun opens will be relative to the eww's directory (e.g. kitty)
 (defwidget start []
 	(button
 		:class "start"
@@ -32,10 +46,74 @@
 		:timeout "60000ms"
 		""))
 
+; system tray
+; TODO add (systray) element, available as of 0.6.0
+(defwidget tray []
+	(box
+		:class "tray"
+		:width 44
+		:orientation "v"
+		:spacing 0 ; previously 6, now we don't need it
+		:space-evenly true
+		(button
+			:class "ac"
+			:width 44
+			:onclick "anyrun"
+			"")
+		(button
+			:class "power"
+			:width 44
+			:onclick "${EWW_CMD} open power --toggle"
+			:timeout "10000ms"
+			"")))
+
+; tells the time
 (defwidget clock []
 	(label
 		:class "clock"
-		:valign "end"
 		:width 44
 		:tooltip "${formattime(EWW_TIME, '%Y-%m-%d')}"
 		:text {formattime(EWW_TIME, "%H%n%M%n%S")}))
+
+; power menu window
+(defwindow power
+	:monitor 0
+	:geometry (geometry
+		:x "50%"
+		:y "50%"
+		:anchor "center")
+	:stacking "overlay"
+	:exclusive false
+	:focusable true
+	:namespace "eww"
+	(powermenu))
+
+; power menu
+(defwidget powermenu []
+	(box
+		:class "powermenu"
+		:orientation "h"
+		:valign "center"
+		:halign "center"
+		(powerbutton ; log out
+			:icon "="
+			:cmd "${EWW_CMD} close power && loginctl terminate-user $USER")
+		(powerbutton ; sleep
+			:icon "Y"
+			:cmd "${EWW_CMD} close power && systemctl suspend") ; this also triggers the computer lock, it's just magic
+		(powerbutton ; restart
+			:icon "Z"
+			:cmd "shutdown now -r")
+		(powerbutton ; shut down
+			:icon ""
+			:cmd "shutdown now")))
+
+; a button in the power menu
+(defwidget powerbutton [icon cmd]
+	(button
+		:class "powerbutton"
+		:width 56
+		:height 56
+		:onclick cmd
+		icon))
+

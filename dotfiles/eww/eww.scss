@@ -1,3 +1,11 @@
+$bgcolor: rgba(31, 31, 31, .6);
+$bgcolor-hover: rgba(255, 255, 255, .2);
+$bgcolor-hover-composted: rgba(76, 76, 76, .8);
+$border: 2px solid white;
+$margin: 12px;
+$margin-all: $margin $margin $margin 0;
+$padding: 6px;
+
 * {
 	border-radius: 0;
 }
@@ -15,17 +23,67 @@ button {
 	*/
 	all: unset;
 	font-family: "dripicons-v2", sans-serif;
-	margin: 12px 12px 12px 0;
-	padding: 6px;
+	margin: $margin-all;
+	padding: $padding;
 	font-size: 22px;
 	color: #fff;
-	background-color: rgba(31, 31, 31, .6);
+	background-color: $bgcolor;
 	min-height: 32px; /* actual width/height doesn't exist, only min */
+	transition: .2s;
+}
+
+button:hover {
+	background-color: $bgcolor-hover-composted;
+}
+
+.tray {
+
+	padding: $padding 0;
+	margin: $margin $margin 0 0;
+	background-color: $bgcolor;
+
+	button {
+		padding: 0 $padding;
+		margin: 0;
+		background: unset;
+		font-size: 18px;
+		min-height: unset;
+	}
+
+	button:hover {
+		background-color: $bgcolor-hover;
+	}
+	
 }
 
 .clock {
 	font-family: monospace;
-	margin: 12px 12px 12px 0;
-	padding: 6px;
-	background: rgba(31, 31, 31, .6);
+	margin: $margin-all;
+	padding: $padding;
+	background: $bgcolor;
 }
+
+.powermenu {
+
+	background-color: $bgcolor;
+	border: $border;
+	padding: 12px;
+
+	/*
+	when eww centers the window it excludes the part of the screen occupied by the taskbar
+	so we need to nudge it back into the true center of the display for sexiness
+	*/
+	margin-left: 56px;
+
+	button {
+		background: none;
+		margin: 0;
+		padding: 12px;
+	}
+
+	button:hover {
+		background-color: $bgcolor-hover;
+	}
+	
+}
+
