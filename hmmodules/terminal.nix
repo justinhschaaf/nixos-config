@@ -21,7 +21,6 @@
         programs.fish.functions.fish_greeting = "";
 
         # micro editor config https://github.com/zyedidia/micro/blob/master/runtime/help/options.md
-        # TODO https://github.com/zyedidia/micro/issues/2778
         programs.micro.enable = true;
         programs.micro.settings = {
             mkparents = true;
@@ -87,3 +86,4 @@
     };
 
 }
+

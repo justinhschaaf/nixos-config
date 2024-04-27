@@ -10,6 +10,7 @@
         # $ nix search wget
         environment.systemPackages = with pkgs; [
 
+            git
             nix-inspect
 
             # security tools
@@ -44,6 +45,10 @@
         # It automatically sets up the fish hook too, so no need to do so ourselves.
         programs.direnv.enable = true;
 
+        # Enable nh for better Nix commands
+        programs.nh.enable = true;
+        programs.nh.flake = "/etc/nixos"
+
         # Enable nix-index for easier package search
         programs.nix-index = {
 
@@ -60,6 +65,11 @@
         # automatically sets up fish integration
         programs.thefuck.enable = true;
 
+        # Enable firmware updater https://nixos.wiki/wiki/Fwupd
+        # Firmware updates are actually checked for in the autoupdate module
+        services.fwupd.enable = true;
+
     };
 
 }
+

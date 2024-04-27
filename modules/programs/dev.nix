@@ -9,8 +9,7 @@
         # System packages
         environment.systemPackages = with pkgs; [
 
-            # Git
-            git
+            # Let us actually write to Git
             git-credential-manager
 
             # Java
