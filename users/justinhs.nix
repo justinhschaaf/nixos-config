@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, lib, config, pkgs, ... }:
 
 {
   
@@ -6,10 +6,12 @@
     users.users.justinhs = {
         isNormalUser = true;
         description = "Justin";
+        initialPassword = "cum";
         extraGroups = [ "networkmanager" "wheel" ]; # wheel = admin. don't remove it like i did...
     };
 
     # Home Manager manages people
-    home-manager.users.justinhs = import ../hmusers/justinhs.nix;
+    home-manager.users = lib.mkIf config.js.desktop.enable { justinhs = import ../hmusers/justinhs.nix; };
 
 }
+
