@@ -5,6 +5,7 @@
         # Everything is imported here
         ./desktop
         ./programs
+        ./server
         ./autoupdate.nix
 
     ];
@@ -136,7 +137,7 @@
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
     # Only allow sudoers to use nix
-    nix.settings.allowedUsers = [ "@wheel" ];
+    nix.settings.allowed-users = [ "@wheel" ];
 
     # Automatically optimise the store
     nix.optimise.automatic = true;
@@ -146,7 +147,7 @@
 
     # Add TUI programs and enable firmware updates by default
     js.programs.tui.enable = lib.mkDefault true;
-    js.autoUpdate.firmware = lib.mkDefault true;
+    js.autoUpdate.firmware.enable = lib.mkDefault true;
 
     # List services that you want to enable:
 
@@ -168,3 +169,4 @@
     system.stateVersion = "23.05"; # Did you read the comment?
 
 }
+

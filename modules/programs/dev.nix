@@ -18,7 +18,7 @@
             temurin-bin-17
 
             # JS
-            nodejs_21
+            nodePackages.nodejs
             yarn-berry
 
             # Rust

@@ -78,6 +78,7 @@ update_system_config() {
             fi
 
             # Rebuild the system with nh, disabling NOM for cleaner logs
+            # IN CASE WE HAVE PROBLEMS: https://discourse.nixos.org/t/dirty-nixos-rebuild-build-flake-issues/30078/2
             nh os $REBUILD_CMD --no-nom "$CONFIG_DIR"
             if [ "$?" -eq 1 ]; then
                 send_msg "Config Update Failed" 'There was a problem rebuilding the system, please run "nh os $REBUILD_CMD" manually for more details.'

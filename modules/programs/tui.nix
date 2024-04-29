@@ -47,7 +47,7 @@
 
         # Enable nh for better Nix commands
         programs.nh.enable = true;
-        programs.nh.flake = "/etc/nixos"
+        programs.nh.flake = "/etc/nixos";
 
         # Enable nix-index for easier package search
         programs.nix-index = {

@@ -10,7 +10,7 @@
             system.rebuildCmd = lib.mkOption { 
                 type = lib.types.enum [ "boot" "switch" "test" ];
                 default = "boot";
-                description = "Specify which command to use when rebuilding the system config."
+                description = "Specify which command to use when rebuilding the system config.";
             };
         };
     };

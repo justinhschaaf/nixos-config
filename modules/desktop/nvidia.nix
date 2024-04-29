@@ -1,6 +1,6 @@
 # UNTESTED
 
-{ inputs, lib, config, ... }: {
+{ inputs, lib, config, pkgs, ... }: {
 
     options = {
         js.desktop.nvidia.enable = lib.mkEnableOption "NVIDIA driver support";
