@@ -32,7 +32,7 @@
     inputs = {
 
         # Packages
-  	    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+        nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
         # justinhs packages
         jspkgs = {
@@ -55,6 +55,12 @@
         # Declarative flatpaks
         flatpaks = { 
             url = "github:GermanBread/declarative-flatpak/stable"; 
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
+        # Authentik Server
+        authentik-nix = {
+            url = "github:nix-community/authentik-nix";
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
@@ -91,8 +97,19 @@
             ];
         };
 
+        nixosConfigurations.justinhs-server = nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs system jspkgs; };
+            modules = [
+                ./hardware-configuration.nix
+                ./modules
+                ./systems/server.nix
+                ./users/justinhs.nix
+            ];
+        };
+
         homeManagerModules.default = ./hmmodules;
 
     };
     
 }
+

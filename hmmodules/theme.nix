@@ -1,6 +1,4 @@
-{ inputs, lib, osConfig, config, pkgs, ... }:
-
-{
+{ inputs, lib, osConfig, config, pkgs, ... }: {
 
     options = {
         js.hm.theme.enable = lib.mkOption { default = osConfig.js.desktop.enable; };
@@ -30,7 +28,7 @@
         # https://nixos.wiki/wiki/KDE#GNOME_desktop_integration
         qt = {
             enable = true;
-            platformTheme = "gnome";
+            platformTheme.name = "adwaita";
             style.name = "adwaita-dark";
         };
 
@@ -56,3 +54,4 @@
     };
 
 }
+
