@@ -7,6 +7,7 @@
         ./programs
         ./server
         ./autoupdate.nix
+        ./sops.nix
 
     ];
 

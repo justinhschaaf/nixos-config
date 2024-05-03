@@ -46,15 +46,20 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        # anyrun https://github.com/Kirottu/anyrun
-        anyrun = {
-            url = "github:Kirottu/anyrun";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-
         # Declarative flatpaks
         flatpaks = { 
             url = "github:GermanBread/declarative-flatpak/stable"; 
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
+        sops-nix = {
+            url = "github:Mic92/sops-nix";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
+        # anyrun https://github.com/Kirottu/anyrun
+        anyrun = {
+            url = "github:Kirottu/anyrun";
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
