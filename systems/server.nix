@@ -3,6 +3,7 @@
     # Autoupdate.
     #js.autoUpdate.enable = true;
 
+    js.sops.enable = true;
     js.server.enable = true;
 
     # Set system name

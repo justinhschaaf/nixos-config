@@ -36,15 +36,19 @@
             '';
         };
 
+        sops.secrets."authentik/authentik-env" = {
+            sopsFile = ../../secrets/server.yaml;
+        };
+
         services.authentik = {
-            #enable = true;
+            enable = true;
             environmentFile = "/run/secrets/authentik/authentik-env";
             settings.email = {
-                host = "smtp.protonmail.ch";
-                port = 587;
+                host = "smtp-relay.brevo.com";
+                port = 465;
                 use_tls = true;
                 use_ssl = false;
-                from = "sysadmin@justinschaaf.com";
+                from = "System Administrator <sysadmin@justinschaaf.com>";
             };
         };
     

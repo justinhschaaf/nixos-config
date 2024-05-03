@@ -65,7 +65,8 @@
 
         # Authentik Server
         authentik-nix = {
-            url = "github:nix-community/authentik-nix";
+            # Use node-22 branch for https://github.com/nix-community/authentik-nix/issues/24
+            url = "github:nix-community/authentik-nix/node-22";
             inputs.nixpkgs.follows = "nixpkgs";
         };
 

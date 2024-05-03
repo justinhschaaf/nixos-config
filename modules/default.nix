@@ -115,8 +115,8 @@
     security.sudo-rs.enable = true;
     security.sudo-rs.execWheelOnly = true;
 
-    # Set your time zone.
-    time.timeZone = "America/Los_Angeles";
+    # Set your time zone. This is set to default since Authentik overrides it.
+    time.timeZone = lib.mkDefault "America/Los_Angeles";
 
     # Select internationalisation properties.
     i18n.defaultLocale = "en_US.UTF-8";
