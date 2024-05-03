@@ -43,6 +43,7 @@
         programs.git = {
             enable = true;
             config.credential.credentialStore = "cache";
+            config.init.defaultBranch = "main";
         };
 
     };
