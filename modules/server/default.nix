@@ -51,6 +51,17 @@
                 from = "System Administrator <sysadmin@justinschaaf.com>";
             };
         };
+
+        services.seafile = {
+            enable = true;
+            adminEmail = "sysadmin@justinschaaf.com";
+            initialAdminPassword = "Spaghett!0s"; # this will be changed when deployed so don't try it
+            seafileSettings = {
+                quota.default = 5; # in gb
+                library_trash.espire_days = 60;
+                fileserver.use_go_fileserver = true;
+            };
+        };
     
     };
 
