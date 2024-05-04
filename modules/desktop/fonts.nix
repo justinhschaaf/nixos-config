@@ -35,6 +35,7 @@
                 pkgs.dotcolon-fonts
                 pkgs.fira
                 pkgs.fraunces
+                pkgs.geist-font
                 pkgs.gelasio
                 pkgs.helvetica-neue-lt-std
                 pkgs.ibm-plex
@@ -93,3 +94,4 @@
     };
 
 }
+
