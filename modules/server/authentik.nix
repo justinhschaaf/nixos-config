@@ -18,12 +18,21 @@
         services.authentik = {
             enable = true;
             environmentFile = "/run/secrets/authentik/authentik-env";
-            settings.email = {
-                host = "smtp-relay.brevo.com";
-                port = 465;
-                use_tls = true;
-                use_ssl = false;
-                from = "System Administrator <sysadmin@justinschaaf.com>";
+            settings = {
+            
+                email = {
+                    host = "smtp-relay.brevo.com";
+                    port = 465;
+                    use_tls = true;
+                    use_ssl = false;
+                    from = "System Administrator <sysadmin@justinschaaf.com>";
+                };
+
+                # Air-gap the environment, Gravatars are cool though...
+                disable_startup_analytics = true;
+                disable_update_check = true;
+                error_reporting.enabled = false;
+                
             };
         };
 
