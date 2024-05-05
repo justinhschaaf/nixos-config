@@ -19,6 +19,8 @@
         grafana.enable = true;
         grafana.hostName = "grafana.localhost";
 
+        prometheus.enable = true;
+
         seafile.enable = true;
         seafile.hostName = "files.localhost";
         
