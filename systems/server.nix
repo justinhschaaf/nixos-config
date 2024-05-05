@@ -13,6 +13,9 @@
         authentik.enable = true;
         authentik.hostName = "auth.localhost";
 
+        grafana.enable = true;
+        grafana.hostName = "grafana.localhost";
+
         seafile.enable = true;
         seafile.hostName = "files.localhost";
         

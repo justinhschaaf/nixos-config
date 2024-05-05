@@ -22,7 +22,7 @@
             
                 email = {
                     host = "smtp-relay.brevo.com";
-                    port = 465;
+                    port = 587;
                     use_tls = true;
                     use_ssl = false;
                     from = "System Administrator <sysadmin@justinschaaf.com>";

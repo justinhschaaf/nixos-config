@@ -11,6 +11,7 @@
 
         # Note for Cloudflare setup https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#defaults
         # TODO LetsEncrypt setup
+        # TODO homepage files in /var/www/html https://caddyserver.com/docs/caddyfile/directives/root#examples https://caddy.community/t/help-getting-started-with-caddyserver-sveltekit-app/19346/6
         services.caddy = {
             enable = true;
             virtualHosts."localhost".extraConfig = ''
