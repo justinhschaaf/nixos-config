@@ -65,6 +65,14 @@
         # automatically sets up fish integration
         programs.thefuck.enable = true;
 
+        # Enable tmux terminal multiplexer
+        programs.tmux = {
+            enable = true;
+            clock24 = true;
+            shortcut = "a";
+            terminal = "screen-256color";
+        };
+
         # Enable firmware updater https://nixos.wiki/wiki/Fwupd
         # Firmware updates are actually checked for in the autoupdate module
         services.fwupd.enable = true;
