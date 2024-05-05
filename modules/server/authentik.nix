@@ -6,10 +6,14 @@
 
     options = {
         js.server.authentik.enable = lib.mkEnableOption "Authentik, the authentication glue you need";
-        js.server.authentik.hostName = lib.mkOption { type = lib.types.str };
+        js.server.authentik.hostName = lib.mkOption { type = lib.types.str; };
+        js.server.authentik.openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
     };
 
     config = lib.mkIf config.js.server.authentik.enable {
+
+        # Open ports
+        networking.firewall.allowedTCPPorts = lib.optionals config.js.server.authentik.openFirewall [ 9443 ];
 
         sops.secrets."authentik/authentik-env" = {
             sopsFile = ../../secrets/server.yaml;

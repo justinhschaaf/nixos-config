@@ -2,10 +2,14 @@
 
     options = {
         js.server.grafana.enable = lib.mkEnableOption "Grafana, the gorgeous metric viz, dashboards & editors for Graphite, InfluxDB & OpenTSDB";
-        js.server.grafana.hostName = lib.mkOption { type = lib.types.str };
+        js.server.grafana.hostName = lib.mkOption { type = lib.types.str; };
+        js.server.grafana.openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
     };
 
     config = lib.mkIf config.js.server.grafana.enable {
+
+        # Open ports
+        networking.firewall.allowedTCPPorts = lib.optionals config.js.server.grafana.openFirewall [ config.services.grafana.settings.server.http_port ];
 
         sops.secrets = let
             cfg.sopsFile = ../../secrets/server.yaml;
@@ -15,7 +19,7 @@
             "grafana/smtp-password" = cfg;
         };
 
-        # # All options: https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#paths
+        # All options: https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#paths
         services.grafana.enable = true;
         services.grafana.settings = {
             

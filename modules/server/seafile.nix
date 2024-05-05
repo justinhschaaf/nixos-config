@@ -2,10 +2,14 @@
 
     options = {
         js.server.seafile.enable = lib.mkEnableOption "Seafile, the Next-generation Open Source Cloud Storage";
-        js.server.seafile.hostName = lib.mkOption { type = lib.types.str };
+        js.server.seafile.hostName = lib.mkOption { type = lib.types.str; };
+        js.server.seafile.openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
     };
 
     config = lib.mkIf config.js.server.seafile.enable {
+
+        # Open ports
+        networking.firewall.allowedTCPPorts = lib.optionals config.js.server.seafile.openFirewall [ 8000 8080 8082 8083 ];
 
         services.seafile = {
             enable = true;

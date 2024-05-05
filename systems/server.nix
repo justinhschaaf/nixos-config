@@ -8,7 +8,10 @@
     js.server = {
     
         enable = true;
+        openFirewall = true; # openFirewall != port forwarded, only accessible to internal network
+        
         caddy.enable = true;
+        caddy.openFirewall = true; # we want this to be true even when disabling everything else
 
         authentik.enable = true;
         authentik.hostName = "auth.localhost";
