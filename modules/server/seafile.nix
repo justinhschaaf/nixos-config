@@ -18,7 +18,7 @@
             # that will be changed by the time this is ever accessible to a 
             # public network
             initialAdminPassword = "Spaghett!0s"; # this will be changed when deployed so don't try it
-            ccnetSettings.General.SERVICE_URL = "https://${config.js.server.seafile.hostName}"
+            ccnetSettings.General.SERVICE_URL = "https://${config.js.server.seafile.hostName}";
             seafileSettings = {
                 quota.default = 5; # in gb
                 library_trash.espire_days = 60;

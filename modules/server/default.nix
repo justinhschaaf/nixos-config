@@ -4,6 +4,7 @@
         ./authentik.nix
         ./caddy.nix
         ./grafana.nix
+        ./loki.nix
         ./prometheus.nix
         ./seafile.nix
     ];

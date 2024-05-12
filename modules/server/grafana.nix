@@ -47,7 +47,7 @@
                 enabled = true;
                 host = "smtp-relay.brevo.com:587";
                 user = "$__file{/run/secrets/grafana/smtp-user}";
-                password = "$__file{/run/secrets/grafana/smtp-password}"
+                password = "$__file{/run/secrets/grafana/smtp-password}";
                 from_address = "grafana.3lhnr@waffles.lol";
                 startTLS_policy = "MandatoryStartTLS";
             };
