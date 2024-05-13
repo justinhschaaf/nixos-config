@@ -22,6 +22,9 @@
         loki.enable = true;
         prometheus.enable = true;
 
+        outline.enable = true;
+        outline.hostName = "outline.localhost";
+
         seafile.enable = true;
         seafile.hostName = "files.localhost";
         

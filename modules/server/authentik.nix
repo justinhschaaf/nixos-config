@@ -15,9 +15,7 @@
         # Open ports
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.authentik.openFirewall [ 9443 ];
 
-        sops.secrets."authentik/authentik-env" = {
-            sopsFile = ../../secrets/server.yaml;
-        };
+        sops.secrets."authentik/authentik-env".sopsFile = ../../secrets/server.yaml;
 
         services.authentik = {
             enable = true;

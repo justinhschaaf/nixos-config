@@ -5,6 +5,7 @@
         ./caddy.nix
         ./grafana.nix
         ./loki.nix
+        ./outline.nix
         ./prometheus.nix
         ./seafile.nix
     ];
