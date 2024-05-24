@@ -1,19 +1,24 @@
 { inputs, lib, config, pkgs, ... }: {
 
     options = {
-        js.server.loki.enable = lib.mkEnableOption "Loki, like Prometheus, but for logs. ";
-        js.server.loki.openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
+        js.server.loki = {
+            enable = lib.mkEnableOption "Loki, like Prometheus, but for logs.";
+            openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
+            agents.promtail.enable = lib.mkEnableOption "Promtail";
+            agents.promtail.client = lib.mkOption { default = "http://127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}"}
+            agents.promtail.clients = lib.mkOption { default = [{ url = "${config.js.server.loki.agents.promtail.client}/loki/api/v1/push"; }]; };
+        };
     };
 
     # Most of this is from https://xeiaso.net/blog/prometheus-grafana-loki-nixos-2020-11-20/
     # All of it is documented at https://grafana.com/docs/loki/latest/configure/
-    config = lib.mkIf config.js.server.loki.enable {
+    config = {
 
         # Open ports
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.loki.openFirewall [ config.services.loki.configuration.server.http_listen_port ];
 
-        services.loki.enable = true;
-        services.loki.configuration = {
+        services.loki.enable = config.js.server.loki.enable;
+        services.loki.configuration = lib.mkIf config.js.server.loki.enable {
         
             auth_enabled = false;
             server.http_listen_port = 3100; # default
@@ -59,8 +64,8 @@
             
         };
 
-        services.promtail.enable = true;
-        services.promtail.configuration = {
+        services.promtail.enable = config.js.server.loki.agents.promtail.enable;
+        services.promtail.configuration = lib.mkIf config.js.server.loki.agents.promtail.enable {
 
             # set random listen ports, we don't give a shit about these
             server = {
@@ -68,7 +73,7 @@
                 grpc_listen_port = 0;
             };
 
-            clients = [{ url = "http://127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}/loki/api/v1/push"; }];
+            clients = config.js.server.loki.agents.promtail.clients;
 
             scrape_configs = [{
             

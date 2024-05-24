@@ -1,13 +1,8 @@
 { inputs, lib, config, pkgs, ... }: {
 
     imports = [ 
-        ./authentik.nix
-        ./caddy.nix
-        ./grafana.nix
-        ./loki.nix
-        ./outline.nix
-        ./prometheus.nix
-        ./seafile.nix
+        ./monitoring
+        ./services
     ];
 
     options = {

@@ -29,7 +29,7 @@
             tabstospaces = true;
         };
 
-        # Kitty conig. Note that it doesn't like floats
+        # Kitty config. Note that it doesn't like floats
         programs.kitty = lib.mkIf osConfig.js.programs.desktop.enable {
 
             enable = true;
