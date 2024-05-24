@@ -1,6 +1,7 @@
 { inputs, lib, config, pkgs, ... }: {
 
     imports = [ 
+        ./data
         ./monitoring
         ./services
     ];
