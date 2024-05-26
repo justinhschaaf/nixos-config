@@ -16,14 +16,12 @@
         substituters = [
             "https://cache.nixos.org"
             "https://nix-community.cachix.org/"
-            "https://hyprland.cachix.org"
             "https://anyrun.cachix.org"
         ];
 
         trusted-public-keys = [
             "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
             "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-            "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
             "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
         ];
 
@@ -31,57 +29,55 @@
 
     inputs = {
 
-        # Packages
+        #
+        # PACKAGES
+        #
+
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
         # justinhs packages
-        jspkgs = {
-            url = "github:justinhschaaf/nix-packages/main";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-
-        # Home Manager
-        home-manager = {
-            url = "github:nix-community/home-manager";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
+        jspkgs.url = "github:justinhschaaf/nix-packages/main";
+        jspkgs.inputs.nixpkgs.follows = "nixpkgs";
 
         # Declarative flatpaks
-        flatpaks = { 
-            url = "github:GermanBread/declarative-flatpak/stable"; 
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
+        flatpaks.url = "github:GermanBread/declarative-flatpak/stable"; 
+        flatpaks.inputs.nixpkgs.follows = "nixpkgs";
 
-        sops-nix = {
-            url = "github:Mic92/sops-nix";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
+        #
+        # SYSTEM
+        #
+
+        # Home Manager
+        home-manager.url = "github:nix-community/home-manager";
+        home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+
+        # Secrets management
+        sops-nix.url = "github:Mic92/sops-nix";
+        sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+        #
+        # APPLICATIONS
+        #
 
         # anyrun https://github.com/Kirottu/anyrun
-        anyrun = {
-            url = "github:Kirottu/anyrun";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
+        anyrun.url = "github:Kirottu/anyrun";
+        anyrun.inputs.nixpkgs.follows = "nixpkgs";
 
         # Authentik Server
-        authentik-nix = {
-            # Use node-22 branch for https://github.com/nix-community/authentik-nix/issues/24
-            url = "github:nix-community/authentik-nix/node-22";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
+        # Use node-22 branch for https://github.com/nix-community/authentik-nix/issues/24
+        authentik-nix.url = "github:nix-community/authentik-nix/node-22";
+        authentik-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     };
 
-    outputs = { self, nixpkgs, ... }@inputs:
+    outputs = { nixpkgs, ... }@inputs:
     let
         system = "x86_64-linux";
         pkgs = import nixpkgs { inherit system; };
         jspkgs = import inputs.jspkgs { inherit system; };
     in
     {
-
-        # packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
-        # packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
 
         nixosConfigurations.justinhs-go = nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system jspkgs; };
