@@ -17,52 +17,42 @@
 
         # Set default apps
         xdg.mimeApps.enable = true;
-        xdg.mimeApps.defaultApplications = {} // (
-            if config.js.hm.mime.apps.audio != []
-            then {
-                "audio/flac" = config.js.hm.mime.apps.audio;
-                "audio/mpeg" = config.js.hm.mime.apps.audio;
-                "audio/x-vorbis+ogg" = config.js.hm.mime.apps.audio;
-            } else {}) // (
-            if config.js.hm.mime.apps.browser != []
-            then {
-                "text/html" = config.js.hm.mime.apps.browser;
-                "x-scheme-handler/about" = config.js.hm.mime.apps.browser;
-                "x-scheme-handler/http" = config.js.hm.mime.apps.browser;
-                "x-scheme-handler/https" = config.js.hm.mime.apps.browser;
-                "x-scheme-handler/unknown" = config.js.hm.mime.apps.browser;
-            } else {}) // (
-            if config.js.hm.mime.apps.docs != []
-            then {
-                "application/pdf" = config.js.hm.mime.apps.docs;
-            } else {}) // (
-            if config.js.hm.mime.apps.image != []
-            then {
-                "image/avif" = config.js.hm.mime.apps.image;
-                "image/bmp" = config.js.hm.mime.apps.image;
-                "image/gif" = config.js.hm.mime.apps.image;
-                "image/jpeg" = config.js.hm.mime.apps.image;
-                "image/png" = config.js.hm.mime.apps.image;
-                "image/svg+xml" = config.js.hm.mime.apps.image;
-                "image/tiff" = config.js.hm.mime.apps.image;
-                "image/webp" = config.js.hm.mime.apps.image;
-            } else {}) // (
-            if config.js.hm.mime.apps.mail != []
-            then {
-                "x-scheme-handler/mailto" = config.js.hm.mime.apps.mail;
-            } else {}) // (
-            if config.js.hm.mime.apps.text != []
-            then {
-                "application/xml" = config.js.hm.mime.apps.text;
-                "text/plain" = config.js.hm.mime.apps.text;
-            } else {}) // (
-            if config.js.hm.mime.apps.video != []
-            then {
-                "video/mp4" = config.js.hm.mime.apps.video;
-                "video/quicktime" = config.js.hm.mime.apps.video;
-                "video/x-matroska" = config.js.hm.mime.apps.video;
-            } else {}) // config.js.hm.mime.override;
+        xdg.mimeApps.defaultApplications = let
+            # this essentially takes each of the types and outputs an attrset of { type = handlers; } if handlers is defined
+            genMimeApps = handlers: types: lib.attrSets.optionalAttrs (handlers != []) (lib.attrsets.genAttrs types handlers);
+        in genMimeApps config.js.hm.mime.apps.audio [
+            "audio/flac"
+            "audio/mpeg"
+            "audio/x-vorbis+ogg"
+        ] // genMimeApps config.js.hm.mime.apps.browser [
+            "text/html"
+            "x-scheme-handler/about"
+            "x-scheme-handler/http"
+            "x-scheme-handler/https"
+            "x-scheme-handler/unknown"
+        ] // genMimeApps config.js.hm.mime.apps.docs [
+            "application/pdf"
+        ] // genMimeApps config.js.hm.mime.apps.image [
+            "image/avif"
+            "image/bmp"
+            "image/gif"
+            "image/jpeg"
+            "image/png"
+            "image/svg+xml"
+            "image/tiff"
+            "image/webp"
+        ] // genMimeApps config.js.hm.mime.apps.mail [
+            "x-scheme-handler/mailto"
+        ] // genMimeApps config.js.hm.mime.apps.text [
+            "application/xml"
+            "text/plain"
+        ] // genMimeApps config.js.hm.mime.apps.video [
+            "video/mp4"
+            "video/quicktime"
+            "video/x-matroska"
+        ] // config.js.hm.mime.override;
     
     };
 
 }
+
