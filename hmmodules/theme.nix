@@ -17,7 +17,7 @@
         };
 
         # Tell GNOME to use dark mode
-        # https://nixos.wiki/wiki/GNOME#Dark_mode
+        # https://wiki.nixos.org/wiki/GNOME#Dark_mode
         dconf = {
             enable = true;
             settings."org/gnome/desktop/interface".gtk-theme = "Adwaita-dark";
@@ -25,7 +25,7 @@
         };
 
         # Enable Adwaita style for QT applications
-        # https://nixos.wiki/wiki/KDE#GNOME_desktop_integration
+        # https://wiki.nixos.org/wiki/KDE#GNOME_desktop_integration
         qt = {
             enable = true;
             platformTheme.name = "adwaita";

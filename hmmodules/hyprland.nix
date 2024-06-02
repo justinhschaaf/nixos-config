@@ -37,7 +37,7 @@
                 "$satty" = "satty --filename - --fullscreen --copy-command 'wl-copy' --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H%M%S').png";
 
                 # Startup apps
-                # launch location for gnome polkit: https://nixos.wiki/wiki/Polkit
+                # launch location for gnome polkit: https://wiki.nixos.org/wiki/Polkit
                 exec-once = [
 
                     "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
@@ -246,5 +246,4 @@
     };
 
 }
-
 

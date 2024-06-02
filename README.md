@@ -21,7 +21,7 @@ For now, if you're interested enough to see what I'm making here, feel free to s
 - [x] Configure hyprland through home manager
 - [x] Declarative Flatpaks
 - [x] Mimetypes https://mipmip.github.io/home-manager-option-search/?query=mime https://github.com/nix-community/home-manager/issues/96 https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
-- [x] Fish config https://nixos.wiki/wiki/Fish
+- [x] Fish config https://wiki.nixos.org/wiki/Fish
 - [ ] Frosted glass for theming. maybe soft rainbow gradients too?
 - [ ] EWW vertical taskbar, control center, and maybe notification daemon (history at least)
 - [ ] Mako notification config https://github.com/emersion/mako/issues/91#issuecomment-1750748445
@@ -47,3 +47,4 @@ For now, if you're interested enough to see what I'm making here, feel free to s
 - [[hyprland] glassmorphism?](https://www.reddit.com/r/unixporn/comments/ys4nfs/hyprland_glassmorphism/)
 - [linkfrg's Hyprland(and eww!) dotfiles](https://github.com/linkfrg/dotfiles/tree/main)
 - [1amSimp1e's Dot Files](https://github.com/1amSimp1e/dots)
+

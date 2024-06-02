@@ -36,7 +36,7 @@
         # fml https://nixos.org/manual/nix/stable/command-ref/nix-shell.html#environment-variables
         environment.variables.EDITOR = "micro";
 
-        # No more bash https://nixos.wiki/wiki/Fish
+        # No more bash https://wiki.nixos.org/wiki/Fish
         programs.fish.enable = true;
         users.defaultUserShell = pkgs.fish;
 
@@ -73,7 +73,7 @@
             terminal = "screen-256color";
         };
 
-        # Enable firmware updater https://nixos.wiki/wiki/Fwupd
+        # Enable firmware updater https://wiki.nixos.org/wiki/Fwupd
         # Firmware updates are actually checked for in the autoupdate module
         services.fwupd.enable = true;
 

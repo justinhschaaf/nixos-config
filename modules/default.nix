@@ -64,7 +64,7 @@
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-    # Configure DNSSEC with systemd-resolved https://nixos.wiki/wiki/Systemd-resolved
+    # Configure DNSSEC with systemd-resolved https://wiki.nixos.org/wiki/Systemd-resolved
     networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
 
     services.resolved = {

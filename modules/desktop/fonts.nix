@@ -9,7 +9,7 @@
         # Accept JoyPixels' special license
         nixpkgs.config.joypixels.acceptLicense = true;
 
-        # Fonts https://nixos.wiki/wiki/Fonts
+        # Fonts https://wiki.nixos.org/wiki/Fonts
         fonts = {
 
             # What fonts to install

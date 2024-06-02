@@ -18,7 +18,7 @@
         # Load nvidia drivers
         services.xserver.videoDrivers = [ "nvidia" ];
 
-        # Nvidia setup https://nixos.wiki/wiki/Nvidia
+        # Nvidia setup https://wiki.nixos.org/wiki/Nvidia
         hardware.nvidia = {
 
             # Modesetting is required.

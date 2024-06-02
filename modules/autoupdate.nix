@@ -19,7 +19,7 @@
 
         # Automatically run updates based on the GitHub repo instead of system.autoUpgrade
         # systemd timers recommended over cron by the NixOS Wiki
-        # https://nixos.wiki/wiki/Systemd/Timers
+        # https://wiki.nixos.org/wiki/Systemd/Timers
 
         systemd = lib.mkIf (config.js.autoUpdate.firmware.enable || config.js.autoUpdate.system.enable) {
 

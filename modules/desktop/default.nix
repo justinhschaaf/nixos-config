@@ -82,7 +82,7 @@
 
         # GNOME apps depend on global config
         # Keeping this here since it'll be used for gnome apps in every environment
-        # https://nixos.wiki/wiki/GNOME#Running_GNOME_programs_outside_of_GNOME
+        # https://wiki.nixos.org/wiki/GNOME#Running_GNOME_programs_outside_of_GNOME
         programs.dconf.enable = true;
 
         # Tell GTK apps to use dark mode
