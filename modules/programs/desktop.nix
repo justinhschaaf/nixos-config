@@ -6,15 +6,25 @@
 
     config = lib.mkIf config.js.programs.desktop.enable {
 
-        environment.systemPackages = [
+        environment.systemPackages = with pkgs; [
 
-            # Applications
-            pkgs.kitty
-            pkgs.gnome.gnome-system-monitor
-            pkgs.gparted
-            pkgs.wdisplays
-            pkgs.cinnamon.xreader
-            pkgs.mpv
+            # System Utils
+            kitty
+            gnome.gnome-system-monitor
+            gparted
+            wdisplays
+
+            # File Viewers
+            cinnamon.xreader
+            mpv
+            nomacs
+
+            # Browsers
+            firefox
+            ungoogled-chromium
+
+            # Other
+            localsend
 
         ];
 
@@ -33,20 +43,7 @@
         ];
 
         # Flatpak config
-        # TODO wayland by default
-        services.flatpak = {
-
-            # Add repo
-            remotes.flathub = "https://dl.flathub.org/repo/flathub.flatpakrepo";
-
-            # Add Flatpaks. Format is <repo>:<ref>/<arch>/<branch>:<commit>
-            # Branch is almost always "stable"
-            packages = [
-                "flathub:app/app.drey.Warp//stable"
-                "flathub:app/com.github.tchx84.Flatseal//stable"
-                "flathub:app/org.mozilla.firefox//stable"
-                "flathub:app/org.nomacs.ImageLounge//stable"
-            ];
+        services.flatpak.remotes.flathub = "https://dl.flathub.org/repo/flathub.flatpakrepo";
 
         # Allow running AppImages https://wiki.nixos.org/wiki/Appimage
         boot.binfmt.registrations.appimage = {

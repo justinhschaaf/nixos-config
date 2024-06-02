@@ -31,15 +31,11 @@
         environment.systemPackages = with pkgs; [
             davinci-resolve
             ffmpeg
-        ];
-
-        # Flatpak config
-        # According to `flatpak info --show-extensions fr.handbrake.ghb`,
-        # Handbrake doesn't depend on Flatpak Nvidia drivers, so it can be here
-        services.flatpak.packages = [
-            "flathub:app/com.mojang.Minecraft//stable"
-            "flathub:app/fr.handbrake.ghb//stable"
-            "flathub:app/net.davidotek.pupgui2//stable"
+            handbrake
+            minecraft
+            modrinth-app
+            olive-editor
+            protonup-qt
         ];
 
     };

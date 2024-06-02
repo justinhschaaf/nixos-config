@@ -11,6 +11,12 @@
 
             # Let us actually write to Git
             git-credential-manager
+            gitnuro
+
+            # Editors
+            jetbrains.idea-community
+            jetbrains.rust-rover
+            vscodium # I fucking hate vscode and that there's nothing better for free
 
             # Java
             maven
@@ -23,21 +29,12 @@
 
             # Rust
             rustup # includes cargo
-            jetbrains.rust-rover # No flatpak yet
 
             # Misc
             #etcher # https://github.com/NixOS/nixpkgs/pull/295853
             gnome.gnome-boxes
             vial
 
-        ];
-
-        # Flatpak config
-        services.flatpak.packages = [
-            "flathub:app/com.jetbrains.IntelliJ-IDEA-Community//stable"
-            "flathub:app/com.jetpackduba.Gitnuro//stable"
-            "flathub:app/com.vscodium.codium//stable"
-            "flathub:app/org.gaphor.Gaphor//stable"
         ];
 
         programs.git = {
