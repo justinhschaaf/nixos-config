@@ -44,6 +44,7 @@
                     "udiskie -A" # -A = no automount
                     "mako"
                     "swww init"
+                    "eww open bar"
                     "fcitx5 -d" # -d = daemon
 
                     # System sleep
@@ -79,7 +80,7 @@
                 general = {
 
                     gaps_in = 4;
-                    gaps_out = 12;
+                    gaps_out = "6, 12, 12, 12";
                     border_size = 2;
                     layout = "dwindle";
 

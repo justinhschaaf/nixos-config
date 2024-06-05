@@ -20,6 +20,8 @@
             # terminal utils
             hyfetch
             micro
+            gcc # needed for rust-script
+            rust-script
 
             # fish plugins
             fishPlugins.done

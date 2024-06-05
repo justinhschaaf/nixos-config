@@ -51,6 +51,7 @@
             pkgs.libnotify
             pkgs.mako
             pkgs.polkit_gnome
+            pkgs.socat
             pkgs.swww
             pkgs.udiskie
             inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
