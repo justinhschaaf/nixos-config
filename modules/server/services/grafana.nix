@@ -28,6 +28,7 @@
                 domain = config.js.server.grafana.hostName;
                 #enforce_domain = true; # TODO enable when in prod
                 enable_gzip = true;
+                http_port = 4500; # default is 3000, can't be having that
             };
 
             analytics = {

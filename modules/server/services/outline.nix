@@ -16,7 +16,7 @@
         services.outline = {
         
             enable = true;
-            port = 4000;
+            port = 4000; # default is 3000, can't be having that
             publicUrl = "https://${config.js.server.outline.hostName}";
             forceHttps = true;
             storage.storageType = "local";
