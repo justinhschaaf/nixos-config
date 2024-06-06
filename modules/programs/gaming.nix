@@ -29,7 +29,6 @@
 
         # Other system packages
         environment.systemPackages = with pkgs; [
-            davinci-resolve
             ffmpeg
             handbrake
             minecraft
