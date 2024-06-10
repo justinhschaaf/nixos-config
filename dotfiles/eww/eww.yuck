@@ -52,7 +52,6 @@
 						:text "${workspace.windows > 0 ? "▣" : "□" }"))))))
 
 ; system tray
-; TODO add (systray) element
 (defwidget tray []
 	(box
 		:class "barbox tray"
@@ -231,3 +230,4 @@
 		:height 56
 		:onclick cmd
 		icon))
+
