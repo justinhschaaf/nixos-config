@@ -15,11 +15,11 @@
 
             enable = true;
 
-            ensureDatabases = config.js.server.mariadb.ensureApplications;
+            ensureDatabases = lib.lists.forEach config.js.server.mariadb.ensureApplications (x: "${x}_db");
             ensureUsers = lib.lists.forEach config.js.server.mariadb.ensureApplications (x: {
                 name = x;
                 ensurePermissions = {
-                    "${x}.*" = "ALL PRIVILEGES";
+                    "${x}_db.*" = "ALL PRIVILEGES";
                 };
             });
 

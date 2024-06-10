@@ -15,7 +15,7 @@
         
             enable = true;
 
-            ensureDatabases = config.js.server.postgres.ensureApplications;
+            ensureDatabases = lib.lists.forEach config.js.server.postgres.ensureApplications (x: "${x}_db");
             ensureUsers = lib.lists.forEach config.js.server.postgres.ensureApplications (x: {
                 name = x;
                 ensureDBOwnership = true;
