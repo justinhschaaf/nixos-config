@@ -21,7 +21,7 @@
 
         # All options: https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#paths
         services.grafana.enable = true;
-        services.grafana.settings = {
+        services.grafana.settings = lib.attrsets.recursiveUpdate {
             
             server = {
                 protocol = "https";
@@ -39,6 +39,7 @@
 
             security = {
                 disable_initial_admin_creation = true;
+                disable_gravatar = true;
                 secret_key = "$__file{/run/secrets/grafana/secret-key}";
                 cookie_secure = true;
                 cookie_samesite = "strict";
@@ -53,17 +54,27 @@
                 startTLS_policy = "MandatoryStartTLS";
             };
             
-        };
+        } (lib.attrsets.optionalAttrs config.js.server.cluster.node.enable {
 
-        services.caddy = lib.mkIf config.js.server.caddy.enable {
-            virtualHosts."${config.js.server.grafana.hostName}" = {
-                extraConfig = ''
-                    handle {
-                        reverse_proxy 127.0.0.1:${toString config.services.grafana.settings.server.http_port}
-                    }
-                '';
+            database = {
+                type = "postgres";
+                host = "${config.js.server.cluster.host.ip}:5432";
+                user = "grafana";
+                password = "grafana";
+                name = "grafana_db";
             };
-        };
+
+            remote_cache = {
+                type = "redis";
+                connstr = "addr=${config.js.server.cluster.host.ip}:6325,pool_size=100,db=0,ssl=false";
+            };
+        
+        });
+
+        services.caddy.virtualHosts."${config.js.server.grafana.hostName}".extraConfig =
+            lib.mkIf config.js.server.caddy.enable ''
+                reverse_proxy 127.0.0.1:${toString config.services.grafana.settings.server.http_port}
+            '';
     
     };
 

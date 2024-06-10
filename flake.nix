@@ -51,6 +51,9 @@
         home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+        # Declarative VMs
+        microvm.url = "github:astro/microvm.nix";
+        microvm.inputs.nixpkgs.follows = "nixpkgs";
 
         # Secrets management
         sops-nix.url = "github:Mic92/sops-nix";
@@ -71,13 +74,23 @@
 
     };
 
-    outputs = { nixpkgs, ... }@inputs:
+    outputs = { nixpkgs, ... }@inputs: # TODO play around with `self` keyword
     let
         system = "x86_64-linux";
         pkgs = import nixpkgs { inherit system; };
         jspkgs = import inputs.jspkgs { inherit system; };
-    in
-    {
+        nodes = [{
+            hostName = "tortellini";
+            ip = "10.0.0.20";
+            master = true;
+        } {
+            hostName = "tortellacci";
+            ip = "10.0.0.30";
+        } {
+            hostName = "tortelloni";
+            ip = "10.0.0.40";
+        }];
+    in nixpkgs.lib.attrsets.recursiveUpdate {
 
         nixosConfigurations.justinhs-go = nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system jspkgs; };
@@ -99,8 +112,9 @@
             ];
         };
 
-        nixosConfigurations.justinhs-server = nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system jspkgs; };
+        # Homelab Server Host/Node Hypervisor
+        nixosConfigurations.tortelli = nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs system jspkgs nodes; };
             modules = [
                 ./hardware-configuration.nix
                 ./modules
@@ -111,6 +125,20 @@
 
         homeManagerModules.default = ./hmmodules;
 
+    } {
+
+        # Server Cluster Nodes
+        nixosConfigurations = let
+            hostCfg = inputs.self.outputs.nixosConfigurations.tortelli;
+            nixosCfg = node: nixpkgs.lib.nixosSystem {
+                specialArgs = { inherit inputs system jspkgs hostCfg node; };
+                modules = [
+                    ./modules
+                    ./systems/server-node.nix
+                ];
+            };
+        in nixpkgs.lib.attrsets.genAttrs nixosCfg (nixpkgs.lib.attrsets.catAttrs "hostName" nodes);
+        
     };
     
 }

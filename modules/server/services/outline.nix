@@ -13,7 +13,7 @@
 
         sops.secrets."outline/outline-env".sopsFile = ../../secrets/server.yaml;
         
-        services.outline = {
+        services.outline = lib.attrsets.recursiveUpdate {
         
             enable = true;
             port = 4000; # default is 3000, can't be having that
@@ -28,20 +28,18 @@
                 replyEmail = "sysadmin@justinschaaf.com";
             };
             
-        };
+        } (lib.attrsets.optionalAttrs config.js.server.cluster.node.enable {
+            databaseUrl = "postgres://outline:outline@${config.js.server.cluster.host.ip}:5432/outline_db";
+            redisUrl = "redis://${config.js.server.cluster.host.ip}:6320";
+        });
 
         # SMTP username and password are here
         systemd.services.outline.serviceConfig.EnvironmentFile = "/run/secrets/outline/outline-env";
 
-        services.caddy = lib.mkIf config.js.server.caddy.enable {
-            virtualHosts."${config.js.server.outline.hostName}" = {
-                extraConfig = ''
-                    handle {
-                        reverse_proxy 127.0.0.1:${toString config.services.outline.port}
-                    }
-                '';
-            };
-        };
+        services.caddy.virtualHosts."${config.js.server.outline.hostName}".extraConfig = 
+            lib.mkIf config.js.server.caddy.enable ''
+                reverse_proxy 127.0.0.1:${toString config.services.outline.port}
+            '';
     
     };
 

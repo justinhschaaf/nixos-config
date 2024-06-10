@@ -1,4 +1,4 @@
-{ inputs, lib, config, pkgs, ... }: {
+{ inputs, lib, config, pkgs, nodes, ... }: {
 
     # Autoupdate.
     #js.autoUpdate.enable = true;
@@ -8,30 +8,94 @@
     js.server = {
     
         enable = true;
-        openFirewall = true; # openFirewall != port forwarded, only accessible to internal network
+        openFirewall = false; # openFirewall != port forwarded, only accessible to internal network
+        
+        ssh.enable = true;
+        ssh.openFirewall = true;
+
+        mariadb.enable = true;
+        mariadb.openFirewall = true;
+
+        postgres.enable = true;
+        postgres.openFirewall = true;
+        postgres.ensureApplications = [
+            "authentik"
+            "grafana"
+            "outline"
+        ];
+
+        redis.enable = true;
+        redis.ensureApplications = [{
+            name = "authentik";
+            port = 6310;
+        } {
+            name = "seahub";
+            port = 6315;
+        } {
+            name = "outline";
+            port = 6320;
+        } {
+            name = "grafana";
+            port = 6325;
+        }];
+        
+        # This needs to be disabled since the redis servers will
+        # be accessed from the VMs instead of the host machine.
+        redis.defaultSettings.settings.protected-mode = false;
+
+        prometheus.enable = true;
+        prometheus.exporters.node.enable = true;
+        prometheus.scrapeFrom = { # local exporters
+            "node-${networking.hostName}" = "127.0.0.1:${services.prometheus.exporters.node.port}";
+        } // listToAttrs (lib.lists.forEach [ # what exporters we need from each vm
+            { name = "node"; port = 9100; }
+            { name = "authentik"; port = 9300; }
+        ] (service: lib.lists.forEach config.js.server.cluster.nodes (node : { # add the exporters
+            name = "${service.name}-${node.hostName}";
+            value = "${node.ip}:${toString service.port}";
+        })));
+
+        loki.enable = true;
+        loki.agents.promtail.enable = true;
         
         caddy.enable = true;
         caddy.openFirewall = true; # we want this to be true even when disabling everything else
 
-        authentik.enable = true;
-        authentik.hostName = "auth.localhost";
-
-        grafana.enable = true;
-        grafana.hostName = "grafana.localhost";
-
-        loki.enable = true;
-        prometheus.enable = true;
-
-        outline.enable = true;
-        outline.hostName = "outline.localhost";
-
-        seafile.enable = true;
-        seafile.hostName = "files.localhost";
+        cluster = {
+        
+            enable = true;
+            host.enable = true;
+            nodes = nodes;
+            
+            node.config = node: {
+                flake = "path:/etc/nixos#${node.hostName}";
+                updateFlake = "path:/etc/nixos#${node.hostName}";
+                restartIfChanged = true;
+            };
+            
+        };
         
     };
 
+    # Special Snowflake Seafile MariaDB config
+
+    services.mysql.ensureUsers = [{
+        name = "seafile";
+        ensurePermissions = {
+            "ccnet_db.*" = "ALL PRIVILEGES";
+            "seafile_db.*" = "ALL PRIVILEGES";
+            "seahub_db.*" = "ALL PRIVILEGES";
+        };
+    }];
+
+    services.mysql.ensureDatabases = [
+        "ccnet_db"
+        "seafile_db"
+        "seahub_db"
+    ];
+
     # Set system name
-    networking.hostName = "justinhs-server";
+    networking.hostName = "tortelli";
 
 }
 

@@ -12,12 +12,7 @@
 
         # Note for Cloudflare setup https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#defaults
         # TODO LetsEncrypt setup
-        services.caddy = {
-            enable = true;
-            virtualHosts."localhost".extraConfig = ''
-                respond "Hello, world!"
-            '';
-        };
+        services.caddy.enable = true;
     
     };
 
