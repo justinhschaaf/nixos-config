@@ -8,15 +8,18 @@
     
         enable = lib.mkEnableOption "special options for running a VM cluster";
         
-        guests.all = lib.mkOption { type = lib.types.listOf (lib.types.attrsOf lib.types.submodule {
-            hostName = lib.mkOption { type = lib.types.str; };
-            ip = lib.mkOption { type = lib.types.str; };
-            master = lib.mkOption { type = lib.types.bool; default = false; };
-        }); };
+        guests.all = lib.mkOption { type = lib.types.listOf (options.js.server.cluster.guest.options.type); };
         guests.config = lib.mkOption { type = lib.types.functionTo lib.types.attrs; }; # takes the guest config as an arg
         guests.ips = lib.mkOption { default = lib.attrsets.catAttrs "ip" config.js.server.cluster.guests.all; };
         
         guest.enable = lib.mkEnableOption "cluster child options. Only enable this inside the actual guest VM.";
+        guest.options = lib.mkOption {
+            type = lib.types.attrsOf lib.types.submodule {
+                hostName = lib.mkOption { type = lib.types.str; };
+                ip = lib.mkOption { type = lib.types.str; };
+                master = lib.mkOption { type = lib.types.bool; default = false; };
+            };
+        };
         
         host.enable = lib.mkEnableOption "cluster host options";
         host.ip = lib.mkOption { default = "10.0.0.10"; };
@@ -42,8 +45,19 @@
             };
     
         } else if config.js.server.cluster.guest.enable {
+        
             enable = true;
+            
+            networks."11-microvm" = {
+                matchConfig.Name = "vm-*";
+                networkConfig.Bridge = "microvm";
+                networkConfig.Address = "${config.js.server.cluster.guest.ip}/24";
+            };
+            
         } else {};
+
+        # set hostname if we already know it
+        networking.hostName = lib.mkIf config.js.server.cluster.guest.enable (lib.mkDefault config.js.server.cluster.guest.hostName);
 
         # override core defaults for cluster clients
         boot.loader.grub.enable = lib.mkIf config.js.server.cluster.guest.enable (lib.mkForce false); # we're in a vm we don't need it

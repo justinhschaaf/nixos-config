@@ -18,6 +18,7 @@
         
         cluster.enable = true;
         cluster.guest.enable = true;
+        cluster.guest.options = guest;
         cluster.host.ip = hostCfg.js.server.cluster.host.ip;
         
         caddy.enable = true;
@@ -54,12 +55,7 @@
         proto = "virtiofs";
     }];
 
-    networking.hostName = guest.hostName;
-    systemd.network.networks."11-microvm" = {
-        matchConfig.Name = "vm-*";
-        networkConfig.Bridge = "microvm";
-        networkConfig.Address = "${guest.ip}/24";
-    };
+    # Hostname is now set by cluster module
 
 }
 
