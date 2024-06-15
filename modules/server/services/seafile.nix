@@ -28,7 +28,7 @@
                 fileserver.use_go_fileserver = true;
             };
             
-        } (lib.attrsets.optionalAttrs config.js.server.cluster.node.enable {
+        } (lib.attrsets.optionalAttrs config.js.server.cluster.guest.enable {
 
             ccnetSettings = {
                 cluster.enabled = true;

@@ -1,4 +1,4 @@
-{ inputs, lib, config, pkgs, nodes, ... }: {
+{ inputs, lib, config, pkgs, guests, ... }: {
 
     # Autoupdate.
     #js.autoUpdate.enable = true;
@@ -50,9 +50,9 @@
         } // listToAttrs (lib.lists.forEach [ # what exporters we need from each vm
             { name = "node"; port = 9100; }
             { name = "authentik"; port = 9300; }
-        ] (service: lib.lists.forEach config.js.server.cluster.nodes (node : { # add the exporters
-            name = "${service.name}-${node.hostName}";
-            value = "${node.ip}:${toString service.port}";
+        ] (service: lib.lists.forEach config.js.server.cluster.guests (guest : { # add the exporters
+            name = "${service.name}-${guest.hostName}";
+            value = "${guest.ip}:${toString service.port}";
         })));
 
         loki.enable = true;
@@ -65,11 +65,11 @@
         
             enable = true;
             host.enable = true;
-            nodes = nodes;
             
-            node.config = node: {
-                flake = "path:/etc/nixos#${node.hostName}";
-                updateFlake = "path:/etc/nixos#${node.hostName}";
+            guests.all = guests;
+            guests.config = guest: {
+                flake = "path:/etc/nixos#${guest.hostName}";
+                updateFlake = "path:/etc/nixos#${guest.hostName}";
                 restartIfChanged = true;
             };
             

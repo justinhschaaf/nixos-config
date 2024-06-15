@@ -79,7 +79,7 @@
         system = "x86_64-linux";
         pkgs = import nixpkgs { inherit system; };
         jspkgs = import inputs.jspkgs { inherit system; };
-        nodes = [{
+        guests = [{
             hostName = "tortellini";
             ip = "10.0.0.20";
             master = true;
@@ -114,7 +114,7 @@
 
         # Homelab Server Host/Node Hypervisor
         nixosConfigurations.tortelli = nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system jspkgs nodes; };
+            specialArgs = { inherit inputs system jspkgs guests; };
             modules = [
                 ./hardware-configuration.nix
                 ./modules
@@ -131,13 +131,13 @@
         nixosConfigurations = let
             hostCfg = inputs.self.outputs.nixosConfigurations.tortelli;
             nixosCfg = node: nixpkgs.lib.nixosSystem {
-                specialArgs = { inherit inputs system jspkgs hostCfg node; };
+                specialArgs = { inherit inputs system jspkgs hostCfg guest; };
                 modules = [
                     ./modules
-                    ./systems/server-node.nix
+                    ./systems/server-guest.nix
                 ];
             };
-        in nixpkgs.lib.attrsets.genAttrs nixosCfg (nixpkgs.lib.attrsets.catAttrs "hostName" nodes);
+        in nixpkgs.lib.attrsets.genAttrs nixosCfg (nixpkgs.lib.attrsets.catAttrs "hostName" guests);
         
     };
     

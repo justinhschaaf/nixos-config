@@ -38,7 +38,7 @@
                 error_reporting.enabled = false;
                 
             };
-        } (lib.attrsets.optionalAttrs config.js.server.cluster.node.enable {
+        } (lib.attrsets.optionalAttrs config.js.server.cluster.guest.enable {
         
             createDatabase = false;
 

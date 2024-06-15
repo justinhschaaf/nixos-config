@@ -1,4 +1,4 @@
-{ inputs, lib, config, hostCfg, node, ... }: {
+{ inputs, lib, config, hostCfg, guest, ... }: {
 
     js.server = { # TODO add hostnames for services
     
@@ -14,10 +14,10 @@
         prometheus.exporters.node.openFirewall = true;
 
         loki.agents.promtail.enable = true;
-        loki.agents.promtail.client = "http://${hostCfg.js.server.cluster.host.ip}:${toString hostCfg.services.loki.configuration.server.http_listen_port}";
+        loki.agents.promtail.client = "http://${js.server.cluster.host.ip}:${toString hostCfg.services.loki.configuration.server.http_listen_port}";
         
         cluster.enable = true;
-        cluster.client.enable = true;
+        cluster.guest.enable = true;
         cluster.host.ip = hostCfg.js.server.cluster.host.ip;
         
         caddy.enable = true;
@@ -54,11 +54,11 @@
         proto = "virtiofs";
     }];
 
-    networking.hostName = node.hostName;
+    networking.hostName = guest.hostName;
     systemd.network.networks."11-microvm" = {
         matchConfig.Name = "vm-*";
         networkConfig.Bridge = "microvm";
-        networkConfig.Address = "${node.ip}/24";
+        networkConfig.Address = "${guest.ip}/24";
     };
 
 }

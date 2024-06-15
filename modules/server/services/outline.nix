@@ -28,7 +28,7 @@
                 replyEmail = "sysadmin@justinschaaf.com";
             };
             
-        } (lib.attrsets.optionalAttrs config.js.server.cluster.node.enable {
+        } (lib.attrsets.optionalAttrs config.js.server.cluster.guest.enable {
             databaseUrl = "postgres://outline:outline@${config.js.server.cluster.host.ip}:5432/outline_db";
             redisUrl = "redis://${config.js.server.cluster.host.ip}:6320";
         });

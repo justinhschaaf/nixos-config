@@ -8,15 +8,15 @@
     
         enable = lib.mkEnableOption "special options for running a VM cluster";
         
-        nodes = lib.mkOption { type = lib.types.listOf (lib.types.attrsOf lib.types.submodule {
+        guests.all = lib.mkOption { type = lib.types.listOf (lib.types.attrsOf lib.types.submodule {
             hostName = lib.mkOption { type = lib.types.str; };
             ip = lib.mkOption { type = lib.types.str; };
             master = lib.mkOption { type = lib.types.bool; default = false; };
         }); };
+        guests.config = lib.mkOption { type = lib.types.functionTo lib.types.attrs; }; # takes the guest config as an arg
+        guests.ips = lib.mkOption { default = lib.attrsets.catAttrs "ip" config.js.server.cluster.guests.all; };
         
-        node.enable = lib.mkEnableOption "cluster child options. Only enable this inside the actual node VM.";
-        node.config = lib.mkOption { type = lib.types.functionTo lib.types.attrs; }; # takes the node config as an arg
-        node.ips = lib.mkOption { default = lib.attrsets.catAttrs "ip" config.js.server.cluster.nodes; };
+        guest.enable = lib.mkEnableOption "cluster child options. Only enable this inside the actual guest VM.";
         
         host.enable = lib.mkEnableOption "cluster host options";
         host.ip = lib.mkOption { default = "10.0.0.10"; };
@@ -41,26 +41,26 @@
                 networkConfig.Address = "${config.js.server.cluster.host.ip}/24";
             };
     
-        } else if config.js.server.cluster.node.enable {
+        } else if config.js.server.cluster.guest.enable {
             enable = true;
         } else {};
 
         # override core defaults for cluster clients
-        boot.loader.grub.enable = lib.mkIf config.js.server.cluster.node.enable (lib.mkForce false); # we're in a vm we don't need it
-        networking.networkmanager.enable = lib.mkIf config.js.server.cluster.node.enable (lib.mkForce false); # using systemd.network instead
-        js.autoUpdate.firmware.enable = lib.mkIf config.js.server.cluster.node.enable false;
+        boot.loader.grub.enable = lib.mkIf config.js.server.cluster.guest.enable (lib.mkForce false); # we're in a vm we don't need it
+        networking.networkmanager.enable = lib.mkIf config.js.server.cluster.guest.enable (lib.mkForce false); # using systemd.network instead
+        js.autoUpdate.firmware.enable = lib.mkIf config.js.server.cluster.guest.enable false; # there is no firmware in a vm
 
         # make microvms
         microvm.host.enable = config.js.server.cluster.host.enable;
-        microvm.vms = listToAttrs (lib.lists.forEach config.js.server.cluster.nodes (node: {
-            name = node.hostName;
-            value = config.js.server.cluster.node.config node;
+        microvm.vms = listToAttrs (lib.lists.forEach config.js.server.cluster.guests (guest: {
+            name = guest.hostName;
+            value = config.js.server.cluster.guest.config guest;
         }));
 
         # caddy load balancer https://www.linuxtrainingacademy.com/caddy-load-balancing-tutorial/
         services.caddy.virtualHosts.":80".extraConfig =
             lib.mkIf (config.js.server.caddy.enable && config.js.server.cluster.host.enable) ''
-                reverse_proxy ${lib.strings.concatStringsSep " " js.server.cluster.node.ips} {
+                reverse_proxy ${lib.strings.concatStringsSep " " js.server.cluster.guests.ips} {
                     lb_policy least_conn
                 }
             '';
