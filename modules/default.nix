@@ -4,6 +4,7 @@
 
         # Everything is imported here
         ./desktop
+        ./hardware
         ./programs
         ./server
         ./autoupdate.nix
