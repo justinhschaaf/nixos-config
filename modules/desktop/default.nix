@@ -12,7 +12,6 @@
         ./fonts.nix
         ./hyprland.nix
         ./jpkb.nix
-        ./nvidia.nix
 
     ];
 

@@ -3,10 +3,10 @@
 { inputs, lib, config, pkgs, ... }: {
 
     options = {
-        js.desktop.nvidia.enable = lib.mkEnableOption "NVIDIA driver support";
+        js.hardware.nvidia.enable = lib.mkEnableOption "NVIDIA driver support";
     };
 
-    config = lib.mkIf config.js.desktop.nvidia.enable {
+    config = lib.mkIf config.js.hardware.nvidia.enable {
 
         # Enable OpenGL
         hardware.opengl = {

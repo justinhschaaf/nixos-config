@@ -2,6 +2,7 @@
 
     imports = [
         ./fingerprint.nix
+        ./nvidia.nix
     ];
     
 }

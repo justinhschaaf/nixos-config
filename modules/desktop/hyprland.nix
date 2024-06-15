@@ -38,7 +38,7 @@
             xwayland.enable = true;
 
             # Not sure if this applies since homemanager mostly manages hyprland
-            enableNvidiaPatches = lib.mkIf config.js.desktop.nvidia.enable true;
+            enableNvidiaPatches = lib.mkIf config.js.hardware.nvidia.enable true;
 
         };
 
