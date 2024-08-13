@@ -31,6 +31,7 @@
             # Misc
             #etcher # https://github.com/NixOS/nixpkgs/pull/295853
             gnome.gnome-boxes
+            tio
             vial
 
         ];
