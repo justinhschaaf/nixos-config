@@ -7,7 +7,8 @@
     # Enable Japanese keyboard input. Switch between Latin and JP with Alt+Space
     config = lib.mkIf config.js.desktop.input.jp {
 
-        i18n.inputMethod.enabled = "fcitx5";
+        i18n.inputMethod.enable = true;
+        i18n.inputMethod.type = "fcitx5";
         i18n.inputMethod.fcitx5 = {
             waylandFrontend = true;
             addons = with pkgs; [
@@ -35,3 +36,4 @@
     };
 
 }
+

@@ -10,12 +10,12 @@
 
             # System Utils
             kitty
-            gnome.gnome-system-monitor
+            gnome-system-monitor
             gparted
             wdisplays
 
             # File Viewers
-            cinnamon.xreader
+            xreader
             mpv
             nomacs
 

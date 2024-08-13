@@ -20,8 +20,8 @@
 
             # Java
             maven
-            semeru-bin-16
-            temurin-bin-17
+            semeru-bin
+            temurin-bin
 
             # JS
             nodePackages.nodejs

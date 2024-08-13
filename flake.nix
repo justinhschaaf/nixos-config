@@ -25,7 +25,7 @@
             "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
         ];
 
-    }; 
+    };
 
     inputs = {
 
@@ -68,8 +68,7 @@
         anyrun.inputs.nixpkgs.follows = "nixpkgs";
 
         # Authentik Server
-        # Use node-22 branch for https://github.com/nix-community/authentik-nix/issues/24
-        authentik-nix.url = "github:nix-community/authentik-nix/node-22";
+        authentik-nix.url = "github:nix-community/authentik-nix";
         authentik-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     };
@@ -128,16 +127,16 @@
     } {
 
         # Server Cluster Nodes
-        nixosConfigurations = let
+        /**nixosConfigurations = let
             hostCfg = inputs.self.outputs.nixosConfigurations.tortelli;
-            nixosCfg = node: nixpkgs.lib.nixosSystem {
+            nixosCfg = guest: nixpkgs.lib.nixosSystem {
                 specialArgs = { inherit inputs system jspkgs hostCfg guest; };
                 modules = [
                     ./modules
                     ./systems/server-guest.nix
                 ];
             };
-        in nixpkgs.lib.attrsets.genAttrs nixosCfg (nixpkgs.lib.attrsets.catAttrs "hostName" guests);
+        in nixpkgs.lib.attrsets.genAttrs nixosCfg (nixpkgs.lib.attrsets.catAttrs "hostName" guests);**/
         
     };
     
