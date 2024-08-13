@@ -1,15 +1,20 @@
 { inputs, lib, osConfig, config, pkgs, ... }: {
 
     # https://nlewo.github.io/nixos-manual-sphinx/development/option-types.xml.html
-    options = {
+    options = let 
+        mimeAppsOption = lib.mkOption {
+            type = lib.types.listOf lib.types.str;
+            default = [];
+        };
+    in {
         js.hm.mime.enable = lib.mkOption { default = osConfig.js.programs.desktop.enable; };
-        js.hm.mime.apps.audio = lib.mkOption { type = lib.types.listOf lib.types.str; };
-        js.hm.mime.apps.browser = lib.mkOption { type = lib.types.listOf lib.types.str; };
-        js.hm.mime.apps.docs = lib.mkOption { type = lib.types.listOf lib.types.str; };
-        js.hm.mime.apps.image = lib.mkOption { type = lib.types.listOf lib.types.str; };
-        js.hm.mime.apps.mail = lib.mkOption { type = lib.types.listOf lib.types.str; };
-        js.hm.mime.apps.text = lib.mkOption { type = lib.types.listOf lib.types.str; };
-        js.hm.mime.apps.video = lib.mkOption { type = lib.types.listOf lib.types.str; };
+        js.hm.mime.apps.audio = mimeAppsOption;
+        js.hm.mime.apps.browser = mimeAppsOption;
+        js.hm.mime.apps.docs = mimeAppsOption;
+        js.hm.mime.apps.image = mimeAppsOption;
+        js.hm.mime.apps.mail = mimeAppsOption;
+        js.hm.mime.apps.text = mimeAppsOption;
+        js.hm.mime.apps.video = mimeAppsOption;
         js.hm.mime.override = lib.mkOption { default = {}; };
     };
 
@@ -19,7 +24,7 @@
         xdg.mimeApps.enable = true;
         xdg.mimeApps.defaultApplications = let
             # this essentially takes each of the types and outputs an attrset of { type = handlers; } if handlers is defined
-            genMimeApps = handlers: types: lib.attrSets.optionalAttrs (handlers != []) (lib.attrsets.genAttrs types handlers);
+            genMimeApps = handlers: types: lib.attrsets.optionalAttrs (lib.length handlers != []) (lib.attrsets.genAttrs types (type: handlers));
         in genMimeApps config.js.hm.mime.apps.audio [
             "audio/flac"
             "audio/mpeg"
