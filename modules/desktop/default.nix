@@ -76,6 +76,7 @@
             sharedModules = [ inputs.self.outputs.homeManagerModules.default ];
             useGlobalPkgs = true;
             useUserPackages = true;
+            backupFileExtension = "BACKUP"; # fixes a bug where Home Manager refuses to start due to old files
         };
 
         # GNOME apps depend on global config
