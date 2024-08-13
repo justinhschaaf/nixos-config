@@ -5,7 +5,7 @@
             enable = lib.mkEnableOption "Loki, like Prometheus, but for logs.";
             openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
             agents.promtail.enable = lib.mkEnableOption "Promtail";
-            agents.promtail.client = lib.mkOption { default = "http://127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}" };
+            agents.promtail.client = lib.mkOption { default = "http://127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}"; };
             agents.promtail.clients = lib.mkOption { default = [{ url = "${config.js.server.loki.agents.promtail.client}/loki/api/v1/push"; }]; };
         };
     };

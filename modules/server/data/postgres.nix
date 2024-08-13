@@ -11,7 +11,7 @@
         # Open ports
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.postgres.openFirewall [ config.services.postgresql.settings.port ];
 
-        config.services.postgresql = {
+        services.postgresql = {
         
             enable = true;
 

@@ -5,7 +5,7 @@
             enable = lib.mkEnableOption "the Prometheus monitoring system and time series database";
             openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
             exporters.node.enable = lib.mkEnableOption "the Prometheus node exporter";
-            exporters.node.openFirewall = lib.mkOption { default = config.js.server.prometheus.openFirewall };
+            exporters.node.openFirewall = lib.mkOption { default = config.js.server.prometheus.openFirewall; };
             scrapeFrom = lib.mkOption { default = {}; }; # "${config.networking.hostName}" = "route on the host:exporter port"
         };
     };
@@ -27,16 +27,16 @@
 
         # Send collected data from the exporter to Prometheus
         services.prometheus.scrapeConfigs = lib.attrsets.mapAttrsToList (name: value: 
-            if typeOf value == "set"
+            if lib.typeOf value == "set"
             then value
             else {
                 job_name = name;
                 static_configs = [{
-                    targets = if typeOf value == "list" 
+                    targets = if lib.typeOf value == "list" 
                         then value
                         else [ "${toString value}" ];
                 }];
-            }) js.server.prometheus.scrapeFrom;
+            }) config.js.server.prometheus.scrapeFrom;
     
     };
 

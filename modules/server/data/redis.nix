@@ -12,7 +12,7 @@
     };
 
     config.services.redis = lib.mkIf config.js.server.redis.enable (
-        listToAttrs (lib.lists.forEach config.js.server.redis.ensureApplications (
+        lib.listToAttrs (lib.lists.forEach config.js.server.redis.ensureApplications (
             app: lib.attrsets.recursiveUpdate {
             
                 enable = true;

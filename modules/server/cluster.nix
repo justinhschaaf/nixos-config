@@ -8,7 +8,7 @@
     
         enable = lib.mkEnableOption "special options for running a VM cluster";
         
-        guests.all = lib.mkOption { type = lib.types.listOf (options.js.server.cluster.guest.options.type); };
+        guests.all = lib.mkOption { type = lib.types.listOf (config.options.js.server.cluster.guest.options.type); };
         guests.config = lib.mkOption { type = lib.types.functionTo lib.types.attrs; }; # takes the guest config as an arg
         guests.ips = lib.mkOption { default = lib.attrsets.catAttrs "ip" config.js.server.cluster.guests.all; };
         
@@ -30,7 +30,7 @@
     config = lib.mkIf config.js.server.cluster.enable {
 
         # Setup network bridge
-        systemd.network = if config.js.server.cluster.host.enable {
+        systemd.network = if config.js.server.cluster.host.enable then {
 
             enable = true;
 
@@ -44,7 +44,7 @@
                 networkConfig.Address = "${config.js.server.cluster.host.ip}/24";
             };
     
-        } else if config.js.server.cluster.guest.enable {
+        } else if config.js.server.cluster.guest.enable then {
         
             enable = true;
             
@@ -66,7 +66,7 @@
 
         # make microvms
         microvm.host.enable = config.js.server.cluster.host.enable;
-        microvm.vms = listToAttrs (lib.lists.forEach config.js.server.cluster.guests (guest: {
+        microvm.vms = lib.listToAttrs (lib.lists.forEach config.js.server.cluster.guests (guest: {
             name = guest.hostName;
             value = config.js.server.cluster.guest.config guest;
         }));
@@ -74,7 +74,7 @@
         # caddy load balancer https://www.linuxtrainingacademy.com/caddy-load-balancing-tutorial/
         services.caddy.virtualHosts.":80".extraConfig =
             lib.mkIf (config.js.server.caddy.enable && config.js.server.cluster.host.enable) ''
-                reverse_proxy ${lib.strings.concatStringsSep " " js.server.cluster.guests.ips} {
+                reverse_proxy ${lib.strings.concatStringsSep " " config.js.server.cluster.guests.ips} {
                     lb_policy least_conn
                 }
             '';
