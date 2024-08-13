@@ -3,11 +3,14 @@
     options.js.server.redis = {
         enable = lib.mkEnableOption "Redis, an in-memory database that persists on disk";
         defaultSettings = lib.mkOption { default = {}; };
-        ensureApplications = lib.mkOption { type = lib.types.listOf (lib.types.attrsOf lib.types.submodule {
-            name = lib.mkOption { type = lib.types.str; };
-            port = lib.mkOption { type = lib.types.port; };
-            extraConfig = lib.mkOption { default = {}; };
-        }); };
+        ensureApplications = lib.mkOption {
+            type = lib.types.listOf (lib.types.submodule {
+                name = lib.mkOption { type = lib.types.str; };
+                port = lib.mkOption { type = lib.types.port; };
+                extraConfig = lib.mkOption { default = {}; };
+            });
+            default = [];
+        };
         openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
     };
 
