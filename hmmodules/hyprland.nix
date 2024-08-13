@@ -128,7 +128,8 @@
                 };
 
                 # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-                master.new_is_master = true;
+                # https://github.com/hyprwm/Hyprland/pull/6479
+                master.new_status = "master";
 
                 # See https://wiki.hyprland.org/Configuring/Keywords/ for more
                 "$mainMod" = "SUPER";
