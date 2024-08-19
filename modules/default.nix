@@ -65,15 +65,15 @@
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-    # Configure DNSSEC with systemd-resolved https://wiki.nixos.org/wiki/Systemd-resolved
-    networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+    # Configure DNSSEC with systemd-resolved to use Cloudflare and Quad9 https://wiki.nixos.org/wiki/Systemd-resolved
+    networking.nameservers = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" "149.112.112.112" ];
 
     services.resolved = {
         enable = true;
         dnssec = "true"; # yes, these are strings
         dnsovertls = "true";
         domains = [ "~." ];
-        fallbackDns = [ "1.1.1.1" "1.0.0.1" ];
+        fallbackDns = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" "149.112.112.112" ];
     };
 
     # Enable Avahi for zeroconf networking, firewall is opened for it by default
