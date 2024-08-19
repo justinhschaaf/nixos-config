@@ -36,5 +36,10 @@
         openFirewall = config.js.server.tarpits.openFirewall;
     };
 
+    config.services.avahi = lib.mkIf config.js.server.enable {
+        publish.enable = true;
+        publish.domain = true;
+    };
+
 }
 

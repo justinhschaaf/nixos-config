@@ -76,6 +76,10 @@
         fallbackDns = [ "1.1.1.1" "1.0.0.1" ];
     };
 
+    # Enable Avahi for zeroconf networking, firewall is opened for it by default
+    services.avahi.enable = true;
+    services.avahi.nssmdns4 = true;
+
     # Setup Chrony with NTS for time server security
     # https://privsec.dev/posts/linux/desktop-linux-hardening/#time-synchronization
     services.chrony = {
