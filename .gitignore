@@ -5,3 +5,4 @@ hardware-configuration.nix
 result
 *.qcow2
 
+.idea
