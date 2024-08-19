@@ -37,6 +37,13 @@
 
         ];
 
+        services.flatpak.packages = [
+            # Install Cura via Flatpak instead of Nixpkgs, see below for why
+            # https://github.com/NixOS/nixpkgs/pull/327976#issuecomment-2274977353
+            # https://github.com/NixOS/nixpkgs/issues/186570
+            "flathub:app/com.ultimaker.cura//stable"
+        ];
+
         programs.git = {
             enable = true;
             config.credential.credentialStore = "cache";
