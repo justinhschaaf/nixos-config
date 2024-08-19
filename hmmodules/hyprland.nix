@@ -140,7 +140,7 @@
                     "$mainMod, space, exec, anyrun"
                     "$mainMod, T, exec, kitty"
                     "$mainMod, E, exec, thunar"
-                    "$mainMod, R, exec, gnome-system-monitor"
+                    "$mainMod, R, exec, resources"
                     "$mainMod, period, exec, flatpak run dev.krtirtho.Flemozi" # same as windows
                     "$mainMod SHIFT, C, exec, notify-send -a 'hyprpicker' 'Color: $(hyprpicker -anr)' 'The selected color has been copied to your clipboard.'" # same as powertoys
 

@@ -10,8 +10,8 @@
 
             # System Utils
             kitty
-            gnome-system-monitor
             gparted
+            resources
             wdisplays
 
             # File Viewers
