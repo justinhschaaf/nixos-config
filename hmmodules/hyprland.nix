@@ -244,6 +244,13 @@
         };
 
         # TODO https://mipmip.github.io/home-manager-option-search/?query=mako
+
+        # Enable day/night color temperature adjustment
+        services.wlsunset = {
+            enable = true;
+            sunrise = "6:00";
+            sunset = "19:00";
+        };
         
     };
 
