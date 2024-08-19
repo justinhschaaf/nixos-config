@@ -68,8 +68,11 @@
         anyrun.inputs.nixpkgs.follows = "nixpkgs";
 
         # Authentik Server
+        # Override poetry2nix to fix https://github.com/nix-community/authentik-nix/issues/30
+        poetry2nix.url = "github:nix-community/poetry2nix";
         authentik-nix.url = "github:nix-community/authentik-nix";
         authentik-nix.inputs.nixpkgs.follows = "nixpkgs";
+        authentik-nix.inputs.poetry2nix.follows = "poetry2nix";
 
     };
 
