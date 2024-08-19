@@ -78,17 +78,17 @@
         system = "x86_64-linux";
         pkgs = import nixpkgs { inherit system; };
         jspkgs = import inputs.jspkgs { inherit system; };
-        guests = [{
-            hostName = "tortellini";
-            ip = "10.0.0.20";
-            master = true;
-        } {
-            hostName = "tortellacci";
-            ip = "10.0.0.30";
-        } {
-            hostName = "tortelloni";
-            ip = "10.0.0.40";
-        }];
+        #guests = [{
+        #    hostName = "tortellini";
+        #    ip = "10.0.0.20";
+        #    master = true;
+        #} {
+        #    hostName = "tortellacci";
+        #    ip = "10.0.0.30";
+        #} {
+        #    hostName = "tortelloni";
+        #    ip = "10.0.0.40";
+        #}];
     in nixpkgs.lib.attrsets.recursiveUpdate {
 
         nixosConfigurations.justinhs-go = nixpkgs.lib.nixosSystem {
@@ -111,9 +111,9 @@
             ];
         };
 
-        # Homelab Server Host/Node Hypervisor
+        # Homelab Server
         nixosConfigurations.tortelli = nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system jspkgs guests; };
+            specialArgs = { inherit inputs system jspkgs; };
             modules = [
                 ./hardware-configuration.nix
                 ./modules
@@ -122,21 +122,33 @@
             ];
         };
 
+        # Homelab Server - Exprimental VM Cluster
+        #nixosConfigurations.tortelli-cluster = nixpkgs.lib.nixosSystem {
+        #    specialArgs = { inherit inputs system jspkgs guests; };
+        #    modules = [
+        #        ./hardware-configuration.nix
+        #        ./modules
+        #        ./systems/server-cluster.nix
+        #        ./users/justinhs.nix
+        #    ];
+        #};
+
         homeManagerModules.default = ./hmmodules;
 
     } {
 
+        # This currently doesn't work because nixosConfigurations doesn't exist to set hostCfg to when this is ran
         # Server Cluster Nodes
-        /**nixosConfigurations = let
-            hostCfg = inputs.self.outputs.nixosConfigurations.tortelli;
-            nixosCfg = guest: nixpkgs.lib.nixosSystem {
-                specialArgs = { inherit inputs system jspkgs hostCfg guest; };
-                modules = [
-                    ./modules
-                    ./systems/server-guest.nix
-                ];
-            };
-        in nixpkgs.lib.attrsets.genAttrs nixosCfg (nixpkgs.lib.attrsets.catAttrs "hostName" guests);**/
+        #nixosConfigurations = let
+        #    hostCfg = inputs.self.outputs.nixosConfigurations.tortelli-cluster;
+        #    nixosCfg = guest: nixpkgs.lib.nixosSystem {
+        #        specialArgs = { inherit inputs system jspkgs hostCfg guest; };
+        #        modules = [
+        #            ./modules
+        #            ./systems/server-guest.nix
+        #        ];
+        #    };
+        #in nixpkgs.lib.attrsets.genAttrs nixosCfg (nixpkgs.lib.attrsets.catAttrs "hostName" guests);
         
     };
     
