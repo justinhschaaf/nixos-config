@@ -11,7 +11,7 @@
         # Open ports
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.outline.openFirewall [ config.services.outline.port ];
 
-        sops.secrets."outline/outline-env".sopsFile = ../../secrets/server.yaml;
+        sops.secrets."outline/outline-env".sopsFile = ../../../secrets/server.yaml;
         
         services.outline = lib.attrsets.recursiveUpdate {
         

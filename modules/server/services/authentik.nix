@@ -17,7 +17,7 @@
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.authentik.openFirewall [ 9443 ]
             ++ lib.optionals config.js.server.authentik.openFirewallMetrics [ 9300 ];
 
-        sops.secrets."authentik/authentik-env".sopsFile = ../../secrets/server.yaml;
+        sops.secrets."authentik/authentik-env".sopsFile = ../../../secrets/server.yaml;
 
         services.authentik = lib.attrsets.recursiveUpdate {
             enable = true;
