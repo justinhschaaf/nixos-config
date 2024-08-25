@@ -49,8 +49,8 @@
     # Enable nodev and nosuid on most file systems
     # Not enabling noexec on most since I'm a developer, I need to do dev stuff!
     # noexec was enabled for /root, /home, /srv, and /var/log but Nix complained those aren't actual mounts
+    # disabling /boot options because Nix complains about it duuring install
     fileSystems."/".options = [ "nodev" "nosuid" ];
-    fileSystems."/boot".options = [ "nodev" "noexec" "nosuid" ];
 
     # Enable networking, usuable with nmtui
     # Also enable privacy tweaks to hide MAC address https://privsec.dev/posts/linux/desktop-linux-hardening/#privacy-tweaks
