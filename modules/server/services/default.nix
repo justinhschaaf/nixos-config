@@ -6,6 +6,7 @@
         ./grafana.nix
         ./outline.nix
         ./seafile.nix
+        ./waffles.lol.nix
     ];
 
 }

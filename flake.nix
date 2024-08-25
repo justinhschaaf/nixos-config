@@ -74,6 +74,10 @@
         authentik-nix.inputs.nixpkgs.follows = "nixpkgs";
         authentik-nix.inputs.poetry2nix.follows = "poetry2nix";
 
+        # waffles.lol website
+        #waffleslol.url = "path:/mnt/Files/Programming/waffles.lol";
+        #waffleslol.inputs.nixpkgs.follows = "nixpkgs";
+
     };
 
     outputs = { nixpkgs, ... }@inputs: # TODO play around with `self` keyword

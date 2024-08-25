@@ -29,18 +29,20 @@
         caddy.enable = true;
         caddy.openFirewall = true; # we want this to be true even when disabling everything else
 
+        waffles.lol.enable = false; # still working on getting yarn v2 packages working
+        waffles.lol.hostName = "waffles.lol";
+
         authentik.enable = true;
-        authentik.openFirewallMetrics = true;
-        authentik.hostName = "auth.localhost";
+        authentik.hostName = "auth.waffles.lol";
 
         grafana.enable = false; # enable when OIDC is set up
-        grafana.hostName = "grafana.localhost";
+        grafana.hostName = "grafana.waffles.lol";
 
         outline.enable = false; # enable when OIDC is set up
-        outline.hostName = "outline.localhost";
+        outline.hostName = "outline.waffles.lol";
 
         seafile.enable = false; # waiting for https://github.com/NixOS/nixpkgs/pull/318727 to complete because database system is changing
-        seafile.hostName = "files.localhost";
+        seafile.hostName = "files.waffles.lol";
         
     };
 
