@@ -3,7 +3,6 @@
     imports = [ inputs.sops-nix.nixosModules.sops ];
 
     options = {
-        # Usage note: remember to set sops.age.keyFile
         js.sops.enable = lib.mkEnableOption "secrets management with sops-nix";
     };
 
@@ -15,6 +14,7 @@
         ];
 
         sops.defaultSopsFormat = "yaml";
+        sops.age.keyFile = "/var/lib/sops-nix/key.txt";
     
     };
 
