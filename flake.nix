@@ -125,7 +125,7 @@
                 ./hardware-configuration.nix
                 ./modules
                 ./systems/server.nix
-                ./users/justinhs.nix
+                ./users/sysadmin.nix
             ];
         };
 
@@ -136,7 +136,7 @@
         #        ./hardware-configuration.nix
         #        ./modules
         #        ./systems/server-cluster.nix
-        #        ./users/justinhs.nix
+        #        ./users/sysadmin.nix
         #    ];
         #};
 
