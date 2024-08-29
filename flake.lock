@@ -166,16 +166,16 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1722178161,
-        "narHash": "sha256-9Nmg+1ngRCsKMJXN4JWFzg4SLTj1iJfakxiOsF48rZw=",
+        "lastModified": 1724545401,
+        "narHash": "sha256-Or7WArPVTP50UD47OIiVMP/MzsveHBpVLgZO2Y2X+N8=",
         "owner": "GermanBread",
         "repo": "declarative-flatpak",
-        "rev": "cbabea429cd7d659041e5338e869a8e70f59fa74",
+        "rev": "5ac7c5329b18fc22f92ac6f414732c40fbb22143",
         "type": "github"
       },
       "original": {
         "owner": "GermanBread",
-        "ref": "stable",
+        "ref": "stable-v3",
         "repo": "declarative-flatpak",
         "type": "github"
       }
