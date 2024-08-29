@@ -51,10 +51,6 @@
         home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-        # Declarative VMs
-        microvm.url = "github:astro/microvm.nix";
-        microvm.inputs.nixpkgs.follows = "nixpkgs";
-
         # Secrets management
         sops-nix.url = "github:Mic92/sops-nix";
         sops-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -85,18 +81,7 @@
         system = "x86_64-linux";
         pkgs = import nixpkgs { inherit system; };
         jspkgs = import inputs.jspkgs { inherit system; };
-        #guests = [{
-        #    hostName = "tortellini";
-        #    ip = "10.0.0.20";
-        #    master = true;
-        #} {
-        #    hostName = "tortellacci";
-        #    ip = "10.0.0.30";
-        #} {
-        #    hostName = "tortelloni";
-        #    ip = "10.0.0.40";
-        #}];
-    in nixpkgs.lib.attrsets.recursiveUpdate {
+    in {
 
         nixosConfigurations.justinhs-go = nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system jspkgs; };
@@ -129,34 +114,8 @@
             ];
         };
 
-        # Homelab Server - Exprimental VM Cluster
-        #nixosConfigurations.tortelli-cluster = nixpkgs.lib.nixosSystem {
-        #    specialArgs = { inherit inputs system jspkgs guests; };
-        #    modules = [
-        #        ./hardware-configuration.nix
-        #        ./modules
-        #        ./systems/server-cluster.nix
-        #        ./users/sysadmin.nix
-        #    ];
-        #};
-
         homeManagerModules.default = ./hmmodules;
 
-    } {
-
-        # This currently doesn't work because nixosConfigurations doesn't exist to set hostCfg to when this is ran
-        # Server Cluster Nodes
-        #nixosConfigurations = let
-        #    hostCfg = inputs.self.outputs.nixosConfigurations.tortelli-cluster;
-        #    nixosCfg = guest: nixpkgs.lib.nixosSystem {
-        #        specialArgs = { inherit inputs system jspkgs hostCfg guest; };
-        #        modules = [
-        #            ./modules
-        #            ./systems/server-guest.nix
-        #        ];
-        #    };
-        #in nixpkgs.lib.attrsets.genAttrs nixosCfg (nixpkgs.lib.attrsets.catAttrs "hostName" guests);
-        
     };
     
 }

@@ -11,7 +11,6 @@
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.caddy.openFirewall [ 80 443 ];
 
         # Note for Cloudflare setup https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#defaults
-        # TODO LetsEncrypt setup
         services.caddy.enable = true;
     
     };

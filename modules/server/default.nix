@@ -1,14 +1,9 @@
 { inputs, lib, config, pkgs, ... }: {
 
-    imports = [ 
-
-        inputs.microvm.nixosModules.host
-    
+    imports = [
         ./data
         ./monitoring
         ./services
-        ./cluster.nix
-        
     ];
 
     options.js.server = {

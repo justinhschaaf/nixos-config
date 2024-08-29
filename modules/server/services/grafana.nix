@@ -21,7 +21,7 @@
 
         # All options: https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#paths
         services.grafana.enable = true;
-        services.grafana.settings = lib.attrsets.recursiveUpdate {
+        services.grafana.settings = {
             
             server = {
                 protocol = "https";
@@ -54,22 +54,7 @@
                 startTLS_policy = "MandatoryStartTLS";
             };
             
-        } (lib.attrsets.optionalAttrs config.js.server.cluster.guest.enable {
-
-            database = {
-                type = "postgres";
-                host = "${config.js.server.cluster.host.ip}:5432";
-                user = "grafana";
-                password = "grafana";
-                name = "grafana_db";
-            };
-
-            remote_cache = {
-                type = "redis";
-                connstr = "addr=${config.js.server.cluster.host.ip}:6325,pool_size=100,db=0,ssl=false";
-            };
-        
-        });
+        };
 
         services.caddy.virtualHosts."${config.js.server.grafana.hostName}".extraConfig =
             lib.mkIf config.js.server.caddy.enable ''

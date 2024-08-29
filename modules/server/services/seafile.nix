@@ -11,7 +11,7 @@
         # Open ports
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.seafile.openFirewall [ 8000 8080 8082 8083 ];
 
-        services.seafile = lib.attrsets.recursiveUpdate {
+        services.seafile = {
         
             # haha good catch GitGuardian, i really give a shit about a password
             # that will be changed by the time this is ever accessible to a 
@@ -28,53 +28,7 @@
                 fileserver.use_go_fileserver = true;
             };
             
-        } (lib.attrsets.optionalAttrs config.js.server.cluster.guest.enable {
-
-            ccnetSettings = {
-                cluster.enabled = true;
-                database = { # DB only for this, cache is pro only
-                    type = "mysql";
-                    host = config.js.server.cluster.host.ip;
-                    port = 3306;
-                    user = "seafile";
-                    password = "seafile";
-                    db_name = "ccnet_db";
-                };
-            };
-
-            seafileSettings = {
-                cluster.enabled = true;
-                database = { # DB only for this, cache is pro only
-                    type = "mysql";
-                    host = config.js.server.cluster.host.ip;
-                    port = 3306;
-                    user = "seafile";
-                    password = "seafile";
-                    db_name = "seafile_db";
-                };
-            };
-
-            seahubExtraConf = ''
-                DATABASES = {
-                    "default": {
-                        "ENGINE": "django.db.backends.mysql",
-                        "HOST": "${config.js.server.cluster.host.ip}",
-                        "PORT": "3306",
-                        "USER": "seafile",
-                        "PASSWORD": "seafile",
-                        "NAME": "seahub_db",
-                    }
-                }
-                
-                CACHES = {
-                    "default": {
-                        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-                        "LOCATION": "redis://${config.js.server.cluster.host.ip}:6315",
-                    }
-                }
-            '';
-        
-        });
+        };
 
         # https://forum.seafile.com/t/notification-server-behind-caddy/19326
         # https://forum.seafile.com/t/caddy-reverse-proxy-for-seafile/19525

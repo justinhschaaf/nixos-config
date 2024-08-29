@@ -19,11 +19,11 @@
 
         sops.secrets."authentik/authentik-env".sopsFile = ../../../secrets/server.yaml;
 
-        services.authentik = lib.attrsets.recursiveUpdate {
+        services.authentik = {
             enable = true;
             environmentFile = "/run/secrets/authentik/authentik-env";
             settings = {
-            
+
                 email = {
                     host = "smtp-relay.brevo.com";
                     port = 587;
@@ -36,24 +36,9 @@
                 disable_startup_analytics = true;
                 disable_update_check = true;
                 error_reporting.enabled = false;
-                
-            };
-        } (lib.attrsets.optionalAttrs config.js.server.cluster.guest.enable {
-        
-            createDatabase = false;
 
-            settings.postgresql = {
-                host = config.js.server.cluster.host.ip;
-                user = "authentik";
-                name = "authentik_db";
             };
-
-            settings.redis = {
-                host = config.js.server.cluster.host.ip;
-                port = 6310;
-            };
-        
-        });
+        };
 
         # https://docs.goauthentik.io/docs/installation/reverse-proxy
         # Headers should already be set, see https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#defaults
@@ -61,7 +46,7 @@
             lib.mkIf config.js.server.caddy.enable ''
                 reverse_proxy 127.0.0.1:9443
             '';
-    
+
     };
 
 }
