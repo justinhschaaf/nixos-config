@@ -8,7 +8,7 @@
     js.server = {
     
         enable = true;
-        openFirewall = false; # openFirewall != port forwarded, only accessible to internal network
+        openFirewall = true; # openFirewall != port forwarded, only accessible to internal network
         
         ssh.enable = true;
         ssh.openFirewall = true;
