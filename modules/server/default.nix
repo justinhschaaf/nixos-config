@@ -20,7 +20,6 @@
         enable = true;
         ports = [ 2720 ];
         openFirewall = config.js.server.ssh.openFirewall;
-        settings.UseDns = true;
         settings.PermitRootLogin = "no";
     };
 
