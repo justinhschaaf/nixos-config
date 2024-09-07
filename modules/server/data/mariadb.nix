@@ -6,12 +6,12 @@
         js.server.mariadb.openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
     };
 
-    config = {
+    config = lib.mkIf config.js.server.mariadb.enable {
 
         # Open ports
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.mariadb.openFirewall [ config.services.mysql.settings.mysqld.port ];
     
-        services.mysql = lib.mkIf config.js.server.mariadb.enable {
+        services.mysql =  {
 
             enable = true;
 
