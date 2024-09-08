@@ -21,6 +21,7 @@
         prometheus.scrapeFrom = { # local exporters
             "node-${config.networking.hostName}" = "127.0.0.1:${toString config.services.prometheus.exporters.node.port}";
             "authentik-${config.networking.hostName}" = "127.0.0.1:9300";
+            "caddy-${config.networking.hostName}" = "127.0.0.1:2019";
         };
 
         loki.enable = true;
