@@ -10,7 +10,9 @@
         # Open ports
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.caddy.openFirewall [ 80 443 ];
 
-        # Note for Cloudflare setup https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#defaults
+        # NOTES FOR CLOUDFLARE
+        # https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#defaults
+        # https://caddy.community/t/caddy-cloudflare-err-too-many-redirects/3518
         services.caddy.enable = true;
     
     };

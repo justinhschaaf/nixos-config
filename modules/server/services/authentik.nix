@@ -14,6 +14,7 @@
     config = lib.mkIf config.js.server.authentik.enable {
 
         # Open ports
+        # Don't open 9000, we want to use HTTPS for internal access
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.authentik.openFirewall [ 9443 ]
             ++ lib.optionals config.js.server.authentik.openFirewallMetrics [ 9300 ];
 
@@ -42,9 +43,10 @@
 
         # https://docs.goauthentik.io/docs/installation/reverse-proxy
         # Headers should already be set, see https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#defaults
+        # Must use HTTP here or else we run into a bad gateway error
         services.caddy.virtualHosts."${config.js.server.authentik.hostName}".extraConfig =
             lib.mkIf config.js.server.caddy.enable ''
-                reverse_proxy 127.0.0.1:9443
+                reverse_proxy 127.0.0.1:9000
             '';
 
     };
