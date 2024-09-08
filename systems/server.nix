@@ -33,6 +33,7 @@
         waffles.lol.hostName = "waffles.lol";
 
         authentik.enable = true;
+        authentik.ldap.enable = true;
         authentik.hostName = "auth.waffles.lol";
 
         grafana.enable = false; # enable when OIDC is set up
