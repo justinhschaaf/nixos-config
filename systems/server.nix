@@ -53,7 +53,9 @@
     # TODO implement a better solution for proxying applications over Authentik
     services.caddy.virtualHosts."fluidd.waffles.lol".extraConfig = ''
         # always forward outpost path to actual outpost
-        reverse_proxy /outpost.goauthentik.io/* http://127.0.0.1:9000
+        reverse_proxy /outpost.goauthentik.io/* http://127.0.0.1:9000 {
+            header_up Host {http.reverse_proxy.upstream.hostport}
+        }
 
         # forward authentication to outpost
         forward_auth http://127.0.0.1:9000 {
