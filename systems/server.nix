@@ -52,5 +52,12 @@
     # Set system name
     networking.hostName = "tortelli";
 
+    # Setup static IP and default gateway
+    networking.defaultGateway = "10.10.22.1";
+    networking.interfaces.enp2s0.ipv4.addresses = [{
+        address = "10.10.22.20";
+        prefixLength = 24;
+    }];
+
 }
 
