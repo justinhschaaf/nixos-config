@@ -61,6 +61,10 @@
         wifi.scanRandMacAddress = true;
     };
 
+    # use nftables instead of iptables
+    # note in case docker ever gets enabled: this fucks with docker
+    networking.nftables.enable = true;
+
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
