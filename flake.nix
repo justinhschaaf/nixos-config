@@ -70,6 +70,10 @@
         authentik-nix.inputs.nixpkgs.follows = "nixpkgs";
         authentik-nix.inputs.poetry2nix.follows = "poetry2nix";
 
+        # Patched Caddy containing Cloudflare plugin
+        nixos-caddy.url = "github:Ramblurr/nixos-caddy";
+        nixos-caddy.inputs.nixpkgs.follows = "nixpkgs";
+
         # waffles.lol website
         #waffleslol.url = "path:/mnt/Files/Programming/waffles.lol";
         #waffleslol.inputs.nixpkgs.follows = "nixpkgs";
