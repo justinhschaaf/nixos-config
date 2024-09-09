@@ -113,6 +113,10 @@
 
     };
 
+    # Prevent logrotate from checking the config at buildtime, resolves an issue caused by the hardened kernel
+    # https://discourse.nixos.org/t/logrotate-config-fails-due-to-missing-group-30000/28501
+    services.logrotate.checkConfig = false;
+
     # Cleanup tmp upon boot, why tf is this documentation shit
     # https://github.com/NixOS/nixpkgs/issues/96753
     # https://man.archlinux.org/man/tmpfiles.d.5
