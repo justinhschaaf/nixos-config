@@ -49,6 +49,27 @@
         
     };
 
+    # Add Fluidd
+    # TODO implement a better solution for proxying applications over Authentik
+    services.caddy.virtualHosts."fluidd.waffles.lol".extraConfig = ''
+        # always forward outpost path to actual outpost
+        reverse_proxy /outpost.goauthentik.io/* http://127.0.0.1:9000
+
+        # forward authentication to outpost
+        forward_auth http://127.0.0.1:9000 {
+            uri /outpost.goauthentik.io/auth/caddy
+
+            # capitalization of the headers is important, otherwise they will be empty
+            copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
+
+            # optional, in this config trust all private ranges, should probably be set to the outposts IP
+            trusted_proxies private_ranges
+        }
+
+        # actual site configuration below, for example
+        reverse_proxy 10.10.22.19
+    '';
+
     # Set system name
     networking.hostName = "tortelli";
 
