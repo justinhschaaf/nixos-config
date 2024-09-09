@@ -6,11 +6,11 @@
 
     options = {
         js.server.authentik.enable = lib.mkEnableOption "Authentik, the authentication glue you need";
-        js.server.authentik.ldap.enable = lib.mkEnableOption "Authentik LDAP outpost";
         js.server.authentik.hostName = lib.mkOption { type = lib.types.str; };
         js.server.authentik.openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
         js.server.authentik.openFirewallMetrics = lib.mkOption { default = config.js.server.openFirewall; };
-        js.server.authentik.openFirewallLdap = lib.mkOption { default = config.js.server.openFirewall; };
+        js.server.authentik.ldap.enable = lib.mkEnableOption "Authentik LDAP outpost";
+        js.server.authentik.ldap.openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
     };
 
     config = lib.mkIf config.js.server.authentik.enable {
@@ -19,7 +19,7 @@
         # Don't open 9000, we want to use HTTPS for internal access
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.authentik.openFirewall [ 9443 ]
             ++ lib.optionals config.js.server.authentik.openFirewallMetrics [ 9300 ]
-            ++ lib.optionals config.js.server.authentik.openFirewallLdap [ 3389 6636 ];
+            ++ lib.optionals config.js.server.authentik.ldap.openFirewall [ 3389 6636 ];
 
         sops.secrets."authentik/authentik-env".sopsFile = ../../../secrets/server.yaml;
         sops.secrets."authentik/authentik-ldap-env".sopsFile = lib.mkIf config.js.server.authentik.ldap.enable ../../../secrets/server.yaml;

@@ -34,8 +34,9 @@
         waffles.lol.hostName = "waffles.lol";
 
         authentik.enable = true;
-        authentik.ldap.enable = true;
         authentik.hostName = "auth.waffles.lol";
+        authentik.ldap.enable = true;
+        authentik.ldap.openFirewall = false; # only insecure ports are open and those don't even work right
 
         grafana.enable = false; # enable when OIDC is set up
         grafana.hostName = "grafana.waffles.lol";
