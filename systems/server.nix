@@ -54,12 +54,10 @@
     services.caddy.virtualHosts."fluidd.waffles.lol".extraConfig = ''
         route {
             # always forward outpost path to actual outpost
-            reverse_proxy /outpost.goauthentik.io/* http://127.0.0.1:9000 {
-                header_up Host {http.reverse_proxy.upstream.hostport}
-            }
+            reverse_proxy /outpost.goauthentik.io/* 127.0.0.1:9000
 
             # forward authentication to outpost
-            forward_auth http://127.0.0.1:9000 {
+            forward_auth 127.0.0.1:9000 {
                 uri /outpost.goauthentik.io/auth/caddy
 
                 # capitalization of the headers is important, otherwise they will be empty
