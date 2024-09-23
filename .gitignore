@@ -1,5 +1,3 @@
-hardware-configuration.nix
-
 # For testing VMs
 # nixos-rebuild build-vm --flake path:./#system-name-here
 result

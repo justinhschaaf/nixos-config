@@ -87,17 +87,28 @@
         jspkgs = import inputs.jspkgs { inherit system; };
     in {
 
-        nixosConfigurations.justinhs-go = nixpkgs.lib.nixosSystem {
+        # Gaming PC
+        nixosConfigurations.bucatini = nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system jspkgs; };
-            modules = [ 
-                ./hardware-configuration.nix 
+            modules = [
                 ./modules
-                ./systems/go.nix
+                ./systems/gaming.nix
                 ./users/justinhs.nix
             ];
         };
 
-        nixosConfigurations.justinhs-tv = nixpkgs.lib.nixosSystem {
+        # Framework Laptop
+        nixosConfigurations.farfalle = nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs system jspkgs; };
+            modules = [
+                ./modules
+                ./systems/laptop.nix
+                ./users/justinhs.nix
+            ];
+        };
+
+        # Bedroom TV
+        nixosConfigurations.lasagna = nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system jspkgs; };
             modules = [ 
                 ./hardware-configuration.nix 
@@ -111,7 +122,6 @@
         nixosConfigurations.tortelli = nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system jspkgs; };
             modules = [
-                ./hardware-configuration.nix
                 ./modules
                 ./systems/server.nix
                 ./users/sysadmin.nix

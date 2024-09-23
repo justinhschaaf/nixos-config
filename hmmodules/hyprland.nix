@@ -20,7 +20,7 @@
 
                 # See https://wiki.hyprland.org/Configuring/Monitors/
                 # Wdisplays exists and is installed, but config doesn't save between restarts
-                monitor = if "${osConfig.system.name}" == "justinhs-go" 
+                monitor = if "${osConfig.system.name}" == "farfalle"
                     then ",preferred,auto,1.5" 
                     else ",preferred,auto,auto";
 

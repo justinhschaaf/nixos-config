@@ -11,6 +11,6 @@
     js.programs.thunar.enable = true;
 
     # Set system name
-    networking.hostName = "justinhs-tv";
+    networking.hostName = "lasagna";
 
 }

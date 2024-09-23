@@ -1,5 +1,7 @@
 { inputs, lib, config, pkgs, ... }: {
 
+    imports = [ ./laptop-hardware.nix ];
+
     # Autoupdate. Disabled while this is my primary testing device
     #js.autoUpdate.enable = true;
 
@@ -16,7 +18,7 @@
     js.programs.thunar.enable = true;
 
     # Set system name
-    networking.hostName = "justinhs-go";
+    networking.hostName = "farfalle";
 
 }
 

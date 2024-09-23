@@ -1,5 +1,7 @@
 { inputs, lib, config, pkgs, ... }: {
 
+    imports = [ ./server-hardware.nix ];
+
     # Autoupdate.
     #js.autoUpdate.enable = true;
     #js.autoUpdate.system.rebuildCmd = "switch";
