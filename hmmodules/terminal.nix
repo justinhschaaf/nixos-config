@@ -57,6 +57,10 @@
                 enable_audio_bell = "no";
                 notify_on_cmd_finish = "invisible 10.0 notify";
 
+                # https://github.com/kovidgoyal/kitty/issues/713
+                # https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.term
+                term = "xterm-256color";
+
                 # Tomorrow Night theme from Blackbox Terminal
                 # see https://gitlab.gnome.org/raggesilver/blackbox/-/blob/55f34e75d16c51a12b2522bc30e1f53a417ac973/data/schemes/tommorow-night.json
                 # and https://github.com/ccharles/Tomorrow-Theme
