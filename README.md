@@ -10,27 +10,6 @@ Right now, this is targeted at a home theater PC; more accurately, an old Dell O
 
 For now, if you're interested enough to see what I'm making here, feel free to stick around and enjoy the ride.
 
-## Goals / To Do
-
-- [x] Have this file hosted in a GitHub repo justinhschaaf/nixos-config
-- [x] Actually comment shit so I know what it does
-- [x] Automatic updates which pull from the GitHub repo
-- [x] Perhaps have separate configs for each machine defined, need some way to specify which profile to build
-- [x] Use the on-disk hardware-configuration.nix instead of having to pull it from GitHub
-- [x] Setup Home Manager
-- [x] Configure hyprland through home manager
-- [x] Declarative Flatpaks
-- [x] Mimetypes https://mipmip.github.io/home-manager-option-search/?query=mime https://github.com/nix-community/home-manager/issues/96 https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
-- [x] Fish config https://wiki.nixos.org/wiki/Fish
-- [ ] Frosted glass for theming. maybe soft rainbow gradients too?
-- [ ] EWW vertical taskbar, control center, and maybe notification daemon (history at least)
-- [ ] Mako notification config https://github.com/emersion/mako/issues/91#issuecomment-1750748445
-- [x] Migrate from Blackbox to Kitty and make it as beautiful as Blackbox https://sw.kovidgoyal.net/kitty/conf/ (kangawabones color theme)
-- [ ] Make Anyrun look like Spotlight Search but two column results
-- [x] Dark theme, make sure it works in Thunar
-- [ ] Add generic user for TV config
-- [x] Japanese keyboard
-
 ## References
 
 ### Technical
