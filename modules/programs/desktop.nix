@@ -11,6 +11,7 @@
             # System Utils
             kitty
             gparted
+            pwvucontrol
             resources
             wdisplays
 

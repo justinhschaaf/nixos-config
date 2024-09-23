@@ -42,16 +42,17 @@
 
         };
 
+        # enable waybar for the system top bar
+        programs.waybar.enable = true;
+
         environment.systemPackages = [
             
             # Hyprland Stuff/Basic System Functionality
             pkgs.brightnessctl
-            pkgs.eww
             pkgs.hyprland
             pkgs.libnotify
             pkgs.mako
             pkgs.polkit_gnome
-            pkgs.socat
             pkgs.swww
             pkgs.udiskie
             inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
