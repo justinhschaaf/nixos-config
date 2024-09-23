@@ -61,8 +61,14 @@
         wifi.scanRandMacAddress = true;
     };
 
+    # Replace wpa_supplicant with IWD
+    # https://kokada.dev/blog/an-unordered-list-of-hidden-gems-inside-nixos/
+    # https://wmbuck.net/blog/?p=1313
+    networking.networkmanager.wifi.backend = "iwd";
+
     # use nftables instead of iptables
     # note in case docker ever gets enabled: this fucks with docker
+    # podman is fine
     networking.nftables.enable = true;
 
     # Configure network proxy if necessary
