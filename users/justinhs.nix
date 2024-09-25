@@ -6,7 +6,7 @@
     users.users.justinhs = {
         isNormalUser = true;
         description = "Justin";
-        initialPassword = "cum";
+        initialPassword = "banana";
         extraGroups = [ "networkmanager" "wheel" ]; # wheel = admin. don't remove it like i did...
     };
 
