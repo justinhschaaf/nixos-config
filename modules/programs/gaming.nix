@@ -31,7 +31,7 @@
         environment.systemPackages = with pkgs; [
             ffmpeg
             handbrake
-            minecraft
+            #minecraft # currently broken
             modrinth-app
             olive-editor
             protonup-qt
