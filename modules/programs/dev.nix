@@ -29,7 +29,7 @@
             # Misc
             activitywatch
             #etcher # https://github.com/NixOS/nixpkgs/pull/295853
-            gnome.gnome-boxes
+            gnome-boxes
             tio
             vial
 
