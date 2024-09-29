@@ -417,7 +417,7 @@
             .modules-right {
                 background-color: rgba(31, 31, 31, .6);
                 box-shadow: 0 0 2px 1px rgba(26, 26, 26, 238);
-                border: 2px solid #fff;
+                border: 2px solid rgba(255, 255, 255, .2);
                 margin: 12px 12px 6px 12px;
             }
 
