@@ -540,6 +540,25 @@
             }
         '';
 
+        services.mako = {
+
+            enable = true;
+            defaultTimeout = 10000; # in ms
+
+            # Border formatting
+            borderColor = "#ffffffff";
+            borderRadius = 0;
+            borderSize = 2;
+
+            font = "sans-serif 12";
+            backgroundColor = "#1f1f1f99";
+            margin = "24,28";
+            padding = "6";
+
+            progressColor = "#55bb55ff";
+
+        };
+
         programs.anyrun = {
 
             enable = true;
@@ -565,8 +584,6 @@
             '';
 
         };
-
-        # TODO https://mipmip.github.io/home-manager-option-search/?query=mako
 
         # Enable day/night color temperature adjustment
         services.wlsunset = {
