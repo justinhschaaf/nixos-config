@@ -4,6 +4,7 @@
 
     # Autoupdate. Disabled while this is my primary testing device
     #js.autoUpdate.enable = true;
+    js.autoUpdate.sendNotif = true;
 
     # Enable Hyprland and JP keyboard
     js.desktop.enable = true;

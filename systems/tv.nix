@@ -2,6 +2,7 @@
 
     # Enable autoupdate
     js.autoUpdate.enable = true;
+    js.autoUpdate.sendNotif = true;
 
     # Enable Hyprland
     js.desktop.enable = true;

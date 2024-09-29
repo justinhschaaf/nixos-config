@@ -4,6 +4,7 @@
 
     # Autoupdate. TODO enable me
     #js.autoUpdate.enable = true;
+    js.autoUpdate.sendNotif = true;
 
     # Enable Hyprland and JP keyboard
     js.desktop.enable = true;

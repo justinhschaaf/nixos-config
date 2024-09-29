@@ -1,4 +1,4 @@
-{ inputs, lib, config, pkgs, ... }: {
+{ inputs, lib, config, pkgs, system, ... }: {
 
     options = {
         js.autoUpdate = {
@@ -21,6 +21,10 @@
         # systemd timers recommended over cron by the NixOS Wiki
         # https://wiki.nixos.org/wiki/Systemd/Timers
 
+        environment.systemPackages = lib.mkIf (config.js.autoUpdate.firmware.enable || config.js.autoUpdate.system.enable) [
+            inputs.self.outputs.packages.${system}.jsupdate
+        ];
+
         systemd = lib.mkIf (config.js.autoUpdate.firmware.enable || config.js.autoUpdate.system.enable) {
 
             timers."js-autoupdate" = {
@@ -39,7 +43,7 @@
                     else "";
                 notifyArgs = if config.js.autoUpdate.sendNotif then " -n" else "";
             in {
-                script = "/etc/nixos/scripts/update.sh" + firmwareUpdateArgs + systemUpdateArgs + notifyArgs;
+                script = "${inputs.self.outputs.packages.${system}.jsupdate}/bin/jsupdate" + firmwareUpdateArgs + systemUpdateArgs + notifyArgs;
                 serviceConfig = {
                     Type = "oneshot";
                     User = "root";

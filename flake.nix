@@ -130,6 +130,26 @@
 
         homeManagerModules.default = ./hmmodules;
 
+        # Package scripts. THIS HAS TO BE DEFINED LIKE THIS, SEE BELOW
+        # https://github.com/NixOS/nix/issues/916
+        # https://old.reddit.com/r/NixOS/comments/16p7ea2/dynamic_attribute_x86_64linux_already_defined/k1skjsf/
+        packages.${system} = {
+
+            # Use trivial builders from https://ryantm.github.io/nixpkgs/builders/trivial-builders/
+            jsinstall = pkgs.writeShellApplication {
+                name = "jsinstall";
+                runtimeInputs = with pkgs; [ git ];
+                text = builtins.readFile ./scripts/install.sh;
+            };
+
+            jsupdate = pkgs.writeShellApplication {
+                name = "jsupdate";
+                runtimeInputs = with pkgs; [ git nh ];
+                text = builtins.readFile ./scripts/update.sh;
+            };
+
+        };
+
     };
     
 }

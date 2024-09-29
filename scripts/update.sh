@@ -9,7 +9,7 @@ REBUILD_CMD="boot";
 
 SEND=true;
 SEND_NOTIF=false;
-SEND_EMAIL=false;
+#SEND_EMAIL=false;
 
 UPDATE_CONFIG=false;
 CHECK_FIRMWARE=false;
@@ -32,7 +32,7 @@ echo_usage() {
     Arguments:
       config \t (optional) the folder path to where the system's NixOS config is stored"
 
-    exit $1
+    exit "$1"
 
 }
 
@@ -44,12 +44,13 @@ send_msg() {
     fi
 
     if [ "$SEND_NOTIF" = true ]; then
-        notify-send $1 $2
+        notify-send "$1" "$2"
     fi
 
-    if [ "$SEND_EMAIL" = true ]; then
+    # shell check doesn't like this existing without a body
+    #if [ "$SEND_EMAIL" = true ]; then
         # not implemented https://www.digitalocean.com/community/tutorials/send-email-linux-command-line
-    fi
+    #fi
 
 }
 
@@ -64,14 +65,13 @@ update_system_config() {
         # https://www.w3docs.com/snippets/git/how-to-programmatically-determine-if-there-are-uncommitted-changes.html
         # https://git-scm.com/docs/git-diff-index
         # https://www.cyberciti.biz/faq/bash-get-exit-code-of-command/
-        git diff-index --quiet HEAD --
-        if [ "$?" -eq 0 ]; then
+        if git diff-index --quiet HEAD --; then
 
             # We have no unsaved changes, proceed with the update
             send_msg "Updating System Config" "Please do not shut down your computer."
 
             # Fetch the latest changes from Git
-            git pull --prune
+
             if [ "$?" -eq 1 ]; then
                 send_msg "Config Update Failed" 'There was a problem pulling the latest config from Git, please run "git pull --prune" manually for more details.'
                 return 1
@@ -79,9 +79,9 @@ update_system_config() {
 
             # Rebuild the system with nh, disabling NOM for cleaner logs
             # IN CASE WE HAVE PROBLEMS: https://discourse.nixos.org/t/dirty-nixos-rebuild-build-flake-issues/30078/2
-            nh os $REBUILD_CMD --no-nom "path:$CONFIG_DIR"
+            nh os "$REBUILD_CMD" --no-nom "path:$CONFIG_DIR"
             if [ "$?" -eq 1 ]; then
-                send_msg "Config Update Failed" 'There was a problem rebuilding the system, please run "nh os $REBUILD_CMD" manually for more details.'
+                send_msg "Config Update Failed" "There was a problem rebuilding the system, please run \"nh os $REBUILD_CMD\" manually for more details."
                 return 1
             fi
 
@@ -110,7 +110,9 @@ check_firmware() {
         if [ "$FWUPDMGR_STATUS" -eq 0 ]; then
             send_msg "Firmware Updates Available" 'Please run "fwupdmgr update" the next time your device is plugged in.'
             return 2
-        else if [ "$FWUPDMGR_STATUS" -eq 1 ];
+        fi
+
+        if [ "$FWUPDMGR_STATUS" -eq 1 ]; then
             send_msg "Firmware Check Failed" 'There was a problem checking for firmware updates, please run "fwupdmgr get-updates" manually for more details.'
             return 1
         fi
@@ -124,18 +126,18 @@ check_firmware() {
 
 # Determine argument flags
 # https://linuxconfig.org/bash-script-flags-usage-with-arguments-examples
-while getopts "ab:-:" OPTION; do
+while getopts "crfnh?:-:" OPTION; do
     case "$OPTION" in
         c) UPDATE_CONFIG=true ;;
         r) REBUILD_CMD="$OPTARG" ;;
         f) CHECK_FIRMWARE=true ;;
         n) SEND_NOTIF=true ;;
-        e) SEND_EMAIL=true ;;
+        #e) SEND_EMAIL=true ;;
         h) echo_usage 0 ;;
         ?) echo_usage 1 ;;
     esac
 done
-shift "$(($OPTIND -1))"
+shift "$((OPTIND -1))"
 
 if [ "$#" -gt 0 ]; then
     CONFIG_DIR="$1"
@@ -152,4 +154,3 @@ if [ "$EXIT_SYSTEM_CONFIG" -eq 1 ]; then
 else
     exit "$EXIT_CHECK_FIRMWARE"
 fi
-
