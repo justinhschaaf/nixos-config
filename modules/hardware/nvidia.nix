@@ -8,12 +8,8 @@
 
     config = lib.mkIf config.js.hardware.nvidia.enable {
 
-        # Enable OpenGL
-        hardware.opengl = {
-            enable = true;
-            driSupport = true;
-            driSupport32Bit = true;
-        };
+        # Enable hardware graphics acceleration
+        hardware.graphics.enable = true;
 
         # Load nvidia drivers
         services.xserver.videoDrivers = [ "nvidia" ];
