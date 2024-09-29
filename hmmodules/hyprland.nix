@@ -629,33 +629,6 @@
                 label#match-title {
                     font-weight: bold;
                 }
-
-                /*box#main, list#main {
-                    background: rgba(0, 0, 0, 0);
-                    border-radius: 0;
-                }
-
-                entry#entry {
-                    all: unset;
-                    background-color: rgba(31, 31, 31, .6);
-                    box-shadow: 0 0 2px 1px rgba(26, 26, 26, 238);
-                    border: 2px solid #fff;
-                    border-radius: 0;
-                }
-
-                #plugin {
-                    background: rgba(31, 31, 31, .6);
-                    box-shadow: 0 0 2px 1px rgba(26, 26, 26, 238);
-                    border: 2px solid #fff;
-                    padding: 6px;
-                    margin-top: 12px;
-                    border-radius: 0;
-                }
-
-                #plugin label {
-                    text-transform: uppercase;
-                    font-weight: bold;
-                }*/
             '';
 
         };
