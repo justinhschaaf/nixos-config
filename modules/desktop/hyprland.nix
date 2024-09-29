@@ -33,13 +33,8 @@
 
         # Enable Hyprland. It has to be enabled on the system level too
         programs.hyprland = {
-
             enable = true;
             xwayland.enable = true;
-
-            # Not sure if this applies since homemanager mostly manages hyprland
-            enableNvidiaPatches = lib.mkIf config.js.hardware.nvidia.enable true;
-
         };
 
         # enable waybar for the system top bar
