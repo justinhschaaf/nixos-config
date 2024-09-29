@@ -39,7 +39,7 @@
                     else "";
                 notifyArgs = if config.js.autoUpdate.sendNotif then " -n" else "";
             in {
-                script = "../scripts/update.sh" + firmwareUpdateArgs + systemUpdateArgs + notifyArgs;
+                script = "/etc/nixos/scripts/update.sh" + firmwareUpdateArgs + systemUpdateArgs + notifyArgs;
                 serviceConfig = {
                     Type = "oneshot";
                     User = "root";
