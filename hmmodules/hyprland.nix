@@ -559,28 +559,103 @@
 
         };
 
+        # anyrun app launcher
         programs.anyrun = {
 
             enable = true;
 
-            config = {
-                plugins = [ # Everything except randr, stdin, and dictionary
-                    "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libapplications.so"
-                    "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libkidex.so"
-                    "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/librink.so"
-                    "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libshell.so"
-                    "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libsymbols.so"
-                    "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libtranslate.so"
-                    "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libwebsearch.so"
-                ];
-            };
+            # styling
+            config.width = { fraction = 0.5; };
+            config.hidePluginInfo = true;
 
-            # Websearch plugin
+            # if this isn't enabled you must press ESC to exit Anyrun
+            config.closeOnClick = true;
+
+            # enable all plugins except randr, stdin, and dictionary
+            config.plugins = [
+                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libapplications.so"
+                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libkidex.so"
+                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/librink.so"
+                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libshell.so"
+                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libsymbols.so"
+                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libtranslate.so"
+                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libwebsearch.so"
+            ];
+
+            # Websearch plugin config
             extraConfigFiles."websearch.ron".text = ''
                 Config(
                     prefix: "?",
-                    engines: [DuckDuckGo] 
+                    engines: [DuckDuckGo]
                 )
+            '';
+
+            # CSS theming
+            extraCss = ''
+                * {
+                    all: unset;
+                    border-radius: 0;
+                }
+
+                #window {
+                    background: rgba(0, 0, 0, 0);
+                    padding: 48px;
+                }
+
+                box#main {
+                    margin: 48px;
+                    padding: 24px;
+                    background-color: rgba(31, 31, 31, .6);
+                    box-shadow: 0 0 2px 1px rgba(26, 26, 26, 238);
+                    border: 2px solid #fff;
+                }
+
+                #entry { /* I would center align the text, but GTK doesn't support it */
+                    border-bottom: 2px solid #fff;
+                    margin-bottom: 12px;
+                    padding: 6px;
+                    font-family: monospace;
+                }
+
+                #match {
+                    padding: 4px;
+                }
+
+                #match:selected,
+                #match:hover {
+                    background-color: rgba(255, 255, 255, .2);
+                }
+
+                label#match-title {
+                    font-weight: bold;
+                }
+
+                /*box#main, list#main {
+                    background: rgba(0, 0, 0, 0);
+                    border-radius: 0;
+                }
+
+                entry#entry {
+                    all: unset;
+                    background-color: rgba(31, 31, 31, .6);
+                    box-shadow: 0 0 2px 1px rgba(26, 26, 26, 238);
+                    border: 2px solid #fff;
+                    border-radius: 0;
+                }
+
+                #plugin {
+                    background: rgba(31, 31, 31, .6);
+                    box-shadow: 0 0 2px 1px rgba(26, 26, 26, 238);
+                    border: 2px solid #fff;
+                    padding: 6px;
+                    margin-top: 12px;
+                    border-radius: 0;
+                }
+
+                #plugin label {
+                    text-transform: uppercase;
+                    font-weight: bold;
+                }*/
             '';
 
         };
