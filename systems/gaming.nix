@@ -2,9 +2,9 @@
 
     imports = [ ./gaming-hardware.nix ];
 
-    # Autoupdate. TODO enable me
-    #js.autoUpdate.enable = true;
-    js.autoUpdate.sendNotif = true;
+    # Autoupdate.
+    js.update.enable = true;
+    js.update.sendNotif = true;
 
     js.backup = {
         enable = true;

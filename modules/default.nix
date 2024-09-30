@@ -166,7 +166,7 @@
 
     # Add TUI programs and enable firmware updates by default
     js.programs.tui.enable = lib.mkDefault true;
-    js.autoUpdate.firmware.enable = lib.mkDefault true;
+    js.update.firmware.enable = lib.mkDefault true;
 
     # List services that you want to enable:
 

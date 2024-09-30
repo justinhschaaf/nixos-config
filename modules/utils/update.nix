@@ -1,12 +1,12 @@
 { inputs, lib, config, pkgs, system, ... }: {
 
     options = {
-        js.autoUpdate = {
+        js.update = {
             enable = lib.mkEnableOption "automatic updates";
             sendNotif = lib.mkEnableOption "libnotify notifications for automatic update progress";
-            firmware.enable = lib.mkOption { default = config.js.autoUpdate.enable; };
-            gc.enable = lib.mkOption { default = config.js.autoUpdate.enable; };
-            system.enable = lib.mkOption { default = config.js.autoUpdate.enable; };
+            firmware.enable = lib.mkOption { default = config.js.update.enable; };
+            gc.enable = lib.mkOption { default = config.js.update.enable; };
+            system.enable = lib.mkOption { default = config.js.update.enable; };
             system.rebuildCmd = lib.mkOption { 
                 type = lib.types.enum [ "boot" "switch" "test" ];
                 default = "boot";
@@ -21,11 +21,11 @@
         # systemd timers recommended over cron by the NixOS Wiki
         # https://wiki.nixos.org/wiki/Systemd/Timers
 
-        environment.systemPackages = lib.mkIf (config.js.autoUpdate.firmware.enable || config.js.autoUpdate.system.enable) [
+        environment.systemPackages = lib.mkIf (config.js.update.firmware.enable || config.js.update.system.enable) [
             inputs.self.outputs.packages.${system}.jsupdate
         ];
 
-        systemd = lib.mkIf (config.js.autoUpdate.firmware.enable || config.js.autoUpdate.system.enable) {
+        systemd = lib.mkIf (config.js.update.firmware.enable || config.js.update.system.enable) {
 
             timers."jsupdate" = {
                 description = "Pulls the latest system updates from GitHub shortly after boot and daily afterwards.";
@@ -37,11 +37,11 @@
             };
 
             services."jsupdate" = let
-                firmwareUpdateArgs = if config.js.autoUpdate.firmware.enable then " -f" else "";
-                systemUpdateArgs = if config.js.autoUpdate.system.enable 
-                    then " -c -r ${config.js.autoUpdate.system.rebuildCmd}"
+                firmwareUpdateArgs = if config.js.update.firmware.enable then " -f" else "";
+                systemUpdateArgs = if config.js.update.system.enable
+                    then " -c -r ${config.js.update.system.rebuildCmd}"
                     else "";
-                notifyArgs = if config.js.autoUpdate.sendNotif then " -n" else "";
+                notifyArgs = if config.js.update.sendNotif then " -n" else "";
             in {
                 script = "${inputs.self.outputs.packages.${system}.jsupdate}/bin/jsupdate"
                     + firmwareUpdateArgs
@@ -59,7 +59,7 @@
         # https://github.com/kjhoerr/dotfiles/blob/trunk/.config/nixos/os/upgrade.nix
         # https://github.com/viperML/nh?tab=readme-ov-file#nixos-module
         programs.nh.clean = {
-            enable = config.js.autoUpdate.gc.enable;
+            enable = config.js.update.gc.enable;
             dates = "weekly";
             extraArgs = "--keep-since 30d";
         };

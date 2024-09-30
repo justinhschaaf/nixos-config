@@ -3,8 +3,8 @@
     imports = [ ./server-hardware.nix ];
 
     # Autoupdate.
-    #js.autoUpdate.enable = true;
-    #js.autoUpdate.system.rebuildCmd = "switch";
+    #js.update.enable = true;
+    #js.update.system.rebuildCmd = "switch";
 
     js.sops.enable = true;
     js.server = {

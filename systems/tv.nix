@@ -1,8 +1,8 @@
 { inputs, config, pkgs, ... }: {
 
     # Enable autoupdate
-    js.autoUpdate.enable = true;
-    js.autoUpdate.sendNotif = true;
+    js.update.enable = true;
+    js.update.sendNotif = true;
 
     # Enable Hyprland
     js.desktop.enable = true;
