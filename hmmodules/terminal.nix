@@ -16,10 +16,6 @@
             pipes-rs
         ];
 
-        # Disable the greeting https://fishshell.com/docs/current/cmds/fish_greeting.html
-        programs.fish.enable = true;
-        programs.fish.functions.fish_greeting = "";
-
         # micro editor config https://github.com/zyedidia/micro/blob/master/runtime/help/options.md
         programs.micro.enable = true;
         programs.micro.settings = {
