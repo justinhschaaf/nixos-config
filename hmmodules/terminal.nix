@@ -51,6 +51,7 @@
 
                 # Notifications
                 enable_audio_bell = "no";
+                notify_on_cmd_finish = "invisible 10.0 notify";
 
                 # https://github.com/kovidgoyal/kitty/issues/713
                 # https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.term

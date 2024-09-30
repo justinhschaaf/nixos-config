@@ -22,7 +22,6 @@
             micro
 
             # fish plugins
-            fishPlugins.done
             fishPlugins.pisces
             fishPlugins.puffer
             fishPlugins.sponge
