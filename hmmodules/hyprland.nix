@@ -5,7 +5,9 @@
     };
 
     # Hyprland and helper applications
-    config = lib.mkIf config.js.hm.hyprland.enable {
+    config = let
+        lockcmd = "grim /tmp/lock.png && gm mogrify -blur 20x10 -fill black -colorize 20 file /tmp/lock.png && swaylock -fklr --image /tmp/lock.png --separator-color 00000000";
+    in lib.mkIf config.js.hm.hyprland.enable {
 
         # hyprland config imported from file
         wayland.windowManager.hyprland = {
@@ -29,9 +31,8 @@
                 # https://github.com/hyprwm/Hyprland/issues/4225
                 debug.disable_scale_checks = 1;
 
-                # Idle lock https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
-                # TODO replace swayidle with hypridle
-                "$lock" = "grim /tmp/lock.png && gm mogrify -blur 20x10 -fill black -colorize 20 file /tmp/lock.png && swaylock -fklr --image /tmp/lock.png --separator-color 00000000";
+                # Lock command https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
+                "$lock" = lockcmd;
 
                 # Screenshot editor
                 "$satty" = "satty --filename - --fullscreen --copy-command 'wl-copy' --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H%M%S').png";
@@ -47,8 +48,7 @@
                     "fcitx5 -d" # -d = daemon
 
                     # System sleep
-                    "sway-audio-idle-inhibit"
-                    "swayidle -w timeout 300 '$lock' timeout 300 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep '$lock'"
+                    "hypridle"
                 
                 ];
 
@@ -208,6 +208,28 @@
 
             };
 
+        };
+
+        # configure hypridle
+        # https://wiki.hyprland.org/Hypr-Ecosystem/hypridle/
+        # https://home-manager-options.extranix.com/?query=hypridle&release=release-24.05
+        services.hypridle.enable = true;
+        services.hypridle.settings = {
+            general = {
+                lock_cmd = "pidof swaylock || ${lockcmd}";
+                before_sleep_cmd = "loginctl lock-session";
+            };
+            listener = [{
+                timeout = 300;
+                on-timeout = "loginctl lock-session";
+            } {
+                timeout = 330;
+                on-timeout = "hyprctl dispatch dpms off";
+                on-resume = "hyprctl dispatch dpms on";
+            } {
+                timeout = 1800;
+                on-timeout = "systemctl suspend";
+            }];
         };
 
         # setup waybar

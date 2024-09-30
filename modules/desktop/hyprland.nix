@@ -40,6 +40,9 @@
         # enable waybar for the system top bar
         programs.waybar.enable = true;
 
+        # enable hypridle
+        services.hypridle.enable = true;
+
         environment.systemPackages = [
             
             # Hyprland Stuff/Basic System Functionality
@@ -67,8 +70,6 @@
             pkgs.slurp
 
             # Sleep
-            pkgs.sway-audio-idle-inhibit
-            pkgs.swayidle
             pkgs.swaylock
             pkgs.graphicsmagick
 
