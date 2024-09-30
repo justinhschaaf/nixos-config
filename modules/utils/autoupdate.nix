@@ -27,23 +27,26 @@
 
         systemd = lib.mkIf (config.js.autoUpdate.firmware.enable || config.js.autoUpdate.system.enable) {
 
-            timers."js-autoupdate" = {
+            timers."jsupdate" = {
                 description = "Pulls the latest system updates from GitHub shortly after boot and daily afterwards.";
                 timerConfig = {
                     OnBootSec = "15m"; # Run 15 minutes after booting
                     OnUnitActiveSec = "1d"; # ...and daily afterwards
-                    Unit = "js-autoupdate.service";
+                    Unit = "jsupdate.service";
                 };
             };
 
-            services."js-autoupdate" = let
+            services."jsupdate" = let
                 firmwareUpdateArgs = if config.js.autoUpdate.firmware.enable then " -f" else "";
                 systemUpdateArgs = if config.js.autoUpdate.system.enable 
-                    then " -c -r " + config.js.autoUpdate.system.rebuildCmd
+                    then " -c -r ${config.js.autoUpdate.system.rebuildCmd}"
                     else "";
                 notifyArgs = if config.js.autoUpdate.sendNotif then " -n" else "";
             in {
-                script = "${inputs.self.outputs.packages.${system}.jsupdate}/bin/jsupdate" + firmwareUpdateArgs + systemUpdateArgs + notifyArgs;
+                script = "${inputs.self.outputs.packages.${system}.jsupdate}/bin/jsupdate"
+                    + firmwareUpdateArgs
+                    + systemUpdateArgs
+                    + notifyArgs;
                 serviceConfig = {
                     Type = "oneshot";
                     User = "root";

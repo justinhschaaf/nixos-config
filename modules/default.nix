@@ -7,8 +7,7 @@
         ./hardware
         ./programs
         ./server
-        ./autoupdate.nix
-        ./sops.nix
+        ./utils
 
     ];
 

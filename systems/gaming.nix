@@ -6,6 +6,24 @@
     #js.autoUpdate.enable = true;
     js.autoUpdate.sendNotif = true;
 
+    js.backup = {
+        enable = true;
+        src = /home/justinhs;
+        dest = /mnt/FATLIN/LITTLEBOY_BACKUPS/rsync;
+        keep = 28;
+        mount = {
+            enable = true;
+            device = "/dev/sdb2";
+            dir = "/mnt/FATLIN";
+        };
+        excludes = [
+            "Games/Steam/steamapps"
+            ".Trash-1000"
+            "$RECYCLE.BIN"
+            "/.*" # exclude all dotfiles in the home dir, these are managed by home manager, not important to back up
+        ];
+    };
+
     # Enable Hyprland and JP keyboard
     js.desktop.enable = true;
     js.desktop.hyprland.enable = true;
@@ -21,7 +39,7 @@
     js.programs.thunar.enable = true;
 
     # Add Files
-    fileSystems."/mnt/Files" = {
+    fileSystems."/home/justinhs" = {
         device = "/dev/sda1";
         fsType = "ntfs";
         label = "LITTLEBOY"; # context: the 8TB is FATMAN

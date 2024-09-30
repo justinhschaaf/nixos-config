@@ -136,6 +136,13 @@
         packages.${system} = {
 
             # Use trivial builders from https://ryantm.github.io/nixpkgs/builders/trivial-builders/
+
+            jsbackup = pkgs.writeShellApplication {
+                name = "jsbackup";
+                runtimeInputs = with pkgs; [ rsync ];
+                text = builtins.readFile ./scripts/backup.sh;
+            };
+
             jsinstall = pkgs.writeShellApplication {
                 name = "jsinstall";
                 runtimeInputs = with pkgs; [ git ];
