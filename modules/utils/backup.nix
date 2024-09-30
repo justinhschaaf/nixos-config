@@ -21,11 +21,11 @@
                 description = "Where the drive should be mounted to. Will be created if it doesn't exist.";
             };
         };
-        excludes = {
+        excludes = lib.mkOption {
             type = lib.types.listOf lib.types.str;
             description = "A list of files and directories which should be excluded from the backup.";
         };
-        keep = {
+        keep = lib.mkOption {
             type = lib.types.ints.between 0 512;
             description = "The number of backups to keep. Set to 0 to keep all.";
             default = 28;
