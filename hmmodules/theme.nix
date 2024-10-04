@@ -7,7 +7,13 @@
     config = lib.mkIf config.js.hm.theme.enable {
 
         # Dark theme can be forced on stubborn GTK apps by launching them with GTK_THEME=Adwaita:dark
-        # TODO https://wiki.hyprland.org/Hypr-Ecosystem/hyprcursor/
+
+        # Cursor
+        # TODO - LONG TERM https://wiki.hyprland.org/Hypr-Ecosystem/hyprcursor/
+        home.pointerCursor = {
+            package = pkgs.posy-cursors;
+            name = "Posy_Cursor_Black";
+        };
 
         # Icons
         gtk = {
