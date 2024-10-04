@@ -41,7 +41,8 @@
             timers."jsbackup" = {
                 description = "Performs an incremental backup every day.";
                 timerConfig = {
-                    OnCalendar = "daily";
+                    # https://silentlad.com/systemd-timers-oncalendar-(cron)-format-explained
+                    OnCalendar = "*-*-* 12:00:00"; # Daily at 12pm
                     Persistent = "true";
                     Unit = "jsbackup.service";
                 };
