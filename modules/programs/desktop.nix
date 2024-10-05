@@ -16,6 +16,7 @@
             wdisplays
 
             # File Viewers
+            file-roller
             xreader
             mpv
             nomacs

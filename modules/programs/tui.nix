@@ -20,13 +20,14 @@
             # terminal utils
             hyfetch
             micro
+            patool # zip util
 
             # fish plugins
             fishPlugins.pisces
             fishPlugins.puffer
             fishPlugins.sponge
             fishPlugins.tide
-            
+
         ];
 
         # No more nano
@@ -48,8 +49,8 @@
             set -U fish_greeting
         '';
 
-        # Enable direnv for easy shells. I have a feeling this is useful for more 
-        # than just dev environments, so it goes here instead of the dev.nix module. 
+        # Enable direnv for easy shells. I have a feeling this is useful for more
+        # than just dev environments, so it goes here instead of the dev.nix module.
         # It automatically sets up the fish hook too, so no need to do so ourselves.
         programs.direnv.enable = true;
 
