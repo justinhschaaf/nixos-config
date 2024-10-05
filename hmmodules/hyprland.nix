@@ -11,7 +11,7 @@
 
         # hyprland config imported from file
         wayland.windowManager.hyprland = {
-            
+
             enable = true;
             xwayland.enable = true;
 
@@ -23,8 +23,12 @@
                 # See https://wiki.hyprland.org/Configuring/Monitors/
                 # Wdisplays exists and is installed, but config doesn't save between restarts
                 monitor = if "${osConfig.system.name}" == "farfalle"
-                    then ",preferred,auto,1.5" 
-                    else ",preferred,auto,auto";
+                    then ",preferred,auto,1.5"
+                    else if "${osConfig.system.name}" == "bucatini"
+                    then [
+                        "DP-1,preferred,1920x0,1"
+                        "DP-2,preferred,0x0,1"
+                    ] else",preferred,auto,auto";
 
                 # This is necessary to force Hyprland to stfu about using 1.5 scale
                 # IT WAS WORKING FINE BEFORE V34
@@ -49,7 +53,7 @@
 
                     # System sleep
                     "hypridle"
-                
+
                 ];
 
                 # Get KDE file picker to show up properly
@@ -62,7 +66,14 @@
                 ];
 
                 # Some default env vars.
-                env = "XCURSOR_SIZE,24";
+                env = [
+                    "XCURSOR_SIZE,24"
+                ] ++ lib.optionals osConfig.js.hardware.nvidia.enable [
+                    "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+                    "GBM_BACKEND,nvidia-drm"
+                    "XDG_SESSION_TYPE,wayland"
+                    "LIBVA_DRIVER_NAME,nvidia"
+                ];
 
                 # See https://wiki.hyprland.org/Configuring/Variables/ for more
                 gestures.workspace_swipe = false;
@@ -103,7 +114,7 @@
                         passes = 2;
                         new_optimizations = true;
                     };
-                    
+
                 };
 
                 # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
@@ -119,6 +130,8 @@
                         "workspaces, 1, 6, default"
                     ];
                 };
+
+                cursor.no_hardware_cursors = true;
 
                 # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
                 dwindle = {
@@ -160,7 +173,7 @@
 
                     # Application interactions
                     "$mainMod, Q, killactive,"
-                    "$mainMod, V, togglefloating," 
+                    "$mainMod, V, togglefloating,"
                     "$mainMod, P, pseudo," # dwindle
                     "$mainMod, J, togglesplit," # dwindle
 
