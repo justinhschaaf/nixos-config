@@ -5,13 +5,13 @@
     };
 
     config = lib.mkIf config.js.programs.dev.enable {
-    
+
         # System packages
         environment.systemPackages = with pkgs; [
 
             # Let us actually write to Git
             git-credential-manager
-            gitnuro
+            github-desktop
 
             # Editors
             jetbrains-toolbox # Fleet is missing from Nixpkgs
