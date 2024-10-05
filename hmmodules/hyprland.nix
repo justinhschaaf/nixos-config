@@ -6,7 +6,7 @@
 
     # Hyprland and helper applications
     config = let
-        lockcmd = "grim /tmp/lock.png && gm mogrify -blur 20x10 -fill black -colorize 20 file /tmp/lock.png && swaylock -fklr --image /tmp/lock.png --separator-color 00000000";
+        lockcmd = "grim /tmp/lock.png && gm mogrify -blur 20x10 -fill black -colorize 20 /tmp/lock.png && swaylock -fklr --image /tmp/lock.png --separator-color 00000000";
     in lib.mkIf config.js.hm.hyprland.enable {
 
         # hyprland config imported from file
