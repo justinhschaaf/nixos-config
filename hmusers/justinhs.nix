@@ -24,11 +24,11 @@
         "flathub:app/dev.krtirtho.Flemozi//stable"
         "flathub:app/org.torproject.torbrowser-launcher//stable"
     ];
-        
+
     # Add micro desktop entry
-    xdg.desktopEntries.micro = lib.mkIf osConfig.js.programs.desktop.enable {
+    xdg.desktopEntries."js.micro" = lib.mkIf osConfig.js.programs.desktop.enable {
         type = "Application";
-        exec = "${pkgs.kitty} ${pkgs.micro} %F"; # cursed but it actually works
+        exec = "kitty micro %F"; # cursed but it actually works
         name = "micro";
         genericName = "Text Editor";
         comment = "Modern and intuitive terminal-based text editor";
@@ -44,7 +44,7 @@
             docs = [ "xreader.desktop" ];
             browser = [ "org.mozilla.firefox.desktop" ];
             image = [ "org.nomacs.ImageLounge.desktop" ];
-            text = [ "micro.desktop" ];
+            text = [ "js.micro.desktop" ];
             video = [ "mpv.desktop" ];
         };
         #override = {
