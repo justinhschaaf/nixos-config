@@ -132,6 +132,8 @@
                     ];
                 };
 
+                # Nvidia performance
+                # https://wiki.hyprland.org/Nvidia/
                 cursor.no_hardware_cursors = true;
 
                 # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
