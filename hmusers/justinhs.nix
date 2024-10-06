@@ -42,7 +42,7 @@
         apps = {
             audio = [ "mpv.desktop" ];
             docs = [ "xreader.desktop" ];
-            browser = [ "org.mozilla.firefox.desktop" ];
+            browser = [ "firefox.desktop" ];
             image = [ "org.nomacs.ImageLounge.desktop" ];
             text = [ "js.micro.desktop" ];
             video = [ "mpv.desktop" ];
