@@ -37,14 +37,11 @@
             xwayland.enable = true;
         };
 
-        # enable waybar for the system top bar
-        programs.waybar.enable = true;
-
         # enable hypridle
         services.hypridle.enable = true;
 
         environment.systemPackages = [
-            
+
             # Hyprland Stuff/Basic System Functionality
             pkgs.brightnessctl
             pkgs.hyprland
@@ -53,6 +50,7 @@
             pkgs.polkit_gnome
             pkgs.swww
             pkgs.udiskie
+            pkgs.waybar
             inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
             # https://github.com/ErikReider/SwayOSD
 
@@ -77,7 +75,7 @@
 
         # Tell Electron apps to use Wayland
         environment.sessionVariables.NIXOS_OZONE_WL = "1";
-    
+
     };
 
 }

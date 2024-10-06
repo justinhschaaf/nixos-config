@@ -48,6 +48,7 @@
                     "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
                     "udiskie -A" # -A = no automount
                     "mako"
+                    "waybar"
                     "swww init"
                     "fcitx5 -d" # -d = daemon
 
@@ -244,7 +245,6 @@
 
         # setup waybar
         programs.waybar.enable = true;
-        programs.waybar.systemd.enable = true;
         programs.waybar.settings.taskbar = {
 
             # where do we put it
