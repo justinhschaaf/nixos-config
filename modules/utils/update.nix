@@ -7,7 +7,7 @@
             firmware.enable = lib.mkOption { default = config.js.update.enable; };
             gc.enable = lib.mkOption { default = config.js.update.enable; };
             system.enable = lib.mkOption { default = config.js.update.enable; };
-            system.rebuildCmd = lib.mkOption { 
+            system.rebuildCmd = lib.mkOption {
                 type = lib.types.enum [ "boot" "switch" "test" ];
                 default = "boot";
                 description = "Specify which command to use when rebuilding the system config.";
@@ -29,6 +29,7 @@
 
             timers."jsupdate" = {
                 description = "Pulls the latest system updates from GitHub shortly after boot and daily afterwards.";
+                wantedBy = [ "multi-user.target" ];
                 timerConfig = {
                     OnBootSec = "15m"; # Run 15 minutes after booting
                     OnUnitActiveSec = "1d"; # ...and daily afterwards
@@ -52,7 +53,7 @@
                     User = "root";
                 };
             };
-        
+
         };
 
         # Clean up old generations weekly

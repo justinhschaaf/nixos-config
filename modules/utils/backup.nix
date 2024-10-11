@@ -40,6 +40,7 @@
 
             timers."jsbackup" = {
                 description = "Performs an incremental backup every day.";
+                wantedBy = [ "multi-user.target" ];
                 timerConfig = {
                     # https://silentlad.com/systemd-timers-oncalendar-(cron)-format-explained
                     OnCalendar = "*-*-* 12:00:00"; # Daily at 12pm
