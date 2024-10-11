@@ -46,7 +46,7 @@
                 exec-once = [
 
                     "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
-                    "udiskie -A" # -A = no automount
+                    "udiskie -A -f thunar" # -A = no automount
                     "mako"
                     "waybar"
                     "swww init"
@@ -271,8 +271,8 @@
                 persistent-workspaces."*" = 10;
                 format = "{icon}";
                 format-icons = {
-                    empty = "□";
-                    default = "▣";
+                    empty = "";
+                    default = "";
                 };
             };
 
@@ -458,10 +458,10 @@
             /* workspace switcher. nuke it because default styles fuck with everything else */
             #workspaces button {
                 all: unset;
-                padding: 0 7px 3px 6px;
+                padding: 0 6px;
                 color: rgba(255, 255, 255, .2);
                 font-size: 14px;
-                font-family: sans-serif;
+                font-family: "dripicons-v2", sans-serif;
                 border-radius: 0;
                 transition: .25s;
             }
@@ -469,22 +469,11 @@
             /* workspace switcher on hover. nuke it because default styles fuck with everything else */
             /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
             #workspaces button:hover {
-
-                all: unset;
-                padding: 0 7px 3px 6px;
-                color: rgba(255, 255, 255, .2);
-                font-size: 14px;
-                font-family: sans-serif;
-                border-radius: 0;
-
-                /* what actually changes on hover */
                 background: rgba(255, 255, 255, .2);
-
             }
 
             /* the currently selected workspace */
             #workspaces button.active {
-                font-size: 20px;
                 color: #fff;
             }
 
@@ -505,7 +494,7 @@
             #custom-power-logout,
             #custom-power-sleep,
             #custom-power-restart {
-            font-family: "dripicons-v2", sans-serif;
+                font-family: "dripicons-v2", sans-serif;
                 padding: 0 6px;
             }
 
@@ -673,7 +662,7 @@
             sunrise = "6:00";
             sunset = "19:00";
         };
-        
+
     };
 
 }
