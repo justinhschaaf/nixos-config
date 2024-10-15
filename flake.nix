@@ -16,12 +16,14 @@
             "https://cache.nixos.org"
             "https://nix-community.cachix.org/"
             "https://anyrun.cachix.org"
+            "https://hyprland.cachix.org"
         ];
 
         trusted-public-keys = [
             "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
             "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
             "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
+            "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         ];
 
     };
@@ -59,8 +61,8 @@
         #
 
         # anyrun https://github.com/Kirottu/anyrun
+        # Don't follow nixpkgs so we can use the cached version
         anyrun.url = "github:Kirottu/anyrun";
-        anyrun.inputs.nixpkgs.follows = "nixpkgs";
 
         # Authentik Server
         # Override poetry2nix to fix https://github.com/nix-community/authentik-nix/issues/30
@@ -72,6 +74,14 @@
         # Patched Caddy containing Cloudflare plugin
         nixos-caddy.url = "github:Ramblurr/nixos-caddy";
         nixos-caddy.inputs.nixpkgs.follows = "nixpkgs";
+
+        # Hyprland (must use the nix flake for split-monitor-workspaces)
+        # Don't follow nixpkgs so we can use the cached version
+        hyprland.url = "github:hyprwm/Hyprland";
+
+        # Hyprland Split Monitor Workspaces Plugin
+        split-monitor-workspaces.url = "github:Duckonaut/split-monitor-workspaces";
+        split-monitor-workspaces.inputs.hyprland.follows = "hyprland";
 
         # waffles.lol website
         #waffleslol.url = "path:/mnt/Files/Programming/waffles.lol";
@@ -109,8 +119,8 @@
         # Bedroom TV
         nixosConfigurations.lasagna = nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system jspkgs; };
-            modules = [ 
-                ./hardware-configuration.nix 
+            modules = [
+                ./hardware-configuration.nix
                 ./modules
                 ./systems/tv.nix
                 ./users/justinhs.nix
@@ -127,6 +137,7 @@
             ];
         };
 
+        nixosModules.default = ./modules;
         homeManagerModules.default = ./hmmodules;
 
         # Package scripts. THIS HAS TO BE DEFINED LIKE THIS, SEE BELOW
@@ -157,6 +168,6 @@
         };
 
     };
-    
+
 }
 

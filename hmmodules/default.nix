@@ -1,9 +1,8 @@
 { inputs, lib, config, osConfig, pkgs, ... }: {
-    
+
     imports = [
 
         # Import default configs so flakes know how to behave by default
-        inputs.anyrun.homeManagerModules.default
         inputs.flatpaks.homeManagerModules.default
 
         # Import other modules
@@ -11,7 +10,7 @@
         ./mimetypes.nix
         ./terminal.nix
         ./theme.nix
-        
+
     ];
 
     # Flatpak config

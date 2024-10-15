@@ -1,24 +1,25 @@
 { inputs, lib, config, pkgs, ... }: {
 
+    imports = [
+        inputs.hyprland.nixosModules.default
+    ];
+
     options = {
         js.desktop.hyprland.enable = lib.mkEnableOption "Hyprland";
     };
 
     config = lib.mkIf config.js.desktop.hyprland.enable {
 
-        # XDG Desktop Portal
-        xdg.portal = {
-            enable = true;
-            extraPortals = with pkgs; [
-                xdg-desktop-portal-hyprland # Needed for screen sharing
-                kdePackages.xdg-desktop-portal-kde # Needed for file picker
-            ];
-            config.common = {
-                # Setting 2 defaults uses KDE for everything else Hyprland can't do
-                # https://forum.manjaro.org/t/link-in-flatpak-apps-wont-open-on-click-since-anymore-last-update/149907/22
-                default = [ "hyprland" "kde" ];
-            };
-        };
+        # Enable XDG Desktop Portal
+        xdg.portal.enable = true;
+
+        # Add KDE portal for file picker
+        # Hyprland is already added by the module for it
+        xdg.portal.extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+
+        # Setting 2 defaults uses KDE for everything else Hyprland can't do
+        # https://forum.manjaro.org/t/link-in-flatpak-apps-wont-open-on-click-since-anymore-last-update/149907/22
+        xdg.portal.config.common.default = [ "hyprland" "kde" ];
 
         # Properly pass bin locations to systemd so desktop portals can access
         # Mimetype handlers and let Flatpaks open the browser
@@ -44,7 +45,6 @@
 
             # Hyprland Stuff/Basic System Functionality
             pkgs.brightnessctl
-            pkgs.hyprland
             pkgs.libnotify
             pkgs.mako
             pkgs.polkit_gnome
