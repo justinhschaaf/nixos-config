@@ -8,7 +8,7 @@
 
     js.backup = {
         enable = true;
-        src = /home/justinhs;
+        src = /home/justinhs/the_shit;
         dest = /mnt/FATLIN/LITTLEBOY_BACKUPS/rsync;
         keep = 28;
         mount = {
@@ -19,7 +19,7 @@
         excludes = [
             "Games/Steam/steamapps"
             ".Trash-1000"
-            "$RECYCLE.BIN"
+            "'$RECYCLE.BIN'"
             "/.*" # exclude all dotfiles in the home dir, these are managed by home manager, not important to back up
         ];
     };
@@ -39,7 +39,7 @@
     js.programs.thunar.enable = true;
 
     # Add Files
-    fileSystems."/home/justinhs" = {
+    fileSystems."/home/justinhs/the_shit" = {
         device = "/dev/sda1";
         fsType = "ntfs";
         label = "LITTLEBOY"; # context: the 8TB is FATMAN
