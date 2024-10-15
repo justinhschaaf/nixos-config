@@ -1,0 +1,46 @@
+name: Bug Report
+description: "Something's not quite right...."
+labels: [ "bug" ]
+assignees: [ "justinhschaaf" ]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+        label: Summarize the issue
+        description: "What's going on? What's supposed to happen instead?"
+    validations:
+        required: true
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+        label: Steps to reproduce
+        description: "How do you make the issue occur consistently? Be very clear, concise, and provide the exact steps taken."
+        placeholder: |
+            1.
+            2.
+            3.
+            ...
+    validations:
+        required: true
+  - type: dropdown
+    id: systems
+    attributes:
+        label: Systems impacted
+        description: Which system configs are impacted by the issue?
+        multiple: true
+        options:
+          - Gaming (bucatini)
+          - Laptop (farfalle)
+          - Server (tortelli)
+          - TV (lasagna)
+  - type: textarea
+    id: troubleshooting
+    attributes:
+        label: Troubleshooting steps taken
+        description: What have you already tried to investigate/resolve the issue?
+  - type: textarea
+    id: logs
+    attributes:
+        label: Output logs
+        description: What are the outputs of any relevant commands?
+        placeholder: "Please use <details>"

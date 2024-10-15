@@ -1,0 +1,33 @@
+name: Feature Request
+description: "Something to improve."
+labels: [ "feature" ]
+assignees: [ "justinhschaaf" ]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+        label: Summarize the request
+        description: "What would you like to see happen?"
+    validations:
+        required: true
+  - type: dropdown
+    attributes:
+        label: Is this new?
+        description: "Is this request a new feature or package to add, or is it a change to how the configuration currently works?"
+        multiple: false
+        options:
+          - New Feature
+          - Change Request
+    validations:
+        required: true
+  - type: dropdown
+    id: systems
+    attributes:
+        label: Systems impacted
+        description: Which system configs would these changes apply to?
+        multiple: true
+        options:
+          - Gaming (bucatini)
+          - Laptop (farfalle)
+          - Server (tortelli)
+          - TV (lasagna)
