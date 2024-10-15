@@ -82,11 +82,6 @@
             # Tell Electron apps to use Wayland
             NIXOS_OZONE_WL = "1";
 
-            # Tell GTK apps to use the desktop portal
-            # fuck the GTK file picker, all my homies hate the GTK file picker
-            # https://bbs.archlinux.org/viewtopic.php?pid=1908331#p1908331
-            GTK_USE_PORTAL = "1";
-
             # Tell each toolkit to use Wayland
             # https://wiki.hyprland.org/Configuring/Environment-variables/#toolkit-backend-variables
             GDK_BACKEND = "wayland,x11,*";
