@@ -73,8 +73,36 @@
 
         ];
 
-        # Tell Electron apps to use Wayland
-        environment.sessionVariables.NIXOS_OZONE_WL = "1";
+        # Set Hyprland environment variables
+        environment.sessionVariables = {
+
+            # Tell XDG we're on Wayland
+            XDG_SESSION_TYPE = "wayland";
+
+            # Tell Electron apps to use Wayland
+            NIXOS_OZONE_WL = "1";
+
+            # Tell GTK apps to use the desktop portal
+            # fuck the GTK file picker, all my homies hate the GTK file picker
+            # https://bbs.archlinux.org/viewtopic.php?pid=1908331#p1908331
+            GTK_USE_PORTAL = "1";
+
+            # Tell each toolkit to use Wayland
+            # https://wiki.hyprland.org/Configuring/Environment-variables/#toolkit-backend-variables
+            GDK_BACKEND = "wayland,x11,*";
+            QT_QPA_PLATFORM = "wayland;xcb";
+            SDL_VIDEODRIVER = "wayland";
+            CLUTTER_BACKEND = "wayland";
+
+        } // lib.attrsets.optionalAttrs config.js.hardware.nvidia.enable {
+
+            # Recommended NVIDIA variables
+            # https://wiki.hyprland.org/Nvidia/#environment-variables
+            "__GLX_VENDOR_LIBRARY_NAME" = "nvidia";
+            GBM_BACKEND = "nvidia-drm";
+            LIBVA_DRIVER_NAME = "nvidia";
+
+        };
 
     };
 

@@ -66,16 +66,6 @@
                     "maximize,class:^(org.freedesktop.impl.portal.desktop.kde)$"
                 ];
 
-                # Some default env vars.
-                env = [
-                    "XCURSOR_SIZE,24"
-                ] ++ lib.optionals osConfig.js.hardware.nvidia.enable [
-                    "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-                    "GBM_BACKEND,nvidia-drm"
-                    "XDG_SESSION_TYPE,wayland"
-                    "LIBVA_DRIVER_NAME,nvidia"
-                ];
-
                 # See https://wiki.hyprland.org/Configuring/Variables/ for more
                 gestures.workspace_swipe = false;
                 misc.force_default_wallpaper = 0; # No more anime girl jumpscares
