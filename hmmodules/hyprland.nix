@@ -49,7 +49,7 @@
                     "udiskie -A -f thunar" # -A = no automount
                     "mako"
                     "waybar"
-                    "swww init"
+                    "swww-daemon"
                     "fcitx5 -d" # -d = daemon
 
                     # System sleep
