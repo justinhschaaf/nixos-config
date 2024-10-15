@@ -22,7 +22,6 @@
             nomacs
 
             # Browsers
-            firefox
             ungoogled-chromium
 
             # Other
@@ -55,6 +54,129 @@
             offset = 0;
             mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
             magicOrExtension = ''\x7fELF....AI\x02'';
+        };
+
+        # Firefox web browser
+        programs.firefox = {
+
+            enable = true;
+
+            wrapperConfig.pipewireSupport = true;
+
+            preferences = {
+
+                # Make Firefox use the xdg portal picker
+                # Setting GDK_USE_PORTAL for everything fucks everything up
+                "widget.use-xdg-desktop-portal.file-picker" = 1;
+
+                # Make sure the bookmarks toolbar never shows up
+                "browser.toolbars.bookmarks.visibility" = "never";
+                "browser.toolbars.bookmarks.showOtherBookmarks" = false;
+
+            };
+
+            policies = {
+
+                #
+                # PERSONAL PREFS
+                #
+
+                PromptForDownloadLocation = true;
+
+                # Set the homepage
+                Homepage = {
+                    Locked = true;
+                    URL = "https://justinschaaf.com";
+                    StartPage = "previous-session";
+                };
+
+                # Disable Firefox Home on the new tab
+                NewTabPage = false;
+
+                # Set Default Search Engine. These won't work since we're not on ESR
+                SearchEngines.Default = "DuckDuckGo";
+                SearchEngines.DefaultPrivate = "DuckDuckGo";
+
+                # Add NixOS-related search engines. These won't work since we're not on ESR
+                SearchEngines.Add = [{
+                    Name = "Nix Packages";
+                    URLTemplate = "https://search.nixos.org/packages";
+                    Method = "POST";
+                    IconURL = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                    Alias = "@np";
+                    Description = "Search for packages in the nixpkgs repo.";
+                    PostData = "query={searchTerms}";
+                } {
+                    Name = "Nix Options";
+                    URLTemplate = "https://search.nixos.org/options";
+                    Method = "POST";
+                    Alias = "@no";
+                    Description = "Search for NixOS module options.";
+                    PostData = "query={searchTerms}";
+                } {
+                    Name = "Home Manager Options";
+                    URLTemplate = "https://home-manager-options.extranix.com/";
+                    Method = "POST";
+                    Alias = "@hm";
+                    Description = "Search for Nix Home Manager module options.";
+                    PostData = "query={searchTerms}";
+                }];
+
+                #
+                # PRIVACY
+                #
+
+                # Get rid of unnecessary Mozilla stuff
+                DisablePocket = true;
+                DisableFirefoxStudies = true;
+                DisableTelemetry = true;
+
+                # Get rid of suggestions
+                FirefoxSuggest = {
+                    Locked = true;
+                    WebSuggestions = false;
+                    SponsoredSuggestions = false;
+                    ImproveSuggest = false;
+                };
+
+                #
+                # NUISANCES
+                #
+
+                DisableSetDesktopBackground = true;
+                DisableProfileImport = true;
+                DontCheckDefaultBrowser = true;
+                NoDefaultBookmarks = true;
+
+                # Disable autofill and saving form data
+                AutofillAddressEnabled = false;
+                AutofillCreditCardEnabled = false;
+                PasswordManagerEnabled = false;
+                DisableFormHistory = true;
+                OfferToSaveLogins = false;
+
+                # Disable first run and update pages
+                OverrideFirstRunPage = "";
+                OverridePostUpdatePage = "";
+
+                # Get rid of some nagging
+                UserMessaging = {
+                    Locked = true;
+                    ExtensionRecommendations = false;
+                    FeatureRecommendations = false;
+                    UrlbarInterventions = false;
+                    SkipOnboarding = true;
+                    MoreFromMozilla = false;
+                    FirefoxLabs = true;
+                };
+
+                #
+                # SECURITY
+                #
+
+                HttpsOnlyMode = "force_enabled";
+
+            };
         };
 
     };
