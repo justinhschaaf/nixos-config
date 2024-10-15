@@ -1,6 +1,6 @@
 { inputs, lib, config, pkgs, ... }: {
 
-    imports = [ 
+    imports = [
 
         # Everything is imported here
         ./desktop
@@ -150,6 +150,9 @@
         LC_TELEPHONE = "en_US.UTF-8";
         LC_TIME = "en_US.UTF-8";
     };
+
+    # Use the latest version of Nix instead of the LTS
+    nix.package = pkgs.nixVersions.latest;
 
     # Allow flakes and nix-command systemwide
     # this is declared in the flake why tf do i have to do it again

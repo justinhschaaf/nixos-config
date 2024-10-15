@@ -11,7 +11,6 @@
         # Enable binary caching so the flake stuff isn't constantly recompiled
         accept-flake-config = true;
         builders-use-substitutes = true;
-        no-eval-cache = true; # https://github.com/NixOS/nix/issues/3872#issuecomment-1637052258
 
         substituters = [
             "https://cache.nixos.org"
