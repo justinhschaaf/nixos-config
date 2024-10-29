@@ -50,13 +50,13 @@
             };
 
             services."jsbackup" = let
-                args = " ${toString config.js.backup.src} ${toString config.js.backup.dest}";
+                args = " \"${toString config.js.backup.src}\" \"${toString config.js.backup.dest}\"";
                 mountArgs = if config.js.backup.mount.enable
-                    then " -d ${config.js.backup.mount.device} -p ${toString config.js.backup.mount.dir}"
+                    then " -d ${config.js.backup.mount.device} -p \"${toString config.js.backup.mount.dir}\""
                     else "";
                 keepArgs = " -k ${toString config.js.backup.keep}";
                 excludes = pkgs.writeText "jsbackup-excludes" (lib.strings.concatLines config.js.backup.excludes);
-                excludesArgs = " -e ${excludes}/jsbackup-excludes";
+                excludesArgs = " -e \"${excludes}\"";
             in {
                 script = "${inputs.self.outputs.packages.${system}.jsbackup}/bin/jsbackup"
                     + mountArgs

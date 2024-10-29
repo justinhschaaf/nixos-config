@@ -161,7 +161,7 @@ do_backup() {
 
 # Determine argument flags
 # https://linuxconfig.org/bash-script-flags-usage-with-arguments-examples
-while getopts "dpekh?:-:" OPTION; do
+while getopts "d:p:e:k:h?" OPTION; do
     case "$OPTION" in
         d) BDEV="$OPTARG" ;;
         p) BDIR="$OPTARG" ;;

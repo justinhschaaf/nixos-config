@@ -126,7 +126,8 @@ check_firmware() {
 
 # Determine argument flags
 # https://linuxconfig.org/bash-script-flags-usage-with-arguments-examples
-while getopts "crfnh?:-:" OPTION; do
+# NOTE: any arg which requires an option needs a : after it
+while getopts "cr:fnh?" OPTION; do
     case "$OPTION" in
         c) UPDATE_CONFIG=true ;;
         r) REBUILD_CMD="$OPTARG" ;;
