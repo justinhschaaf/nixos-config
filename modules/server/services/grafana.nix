@@ -13,10 +13,13 @@
 
         sops.secrets = let
             cfg.sopsFile = ../../../secrets/server.yaml;
+            owner = config.users.users.grafana.name; # Make sure Grafana can access its own secrets
         in {
             "grafana/secret-key" = cfg;
             "grafana/smtp-user" = cfg;
             "grafana/smtp-password" = cfg;
+            "grafana/oauth-client-id" = cfg;
+            "grafana/oauth-client-secret" = cfg;
         };
 
         # All options: https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#paths
