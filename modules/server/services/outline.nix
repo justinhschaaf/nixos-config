@@ -11,7 +11,12 @@
         # Open ports
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.outline.openFirewall [ config.services.outline.port ];
 
-        sops.secrets."outline/outline-env".sopsFile = ../../../secrets/server.yaml;
+        sops.secrets = let
+            cfg.sopsFile = ../../../secrets/server.yaml;
+        in {
+            "outline/outline-env" = cfg;
+            "outline/oidc-client-secret" = cfg;
+        };
 
         services.outline = {
 
@@ -29,6 +34,7 @@
             };
 
             oidcAuthentication = {
+                clientSecretFile = "/run/secrets/outline/oidc-client-secret";
                 authUrl = "https://${config.js.server.authentik.hostName}/application/o/authorize/";
                 tokenUrl = "https://${config.js.server.authentik.hostName}/application/o/token/";
                 userinfoUrl = "https://${config.js.server.authentik.hostName}/application/o/userinfo/";
