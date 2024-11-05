@@ -42,7 +42,6 @@
 
         # Declarative flatpaks
         flatpaks.url = "github:GermanBread/declarative-flatpak/stable-v3";
-        flatpaks.inputs.nixpkgs.follows = "nixpkgs";
 
         #
         # SYSTEM
@@ -50,33 +49,24 @@
 
         # Home Manager
         home-manager.url = "github:nix-community/home-manager";
-        home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
         # Secrets management
         sops-nix.url = "github:Mic92/sops-nix";
-        sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
         #
         # APPLICATIONS
         #
 
         # anyrun https://github.com/Kirottu/anyrun
-        # Don't follow nixpkgs so we can use the cached version
         anyrun.url = "github:Kirottu/anyrun";
 
         # Authentik Server
-        # Override poetry2nix to fix https://github.com/nix-community/authentik-nix/issues/30
-        poetry2nix.url = "github:nix-community/poetry2nix";
         authentik-nix.url = "github:nix-community/authentik-nix";
-        authentik-nix.inputs.nixpkgs.follows = "nixpkgs";
-        authentik-nix.inputs.poetry2nix.follows = "poetry2nix";
 
         # Patched Caddy containing Cloudflare plugin
         nixos-caddy.url = "github:Ramblurr/nixos-caddy";
-        nixos-caddy.inputs.nixpkgs.follows = "nixpkgs";
 
         # Hyprland (must use the nix flake for split-monitor-workspaces)
-        # Don't follow nixpkgs so we can use the cached version
         hyprland.url = "github:hyprwm/Hyprland";
 
         # Hyprland Split Monitor Workspaces Plugin
