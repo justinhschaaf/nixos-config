@@ -11,10 +11,10 @@
         # Open ports
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.grafana.openFirewall [ config.services.grafana.settings.server.http_port ];
 
-        sops.secrets = let
-            cfg.sopsFile = ../../../secrets/server.yaml;
+        sops.secrets = let cfg = {
+            sopsFile = ../../../secrets/server.yaml;
             owner = config.users.users.grafana.name; # Make sure Grafana can access its own secrets
-        in {
+        }; in {
             "grafana/secret-key" = cfg;
             "grafana/smtp-user" = cfg;
             "grafana/smtp-password" = cfg;
