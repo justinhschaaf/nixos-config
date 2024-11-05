@@ -15,6 +15,7 @@
             cfg.sopsFile = ../../../secrets/server.yaml;
         in {
             "outline/outline-env" = cfg;
+            "outline/smtp-password" = cfg;
             "outline/oidc-client-secret" = cfg;
         };
 
@@ -29,6 +30,7 @@
             smtp = {
                 host = "smtp-relay.brevo.com";
                 port = 587;
+                passwordFile = "/run/secrets/outline/smtp-password";
                 fromEmail = "sysadmin@justinschaaf.com";
                 replyEmail = "sysadmin@justinschaaf.com";
             };
