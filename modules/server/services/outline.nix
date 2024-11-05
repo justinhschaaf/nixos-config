@@ -11,9 +11,10 @@
         # Open ports
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.outline.openFirewall [ config.services.outline.port ];
 
-        sops.secrets = let
-            cfg.sopsFile = ../../../secrets/server.yaml;
-        in {
+        sops.secrets = let cfg = {
+            sopsFile = ../../../secrets/server.yaml;
+            owner = config.users.users.outline.name;
+        }; in {
             "outline/outline-env" = cfg;
             "outline/smtp-password" = cfg;
             "outline/oidc-client-secret" = cfg;
