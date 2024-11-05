@@ -43,8 +43,8 @@
         grafana.enable = true;
         grafana.hostName = "grafana.waffles.lol";
 
-        outline.enable = false; # enable when OIDC is set up
-        outline.hostName = "outline.waffles.lol";
+        outline.enable = true;
+        outline.hostName = "kb.waffles.lol";
 
         seafile.enable = false; # waiting for https://github.com/NixOS/nixpkgs/pull/318727 to complete because database system is changing
         seafile.hostName = "files.waffles.lol";
