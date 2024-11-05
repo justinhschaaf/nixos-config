@@ -21,6 +21,7 @@
             hyfetch
             micro
             patool # zip util
+            sops
 
             # fish plugins
             fishPlugins.pisces
