@@ -56,30 +56,28 @@
             };
 
             auth = {
-
                 signout_redirect_url = "https://${config.js.server.authentik.hostName}/application/o/grafana/end-session/";
-
-                # OAuth only
-                basic.enabled = false;
                 disable_login_form = true;
+            };
 
-                generic_oauth = {
+            # OAuth only
+            "auth.basic".enabled = false;
 
-                    name = "authentik";
-                    enabled = true;
-                    auto_login = true;
-                    client_id = "$__file{/run/secrets/grafana/oauth-client-id}";
-                    client_secret = "$__file{/run/secrets/grafana/oauth-client-secret}";
-                    scopes = "openid email profile";
-                    auth_url = "https://${config.js.server.authentik.hostName}/application/o/authorize/";
-                    token_url = "https://${config.js.server.authentik.hostName}/application/o/token/";
-                    api_url = "https://${config.js.server.authentik.hostName}/application/o/userinfo/";
-                    allow_assign_grafana_admin = true; # lets us assign the GrafanaAdmin role with Authentik
+            "auth.generic_oauth" = {
 
-                    # Role mapping - allows us to map Authentik user groups to Grafana roles
-                    role_attribute_path = "contains(groups, 'iam-grafana-serveradmin') && 'GrafanaAdmin' || contains(groups, 'iam-grafana-admin') && 'Admin' || contains(groups, 'iam-grafana-editor') && 'Editor' || contains(groups, 'iam-grafana-viewer') && 'Viewer'";
+                name = "authentik";
+                enabled = true;
+                auto_login = true;
+                client_id = "$__file{/run/secrets/grafana/oauth-client-id}";
+                client_secret = "$__file{/run/secrets/grafana/oauth-client-secret}";
+                scopes = "openid email profile";
+                auth_url = "https://${config.js.server.authentik.hostName}/application/o/authorize/";
+                token_url = "https://${config.js.server.authentik.hostName}/application/o/token/";
+                api_url = "https://${config.js.server.authentik.hostName}/application/o/userinfo/";
+                allow_assign_grafana_admin = true; # lets us assign the GrafanaAdmin role with Authentik
 
-                };
+                # Role mapping - allows us to map Authentik user groups to Grafana roles
+                role_attribute_path = "contains(groups, 'iam-grafana-serveradmin') && 'GrafanaAdmin' || contains(groups, 'iam-grafana-admin') && 'Admin' || contains(groups, 'iam-grafana-editor') && 'Editor' || contains(groups, 'iam-grafana-viewer') && 'Viewer'";
 
             };
 
