@@ -30,12 +30,14 @@
             smtp = {
                 host = "smtp-relay.brevo.com";
                 port = 587;
+                username = "$REAL_SMTP_USERNAME";
                 passwordFile = "/run/secrets/outline/smtp-password";
                 fromEmail = "sysadmin@justinschaaf.com";
                 replyEmail = "sysadmin@justinschaaf.com";
             };
 
             oidcAuthentication = {
+                clientId = "$REAL_OIDC_CLIENT_ID";
                 clientSecretFile = "/run/secrets/outline/oidc-client-secret";
                 authUrl = "https://${config.js.server.authentik.hostName}/application/o/authorize/";
                 tokenUrl = "https://${config.js.server.authentik.hostName}/application/o/token/";
