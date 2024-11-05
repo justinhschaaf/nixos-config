@@ -27,7 +27,7 @@
         services.grafana.settings = {
 
             server = {
-                protocol = "https";
+                protocol = "http";
                 domain = config.js.server.grafana.hostName;
                 enforce_domain = true;
                 enable_gzip = true;
