@@ -8,10 +8,10 @@
 
     js.sops.enable = true;
     js.server = {
-    
+
         enable = true;
         openFirewall = true; # openFirewall != port forwarded, only accessible to internal network
-        
+
         ssh.enable = true;
         ssh.openFirewall = true;
 
@@ -28,7 +28,7 @@
 
         loki.enable = true;
         loki.agents.promtail.enable = true;
-        
+
         caddy.enable = true;
         caddy.openFirewall = true; # we want this to be true even when disabling everything else
 
@@ -40,7 +40,7 @@
         authentik.ldap.enable = true;
         authentik.ldap.openFirewall = false; # only insecure ports are open and those don't even work right
 
-        grafana.enable = false; # enable when OIDC is set up
+        grafana.enable = true;
         grafana.hostName = "grafana.waffles.lol";
 
         outline.enable = false; # enable when OIDC is set up
@@ -48,7 +48,7 @@
 
         seafile.enable = false; # waiting for https://github.com/NixOS/nixpkgs/pull/318727 to complete because database system is changing
         seafile.hostName = "files.waffles.lol";
-        
+
     };
 
     # Add Fluidd
