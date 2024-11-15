@@ -148,6 +148,10 @@
             after = [ "postgresql.service" ];
         };
 
+        # the guac server needs to have a font installed so it can render terminals
+        fonts.packages = with pkgs; [ terminus_font ];
+        fonts.fontconfig.defaultFonts.monospace = [ "Terminus" ];
+
         # use the rewrite directive to work around tomcat
         # https://caddyserver.com/docs/caddyfile/directives/rewrite
         # https://caddy.community/t/reverse-proxy-to-a-upstream-server-with-a-path-or-subfolder/15335
