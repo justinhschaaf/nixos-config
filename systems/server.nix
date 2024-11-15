@@ -10,7 +10,7 @@
     js.server = {
 
         enable = true;
-        openFirewall = true; # openFirewall != port forwarded, only accessible to internal network
+        openFirewall = false; # openFirewall != port forwarded, only accessible to internal network
 
         ssh.enable = true;
         ssh.openFirewall = true;
@@ -37,8 +37,9 @@
 
         authentik.enable = true;
         authentik.hostName = "auth.waffles.lol";
+        authentik.openFirewall = true;
         authentik.ldap.enable = true;
-        authentik.ldap.openFirewall = false; # only insecure ports are open and those don't even work right
+        authentik.ldap.openFirewall = true;
 
         grafana.enable = true;
         grafana.hostName = "grafana.waffles.lol";
