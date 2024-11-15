@@ -44,6 +44,9 @@
         grafana.enable = true;
         grafana.hostName = "grafana.waffles.lol";
 
+        guacamole.enable = true;
+        guacamole.hostName = "guac.waffles.lol";
+
         outline.enable = true;
         outline.hostName = "kb.waffles.lol";
 
