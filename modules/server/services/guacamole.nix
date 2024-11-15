@@ -14,7 +14,7 @@
 
         # Open ports
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.guacamole.server.openFirewall [ config.services.guacamole-server.port ]
-            ++ lib.optionals js.server.guacamole.client.openFirewall [ config.services.tomcat.port ]; # by default, the guac client is hosted on tomcat
+            ++ lib.optionals config.js.server.guacamole.client.openFirewall [ config.services.tomcat.port ]; # by default, the guac client is hosted on tomcat
 
         services.guacamole-server.enable = true;
         services.guacamole-client.enable = true;
