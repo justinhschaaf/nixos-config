@@ -62,7 +62,7 @@
 
         services.caddy.virtualHosts."${config.js.server.guacamole.hostName}".extraConfig =
             lib.mkIf config.js.server.caddy.enable ''
-                reverse_proxy 127.0.0.1:${toString config.services.guacamole-server.port}/guacamole
+                reverse_proxy 127.0.0.1:${toString config.services.tomcat.port}/guacamole
             '';
 
     };
