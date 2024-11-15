@@ -88,7 +88,7 @@
 
             guacd-hostname = "localhost";
             guacd-port = config.services.guacamole-server.port;
-            extension-priority = "*, openid"; # TODO once internal groups are setup, remove "*"
+            extension-priority = "openid"; # if database login is needed, use "*, openid"
 
             # Database Config
             postgresql-hostname = "localhost";
