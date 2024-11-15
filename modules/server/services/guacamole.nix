@@ -60,9 +60,13 @@
             };
         in "${oidcExtension}/guacamole-auth-sso-openid-${guacVer}.jar";
 
+        # use the rewrite directive to work around tomcat
+        # https://caddyserver.com/docs/caddyfile/directives/rewrite
+        # https://caddy.community/t/reverse-proxy-to-a-upstream-server-with-a-path-or-subfolder/15335
         services.caddy.virtualHosts."${config.js.server.guacamole.hostName}".extraConfig =
             lib.mkIf config.js.server.caddy.enable ''
-                reverse_proxy 127.0.0.1:${toString config.services.tomcat.port}/guacamole
+                rewrite * /guacamole{uri}
+                reverse_proxy 127.0.0.1:${toString config.services.tomcat.port}
             '';
 
     };
