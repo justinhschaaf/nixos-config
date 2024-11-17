@@ -23,6 +23,7 @@
     # Enable Hyprland and JP keyboard
     js.desktop.enable = true;
     js.desktop.hyprland.enable = true;
+    js.desktop.hyprland.screenshot.output = ~/the_shit/Pictures/Screenshots;
     js.desktop.input.jp = true;
 
     # Enable NVIDIA GPU support and thunderbolt

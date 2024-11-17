@@ -6,6 +6,11 @@
 
     options = {
         js.desktop.hyprland.enable = lib.mkEnableOption "Hyprland";
+        js.desktop.hyprland.screenshot.output = lib.mkOption {
+            type = lib.types.path;
+            description = "Where screenshots taken should be saved by default.";
+            default = ~/Pictures/Screenshots;
+        };
     };
 
     config = lib.mkIf config.js.desktop.hyprland.enable {
@@ -89,6 +94,8 @@
             SDL_VIDEODRIVER = "wayland";
             CLUTTER_BACKEND = "wayland";
 
+            JS_SCREENSHOT_OUTDIR = "${toString config.js.desktop.hyprland.screenshot.output}";
+
         } // lib.attrsets.optionalAttrs config.js.hardware.nvidia.enable {
 
             # Recommended NVIDIA variables
@@ -97,6 +104,14 @@
             GBM_BACKEND = "nvidia-drm";
             LIBVA_DRIVER_NAME = "nvidia";
 
+        };
+
+        # Create the folder for screenshot output
+        systemd.services."jshot-mkdir" = {
+            enable = true;
+            script = ''
+                mkdir -p "${toString config.js.desktop.hyprland.screenshot.output}"
+            '';
         };
 
     };
