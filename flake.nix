@@ -142,7 +142,7 @@
 
             jsbackup = pkgs.writeShellApplication {
                 name = "jsbackup";
-                runtimeInputs = with pkgs; [ rsync ];
+                runtimeInputs = with pkgs; [ rsync util-linux ];
                 text = builtins.readFile ./scripts/backup.sh;
             };
 
