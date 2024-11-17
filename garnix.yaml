@@ -1,0 +1,37 @@
+# Schema defined by https://garnix.io/docs/yaml_config
+builds:
+    ### TESTING BRANCHES ###
+    # Gaming
+  - exclude:
+      - "nixosConfigurations.*"
+    include:
+      - "nixosConfigurations.bucatini"
+    branch: testing-bucatini
+    # Laptop
+  - exclude:
+      - "nixosConfigurations.*"
+    include:
+      - "nixosConfigurations.farfalle"
+    branch: testing-farfalle
+    # TV
+  - exclude:
+      - "nixosConfigurations.*"
+    include:
+      - "nixosConfigurations.lasagna"
+    branch: testing-lasagna
+    # Server
+  - exclude:
+      - "nixosConfigurations.*"
+    include:
+      - "nixosConfigurations.tortelli"
+    branch: testing-tortelli
+    ### ALL REMAINING BRANCHES (including main) ###
+    # This is also the default
+  - exclude: []
+    include:
+      - '*.x86_64-linux.*'
+      - defaultPackage.x86_64-linux
+      - devShell.x86_64-linux
+      - homeConfigurations.*
+      - darwinConfigurations.*
+      - nixosConfigurations.*
