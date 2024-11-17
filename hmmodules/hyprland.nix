@@ -48,7 +48,7 @@
                 "$lock" = lockcmd;
 
                 # Screenshot editor
-                "$satty" = "satty --filename - --fullscreen --copy-command 'wl-copy' --output-filename \"$JS_SCREENSHOT_OUTDIR/satty-$(date '+%Y%m%d-%H%M%S').png\"";
+                "$satty" = "satty --filename - --fullscreen --copy-command 'wl-copy' --output-filename \"${osConfig.js.desktop.hyprland.screenshot.output}/satty-$(date '+%Y%m%d-%H%M%S').png\"";
 
                 # Startup apps
                 # launch location for gnome polkit: https://wiki.nixos.org/wiki/Polkit
