@@ -2,10 +2,6 @@
 
     imports = [ ./server-hardware.nix ];
 
-    # Autoupdate.
-    #js.update.enable = true;
-    #js.update.system.rebuildCmd = "switch";
-
     js.sops.enable = true;
     js.server = {
 
@@ -22,6 +18,7 @@
         prometheus.exporters.node.enable = true;
         prometheus.scrapeFrom = { # local exporters
             "node-${config.networking.hostName}" = "127.0.0.1:${toString config.services.prometheus.exporters.node.port}";
+            "comin-${config.networking.hostName}" = "127.0.0.1:${toString config.services.comin.exporter.port}";
             "authentik-${config.networking.hostName}" = "127.0.0.1:9300";
             "caddy-${config.networking.hostName}" = "127.0.0.1:2019";
         };

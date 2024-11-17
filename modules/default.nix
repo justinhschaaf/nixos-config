@@ -189,9 +189,9 @@
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
-    # Add TUI programs and enable firmware updates by default
+    # Add TUI programs and enable automatic updates by default
     js.programs.tui.enable = lib.mkDefault true;
-    js.update.firmware.enable = lib.mkDefault true;
+    js.update.enable = lib.mkDefault true;
 
     # List services that you want to enable:
 

@@ -2,10 +2,6 @@
 
     imports = [ ./gaming-hardware.nix ];
 
-    # Autoupdate.
-    js.update.enable = true;
-    js.update.sendNotif = true;
-
     js.backup = {
         enable = true;
         src = /home/justinhs/the_shit;

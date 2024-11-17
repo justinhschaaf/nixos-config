@@ -2,10 +2,6 @@
 
     imports = [ ./laptop-hardware.nix ];
 
-    # Autoupdate. Disabled while this is my primary testing device
-    #js.update.enable = true;
-    js.update.sendNotif = true;
-
     # Enable Hyprland and JP keyboard
     js.desktop.enable = true;
     js.desktop.hyprland.enable = true;

@@ -47,6 +47,9 @@
         # SYSTEM
         #
 
+        # Updates
+        comin.url = "github:nlewo/comin";
+
         # Home Manager
         home-manager.url = "github:nix-community/home-manager";
 
@@ -147,12 +150,6 @@
                 name = "jsinstall";
                 runtimeInputs = with pkgs; [ git ];
                 text = builtins.readFile ./scripts/install.sh;
-            };
-
-            jsupdate = pkgs.writeShellApplication {
-                name = "jsupdate";
-                runtimeInputs = with pkgs; [ git nh ];
-                text = builtins.readFile ./scripts/update.sh;
             };
 
         };
