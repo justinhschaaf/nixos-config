@@ -29,9 +29,8 @@
     networking.hostName = "pastificio";
 
     # Setup static IP and default gateway
-    # TODO determine correct interface when deploying
     networking.defaultGateway = "10.10.22.1";
-    networking.interfaces.enp2s0.ipv4.addresses = [{
+    networking.interfaces.wlan0.ipv4.addresses = [{
         address = "10.10.22.19";
         prefixLength = 24;
     }];
