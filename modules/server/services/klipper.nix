@@ -332,7 +332,7 @@
                 variable_last_extruder_temp = "{'restore': False, 'temp': 0}";
                 variable_restore_idle_timeout = 0;
                 variable_idle_state = false;
-                gcode: ''
+                gcode = ''
                     ##### get user parameters or use default #####
                     {% set client = printer['gcode_macro _CLIENT_VARIABLE'] | default({}) %}
                     {% set velocity = printer.configfile.settings.pause_resume.recover_velocity %}
