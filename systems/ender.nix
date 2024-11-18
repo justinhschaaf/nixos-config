@@ -18,6 +18,8 @@
         prometheus.exporters.comin.enable = true;
         loki.agents.promtail.enable = true;
 
+        moonraker.enable = true;
+
     };
 
     # Set system name

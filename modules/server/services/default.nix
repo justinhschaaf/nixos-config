@@ -5,6 +5,7 @@
         ./caddy.nix
         ./grafana.nix
         ./guacamole.nix
+        ./moonraker.nix
         ./outline.nix
         ./seafile.nix
         ./waffles.lol.nix
