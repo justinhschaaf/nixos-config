@@ -18,6 +18,8 @@
         prometheus.exporters.comin.enable = true;
         loki.agents.promtail.enable = true;
 
+        # 3d printer stuff
+        klipper.enable = true;
         moonraker.enable = true;
 
     };
