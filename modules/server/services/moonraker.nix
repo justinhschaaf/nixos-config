@@ -1,7 +1,7 @@
 { inputs, lib, config, pkgs, ... }: {
 
     options = {
-        js.server.moonraker.enable = lib.mkEnableOption "Moonraker, the web server for Klippy";
+        js.server.moonraker.enable = lib.mkEnableOption "Moonraker, the web server for Klipper";
         js.server.moonraker.openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
     };
 
