@@ -3,7 +3,7 @@
     imports = [
 
         # Import default configs so flakes know how to behave by default
-        inputs.flatpaks.homeManagerModules.default
+        inputs.flatpaks.homeManagerModules.declarative-flatpak
 
         # Import other modules
         ./hyprland.nix
