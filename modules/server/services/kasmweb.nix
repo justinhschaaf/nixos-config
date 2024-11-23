@@ -16,6 +16,8 @@
         services.kasmweb.enable = true;
         services.kasmweb.listenPort = 8483; # something that isn't standard
 
+        systemd.services."init-kasmweb".serviceConfig.TimeoutStartSec = lib.mkForce 1800;
+
         services.caddy.virtualHosts."${config.js.server.kasmweb.hostName}".extraConfig =
             lib.mkIf config.js.server.caddy.enable ''
                 reverse_proxy 127.0.0.1:${toString config.services.kasmweb.listenPort}
