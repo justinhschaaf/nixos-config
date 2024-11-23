@@ -18,9 +18,14 @@
 
         systemd.services."init-kasmweb".serviceConfig.TimeoutStartSec = lib.mkForce 1800;
 
+        # https://www.kasmweb.com/docs/latest/how_to/reverse_proxy.html#example-caddy-config
         services.caddy.virtualHosts."${config.js.server.kasmweb.hostName}".extraConfig =
             lib.mkIf config.js.server.caddy.enable ''
-                reverse_proxy 127.0.0.1:${toString config.services.kasmweb.listenPort}
+                reverse_proxy 127.0.0.1:${toString config.services.kasmweb.listenPort} {
+                    transport http {
+                    	tls_insecure_skip_verify
+                    }
+                }
             '';
 
     };
