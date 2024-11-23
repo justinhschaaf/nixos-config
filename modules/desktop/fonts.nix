@@ -62,6 +62,7 @@
                 pkgs.recursive
                 pkgs.rubik
                 pkgs.scientifica
+                pkgs.terminus_font
                 pkgs.the-neue-black
                 pkgs.ubuntu_font_family
                 pkgs.unifont
@@ -70,20 +71,20 @@
                 pkgs.vollkorn
                 pkgs.work-sans
                 pkgs.zilla-slab
-                
+
             ];
 
             # What fonts to use as default
             fontconfig.defaultFonts = {
-                serif = [ 
+                serif = [
                     "Gelasio" "IBM Plex Sans Arabic" "IBM Plex Sans Devanagari"
-                    "IBM Plex Sans Hebrew" "IBM Plex Sans JP" "IBM Plex Sans KR" 
+                    "IBM Plex Sans Hebrew" "IBM Plex Sans JP" "IBM Plex Sans KR"
                     "IBM Plex Sans Thai" "Unifont"
                 ];
-                sansSerif = [ 
-                    "Vercetti" "Nacelle" "IBM Plex Sans Arabic" 
-                    "IBM Plex Sans Devanagari" "IBM Plex Sans Hebrew" "IBM Plex Sans JP" 
-                    "IBM Plex Sans KR" "IBM Plex Sans Thai" "Unifont" 
+                sansSerif = [
+                    "Vercetti" "Nacelle" "IBM Plex Sans Arabic"
+                    "IBM Plex Sans Devanagari" "IBM Plex Sans Hebrew" "IBM Plex Sans JP"
+                    "IBM Plex Sans KR" "IBM Plex Sans Thai" "Unifont"
                 ];
                 monospace = [ "IBM Plex Mono" "Cascadia Mono" "Unifont" ];
                 emoji = [ "Blobmoji" "Joypixels" ];
