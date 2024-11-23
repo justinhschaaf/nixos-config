@@ -23,6 +23,10 @@
     # Enable Hyprland and JP keyboard
     js.desktop.enable = true;
     js.desktop.hyprland.enable = true;
+    js.desktop.hyprland.monitors = [
+        "DP-1,preferred,1920x0,1"
+        "DP-2,preferred,0x0,1"
+    ];
     js.desktop.hyprland.screenshot.output = "~/the_shit/Pictures/Screenshots";
     js.desktop.input.jp = true;
 

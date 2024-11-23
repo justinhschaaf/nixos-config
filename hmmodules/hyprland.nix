@@ -31,13 +31,7 @@
 
                 # See https://wiki.hyprland.org/Configuring/Monitors/
                 # Wdisplays exists and is installed, but config doesn't save between restarts
-                monitor = if "${osConfig.system.name}" == "farfalle"
-                    then ",preferred,auto,1.5"
-                    else if "${osConfig.system.name}" == "bucatini"
-                    then [
-                        "DP-1,preferred,1920x0,1"
-                        "DP-2,preferred,0x0,1"
-                    ] else",preferred,auto,auto";
+                monitor = osConfig.js.desktop.hyprland.monitors;
 
                 # This is necessary to force Hyprland to stfu about using 1.5 scale
                 # IT WAS WORKING FINE BEFORE V34

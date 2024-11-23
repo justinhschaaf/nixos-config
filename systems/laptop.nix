@@ -5,6 +5,7 @@
     # Enable Hyprland and JP keyboard
     js.desktop.enable = true;
     js.desktop.hyprland.enable = true;
+    js.desktop.hyprland.monitors = ",preferred,auto,1.5";
     js.desktop.input.jp = true;
 
     # Enable fingerprint reader support

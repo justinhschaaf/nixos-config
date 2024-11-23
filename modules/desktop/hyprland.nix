@@ -6,6 +6,11 @@
 
     options = {
         js.desktop.hyprland.enable = lib.mkEnableOption "Hyprland";
+        js.desktop.hyprland.monitors = lib.mkOption { # https://wiki.hyprland.org/Configuring/Monitors/
+            type = lib.types.either lib.types.str (lib.types.listOf lib.types.str);
+            description = "The display configuration for this device.";
+            default = ",preferred,auto,auto";
+        };
         js.desktop.hyprland.screenshot.output = lib.mkOption {
             type = lib.types.str;
             description = "Where screenshots taken should be saved by default.";
