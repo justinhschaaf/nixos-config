@@ -20,7 +20,6 @@
 
     # Flatpak config
     services.flatpak.packages = lib.mkIf osConfig.js.programs.desktop.enable [
-        "flathub:app/com.simplenote.Simplenote//stable"
         "flathub:app/dev.krtirtho.Flemozi//stable"
         "flathub:app/org.torproject.torbrowser-launcher//stable"
     ];
