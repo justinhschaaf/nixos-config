@@ -16,7 +16,9 @@
         services.kasmweb.enable = true;
         services.kasmweb.listenPort = 8483; # something that isn't standard
 
-        systemd.services."init-kasmweb".serviceConfig.TimeoutStartSec = lib.mkForce 1800;
+        # give it an hour to initialize
+        # why tf is setting this thing up like pulling teeth
+        systemd.services."init-kasmweb".serviceConfig.TimeoutStartSec = lib.mkForce 3600;
 
         # https://www.kasmweb.com/docs/latest/how_to/reverse_proxy.html#example-caddy-config
         services.caddy.virtualHosts."${config.js.server.kasmweb.hostName}".extraConfig =
