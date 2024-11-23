@@ -179,6 +179,82 @@
             };
         };
 
+        # Chromium policies, it has to be installed above
+        # Goal is to be not far off from vanilla as I use it for testing and anything Firefox is broken for
+        programs.chromium = {
+
+            enable = true;
+            homepageLocation = "https://justinschaaf.com";
+
+            # Set default search engine, why tf does Chrome let me do this when Firefox doesn't?
+            defaultSearchProviderEnabled = true;
+            defaultSearchProviderSearchURL = "https://duckduckgo.com/?q=%s";
+            defaultSearchProviderSuggestURL = "https://duckduckgo.com/ac/?q=%s&type=list";
+
+            extraOpts = {
+
+                # Clear cookies and browsing data upon exit
+                DefaultCookiesSetting = 4;
+                SavingBrowserHistoryDisabled = true;
+
+                # Deny all requests to show notifs
+                DefaultNotificationsSetting = 2;
+
+                # Enable Manifest v2 while you still can
+                ExtensionManifestV2Availability = 2;
+
+                # Fuck your AI
+                GenAiDefaultSettings = 2;
+
+                # Disable switching to legacy browsers
+                BrowserSwitcherEnabled = false;
+
+                # Use system notifs
+                AllowSystemNotifications = true;
+
+                # HTTPS only
+                HttpsOnlyMode = "force_balanced_enabled";
+
+                # Disable autofill
+                AutofillAddressEnabled = false;
+                AutofillCreditCardEnabled = false;
+                PasswordManagerEnabled = false;
+
+                # Disable import
+                ImportAutofillFormData = false;
+                ImportBookmarks = false;
+                ImportHistory = false;
+                ImportHomepage = false;
+                ImportSavedPasswords = false;
+                ImportSearchEngine = false;
+
+                PromptForDownloadLocation = true;
+
+                # Fuck Privacy Sandbox
+                PrivacySandboxPromptEnabled = false;
+                PrivacySandboxSiteEnabledAdsEnabled = false;
+                PrivacySandboxAdMeasurementEnabled = false;
+                PrivacySandboxAdTopicsEnabled = false;
+
+                # Fuck your trackers
+                AdsSettingForIntrusiveAdsSites = 2;
+                BrowserSignin = 0;
+                CloudReportingEnabled = false;
+                FirstPartySetsEnabled = false;
+                GoogleWorkspaceCloudUpload = "disallowed";
+                MicrosoftOfficeCloudUpload = "disallowed";
+                MetricsReportingEnabled = false;
+                UserFeedbackAllowed = false;
+
+                # Fuck your bloat
+                BookmarkBarEnabled = false;
+                ShoppingListEnabled = false;
+                SpellcheckEnabled = false;
+
+            };
+
+        };
+
     };
 
 }
