@@ -30,7 +30,6 @@
             };
         };
 
-        environment.sessionVariables.GTK_IM_MODULE = "wayland";
         environment.sessionVariables.GLFW_IM_MODULE = "ibus";
 
     };

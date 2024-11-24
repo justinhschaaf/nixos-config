@@ -99,6 +99,9 @@
             SDL_VIDEODRIVER = "wayland";
             CLUTTER_BACKEND = "wayland";
 
+            # Unset GTK_IM_MODULE so apps can figure it out themselves
+            GTK_IM_MODULE="";
+
         } // lib.attrsets.optionalAttrs config.js.hardware.nvidia.enable {
 
             # Recommended NVIDIA variables
