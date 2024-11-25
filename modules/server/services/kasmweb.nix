@@ -20,13 +20,15 @@
         # why tf is setting this thing up like pulling teeth
         systemd.services."init-kasmweb".serviceConfig.TimeoutStartSec = lib.mkForce 3600;
 
-        # enable podman and docker compat https://wiki.nixos.org/wiki/Podman
-        virtualisation.containers.enable = true;
-        virtualisation.oci-containers.backend = lib.mkForce "podman";
-        virtualisation.podman = {
+        # disable nftables because docker needs iptables
+        networking.nftables.enable = lib.mkForce false;
+
+        # configure docker https://wiki.nixos.org/wiki/Docker
+        virtualisation.docker.enable = true;
+        virtualisation.docker.storageDriver = "btrfs";
+        virtualisation.docker.rootless = {
             enable = true;
-            dockerCompat = true;
-            defaultNetwork.settings.dns_enabled = true;
+            setSocketVariable = true;
         };
 
         # https://www.kasmweb.com/docs/latest/how_to/reverse_proxy.html#example-caddy-config
