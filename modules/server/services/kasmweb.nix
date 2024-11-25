@@ -20,6 +20,9 @@
         # why tf is setting this thing up like pulling teeth
         systemd.services."init-kasmweb".serviceConfig.TimeoutStartSec = lib.mkForce 3600;
 
+        # disable nftables because docker needs iptables
+        networking.nftables.enable = lib.mkForce false;
+
         # https://www.kasmweb.com/docs/latest/how_to/reverse_proxy.html#example-caddy-config
         services.caddy.virtualHosts."${config.js.server.kasmweb.hostName}".extraConfig =
             lib.mkIf config.js.server.caddy.enable ''
