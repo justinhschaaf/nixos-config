@@ -48,7 +48,7 @@
         guacamole.enable = true;
         guacamole.hostName = "guac.waffles.lol";
 
-        kasmweb.enable = false;
+        kasmweb.enable = true;
         kasmweb.hostName = "kasm.waffles.lol";
 
         outline.enable = true;
