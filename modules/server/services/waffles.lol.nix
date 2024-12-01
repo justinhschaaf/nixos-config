@@ -12,10 +12,12 @@
 
     config = lib.mkIf config.js.server.waffles.lol.enable {
 
+        # Open firewall
+        networking.firewall.allowedTCPPorts = lib.optionals config.js.server.waffles.lol.openFirewall [ config.services.waffles.lol.port ];
+
         services.waffles.lol = {
             enable = true;
             hostName = config.js.server.waffles.lol.hostName;
-            openFirewall = config.js.server.waffles.lol.openFirewall;
         };
 
         services.caddy.virtualHosts."${config.js.server.waffles.lol.hostName}".extraConfig =
