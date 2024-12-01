@@ -942,11 +942,11 @@
         "nixpkgs": "nixpkgs_10"
       },
       "locked": {
-        "lastModified": 1733017486,
-        "narHash": "sha256-uqxrxw1SyfFrStojmzm/oMDGRVgpkCD3YYlrjenPl8A=",
+        "lastModified": 1733018373,
+        "narHash": "sha256-PsCUG0bxJWVIFCq0xg+07Nw03S3GYCFY7Qz34amjkNY=",
         "owner": "justinhschaaf",
         "repo": "waffles.lol",
-        "rev": "8bad987cc9a9baa7666842e90b82b772d8617f06",
+        "rev": "c84e4a924367ee2aec6a99405b0f2b363c06f07d",
         "type": "github"
       },
       "original": {
