@@ -29,7 +29,7 @@
         caddy.enable = true;
         caddy.openFirewall = true; # we want this to be true even when disabling everything else
 
-        waffles.lol.enable = false; # still working on getting yarn v2 packages working
+        waffles.lol.enable = true;
         waffles.lol.hostName = "waffles.lol";
 
         authentik.enable = true;

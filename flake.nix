@@ -79,8 +79,7 @@
         split-monitor-workspaces.inputs.hyprland.follows = "hyprland";
 
         # waffles.lol website
-        #waffleslol.url = "path:/mnt/Files/Programming/waffles.lol";
-        #waffleslol.inputs.nixpkgs.follows = "nixpkgs";
+        waffleslol.url = "github:justinhschaaf/waffles.lol";
 
     };
 
