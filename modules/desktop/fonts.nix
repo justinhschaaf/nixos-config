@@ -25,6 +25,7 @@
                 jspkgs.vercetti
 
                 # From nixpkgs
+                pkgs._0xproto
                 pkgs.b612
                 pkgs.barlow
                 pkgs.cascadia-code
