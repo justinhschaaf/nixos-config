@@ -1,22 +1,8 @@
 { inputs, lib, osConfig, config, pkgs, ... }: {
 
     # Personal info and the home path to manage
-    home.username = "justinhs";
-    home.homeDirectory = "/home/justinhs";
-
-    # User-specific packages. I usually like having them at the system level.
-    home.packages = with pkgs; [
-        collision
-        #element-desktop
-        inkscape
-        libreoffice
-        marktext
-        obs-studio
-        pinta
-        signal-desktop
-        tenacity
-        webcord
-    ];
+    home.username = "marco";
+    home.homeDirectory = "/home/marco";
 
     # Flatpak config
     services.flatpak.packages = lib.mkIf osConfig.js.programs.desktop.enable [
@@ -32,22 +18,8 @@
             docs = [ "xreader.desktop" ];
             browser = [ "firefox.desktop" ];
             image = [ "org.nomacs.ImageLounge.desktop" ];
-            text = [ "js.micro.desktop" ];
             video = [ "mpv.desktop" ];
         };
-        #override = {
-        #    "modrinth" = [ "modrinth-app-handler.desktop" ];
-        #};
-    };
-
-    # Add Steam compatdata symlink if on gaming system
-    # Steam needs these files linked because it really hates NTFS disks
-    # This MUST be done on home manager, and it has to be formatted like this because it's stupid
-    # https://github.com/ValveSoftware/Proton/wiki/Using-a-NTFS-disk-with-Linux-and-Windows#preventing-ntfs-read-errors
-    # https://wiki.nixos.org/wiki/Nix_Language:_Tips_%26_Tricks
-    # https://discourse.nixos.org/t/how-to-manage-dotfiles-with-home-manager/30576/3
-    home.file = lib.mkIf ("${osConfig.system.name}" == "bucatini" && osConfig.js.programs.gaming.enable) {
-        "the_shit/Games/Steam/steamapps/compatdata".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.steam/steam/steamapps/compatdata";
     };
 
     ######## Stuff that shouldn't be touched is below this line ########

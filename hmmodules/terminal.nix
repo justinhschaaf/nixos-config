@@ -9,7 +9,7 @@
     config = lib.mkIf config.js.hm.tui.enable {
 
         # Terminal toys
-        home.packages = with pkgs; [ 
+        home.packages = with pkgs; [
             cmatrix
             dotacat
             jp2a
@@ -23,6 +23,17 @@
             rmtrailingws = true;
             saveundo = true;
             tabstospaces = true;
+        };
+
+        # Add micro desktop entry
+        xdg.desktopEntries."js.micro" = lib.mkIf osConfig.js.programs.desktop.enable {
+            type = "Application";
+            exec = "kitty micro %F"; # cursed but it actually works
+            name = "micro";
+            genericName = "Text Editor";
+            comment = "Modern and intuitive terminal-based text editor";
+            categories = [ "Development" "IDE" "TextEditor" "Utility" ];
+            icon = "terminal";
         };
 
         # Kitty config. Note that it doesn't like floats
@@ -78,11 +89,11 @@
                 color13 = "#b294bb";
                 color14 = "#8abeb7";
                 color15 = "#ffffff";
-                
+
             };
 
         };
-    
+
     };
 
 }

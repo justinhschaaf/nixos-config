@@ -117,7 +117,8 @@
                 ./hardware-configuration.nix
                 ./modules
                 ./systems/tv.nix
-                ./users/justinhs.nix
+                ./users/sysadmin.nix
+                ./users/marco.nix
             ];
         };
 
