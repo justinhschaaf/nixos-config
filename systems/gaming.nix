@@ -40,12 +40,12 @@
     js.programs.thunar.enable = true;
 
     # Add Files
+    # context: 2TB drive is LITTLEBOY, 8TB is FATMAN
     # WARNING: IF EVER CHANGING THE MOUNTPOINT, PLEASE
     # UPDATE THE SYMLINK DEFINED IN THE JUSTINHS HM USERS FILE
     fileSystems."/home/justinhs/the_shit" = {
         device = "/dev/sda1";
         fsType = "ntfs";
-        label = "LITTLEBOY"; # context: the 8TB is FATMAN
         options = [ # https://github.com/ValveSoftware/Proton/wiki/Using-a-NTFS-disk-with-Linux-and-Windows#editing-fstab
             "uid=1000"
             "gid=100"
