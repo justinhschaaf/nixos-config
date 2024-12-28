@@ -225,17 +225,17 @@
         # configure hypridle
         # https://wiki.hyprland.org/Hypr-Ecosystem/hypridle/
         # https://home-manager-options.extranix.com/?query=hypridle&release=release-24.05
-        services.hypridle.enable = true;
+        services.hypridle.enable = osConfig.js.desktop.hyprland.idle.enable;
         services.hypridle.settings = {
             general = {
                 lock_cmd = "pidof swaylock || ${lockcmd}";
                 before_sleep_cmd = "loginctl lock-session";
             };
             listener = [{
-                timeout = 300;
+                timeout = osConfig.js.desktop.hyprland.idle.lockTimeout;
                 on-timeout = "loginctl lock-session";
             } {
-                timeout = 330;
+                timeout = osConfig.js.desktop.hyprland.idle.screenOffTimeout;
                 on-timeout = "hyprctl dispatch dpms off";
                 on-resume = "hyprctl dispatch dpms on";
             }];
@@ -326,7 +326,11 @@
                 modules = [
                     "custom/controls"
                     "tray"
+                ] ++ lib.optionals osConfig.js.desktop.hyprland.idle.enable [
+                    # only enable if the screen will idle itself
+                    # placed in the middle because i care about the order
                     "idle_inhibitor"
+                ] ++ [
                     "network"
                     "backlight"
                     "wireplumber"

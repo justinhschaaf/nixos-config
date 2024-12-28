@@ -4,14 +4,25 @@
         inputs.hyprland.nixosModules.default
     ];
 
-    options = {
-        js.desktop.hyprland.enable = lib.mkEnableOption "Hyprland";
-        js.desktop.hyprland.monitors = lib.mkOption { # https://wiki.hyprland.org/Configuring/Monitors/
+    options.js.desktop.hyprland = {
+        enable = lib.mkEnableOption "Hyprland";
+        idle.enable = lib.mkEnableOption "automatically locking the display and turning it off";
+        idle.lockTimeout = lib.mkOption {
+            type = lib.types.ints.positive;
+            description = "How long to wait before locking the computer when there's no activity, in seconds.";
+            default = 300;
+        };
+        idle.screenOffTimeout = lib.mkOption {
+            type = lib.types.ints.positive;
+            description = "How long to wait before turning the screen off when there's no activity, in seconds.";
+            default = 330;
+        };
+        monitors = lib.mkOption { # https://wiki.hyprland.org/Configuring/Monitors/
             type = lib.types.either lib.types.str (lib.types.listOf lib.types.str);
             description = "The display configuration for this device.";
             default = ",preferred,auto,auto";
         };
-        js.desktop.hyprland.screenshot.output = lib.mkOption {
+        screenshot.output = lib.mkOption {
             type = lib.types.str;
             description = "Where screenshots taken should be saved by default.";
             default = "~/Pictures/Screenshots";
@@ -49,7 +60,8 @@
         };
 
         # enable hypridle
-        services.hypridle.enable = true;
+        js.desktop.hyprland.idle.enable = lib.mkDefault true;
+        services.hypridle.enable = config.js.desktop.hyprland.idle.enable;
 
         environment.systemPackages = [
 
