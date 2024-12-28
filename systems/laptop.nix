@@ -2,6 +2,13 @@
 
     imports = [ ./laptop-hardware.nix ];
 
+    # Setup disk partitioning
+    #js.disks.enable = true;
+    js.disks.device = "/dev/nvme0n1";
+    js.disks.encrypt = true;
+    js.disks.swap.enable = true;
+    js.disks.swap.size = "20GiB";
+
     # Enable Hyprland and JP keyboard
     js.desktop.enable = true;
     js.desktop.hyprland.enable = true;

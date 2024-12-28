@@ -52,6 +52,10 @@
         # Updates
         comin.url = "github:nlewo/comin";
 
+        # Disko disk partitioning
+        disko.url = "github:nix-community/disko/latest";
+        disko.inputs.nixpkgs.follows = "nixpkgs";
+
         # Home Manager
         home-manager.url = "github:nix-community/home-manager";
 
@@ -114,7 +118,6 @@
         nixosConfigurations.lasagna = nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system jspkgs; };
             modules = [
-                ./hardware-configuration.nix
                 ./modules
                 ./systems/tv.nix
                 ./users/sysadmin.nix

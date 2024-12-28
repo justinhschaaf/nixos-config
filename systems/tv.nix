@@ -1,5 +1,9 @@
 { inputs, config, pkgs, ... }: {
 
+    # Partition disk
+    js.disks.enable = true;
+    js.disks.device = "/dev/sda";
+
     # Enable Hyprland
     js.desktop.enable = true;
     js.desktop.hyprland.enable = true;

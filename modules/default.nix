@@ -191,6 +191,9 @@
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
+    # Set the default architecture, nearly every system uses this i only gotta override it for the pi
+    nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
     # Add TUI programs and enable automatic updates by default
     js.programs.tui.enable = lib.mkDefault true;
     js.update.enable = lib.mkDefault true;
