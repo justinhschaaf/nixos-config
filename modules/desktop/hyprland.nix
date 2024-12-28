@@ -127,6 +127,8 @@
         # Create the folder for screenshot output
         systemd.services."jshot-mkdir" = {
             enable = true;
+            description = "Creates the screenshot optuot folder if it doesn't already exist.";
+            wantedBy = [ "multi-user.target" ];
             script = ''
                 mkdir -p "${config.js.desktop.hyprland.screenshot.output}"
             '';
