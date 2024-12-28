@@ -39,23 +39,25 @@
         };
 
         # Theme Fcitx5
-        home.file.".config/fcitx5/conf/classicui.conf".text = lib.mkIf osConfig.js.desktop.input.jp ''
-            # Set Fonts
-            Font="Sans Serif 10"
-            MenuFont="Sans Serif 10"
-            TrayFont="Sans Serif Bold 10"
+        home.file.".config/fcitx5/conf/classicui.conf" = lib.mkIf osConfig.js.desktop.input.jp {
+            text = ''
+                # Set Fonts
+                Font="Sans Serif 10"
+                MenuFont="Sans Serif 10"
+                TrayFont="Sans Serif Bold 10"
 
-            # Set Nord themes
-            Theme=Nord-Light
-            DarkTheme=Nord-Dark
+                # Set Nord themes
+                Theme=Nord-Light
+                DarkTheme=Nord-Dark
 
-            # Respect system dark theme and accent colors
-            UseDarkTheme=True
-            UseAccentColor=True
+                # Respect system dark theme and accent colors
+                UseDarkTheme=True
+                UseAccentColor=True
 
-            # Enable Wayland Fractional Scaling
-            EnableFractionalScale=True
-            '';
+                # Enable Wayland Fractional Scaling
+                EnableFractionalScale=True
+                '';
+        };
 
     };
 
