@@ -1,12 +1,12 @@
 { inputs, lib, config, pkgs, ... }: {
 
-    imports = [ 
+    imports = [
 
         # These can be imported here and not imported in subsequent modules
         # Importing in subsequent modules causes an "already declared" error
 
         # Import home manager so we can manage home
-        inputs.home-manager.nixosModules.home-manager 
+        inputs.home-manager.nixosModules.home-manager
 
         # Other modules
         ./fonts.nix
@@ -25,7 +25,7 @@
         services.greetd = {
             enable = true;
             settings = {
-                default_session = let 
+                default_session = let
                     cmd = if config.js.desktop.hyprland.enable
                         # yes, the Hyprland command starts with a capital letter https://wiki.hyprland.org/Nix/
                         then "--cmd Hyprland"
@@ -47,7 +47,7 @@
         services.udisks2.mountOnMedia = true;
 
         # Enable sound with pipewire.
-        hardware.pulseaudio.enable = false;
+        services.pulseaudio.enable = false;
         security.rtkit.enable = true;
         services.pipewire = {
             enable = true;
