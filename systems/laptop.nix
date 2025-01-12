@@ -1,6 +1,9 @@
 { inputs, lib, config, pkgs, ... }: {
 
-    imports = [ ./laptop-hardware.nix ];
+    imports = [
+        ./laptop-hardware.nix
+        inputs.nixos-hardware.nixosModules.framework-13-7040-amd
+    ];
 
     # Setup disk partitioning
     #js.disks.enable = true;

@@ -59,6 +59,9 @@
         # Home Manager
         home-manager.url = "github:nix-community/home-manager";
 
+        # Special hardware configs
+        nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
         # Secrets management
         sops-nix.url = "github:Mic92/sops-nix";
 
