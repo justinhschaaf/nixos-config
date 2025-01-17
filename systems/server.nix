@@ -55,6 +55,8 @@
 
         unifi.enable = true;
         unifi.hostName = "unifi.${config.services.avahi.hostName}.${config.services.avahi.domainName}";
+        unifi.openFirewallConsole = true;
+        unifi.openFirewallDiscovery = true;
 
     };
 
