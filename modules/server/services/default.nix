@@ -8,6 +8,7 @@
         ./kasmweb.nix
         ./outline.nix
         ./seafile.nix
+        ./unifi.nix
         ./waffles.lol.nix
     ];
 
