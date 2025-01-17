@@ -17,7 +17,7 @@
         swap.size = lib.mkOption {
             type = lib.types.str;
             description = "How large to make the swap partition, in sgdisk format.";
-            default = "16GiB";
+            default = "16G";
         };
     };
 
@@ -27,11 +27,11 @@
     config.disko.devices.disk.main = let
 
         # how big the MBR boot partition should be
-        mbrBootSize = "1MiB";
+        mbrBootSize = "1M";
 
         # how big the GPT boot partition (the ESP) should be
         # this is technically the endpoint of the ESP, not the size, but idgaf
-        gptBootSize = "512MiB";
+        gptBootSize = "512M";
 
         # the default config for the btrfs system root
         rootContent = {

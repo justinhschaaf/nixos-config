@@ -10,7 +10,7 @@
     js.disks.device = "/dev/nvme0n1";
     js.disks.encrypt = true;
     js.disks.swap.enable = true;
-    js.disks.swap.size = "20GiB";
+    js.disks.swap.size = "20G";
 
     # Enable Hyprland and JP keyboard
     js.desktop.enable = true;
