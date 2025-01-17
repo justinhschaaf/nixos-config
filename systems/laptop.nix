@@ -18,6 +18,9 @@
     js.desktop.hyprland.monitors = ",preferred,auto,1.5";
     js.desktop.input.jp = true;
 
+    # Enable AMD CPU support
+    js.hardware.amd.cpu.enable = true;
+
     # Enable fingerprint reader support
     js.hardware.fingerprint.enable = true;
 

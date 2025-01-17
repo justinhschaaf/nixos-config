@@ -2,6 +2,9 @@
 
     imports = [ ./server-hardware.nix ];
 
+    # Enable Intel CPU support
+    js.hardware.intel.cpu.enable = true;
+
     js.sops.enable = true;
     js.server = {
 

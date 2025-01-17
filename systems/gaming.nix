@@ -31,6 +31,9 @@
     js.desktop.hyprland.screenshot.output = "~/the_shit/Pictures/Screenshots";
     js.desktop.input.jp = true;
 
+    # Enable Intel CPU support
+    js.hardware.intel.cpu.enable = true;
+
     # Enable NVIDIA GPU support and thunderbolt
     js.hardware.nvidia.enable = true;
     services.hardware.bolt.enable = true;

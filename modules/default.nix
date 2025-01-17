@@ -60,6 +60,12 @@
         wifi.scanRandMacAddress = true;
     };
 
+    # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+    # (the default) this is the recommended approach. When using systemd-networkd it's
+    # still possible to use this option, but it's recommended to use it in conjunction
+    # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+    networking.useDHCP = lib.mkDefault true;
+
     # Replace wpa_supplicant with IWD
     # https://kokada.dev/blog/an-unordered-list-of-hidden-gems-inside-nixos/
     # https://wmbuck.net/blog/?p=1313
@@ -190,9 +196,6 @@
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
-
-    # Set the default architecture, nearly every system uses this i only gotta override it for the pi
-    nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
     # Add TUI programs and enable automatic updates by default
     js.programs.tui.enable = lib.mkDefault true;
