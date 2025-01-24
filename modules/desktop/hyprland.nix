@@ -125,10 +125,16 @@
         };
 
         # Create the folder for screenshot output
-        systemd.services."jshot-mkdir" = {
+        # https://wiki.nixos.org/wiki/Systemd/User_Services
+        # https://superuser.com/a/1269158
+        systemd.user.services."jshot-mkdir" = {
             enable = true;
-            description = "Creates the screenshot optuot folder if it doesn't already exist.";
-            wantedBy = [ "multi-user.target" ];
+            description = "Creates the screenshot output folder if it doesn't already exist.";
+            wantedBy = [ "default.target" ];
+            serviceConfig = {
+                Type = "oneshot";
+                RemainAfterExit = true;
+            };
             script = ''
                 mkdir -p "${config.js.desktop.hyprland.screenshot.output}"
             '';
