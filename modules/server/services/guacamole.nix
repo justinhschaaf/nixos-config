@@ -11,12 +11,12 @@
 
 { inputs, lib, config, pkgs, ... }: {
 
-    options = {
-        js.server.guacamole.enable = lib.mkEnableOption "Guacamole, a clientless remote desktop gateway";
-        js.server.guacamole.hostName = lib.mkOption { type = lib.types.str; };
-        js.server.guacamole.openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
-        js.server.guacamole.client.openFirewall = lib.mkOption { default = config.js.server.guacamole.openFirewall; };
-        js.server.guacamole.server.openFirewall = lib.mkOption { default = config.js.server.guacamole.openFirewall; };
+    options.js.server.guacamole = {
+        enable = lib.mkEnableOption "Guacamole, a clientless remote desktop gateway";
+        hostName = lib.mkOption { type = lib.types.str; };
+        openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
+        client.openFirewall = lib.mkOption { default = config.js.server.guacamole.openFirewall; };
+        server.openFirewall = lib.mkOption { default = config.js.server.guacamole.openFirewall; };
     };
 
     config = let
@@ -80,8 +80,10 @@
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.guacamole.server.openFirewall [ config.services.guacamole-server.port ]
             ++ lib.optionals config.js.server.guacamole.client.openFirewall [ config.services.tomcat.port ]; # by default, the guac client is hosted on tomcat
 
-        # Configure guacamole itself
+        # Set Tomcat port to something other than 8080, which is used by Unifi
+        services.tomcat.port = 8880;
 
+        # Configure guacamole itself
         services.guacamole-server.enable = true;
         services.guacamole-client.enable = true;
         services.guacamole-client.settings = {
