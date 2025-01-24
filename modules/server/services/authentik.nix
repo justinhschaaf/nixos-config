@@ -4,25 +4,32 @@
         inputs.authentik-nix.nixosModules.default
     ];
 
-    options = {
-        js.server.authentik.enable = lib.mkEnableOption "Authentik, the authentication glue you need";
-        js.server.authentik.hostName = lib.mkOption { type = lib.types.str; };
-        js.server.authentik.openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
-        js.server.authentik.openFirewallMetrics = lib.mkOption { default = config.js.server.openFirewall; };
-        js.server.authentik.ldap.enable = lib.mkEnableOption "Authentik LDAP outpost";
-        js.server.authentik.ldap.openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
+    options.js.server.authentik = {
+        enable = lib.mkEnableOption "Authentik, the authentication glue you need";
+        hostName = lib.mkOption { type = lib.types.str; };
+        openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
+        openFirewallMetrics = lib.mkOption { default = config.js.server.openFirewall; };
+        ldap.enable = lib.mkEnableOption "Authentik LDAP outpost";
+        ldap.openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
+        radius.enable = lib.mkEnableOption "Authentik RADIUS outpost";
+        radius.openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
     };
 
     config = lib.mkIf config.js.server.authentik.enable {
 
-        # Open ports
+        # Open TCP ports
         # Don't open 9000, we want to use HTTPS for internal access
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.authentik.openFirewall [ 9443 ]
             ++ lib.optionals config.js.server.authentik.openFirewallMetrics [ 9300 ]
             ++ lib.optionals config.js.server.authentik.ldap.openFirewall [ 3389 6636 ];
 
+        # Open RADIUS port on UDP
+        # https://docs.goauthentik.io/docs/add-secure-apps/outposts/manual-deploy-docker-compose#radius-outpost
+        networking.firewall.allowedUDPPorts = lib.optionals config.js.server.authentik.radius.openFirewall [ 1812 ];
+
         sops.secrets."authentik/authentik-env".sopsFile = ../../../secrets/server.yaml;
         sops.secrets."authentik/authentik-ldap-env".sopsFile = lib.mkIf config.js.server.authentik.ldap.enable ../../../secrets/server.yaml;
+        sops.secrets."authentik/authentik-radius-env".sopsFile = lib.mkIf config.js.server.authentik.radius.enable ../../../secrets/server.yaml;
 
         services.authentik = {
             enable = true;
@@ -48,6 +55,11 @@
         services.authentik-ldap = lib.mkIf config.js.server.authentik.ldap.enable {
             enable = true;
             environmentFile = "/run/secrets/authentik/authentik-ldap-env";
+        };
+
+        services.authentik-radius = lib.mkIf config.js.server.authentik.radius.enable {
+            enable = true;
+            environmentFile = "/run/secrets/authentik/authentik-radius-env";
         };
 
         # https://docs.goauthentik.io/docs/installation/reverse-proxy
