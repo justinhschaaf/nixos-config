@@ -1,6 +1,6 @@
 { inputs, lib, config, pkgs, ... }: {
 
-    imports = [ 
+    imports = [
         inputs.authentik-nix.nixosModules.default
     ];
 
@@ -53,6 +53,8 @@
         # https://docs.goauthentik.io/docs/installation/reverse-proxy
         # Headers should already be set, see https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#defaults
         # Must use HTTP here or else we run into a bad gateway error
+        # Using HTTP for internal communication is recommended by Caddy over disabling HTTPS security checks
+        # https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#tls_insecure_skip_verify
         services.caddy.virtualHosts."${config.js.server.authentik.hostName}".extraConfig =
             lib.mkIf config.js.server.caddy.enable ''
                 reverse_proxy 127.0.0.1:9000

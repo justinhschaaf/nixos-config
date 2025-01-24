@@ -12,6 +12,7 @@
         # Open ports
         # As per Nixpkgs, services.unifi.openFirewall only opens the discovery port, not the console
         # https://search.nixos.org/options?channel=unstable&show=services.unifi.openFirewall&from=0&size=50&sort=relevance&type=packages&query=services.unifi
+        # https://help.ui.com/hc/en-us/articles/218506997-Required-Ports-Reference
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.unifi.openFirewallConsole [ 8443 ];
         services.unifi.openFirewall = config.js.server.unifi.openFirewallDiscovery;
 

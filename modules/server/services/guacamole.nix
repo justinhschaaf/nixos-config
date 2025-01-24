@@ -81,7 +81,7 @@
             ++ lib.optionals config.js.server.guacamole.client.openFirewall [ config.services.tomcat.port ]; # by default, the guac client is hosted on tomcat
 
         # Set Tomcat port to something other than 8080, which is used by Unifi
-        services.tomcat.port = 8880;
+        services.tomcat.port = 8280;
 
         # Configure guacamole itself
         services.guacamole-server.enable = true;
