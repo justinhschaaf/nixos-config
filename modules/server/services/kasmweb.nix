@@ -6,7 +6,7 @@
         js.server.kasmweb.openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
     };
 
-    config = lib.mkIf config.js.server.grafana.enable {
+    config = lib.mkIf config.js.server.kasmweb.enable {
 
         # Open ports
         networking.firewall.allowedTCPPorts = lib.optionals config.js.server.kasmweb.openFirewall [ config.services.kasmweb.listenPort ];
