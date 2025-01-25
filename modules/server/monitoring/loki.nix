@@ -15,11 +15,11 @@
     config = {
 
         # Open ports
-        networking.firewall.allowedTCPPorts = lib.optionals config.js.server.loki.openFirewall [ config.services.loki.configuration.server.http_listen_port ];
+        networking.firewall.allowedTCPPorts = lib.optionals (config.js.server.loki.enable && config.js.server.loki.openFirewall) [ config.services.loki.configuration.server.http_listen_port ];
 
         services.loki.enable = config.js.server.loki.enable;
         services.loki.configuration = lib.mkIf config.js.server.loki.enable {
-        
+
             auth_enabled = false;
             server.http_listen_port = 3100; # default
 
@@ -31,7 +31,7 @@
                     replication_factor = 1;
                 };
             };
-            
+
             ingester = {
                 chunk_idle_period = "1h";        # flush chunks that aren't doing anything'
                 max_chunk_age = "1h";            # flush all old chunks
@@ -61,7 +61,7 @@
                 working_directory = "${config.services.loki.dataDir}/compactor";
                 compactor_ring.kvstore.store = "inmemory";
             };
-            
+
         };
 
         services.promtail.enable = config.js.server.loki.agents.promtail.enable;
@@ -76,9 +76,9 @@
             clients = config.js.server.loki.agents.promtail.clients;
 
             scrape_configs = [{
-            
+
                 job_name = "journal";
-                
+
                 journal.max_age = "12h";
                 journal.labels = {
                     job = "systemd-journal";
@@ -89,11 +89,11 @@
                     source_labels = [ "__journal__systemd_unit" ];
                     target_label = "unit";
                 }];
-                
+
             }];
-        
+
         };
-    
+
     };
 
 }
