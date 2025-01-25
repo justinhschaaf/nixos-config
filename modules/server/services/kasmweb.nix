@@ -24,12 +24,10 @@
         networking.nftables.enable = lib.mkForce false;
 
         # configure docker https://wiki.nixos.org/wiki/Docker
+        # i genuinely fucking hate you
+        # https://i.redd.it/u6q10wkbjcg71.png
         virtualisation.docker.enable = true;
         virtualisation.docker.storageDriver = "btrfs";
-        #virtualisation.docker.rootless = {
-        #    enable = true;
-        #    setSocketVariable = true;
-        #};
 
         # https://www.kasmweb.com/docs/latest/how_to/reverse_proxy.html#example-caddy-config
         services.caddy.virtualHosts."${config.js.server.kasmweb.hostName}".extraConfig =
