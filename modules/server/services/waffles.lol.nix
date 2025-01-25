@@ -18,7 +18,6 @@
         services.waffles.lol = {
             enable = true;
             hostName = config.js.server.waffles.lol.hostName;
-            port = 3050; # for shits and giggles, let's see if this fixes it
         };
 
         services.caddy.virtualHosts."${config.js.server.waffles.lol.hostName}".extraConfig =
