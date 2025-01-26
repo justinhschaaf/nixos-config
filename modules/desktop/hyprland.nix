@@ -24,8 +24,8 @@
         };
         screenshot.output = lib.mkOption {
             type = lib.types.str;
-            description = "Where screenshots taken should be saved by default.";
-            default = "~/Pictures/Screenshots";
+            description = "Where screenshots taken should be saved by default, relative to the user's home directory.";
+            default = "Pictures/Screenshots";
         };
     };
 
