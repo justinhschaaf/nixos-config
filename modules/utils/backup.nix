@@ -64,7 +64,7 @@
                     + excludesArgs
                     + args;
                 serviceConfig = {
-                    Type = "oneshot";
+                    Type = "exec"; # https://man.archlinux.org/man/systemd.service.5#OPTIONS
                     User = "root";
                 };
             };
