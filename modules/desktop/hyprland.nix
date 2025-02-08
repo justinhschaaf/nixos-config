@@ -97,7 +97,6 @@
                 # Startup apps
                 # launch location for gnome polkit: https://wiki.nixos.org/wiki/Polkit
                 exec-once = [
-
                     "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
                     "udiskie -A -f thunar" # -A = no automount
                     "mako"
@@ -107,16 +106,24 @@
 
                     # System sleep
                     "hypridle"
-
                 ];
 
-                # Get KDE file picker to show up properly
-                # At least I can actually paste in a file path now
-                # https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
                 windowrulev2 = [
+                    # Get KDE file picker to show up properly
+                    # At least I can actually paste in a file path now
+                    # https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
                     "float,class:^(org.freedesktop.impl.portal.desktop.kde)$"
                     "center,class:^(org.freedesktop.impl.portal.desktop.kde)$"
                     "maximize,class:^(org.freedesktop.impl.portal.desktop.kde)$"
+
+                    # Handling overrides for xwaylandvideobridge
+                    # https://wiki.hyprland.org/Useful-Utilities/Screen-Sharing/
+                    "opacity 0.0 override, class:^(xwaylandvideobridge)$"
+                    "noanim, class:^(xwaylandvideobridge)$"
+                    "noinitialfocus, class:^(xwaylandvideobridge)$"
+                    "maxsize 1 1, class:^(xwaylandvideobridge)$"
+                    "noblur, class:^(xwaylandvideobridge)$"
+                    "nofocus, class:^(xwaylandvideobridge)$"
                 ];
 
                 # See https://wiki.hyprland.org/Configuring/Variables/ for more
@@ -132,7 +139,6 @@
                 };
 
                 general = {
-
                     gaps_in = 4;
                     gaps_out = "6, 12, 12, 12";
                     border_size = 2;
@@ -141,11 +147,9 @@
 
                     "col.active_border" = "rgba(ffffffff)";
                     "col.inactive_border" = "rgba(595959aa)";
-
                 };
 
                 decoration = {
-
                     rounding = 0;
 
                     blur = {
@@ -161,7 +165,6 @@
                         render_power = 3;
                         color = "rgba(1a1a1aee)";
                     };
-
                 };
 
                 # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
@@ -267,7 +270,6 @@
                     "$mainMod, mouse:272, movewindow"
                     "$mainMod, mouse:273, resizewindow"
                 ];
-
             };
         };
 
@@ -285,6 +287,7 @@
             pkgs.swww
             pkgs.udiskie
             pkgs.waybar
+            pkgs.kdePackages.xwaylandvideobridge
             inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
             # https://github.com/ErikReider/SwayOSD
 
