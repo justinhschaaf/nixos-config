@@ -130,6 +130,12 @@
                 gestures.workspace_swipe = false;
                 misc.force_default_wallpaper = 0; # No more anime girl jumpscares
 
+                # Disable extra popups
+                ecosystem = {
+                    no_update_news = true;
+                    no_donation_nag = true;
+                };
+
                 input = {
                     kb_layout = "us";
                     follow_mouse = 1;
