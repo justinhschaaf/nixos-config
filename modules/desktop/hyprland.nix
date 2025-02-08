@@ -82,7 +82,11 @@
                 # This is necessary to force Hyprland to stfu about using 1.5 scale
                 # IT WAS WORKING FINE BEFORE V34
                 # https://github.com/hyprwm/Hyprland/issues/4225
-                debug.disable_scale_checks = 1;
+                debug.disable_scale_checks = true;
+
+                # Fix xwayland apps at 1.5 scale, nearest neighbor is not necessarily better
+                # https://wiki.hyprland.org/Configuring/Variables/#xwayland
+                xwayland.force_zero_scaling = true;
 
                 # Lock command https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
                 "$lock" = config.js.desktop.hyprland.lockcmd;
