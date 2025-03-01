@@ -12,6 +12,7 @@
             # Let us actually write to Git
             git-credential-manager
             github-desktop
+            gh
 
             # Editors
             jetbrains.idea-community
