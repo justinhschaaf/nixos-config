@@ -60,14 +60,14 @@
         content.partitions.boot = {
             type = "EF02";
             size = mbrBootSize;
+            priority = 100;
         };
 
         # GPT boot partition (EFI System Partition)
         content.partitions.ESP = {
             type = "EF00";
-            start = mbrBootSize;
             end = gptBootSize;
-            priority = 3000;
+            priority = 1000;
             content = {
                 type = "filesystem";
                 format = "vfat";
@@ -76,22 +76,8 @@
             };
         };
 
-        # Create the swap partition at the end of the disk, if enabled
-        content.partitions.swap = lib.mkIf config.js.disks.swap.enable {
-            start = "-${config.js.disks.swap.size}";
-            size = "100%";
-            priority = 2000;
-            content = {
-                type = "swap";
-                randomEncryption = true;
-            };
-        };
-
         # Create the data partition
         content.partitions.root = {
-
-            # Leave enough space for both boot partitions at the start
-            start = gptBootSize;
 
             # If we have a swap partition, leave space for it at the end
             # https://github.com/nix-community/disko/blob/3a4de9fa3a78ba7b7170dda6bd8b4cdab87c0b21/lib/types/gpt.nix#L116-L127
@@ -99,7 +85,7 @@
                 then "-${config.js.disks.swap.size}"
                 else "-0";
 
-            priority = 1000;
+            priority = 2000;
 
             # Encrypt the disk, if necessary. should prompt you to set the encryption key during setup
             # https://github.com/nix-community/disko-templates/blob/6b12e5fe81fc0c06989a58bd0b01f4a2efca4906/single-ext4-luks-and-double-zfs-mirror/disko-config.nix#L27-L42
@@ -110,6 +96,16 @@
                 content = rootContent;
             } else rootContent;
 
+        };
+
+        # Create the swap partition at the end of the disk, if enabled
+        content.partitions.swap = lib.mkIf config.js.disks.swap.enable {
+            size = "100%";
+            priority = 3000;
+            content = {
+                type = "swap";
+                randomEncryption = true;
+            };
         };
 
     };
