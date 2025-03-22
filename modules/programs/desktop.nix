@@ -32,13 +32,15 @@
         # mpv scripts
         nixpkgs.overlays = [
             (self: super: {
-                mpv = super.mpv.override {
+                mpv = super.mpv-unwrapped.wrapper {
+                    mpv = pkgs.mpv-unwrapped;
                     scripts = with self.mpvScripts; [
                         mpris
                         uosc
                         visualizer
                         vr-reversal
                     ];
+                    extraMakeWrapperArgs = [ "--add-flags" "--keep-open=always" ];
                 };
             })
         ];
