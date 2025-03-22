@@ -13,6 +13,7 @@
     # Enable Hyprland
     js.desktop.enable = true;
     js.desktop.hyprland.enable = true;
+    js.desktop.hyprland.idle.enable = false;
 
     # Enable Thunar
     js.programs.thunar.enable = true;
