@@ -1,6 +1,9 @@
-# For testing VMs
-# nixos-rebuild build-vm --flake path:./#system-name-here
+# For testing VMs: jstestvm <system-name-here>
 result
 *.qcow2
 
+# dev shell
+.direnv
+
+# ide
 .idea

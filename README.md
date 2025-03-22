@@ -23,6 +23,12 @@ See the [wiki](https://github.com/justinhschaaf/nixos-config/wiki/Installation).
 > [!NOTE]
 > If you're using one of the setups with a GUI, you need to manually set the wallpaper with `swww img`.
 
+## Developing
+
+To make development easier, this flake provides a dev shell you can enter using [direnv](https://github.com/nix-community/nix-direnv) or by running `nix develop`.
+
+You can then run `jstestvm <system>` to quickly compile and run a virtual machine of any system in the flake.
+
 ## Systems
 
 - **bucatini**, the gaming PC.

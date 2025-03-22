@@ -141,6 +141,11 @@
         nixosModules.default = ./modules;
         homeManagerModules.default = ./hmmodules;
 
+        # Dev Shell. This adds the jstestvm command for quickly building system vms
+        devShells.${system}.default = pkgs.mkShell rec {
+            buildInputs = [ inputs.self.outputs.packages.${system}.jstestvm ];
+        };
+
         # Package scripts. THIS HAS TO BE DEFINED LIKE THIS, SEE BELOW
         # https://github.com/NixOS/nix/issues/916
         # https://old.reddit.com/r/NixOS/comments/16p7ea2/dynamic_attribute_x86_64linux_already_defined/k1skjsf/
@@ -158,6 +163,12 @@
                 name = "jsinstall";
                 runtimeInputs = with pkgs; [ git ];
                 text = builtins.readFile ./scripts/install.sh;
+            };
+
+            jstestvm = pkgs.writeShellApplication {
+                name = "jstestvm";
+                runtimeInputs = with pkgs; [ nixos-rebuild ];
+                text = builtins.readFile ./scripts/test.sh;
             };
 
         };
