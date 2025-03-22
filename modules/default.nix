@@ -170,9 +170,6 @@
         experimental-features = [ "nix-command" "flakes" ];
         accept-flake-config = true;
 
-        # Only allow sudoers to use nix
-        allowed-users = [ "@wheel" ];
-
         # Enable binary caching so the flake stuff isn't constantly recompiled
         builders-use-substitutes = true;
 
