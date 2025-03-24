@@ -43,7 +43,7 @@
 
         # Init prompt and get rid of MOTD
         # https://fishshell.com/docs/current/cmds/fish_greeting.html
-        programs.fish.shellInit = ''
+        programs.fish.interactiveShellInit = ''
             tide configure --auto --style=Lean --prompt_colors='16 colors' --show_time='24-hour format' --lean_prompt_height='One line' --prompt_spacing=Compact --icons='Few icons' --transient=Yes
             set -U tide_cmd_duration_color brwhite
             set -U tide_time_color brwhite
