@@ -1,5 +1,4 @@
 #!/bin/bash
-# shellcheck disable=SC2086
 
 # Needs to be ran as sudo
 # "If you do not have Bash or the GNU Coreutils installed when running this, God help you."
@@ -48,6 +47,7 @@ echo_usage() {
 
 format_disk() {
     if [ "$ZEROTOUCH" -gt 0 ]; then
+        # shellcheck disable=SC2086
         nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --yes-wipe-all-disks --mode destroy,format,mount --flake $FLAKE
     fi
 }
@@ -56,6 +56,7 @@ download_config() {
     if [ "$LOCALCFG" -gt 0 ]; then
 
         # Use the locally installed flake rather than GitHub
+        # shellcheck disable=SC2086
         FLAKE=path:"$CFGDIR"\#"$SYSTEM"
 
         # Remove the old config dir or create it if there isn't one
@@ -70,9 +71,11 @@ download_config() {
 
 install_nixos() {
     if [ "$REBUILD" -gt 0 ]; then
+        # shellcheck disable=SC2086
         nixos-rebuild --boot --flake $FLAKE
     else
         ulimit -n 1048576
+        # shellcheck disable=SC2086
         nixos-install --flake $FLAKE --no-root-passwd
     fi
 
@@ -97,6 +100,7 @@ shift "$((OPTIND -1))"
 
 if [ "$#" -gt 0 ]; then
     SYSTEM="$1"
+    # shellcheck disable=SC2086
     FLAKE=github:$REPO\#"$SYSTEM"
 else
     echo_usage 1
