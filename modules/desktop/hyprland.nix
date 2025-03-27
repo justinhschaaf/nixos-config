@@ -93,7 +93,7 @@
                 "$lock" = config.js.desktop.hyprland.lockcmd;
 
                 # Screenshot editor
-                "$satty" = "satty --filename - --fullscreen --copy-command 'wl-copy' --output-filename \"${config.js.desktop.hyprland.screenshot.output}/satty-$(date '+%Y%m%d-%H%M%S').png\"";
+                "$swappy" = "swappy -f - -o \"${config.js.desktop.hyprland.screenshot.output}/swappy-$(date '+%Y%m%d-%H%M%S').png\"";
 
                 # Startup apps
                 # launch location for gnome polkit: https://wiki.nixos.org/wiki/Polkit
@@ -205,9 +205,9 @@
                     "$mainMod, L, exec, $lock"
 
                     # Screenshot
-                    ", Print, exec, grimblast --freeze save area - | $satty"
-                    "CTRL, Print, exec, grimblast --freeze save active - | $satty"
-                    "ALT, Print, exec, grimblast --freeze save output - | $satty"
+                    ", Print, exec, grimblast --freeze save area - | $swappy"
+                    "CTRL, Print, exec, grimblast --freeze save active - | $swappy"
+                    "ALT, Print, exec, grimblast --freeze save output - | $swappy"
 
                     # Brightness and volume https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
                     ", xf86monbrightnessup, exec, brightnessctl set 5%+"
@@ -294,7 +294,7 @@
             pkgs.grimblast
             pkgs.hyprpicker
             pkgs.jq
-            pkgs.satty
+            pkgs.swappy
             pkgs.slurp
 
             # Sleep
