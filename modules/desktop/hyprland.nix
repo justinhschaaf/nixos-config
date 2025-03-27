@@ -101,7 +101,7 @@
                     "udiskie -A -f thunar" # -A = no automount
                     "mako"
                     "waybar"
-                    "sleep 1 && swww-daemon" # wait for everything to initialize before starting daemon
+                    "swww-daemon"
                     "fcitx5 -d" # -d = daemon
 
                     # System sleep
