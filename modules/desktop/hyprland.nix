@@ -63,7 +63,6 @@
         programs.hyprland = {
             enable = true;
             xwayland.enable = true;
-            withUWSM = true;
 
             # Add plugins for better multi-monitor support
             plugins = [
