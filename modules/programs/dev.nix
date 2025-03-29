@@ -11,7 +11,7 @@
 
             # Let us actually write to Git
             git-credential-manager
-            github-desktop
+            gitui
             gh
 
             # Editors
@@ -31,7 +31,7 @@
 
             # Misc
             activitywatch
-            #etcher # https://github.com/NixOS/nixpkgs/pull/295853
+            usbimager
             gnome-boxes
             nixd
             prusa-slicer
