@@ -174,10 +174,6 @@
                     };
                 };
 
-                # Nvidia performance
-                # https://wiki.hyprland.org/Nvidia/
-                cursor.no_hardware_cursors = true;
-
                 # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
                 dwindle = {
                     pseudotile = true; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
@@ -322,7 +318,7 @@
             # Unset GTK_IM_MODULE so apps can figure it out themselves
             GTK_IM_MODULE="";
 
-        } // lib.attrsets.optionalAttrs config.js.hardware.nvidia.enable {
+        } // lib.attrsets.optionalAttrs config.js.hardware.nvidia.gpu.enable {
 
             # Recommended NVIDIA variables
             # https://wiki.hyprland.org/Nvidia/#environment-variables

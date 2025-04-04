@@ -42,7 +42,7 @@ You can then run `jstestvm <system>` to quickly compile and run a virtual machin
 - [`systems`](systems) is where the main config files for each of my systems live. As of writing, each system has a main file for its software, which imports a secondary, auto-generated file for its hardware.
 - [`modules`](modules) is where the general configuration modules can be found. This defines the options enabled by default for all systems along with other options systems can pick and choose based on their needs.
     - [`desktop`](modules/desktop) holds anything you'd expect a GUI/desktop environment to have. Here, you can find the setup for [Hyprland](https://hyprland.org/) (the main thing you see), all fonts installed on the system, and the keyboard (specifically, the Japanese one).
-    - [`hardware`](modules/hardware) has hardware-specific defaults, such as for my PC's NVIDIA GPU and my laptop's fingerprint reader.
+    - [`hardware`](modules/hardware) has hardware-specific defaults, such as for my PC's AMD GPU and my laptop's fingerprint reader.
     - [`programs`](modules/programs) contains most general-purpose applications you may want on a system. These are organized by use case.
     - [`server`](modules/server) defines various web services for my homelab.
     - [`utils`](modules/utils) is effectively miscellaneous services you may want on the system, such as automatic updates and backups.

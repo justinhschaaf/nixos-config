@@ -1,13 +1,10 @@
 { inputs, lib, config, pkgs, ... }: {
 
     options = {
-        js.hardware.nvidia.enable = lib.mkEnableOption "NVIDIA driver support";
+        js.hardware.nvidia.gpu.enable = lib.mkEnableOption "NVIDIA driver support";
     };
 
-    config = lib.mkIf config.js.hardware.nvidia.enable {
-
-        # Enable hardware graphics acceleration
-        hardware.graphics.enable = true;
+    config = lib.mkIf config.js.hardware.nvidia.gpu.enable {
 
         # Load nvidia drivers
         services.xserver.videoDrivers = [ "nvidia" ];
