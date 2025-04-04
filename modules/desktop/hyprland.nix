@@ -194,7 +194,7 @@
                     "$mainMod, E, exec, thunar"
                     "$mainMod, R, exec, resources"
                     "$mainMod, period, exec, flatpak run dev.krtirtho.Flemozi" # same as windows
-                    "$mainMod SHIFT, C, exec, notify-send -a 'hyprpicker' 'Color: $(hyprpicker -anr)' 'The selected color has been copied to your clipboard.'" # same as powertoys
+                    "$mainMod SHIFT, C, exec, notify-send -a 'hyprpicker' \"Color: $(hyprpicker -anr)\" 'The selected color has been copied to your clipboard.'" # same as powertoys
 
                     # System keybinds
                     "$mainMod, L, exec, $lock"
@@ -348,3 +348,4 @@
     };
 
 }
+
