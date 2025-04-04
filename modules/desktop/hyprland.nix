@@ -101,7 +101,6 @@
                     "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
                     "udiskie -A -f thunar" # -A = no automount
                     "mako"
-                    "waybar"
                     "swww-daemon"
                     "fcitx5 -d" # -d = daemon
 
@@ -262,6 +261,9 @@
             };
         };
 
+        # start waybar with systemd
+        programs.waybar.enable = true;
+
         # enable hypridle
         js.desktop.hyprland.idle.enable = lib.mkDefault true;
         services.hypridle.enable = config.js.desktop.hyprland.idle.enable;
@@ -275,7 +277,6 @@
             pkgs.polkit_gnome
             pkgs.swww
             pkgs.udiskie
-            pkgs.waybar
             pkgs.kdePackages.xwaylandvideobridge
             inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
             # https://github.com/ErikReider/SwayOSD
@@ -347,4 +348,3 @@
     };
 
 }
-
