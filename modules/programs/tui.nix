@@ -26,7 +26,6 @@
             # fish plugins
             fishPlugins.pisces
             fishPlugins.puffer
-            fishPlugins.sponge
             fishPlugins.tide
 
         ];
