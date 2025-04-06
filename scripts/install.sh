@@ -48,7 +48,7 @@ echo_usage() {
 format_disk() {
     if [ "$ZEROTOUCH" -gt 0 ]; then
         # shellcheck disable=SC2086
-        nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --yes-wipe-all-disks --mode destroy,format,mount --flake $FLAKE
+        disko --yes-wipe-all-disks --mode destroy,format,mount --flake $FLAKE
     fi
 }
 

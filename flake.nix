@@ -161,7 +161,7 @@
 
             jsinstall = pkgs.writeShellApplication {
                 name = "jsinstall";
-                runtimeInputs = with pkgs; [ git ];
+                runtimeInputs = with pkgs; [ disko git nixos-install nixos-rebuild ];
                 text = builtins.readFile ./scripts/install.sh;
             };
 
@@ -176,4 +176,3 @@
     };
 
 }
-
