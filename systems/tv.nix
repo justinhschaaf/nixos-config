@@ -8,7 +8,7 @@
     js.hardware.intel.cpu.enable = true;
 
     # Other hardware options
-    boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
+    boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "usbhid" "sd_mod" "sr_mod" ];
 
     # disable iwd for legacy wifi card support
     js.network.nm.enable = false;
