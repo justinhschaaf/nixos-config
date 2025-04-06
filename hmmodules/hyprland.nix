@@ -449,8 +449,8 @@
         # Enable day/night color temperature adjustment
         services.wlsunset = {
             enable = true;
-            sunrise = "6:00";
-            sunset = "19:00";
+            sunrise = osConfig.js.desktop.hyprland.sunrise;
+            sunset = osConfig.js.desktop.hyprland.sunset;
         };
 
     };

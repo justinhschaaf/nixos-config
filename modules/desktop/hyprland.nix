@@ -17,6 +17,12 @@
             description = "How long to wait before turning the screen off when there's no activity, in seconds.";
             default = 330;
         };
+        lockcmd = lib.mkOption {
+            type = lib.types.str;
+            description = "The command to execute to lock the screen.";
+            default = "grim /tmp/lock.png && gm mogrify -blur 20x10 -fill black -colorize 20 /tmp/lock.png && swaylock -fklr --image /tmp/lock.png --separator-color 00000000";
+            visible = false;
+        };
         monitors = lib.mkOption { # https://wiki.hyprland.org/Configuring/Monitors/
             type = lib.types.either lib.types.str (lib.types.listOf lib.types.str);
             description = "The display configuration for this device.";
@@ -27,11 +33,15 @@
             description = "Where screenshots taken should be saved by default, relative to the user's home directory.";
             default = "Pictures/Screenshots";
         };
-        lockcmd = lib.mkOption {
+        sunrise = lib.mkOption {
             type = lib.types.str;
-            description = "The command to execute to lock the screen.";
-            default = "grim /tmp/lock.png && gm mogrify -blur 20x10 -fill black -colorize 20 /tmp/lock.png && swaylock -fklr --image /tmp/lock.png --separator-color 00000000";
-            visible = false;
+            description = "What time wlsunset should shift from warm to cool colors.";
+            default = "7:00";
+        };
+        sunset = lib.mkOption {
+            type = lib.types.str;
+            description = "What time wlsunset should shift from cool to warm colors.";
+            default = "19:00";
         };
     };
 

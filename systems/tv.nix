@@ -15,6 +15,10 @@
     js.desktop.hyprland.enable = true;
     js.desktop.hyprland.idle.enable = false;
 
+    # make sure colors are (almost) always warm
+    js.desktop.hyprland.sunrise = "12:00";
+    js.desktop.hyprland.sunset = "12:01";
+
     # Enable Thunar
     js.programs.thunar.enable = true;
 
