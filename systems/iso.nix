@@ -14,8 +14,8 @@
     # set nixpkgs platform
     nixpkgs.hostPlatform = "x86_64-linux";
 
-    # disable iwd for legacy wifi card support
-    js.network.nm.enable = false;
+    # disable wpa_supplicant, we have networkmanager and iwd
+    networking.wireless.enable = lib.mkForce false;
 
     # set default passwords
     users.users.nixos.password = "nixos";
