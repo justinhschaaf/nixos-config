@@ -138,6 +138,15 @@
             ];
         };
 
+        # Installer ISO
+        nixosConfigurations.iso = nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs system jspkgs; };
+            modules = [
+                ./modules
+                ./systems/iso.nix
+            ];
+        };
+
         nixosModules.default = ./modules;
         homeManagerModules.default = ./hmmodules;
 
@@ -150,6 +159,8 @@
         # https://github.com/NixOS/nix/issues/916
         # https://old.reddit.com/r/NixOS/comments/16p7ea2/dynamic_attribute_x86_64linux_already_defined/k1skjsf/
         packages.${system} = {
+
+            iso = inputs.self.outputs.nixosConfigurations.iso.config.system.build.isoImage;
 
             # Use trivial builders from https://ryantm.github.io/nixpkgs/builders/trivial-builders/
 
@@ -176,3 +187,4 @@
     };
 
 }
+
