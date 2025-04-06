@@ -147,7 +147,7 @@
 
             # network status. click = open nmtui
             network = {
-                on-click = "kitty --detach --directory='~' nmtui";
+                on-click = if osConfig.js.network.nm.enable then "kitty --detach --directory='~' nmtui" else "wpa_gui";
                 format = "";
                 format-wifi = "";
                 format-ethernet = "";

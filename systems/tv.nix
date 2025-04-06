@@ -10,6 +10,9 @@
     # Other hardware options
     boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
 
+    # disable iwd for legacy wifi card support
+    js.network.nm.enable = false;
+
     # Enable Hyprland
     js.desktop.enable = true;
     js.desktop.hyprland.enable = true;
