@@ -1,8 +1,6 @@
 { inputs, lib, config, pkgs, ... }: {
 
-    imports = [
-        inputs.hyprland.nixosModules.default
-    ];
+    imports = [ inputs.hyprland.nixosModules.default ];
 
     options.js.desktop.hyprland = {
         enable = lib.mkEnableOption "Hyprland";
@@ -278,35 +276,35 @@
         js.desktop.hyprland.idle.enable = lib.mkDefault true;
         services.hypridle.enable = config.js.desktop.hyprland.idle.enable;
 
-        environment.systemPackages = [
+        environment.systemPackages = with pkgs; [
 
             # Hyprland Stuff/Basic System Functionality
-            pkgs.brightnessctl
-            pkgs.libnotify
-            pkgs.mako
-            pkgs.polkit_gnome
-            pkgs.swww
-            pkgs.udiskie
-            pkgs.kdePackages.xwaylandvideobridge
-            inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins
+            anyrun
+            brightnessctl
+            libnotify
+            mako
+            polkit_gnome
+            swww
+            udiskie
+            kdePackages.xwaylandvideobridge
             # https://github.com/ErikReider/SwayOSD
 
             # Clipboard
-            pkgs.wl-clipboard
-            pkgs.wl-clipboard-x11
-            pkgs.wl-clip-persist
+            wl-clipboard
+            wl-clipboard-x11
+            wl-clip-persist
 
             # Screenshots
-            pkgs.grim
-            pkgs.grimblast
-            pkgs.hyprpicker
-            pkgs.jq
-            pkgs.satty
-            pkgs.slurp
+            grim
+            grimblast
+            hyprpicker
+            jq
+            satty
+            slurp
 
             # Sleep
-            pkgs.swaylock
-            pkgs.graphicsmagick
+            swaylock
+            graphicsmagick
 
         ];
 
