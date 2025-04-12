@@ -80,6 +80,10 @@
             clock24 = true;
             shortcut = "a";
             terminal = "screen-256color";
+            extraConfig = ''
+                set -g mouse on
+                set -g history-limit 2000
+            '';
         };
 
         # Enable firmware updater https://wiki.nixos.org/wiki/Fwupd
