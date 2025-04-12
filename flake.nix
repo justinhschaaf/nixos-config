@@ -15,7 +15,6 @@
         substituters = [
             "https://cache.nixos.org"
             "https://nix-community.cachix.org/"
-            "https://anyrun.cachix.org"
             "https://cache.garnix.io"
             "https://hyprland.cachix.org"
         ];
@@ -23,7 +22,6 @@
         trusted-public-keys = [
             "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
             "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-            "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
             "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
             "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         ];
@@ -75,14 +73,8 @@
         # APPLICATIONS
         #
 
-        # anyrun https://github.com/Kirottu/anyrun
-        anyrun.url = "github:Kirottu/anyrun";
-
         # Authentik Server
         authentik-nix.url = "github:nix-community/authentik-nix";
-
-        # Patched Caddy containing Cloudflare plugin
-        nixos-caddy.url = "github:Ramblurr/nixos-caddy";
 
         # Hyprland (must use the nix flake for split-monitor-workspaces)
         hyprland.url = "github:hyprwm/Hyprland";

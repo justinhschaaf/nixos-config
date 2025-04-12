@@ -1,13 +1,8 @@
 { inputs, lib, osConfig, config, pkgs, ... }: {
 
-    imports = [
-        inputs.anyrun.homeManagerModules.default
-        inputs.hyprland.homeManagerModules.default
-    ];
+    imports = [ inputs.hyprland.homeManagerModules.default ];
 
-    options = {
-        js.hm.hyprland.enable = lib.mkOption { default = osConfig.js.desktop.hyprland.enable; };
-    };
+    options.js.hm.hyprland.enable = lib.mkOption { default = osConfig.js.desktop.hyprland.enable; };
 
     # Hyprland and helper applications
     config = lib.mkIf config.js.hm.hyprland.enable {
@@ -386,13 +381,13 @@
 
             # enable all plugins except randr, stdin, and dictionary
             config.plugins = [
-                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libapplications.so"
-                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libkidex.so"
-                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/librink.so"
-                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libshell.so"
-                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libsymbols.so"
-                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libtranslate.so"
-                "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libwebsearch.so"
+                "${pkgs.anyrun}/lib/libapplications.so"
+                "${pkgs.anyrun}/lib/libkidex.so"
+                "${pkgs.anyrun}/lib/librink.so"
+                "${pkgs.anyrun}/lib/libshell.so"
+                "${pkgs.anyrun}/lib/libsymbols.so"
+                "${pkgs.anyrun}/lib/libtranslate.so"
+                "${pkgs.anyrun}/lib/libwebsearch.so"
             ];
 
             # Websearch plugin config
