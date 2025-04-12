@@ -2,6 +2,9 @@
 
     imports = [
 
+        # Use Determinate Nix
+        inputs.determinate.nixosModules.default
+
         # Everything is imported here
         ./desktop
         ./hardware
@@ -85,9 +88,6 @@
         LC_TELEPHONE = "en_US.UTF-8";
         LC_TIME = "en_US.UTF-8";
     };
-
-    # Use the latest version of Nix instead of the LTS
-    nix.package = pkgs.nixVersions.latest;
 
     # Automatically optimise the store
     nix.optimise.automatic = true;

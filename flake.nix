@@ -51,6 +51,10 @@
 
         # Updates
         comin.url = "github:nlewo/comin";
+        comin.inputs.nixpkgs.follows = "nixpkgs";
+
+        # Determinate Nix
+        determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
         # Disko disk partitioning
         disko.url = "github:nix-community/disko/latest";
@@ -58,12 +62,14 @@
 
         # Home Manager
         home-manager.url = "github:nix-community/home-manager";
+        home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
         # Special hardware configs
         nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
         # Secrets management
         sops-nix.url = "github:Mic92/sops-nix";
+        sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
         #
         # APPLICATIONS
