@@ -786,24 +786,6 @@
         "type": "github"
       }
     },
-    "nixos-caddy": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_7"
-      },
-      "locked": {
-        "lastModified": 1744441287,
-        "narHash": "sha256-NvUVBJTVrIwM1e9DZr9esLGdJPw5EV1queICJUTm49I=",
-        "owner": "Ramblurr",
-        "repo": "nixos-caddy",
-        "rev": "4cf79bf559cdf5aea73b9aa51dd06f7dbaef4b5f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Ramblurr",
-        "repo": "nixos-caddy",
-        "type": "github"
-      }
-    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1744366945,
@@ -965,35 +947,19 @@
       "locked": {
         "lastModified": 1744232761,
         "narHash": "sha256-gbl9hE39nQRpZaLjhWKmEu5ejtQsgI5TWYrIVVJn30U=",
-        "owner": "NixOS",
+        "owner": "nixos",
         "repo": "nixpkgs",
         "rev": "f675531bc7e6657c10a18b565cfebd8aa9e24c14",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
+        "owner": "nixos",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
     },
     "nixpkgs_8": {
-      "locked": {
-        "lastModified": 1744232761,
-        "narHash": "sha256-gbl9hE39nQRpZaLjhWKmEu5ejtQsgI5TWYrIVVJn30U=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "f675531bc7e6657c10a18b565cfebd8aa9e24c14",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_9": {
       "locked": {
         "lastModified": 1732947954,
         "narHash": "sha256-9cURm5Qb3cFJEHqxIUA2RKuRE7PjlSowuB0LUF8/gWA=",
@@ -1072,9 +1038,8 @@
         "home-manager": "home-manager_2",
         "hyprland": "hyprland",
         "jspkgs": "jspkgs",
-        "nixos-caddy": "nixos-caddy",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_8",
+        "nixpkgs": "nixpkgs_7",
         "sops-nix": "sops-nix",
         "split-monitor-workspaces": "split-monitor-workspaces",
         "waffleslol": "waffleslol"
@@ -1206,7 +1171,7 @@
     "waffleslol": {
       "inputs": {
         "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs_9"
+        "nixpkgs": "nixpkgs_8"
       },
       "locked": {
         "lastModified": 1733021217,

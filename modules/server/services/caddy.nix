@@ -18,7 +18,10 @@
         # https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#defaults
         # https://caddy.community/t/caddy-cloudflare-err-too-many-redirects/3518
         services.caddy.enable = true;
-        services.caddy.package = inputs.nixos-caddy.packages.${pkgs.system}.caddy;
+        services.caddy.package = pkgs.caddy.withPlugins {
+            plugins = [ "github.com/caddy-dns/cloudflare@v0.1.0" ];
+            hash = "sha256-KnXqw7asSfAvKNSIRap9HfSvnijG07NYI3Yfknblcl4=";
+        };
 
         # Add Cloudflare for DNS challenges
         # https://caddy.community/t/how-to-use-dns-provider-modules-in-caddy-2/8148
@@ -36,7 +39,7 @@
                 metrics
             }
         '';
-    
+
     };
 
 }

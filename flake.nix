@@ -76,9 +76,6 @@
         # Authentik Server
         authentik-nix.url = "github:nix-community/authentik-nix";
 
-        # Patched Caddy containing Cloudflare plugin
-        nixos-caddy.url = "github:Ramblurr/nixos-caddy";
-
         # Hyprland (must use the nix flake for split-monitor-workspaces)
         hyprland.url = "github:hyprwm/Hyprland";
 
