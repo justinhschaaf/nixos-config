@@ -12,9 +12,9 @@
         bws
 
         # communication
+        discord
         element-desktop
         signal-desktop
-        webcord
 
         # other
         collision
