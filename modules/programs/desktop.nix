@@ -11,6 +11,7 @@
             # System Utils
             kitty
             gparted
+            overskride
             pwvucontrol
             resources
             wdisplays

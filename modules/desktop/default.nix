@@ -52,6 +52,9 @@
             #media-session.enable = true;
         };
 
+        # enable bluetooth
+        hardware.bluetooth.enable = true;
+
         # Enable flatpaks here, not anywhere else!
         services.flatpak.enable = true;
 
