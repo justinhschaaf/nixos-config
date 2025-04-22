@@ -19,7 +19,9 @@
 
     # set default passwords
     users.users.nixos.password = "nixos";
+    users.users.nixos.initialHashedPassword = lib.mkForce null;
     users.users.root.password = "nixos";
+    users.users.root.initialHashedPassword = lib.mkForce null;
 
     # Set system name
     networking.hostName = "nixos-iso";
