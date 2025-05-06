@@ -19,8 +19,8 @@
         # https://caddy.community/t/caddy-cloudflare-err-too-many-redirects/3518
         services.caddy.enable = true;
         services.caddy.package = pkgs.caddy.withPlugins {
-            plugins = [ "github.com/caddy-dns/cloudflare@v0.1.0" ];
-            hash = "sha256-10zChkb7YK0a4TssZtQbYgd95glC3NCC/AAROK6PcIk=";
+            plugins = [ "github.com/caddy-dns/cloudflare@v0.2.1" ];
+            hash = "sha256-saKJatiBZ4775IV2C5JLOmZ4BwHKFtRZan94aS5pO90=";
         };
 
         # Add Cloudflare for DNS challenges
