@@ -41,7 +41,7 @@
         jspkgs.inputs.nixpkgs.follows = "nixpkgs";
 
         # Declarative flatpaks
-        flatpaks.url = "github:GermanBread/declarative-flatpak/stable-v3";
+        flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/stable-v3";
 
         #
         # SYSTEM
