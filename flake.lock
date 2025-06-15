@@ -342,11 +342,7 @@
       "locked": {
         "lastModified": 1748869541,
         "narHash": "sha256-TkH+duF/+En9wfi7cs+v37Cy536RIqtSpwzA6G7Qf7E=",
-<<<<<<< main
         "owner": "in-a-dil-emma",
-=======
-        "owner": "GermanBread",
->>>>>>> chore: fix flake.lock conflicts
         "repo": "declarative-flatpak",
         "rev": "7da730958a48c7c5f53dd48509767851c88a4774",
         "type": "github"
@@ -1046,16 +1042,8 @@
         "hyprland": "hyprland",
         "jspkgs": "jspkgs",
         "nixos-hardware": "nixos-hardware",
-<<<<<<< main
-<<<<<<< main
         "nixpkgs": "nixpkgs_5",
-=======
-        "nixpkgs": "nixpkgs_7",
-=======
-        "nixpkgs": "nixpkgs_5",
->>>>>>> chore: fix flake.lock conflicts
         "pigweb": "pigweb",
->>>>>>> feat: add PigWebApp
         "sops-nix": "sops-nix",
         "split-monitor-workspaces": "split-monitor-workspaces",
         "waffleslol": "waffleslol"
@@ -1207,17 +1195,8 @@
     },
     "waffleslol": {
       "inputs": {
-<<<<<<< main
-        "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs_6"
-=======
         "flake-utils": "flake-utils_3",
-<<<<<<< main
-        "nixpkgs": "nixpkgs_9"
->>>>>>> feat: add PigWebApp
-=======
         "nixpkgs": "nixpkgs_7"
->>>>>>> chore: fix flake.lock conflicts
       },
       "locked": {
         "lastModified": 1733021217,
