@@ -6,7 +6,7 @@
         # Importing in subsequent modules causes an "already declared" error
 
         # Declarative flatpaks
-        inputs.flatpaks.nixosModules.declarative-flatpak
+        inputs.flatpaks.nixosModule
 
         # Our other modules
         ./desktop.nix
