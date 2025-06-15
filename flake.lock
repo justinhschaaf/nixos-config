@@ -322,7 +322,7 @@
     },
     "flake-utils_3": {
       "inputs": {
-        "systems": "systems_5"
+        "systems": "systems_4"
       },
       "locked": {
         "lastModified": 1731533236,
@@ -342,7 +342,11 @@
       "locked": {
         "lastModified": 1748869541,
         "narHash": "sha256-TkH+duF/+En9wfi7cs+v37Cy536RIqtSpwzA6G7Qf7E=",
+<<<<<<< main
         "owner": "in-a-dil-emma",
+=======
+        "owner": "GermanBread",
+>>>>>>> chore: fix flake.lock conflicts
         "repo": "declarative-flatpak",
         "rev": "7da730958a48c7c5f53dd48509767851c88a4774",
         "type": "github"
@@ -919,7 +923,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_9": {
+    "nixpkgs_7": {
       "locked": {
         "lastModified": 1732947954,
         "narHash": "sha256-9cURm5Qb3cFJEHqxIUA2RKuRE7PjlSowuB0LUF8/gWA=",
@@ -1043,9 +1047,13 @@
         "jspkgs": "jspkgs",
         "nixos-hardware": "nixos-hardware",
 <<<<<<< main
+<<<<<<< main
         "nixpkgs": "nixpkgs_5",
 =======
         "nixpkgs": "nixpkgs_7",
+=======
+        "nixpkgs": "nixpkgs_5",
+>>>>>>> chore: fix flake.lock conflicts
         "pigweb": "pigweb",
 >>>>>>> feat: add PigWebApp
         "sops-nix": "sops-nix",
@@ -1055,7 +1063,7 @@
     },
     "rust-overlay": {
       "inputs": {
-        "nixpkgs": "nixpkgs_8"
+        "nixpkgs": "nixpkgs_6"
       },
       "locked": {
         "lastModified": 1744338850,
@@ -1157,7 +1165,7 @@
         "type": "github"
       }
     },
-    "systems_5": {
+    "systems_4": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
@@ -1204,8 +1212,12 @@
         "nixpkgs": "nixpkgs_6"
 =======
         "flake-utils": "flake-utils_3",
+<<<<<<< main
         "nixpkgs": "nixpkgs_9"
 >>>>>>> feat: add PigWebApp
+=======
+        "nixpkgs": "nixpkgs_7"
+>>>>>>> chore: fix flake.lock conflicts
       },
       "locked": {
         "lastModified": 1733021217,
