@@ -70,10 +70,6 @@
 
         };
 
-        # Enable thefuck for fucking ( ͡° ͜ʖ ͡°)
-        # automatically sets up fish integration
-        programs.thefuck.enable = true;
-
         # Enable tmux terminal multiplexer
         programs.tmux = {
             enable = true;
