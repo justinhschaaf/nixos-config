@@ -83,6 +83,9 @@
         split-monitor-workspaces.url = "github:Duckonaut/split-monitor-workspaces";
         split-monitor-workspaces.inputs.hyprland.follows = "hyprland";
 
+        # Pig Web App
+        pigweb.url = "github:justinhschaaf/PigWebApp";
+
         # waffles.lol website
         waffleslol.url = "github:justinhschaaf/waffles.lol";
 
