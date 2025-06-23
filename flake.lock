@@ -958,11 +958,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1750638605,
-        "narHash": "sha256-/GkRHXfSvi+/XfdB/hNQBR88FZAxPLgtBj6GjR/CfHg=",
+        "lastModified": 1750640499,
+        "narHash": "sha256-gZUIQqklPzSo901f0yVU0+AsZb20gBaouctxRSNVaMw=",
         "owner": "justinhschaaf",
         "repo": "PigWebApp",
-        "rev": "74a637947a99e021afa13f41d5bc895763bc0fc7",
+        "rev": "144232429c9cca5b3dac04046518292387800465",
         "type": "github"
       },
       "original": {
