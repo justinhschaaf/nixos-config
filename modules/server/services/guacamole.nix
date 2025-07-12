@@ -34,7 +34,7 @@
 
             src = pkgs.fetchurl {
                 url = "https://dlcdn.apache.org/guacamole/${guacVer}/binary/guacamole-auth-jdbc-${guacVer}.tar.gz";
-                sha256 = "sha256-gMygoCB2urrQ3Hx2tg2qiW89m/EL6CcI9CX9Qs5BE5M=";
+                sha256 = "sha256-l7xf09Z9JcDpikddHf0wigN4WfVJ+sRxcccjt6cDk2Y=";
             };
 
             phases = "unpackPhase installPhase";
@@ -56,7 +56,7 @@
 
             src = pkgs.fetchurl {
                 url = "https://dlcdn.apache.org/guacamole/${guacVer}/binary/guacamole-auth-sso-${guacVer}.tar.gz";
-                sha256 = "sha256-sO920+Zh+VwtvkahepzoobjUEAcnRY+lXgY1qF03rdg="; # https://www.srihash.org/
+                sha256 = "sha256-6VeYRHGsUKh/Ry9Rrsm/fjeK5nziUC/5OAMAEaZw3K4="; # https://www.srihash.org/
             };
 
             phases = "unpackPhase installPhase";
