@@ -102,26 +102,32 @@
                 # Add NixOS-related search engines. Available in all versions of Firefox since 139
                 SearchEngines.Add = [{
                     Name = "Nix Packages";
-                    URLTemplate = "https://search.nixos.org/packages";
-                    Method = "POST";
-                    IconURL = "file://${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                    URLTemplate = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";
+                    Method = "GET";
+                    IconURL = "https://search.nixos.org/favicon.png";
                     Alias = "@np";
                     Description = "Search for packages in the nixpkgs repo.";
-                    PostData = "query={searchTerms}";
                 } {
                     Name = "Nix Options";
-                    URLTemplate = "https://search.nixos.org/options";
-                    Method = "POST";
+                    URLTemplate = "https://search.nixos.org/options?channel=unstable&query={searchTerms}";
+                    Method = "GET";
+                    IconURL = "https://search.nixos.org/favicon.png";
                     Alias = "@no";
                     Description = "Search for NixOS module options.";
-                    PostData = "query={searchTerms}";
                 } {
                     Name = "Home Manager Options";
-                    URLTemplate = "https://home-manager-options.extranix.com/";
-                    Method = "POST";
+                    URLTemplate = "https://home-manager-options.extranix.com/?release=master&query={searchTerms}";
+                    Method = "GET";
+                    IconURL = "https://home-manager-options.extranix.com/images/favicon.png";
                     Alias = "@hm";
                     Description = "Search for Nix Home Manager module options.";
-                    PostData = "query={searchTerms}";
+                } {
+                    Name = "NixOS Wiki";
+                    URLTemplate = "https://wiki.nixos.org/w/index.php?search={searchTerms}";
+                    Method = "GET"
+                    IconURL = "https://search.nixos.org/favicon.ico";
+                    Alias = "@nw"
+                    Description = "Search the NixOS Wiki."
                 }];
 
                 #
@@ -154,6 +160,7 @@
                 AutofillAddressEnabled = false;
                 AutofillCreditCardEnabled = false;
                 PasswordManagerEnabled = false;
+                DisableMasterPasswordCreation = true;
                 DisableFormHistory = true;
                 OfferToSaveLogins = false;
 
@@ -260,4 +267,3 @@
     };
 
 }
-
