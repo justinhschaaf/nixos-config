@@ -96,16 +96,15 @@
                 # Disable Firefox Home on the new tab
                 NewTabPage = false;
 
-                # Set Default Search Engine. These won't work since we're not on ESR
+                # Set Default Search Engine. Available in all versions of Firefox since 139
                 SearchEngines.Default = "DuckDuckGo";
-                SearchEngines.DefaultPrivate = "DuckDuckGo";
 
-                # Add NixOS-related search engines. These won't work since we're not on ESR
+                # Add NixOS-related search engines. Available in all versions of Firefox since 139
                 SearchEngines.Add = [{
                     Name = "Nix Packages";
                     URLTemplate = "https://search.nixos.org/packages";
                     Method = "POST";
-                    IconURL = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                    IconURL = "file://${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
                     Alias = "@np";
                     Description = "Search for packages in the nixpkgs repo.";
                     PostData = "query={searchTerms}";
