@@ -127,7 +127,7 @@
                     Method = "GET";
                     IconURL = "https://search.nixos.org/favicon.ico";
                     Alias = "@nw";
-                    Description = "Search the NixOS Wiki."
+                    Description = "Search the NixOS Wiki.";
                 }];
 
                 #
