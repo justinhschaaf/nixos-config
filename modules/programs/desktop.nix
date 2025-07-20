@@ -124,9 +124,9 @@
                 } {
                     Name = "NixOS Wiki";
                     URLTemplate = "https://wiki.nixos.org/w/index.php?search={searchTerms}";
-                    Method = "GET"
+                    Method = "GET";
                     IconURL = "https://search.nixos.org/favicon.ico";
-                    Alias = "@nw"
+                    Alias = "@nw";
                     Description = "Search the NixOS Wiki."
                 }];
 
