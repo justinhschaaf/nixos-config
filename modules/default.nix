@@ -102,6 +102,9 @@
         # Enable binary caching so the flake stuff isn't constantly recompiled
         builders-use-substitutes = true;
 
+        # increase download buffer size to stop updates stalling on server
+        download-buffer-size = 2147483648;
+
         substituters = [
             "https://cache.nixos.org"
             "https://nix-community.cachix.org/"
