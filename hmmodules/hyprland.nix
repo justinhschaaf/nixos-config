@@ -31,7 +31,7 @@
         programs.waybar.settings.taskbar = {
 
             # where do we put it
-            layer = "top";
+            layer = "bottom";
             height = 32;
             spacing = 0;
 
