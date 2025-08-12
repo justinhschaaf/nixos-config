@@ -45,38 +45,63 @@
                 usernameClaim = "preferred_username";
                 displayName = "authentik";
                 scopes = [ "openid" "profile" "email" ];
-
-                # Why the fuck did you make me expose the client id when OAuth
-                # highly suggests not to, you little bitch? I'll have you know
-                # I graduated top of my class in the Navy Seals, and I've been
-                # involved in numerous secret raids on Al-Quaeda, and I have
-                # over 300 confirmed kills. I am trained in gorilla warfare
-                # and I'm the top sniper in the entire US armed forces. You
-                # are nothing to me but just another target. I will wipe you
-                # the fuck out with precision the likes of which has never
-                # been seen before on this Earth, mark my fucking words. You
-                # think you can get away with doing that shit to me over the
-                # Internet? Think again, fucker. As we speak I am contacting my
-                # secret network of spies across the USA and your IP is being
-                # traced right now so you better prepare for the storm, maggot.
-                # The storm that wipes out the pathetic little thing you call
-                # your life. You're fucking dead, kid. I can be anywhere,
-                # anytime, and I can kill you in over seven hundred ways, and
-                # that's just with my bare hands. Not only am I extensively
-                # trained in unarmed combat, but I have access to the entire
-                # arsenal of the United States Marine Corps and I will use it
-                # to its full extent to wipe your miserable ass off the face of
-                # the continent, you little shit. If only you could have known
-                # what unholy retribution your little "clever" decision was
-                # about to bring down upon you, maybe you would have found
-                # another fucking fix. But you couldn't, you didn't, and now
-                # you're paying the price, you goddamn idiot. I will shit fury
-                # all over you and you will drown in it. You're fucking dead,
-                # kiddo.
-                # https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/
-                clientId = "yE65w9HBF8Q8KDj9skTGOrxnvlntmACVwP80qVUX";
+                clientId = "";
             };
 
+        };
+        systemd.services.outline = {
+            script =
+              let
+                localPostgresqlUrl = "postgres://localhost/outline?host=/run/postgresql";
+                cfg = config.services.outline;
+              in lib.mkForce ''
+                  export SECRET_KEY="$(head -n1 ${lib.escapeShellArg cfg.secretKeyFile})"
+                  export UTILS_SECRET="$(head -n1 ${lib.escapeShellArg cfg.utilsSecretFile})"
+                  ${lib.optionalString (cfg.storage.storageType == "s3") ''
+                    export AWS_SECRET_ACCESS_KEY="$(head -n1 ${lib.escapeShellArg cfg.storage.secretKeyFile})"
+                  ''}
+                  ${lib.optionalString (cfg.slackAuthentication != null) ''
+                    export SLACK_CLIENT_SECRET="$(head -n1 ${lib.escapeShellArg cfg.slackAuthentication.secretFile})"
+                  ''}
+                  ${lib.optionalString (cfg.googleAuthentication != null) ''
+                    export GOOGLE_CLIENT_SECRET="$(head -n1 ${lib.escapeShellArg cfg.googleAuthentication.clientSecretFile})"
+                  ''}
+                  ${lib.optionalString (cfg.azureAuthentication != null) ''
+                    export AZURE_CLIENT_SECRET="$(head -n1 ${lib.escapeShellArg cfg.azureAuthentication.clientSecretFile})"
+                  ''}
+                  ${lib.optionalString (cfg.oidcAuthentication != null) ''
+                    export OIDC_CLIENT_SECRET="$(head -n1 ${lib.escapeShellArg cfg.oidcAuthentication.clientSecretFile})"
+
+                    export OIDC_CLIENT_ID="$(cat ${config.sops.secrets."outline/oidc-client-secret".path})"  # TADA
+
+                  ''}
+                  ${lib.optionalString (cfg.sslKeyFile != null) ''
+                    export SSL_KEY="$(head -n1 ${lib.escapeShellArg cfg.sslKeyFile})"
+                  ''}
+                  ${lib.optionalString (cfg.sslCertFile != null) ''
+                    export SSL_CERT="$(head -n1 ${lib.escapeShellArg cfg.sslCertFile})"
+                  ''}
+                  ${lib.optionalString (cfg.slackIntegration != null) ''
+                    export SLACK_VERIFICATION_TOKEN="$(head -n1 ${lib.escapeShellArg cfg.slackIntegration.verificationTokenFile})"
+                  ''}
+                  ${lib.optionalString (cfg.smtp != null) ''
+                    export SMTP_PASSWORD="$(head -n1 ${lib.escapeShellArg cfg.smtp.passwordFile})"
+                  ''}
+            
+                  ${
+                    if (cfg.databaseUrl == "local") then
+                      ''
+                        export DATABASE_URL=${lib.escapeShellArg localPostgresqlUrl}
+                        export PGSSLMODE=disable
+                      ''
+                    else
+                      ''
+                        export DATABASE_URL=${lib.escapeShellArg cfg.databaseUrl}
+                      ''
+                  }
+            
+                  ${cfg.package}/bin/outline-server
+                '';
         };
 
         # SMTP username and password are here
