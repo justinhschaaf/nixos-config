@@ -48,16 +48,6 @@
         #};
     };
 
-    # Add Steam compatdata symlink if on gaming system
-    # Steam needs these files linked because it really hates NTFS disks
-    # This MUST be done on home manager, and it has to be formatted like this because it's stupid
-    # https://github.com/ValveSoftware/Proton/wiki/Using-a-NTFS-disk-with-Linux-and-Windows#preventing-ntfs-read-errors
-    # https://wiki.nixos.org/wiki/Nix_Language:_Tips_%26_Tricks
-    # https://discourse.nixos.org/t/how-to-manage-dotfiles-with-home-manager/30576/3
-    home.file = lib.mkIf ("${osConfig.system.name}" == "bucatini" && osConfig.js.programs.gaming.enable) {
-        "the_shit/Games/Steam/steamapps/compatdata".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.steam/steam/steamapps/compatdata";
-    };
-
     # Configure SSH to communicate with Bitwarden for authentication
     # https://bitwarden.com/help/ssh-agent/#configure-bitwarden-ssh-agent
     home.sessionVariables.SSH_AUTH_SOCK = "${config.home.homeDirectory}/.bitwarden-ssh-agent.sock";

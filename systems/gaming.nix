@@ -45,19 +45,18 @@
 
     # Add Files
     # context: 2TB drive is LITTLEBOY, 8TB is FATMAN
-    # WARNING: IF EVER CHANGING THE MOUNTPOINT, PLEASE
-    # UPDATE THE SYMLINK DEFINED IN THE JUSTINHS HM USERS FILE
-    fileSystems."/home/justinhs/the_shit" = {
-        device = "/dev/sda1";
-        fsType = "ntfs";
-        options = [ # https://github.com/ValveSoftware/Proton/wiki/Using-a-NTFS-disk-with-Linux-and-Windows#editing-fstab
-            "uid=1000"
-            "gid=100"
-            "rw"
-            "user"
-            "exec"
-            "umask=000"
-        ];
+    disko.devices.disk.littleboy = {
+        device = "/dev/sda";
+        type = "disk";
+        content.type = "gpt";
+        content.partitions.LITTLEBOY = {
+            size = "100%";
+            content = {
+                type = "filesystem";
+                format = "btrfs";
+                mountpoint = "/home/justinhs/the_shit";
+            };
+        };
     };
 
     # Set system name
