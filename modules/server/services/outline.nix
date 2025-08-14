@@ -46,35 +46,19 @@
                 displayName = "authentik";
                 scopes = [ "openid" "profile" "email" ];
 
-                # Why the fuck did you make me expose the client id when OAuth
-                # highly suggests not to, you little bitch? I'll have you know
-                # I graduated top of my class in the Navy Seals, and I've been
-                # involved in numerous secret raids on Al-Quaeda, and I have
-                # over 300 confirmed kills. I am trained in gorilla warfare
-                # and I'm the top sniper in the entire US armed forces. You
-                # are nothing to me but just another target. I will wipe you
-                # the fuck out with precision the likes of which has never
-                # been seen before on this Earth, mark my fucking words. You
-                # think you can get away with doing that shit to me over the
-                # Internet? Think again, fucker. As we speak I am contacting my
-                # secret network of spies across the USA and your IP is being
-                # traced right now so you better prepare for the storm, maggot.
-                # The storm that wipes out the pathetic little thing you call
-                # your life. You're fucking dead, kid. I can be anywhere,
-                # anytime, and I can kill you in over seven hundred ways, and
-                # that's just with my bare hands. Not only am I extensively
-                # trained in unarmed combat, but I have access to the entire
-                # arsenal of the United States Marine Corps and I will use it
-                # to its full extent to wipe your miserable ass off the face of
-                # the continent, you little shit. If only you could have known
-                # what unholy retribution your little "clever" decision was
-                # about to bring down upon you, maybe you would have found
-                # another fucking fix. But you couldn't, you didn't, and now
-                # you're paying the price, you goddamn idiot. I will shit fury
-                # all over you and you will drown in it. You're fucking dead,
-                # kiddo.
+                # OAuth says you shouldn't expose the client secret but the
+                # NixOS module demands it. Apparently, you can just make this a
+                # blank screen to shut it up. OIDC_CLIENT_ID is now set in the
+                # environment file below (which overrides the environment vars
+                # NixOS sets), managed by SOPS.
+                #
+                # MASSIVE shoutout to k2on/Max Koon for making me see this
+                # https://github.com/k2on
+                #
                 # https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/
-                clientId = "yE65w9HBF8Q8KDj9skTGOrxnvlntmACVwP80qVUX";
+                # https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html#Environment=
+                # https://docs.getoutline.com/s/hosting/doc/oidc-8CPBm6uC0I
+                clientId = "";
             };
 
         };
