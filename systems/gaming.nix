@@ -3,7 +3,7 @@
     imports = [ ./gaming-hardware.nix ];
 
     js.backup = {
-        enable = true;
+        enable = false;
         src = /home/justinhs/the_shit;
         dest = /mnt/FATLIN/LITTLEBOY_BACKUPS/rsync;
         keep = 28;
