@@ -50,11 +50,20 @@
         type = "disk";
         content.type = "gpt";
         content.partitions.LITTLEBOY = {
+            label = "LITTLEBOY";
             size = "100%";
             content = {
                 type = "filesystem";
                 format = "btrfs";
                 mountpoint = "/home/justinhs/the_shit";
+                mountOptions = [
+                    "uid=1000"
+                    "gid=100"
+                    "rw"
+                    "user"
+                    "exec"
+                    "umask=000"
+                ];
             };
         };
     };
