@@ -65,6 +65,9 @@
         unifi.openFirewallConsole = true;
         unifi.openFirewallDiscovery = true;
 
+        youtrack.enable = true;
+        youtrack.hostName = "youtrack.waffles.lol";
+
     };
 
     # Set system name
