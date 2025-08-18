@@ -20,6 +20,7 @@
             # terminal utils
             hyfetch
             micro
+            parted
             patool # zip util
             sops
 
