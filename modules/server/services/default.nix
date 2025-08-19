@@ -6,6 +6,8 @@
         ./grafana.nix
         ./guacamole.nix
         ./kasmweb.nix
+        ./klipper.nix
+        ./moonraker.nix
         ./outline.nix
         ./pigweb.nix
         ./seafile.nix
