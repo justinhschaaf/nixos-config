@@ -24,7 +24,7 @@
         # greetd, you can add multiple sessions as per https://github.com/apognu/tuigreet?tab=readme-ov-file#sessions
         # ours are actually managed via uwsm
         services.greetd.enable = true;
-        services.greetd.settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks --time --user-menu";
+        services.greetd.settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --asterisks --time --user-menu";
 
         # Enable touchpad support (enabled default in most desktopManager).
         services.libinput.enable = true;

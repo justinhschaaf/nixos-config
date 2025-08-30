@@ -135,7 +135,7 @@
                 ];
 
                 # See https://wiki.hyprland.org/Configuring/Variables/ for more
-                gestures.workspace_swipe = false;
+                gestures.workspace_swipe_touch = false;
                 misc.force_default_wallpaper = 0; # No more anime girl jumpscares
 
                 # Disable extra popups
