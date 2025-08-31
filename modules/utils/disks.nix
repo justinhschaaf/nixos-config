@@ -13,6 +13,11 @@
             description = "Whether to encrypt the swap and root partitions.";
             default = false;
         };
+        esp.size = lib.mkOption {
+            type = lib.types.str;
+            description = "How large to make the EFI system partition (ESP), in sgdisk format. This is technically the endpoint of the ESP, not the size, but idgaf.";
+            default = "1024M";
+        };
         swap.enable = lib.mkEnableOption "the swap partition";
         swap.size = lib.mkOption {
             type = lib.types.str;
@@ -28,10 +33,6 @@
 
         # how big the MBR boot partition should be
         mbrBootSize = "1M";
-
-        # how big the GPT boot partition (the ESP) should be
-        # this is technically the endpoint of the ESP, not the size, but idgaf
-        gptBootSize = "512M";
 
         # the default config for the btrfs system root
         rootContent = {
@@ -66,7 +67,7 @@
         # GPT boot partition (EFI System Partition)
         content.partitions.ESP = {
             type = "EF00";
-            end = gptBootSize;
+            end = config.js.disks.esp.size;
             priority = 1000;
             content = {
                 type = "filesystem";

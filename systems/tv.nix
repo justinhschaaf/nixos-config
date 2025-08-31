@@ -3,6 +3,7 @@
     # Partition disk
     js.disks.enable = true;
     js.disks.device = "/dev/sda";
+    js.disks.esp.size = "512M";
 
     # Enable Intel CPU support
     js.hardware.intel.cpu.enable = true;
