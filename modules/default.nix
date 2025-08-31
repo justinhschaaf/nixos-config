@@ -18,8 +18,14 @@
 
     # Bootloader. If you wanna use systemd, it's boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.limine = {
+        enable = lib.mkDefault false;
+        style.wallpapers = lib.mkForce [ ];
+        style.graphicalTerminal.palette = "1d1f21;cc6666;b5bd68;de935f;81a2be;b294bb;8abeb7;c5c8c6";
+    };
     boot.loader.grub = {
 
+        # GRUB deprecated in favor of Limine
         enable = lib.mkDefault true;
         device = "nodev";
         efiSupport = true;

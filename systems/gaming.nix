@@ -2,6 +2,15 @@
 
     imports = [ ./gaming-hardware.nix ];
 
+    # configure limine Windows dual boot https://wiki.gentoo.org/wiki/Limine#Dual-booting_with_Windows_in_Limine_.28UEFI.29
+    boot.loader.grub.enable = false;
+    boot.loader.limine.enable = true;
+    boot.loader.limine.extraEntries = ''
+    /Windows 10
+        protocol: efi
+        path: boot():/EFI/Microsoft/bootmgfw.efi
+    '';
+
     js.backup = {
         enable = true;
         src = /home/justinhs/the_shit;
