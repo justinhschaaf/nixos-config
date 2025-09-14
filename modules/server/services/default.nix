@@ -8,7 +8,6 @@
         ./kasmweb.nix
         ./outline.nix
         ./pigweb.nix
-        ./seafile.nix
         ./unifi.nix
         ./waffles.lol.nix
         ./youtrack.nix
