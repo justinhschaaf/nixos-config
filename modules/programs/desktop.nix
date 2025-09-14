@@ -126,7 +126,7 @@
                     Name = "NixOS Wiki";
                     URLTemplate = "https://wiki.nixos.org/w/index.php?search={searchTerms}";
                     Method = "GET";
-                    IconURL = "https://search.nixos.org/favicon.ico";
+                    IconURL = "https://wiki.nixos.org/nixos.png";
                     Alias = "@nw";
                     Description = "Search the NixOS Wiki.";
                 }];
@@ -196,7 +196,7 @@
             enable = true;
             homepageLocation = "https://justinschaaf.com";
 
-            # Set default search engine, why tf does Chrome let me do this when Firefox doesn't?
+            # Set default search engine
             defaultSearchProviderEnabled = true;
             defaultSearchProviderSearchURL = "https://duckduckgo.com/?q=%s";
             defaultSearchProviderSuggestURL = "https://duckduckgo.com/ac/?q=%s&type=list";
