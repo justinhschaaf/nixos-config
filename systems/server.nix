@@ -57,9 +57,6 @@
         pigweb.enable = true;
         pigweb.hostName = "pigs.waffles.lol";
 
-        seafile.enable = false; # waiting for https://github.com/NixOS/nixpkgs/pull/318727 to complete because database system is changing
-        seafile.hostName = "files.waffles.lol";
-
         unifi.enable = true;
         unifi.hostName = "unifi.${config.services.avahi.hostName}.${config.services.avahi.domainName}";
         unifi.openFirewallConsole = true;
