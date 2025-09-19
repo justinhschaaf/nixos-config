@@ -45,9 +45,6 @@
         grafana.enable = true;
         grafana.hostName = "grafana.waffles.lol";
 
-        guacamole.enable = true;
-        guacamole.hostName = "guac.waffles.lol";
-
         kasmweb.enable = true;
         kasmweb.hostName = "kasm.waffles.lol";
 
