@@ -368,19 +368,17 @@
         };
 
         # anyrun app launcher
-        programs.anyrun = {
-
-            enable = true;
-
+        programs.anyrun.enable = true;
+        programs.anyrun.config = {
             # styling
-            config.width = { fraction = 0.5; };
-            config.hidePluginInfo = true;
+            width = { fraction = 0.5; };
+            hidePluginInfo = true;
 
             # if this isn't enabled you must press ESC to exit Anyrun
-            config.closeOnClick = true;
+            closeOnClick = true;
 
             # enable all plugins except randr, stdin, and dictionary
-            config.plugins = [
+            plugins = [
                 "${pkgs.anyrun}/lib/libapplications.so"
                 "${pkgs.anyrun}/lib/libkidex.so"
                 "${pkgs.anyrun}/lib/librink.so"
@@ -389,57 +387,56 @@
                 "${pkgs.anyrun}/lib/libtranslate.so"
                 "${pkgs.anyrun}/lib/libwebsearch.so"
             ];
-
-            # Websearch plugin config
-            extraConfigFiles."websearch.ron".text = ''
-                Config(
-                    prefix: "?",
-                    engines: [DuckDuckGo]
-                )
-            '';
-
-            # CSS theming
-            extraCss = ''
-                * {
-                    all: unset;
-                    border-radius: 0;
-                }
-
-                window {
-                    background: rgba(0, 0, 0, 0);
-                    padding: 48px;
-                }
-
-                box.main {
-                    margin: 48px;
-                    padding: 24px;
-                    background-color: rgba(31, 31, 31, .6);
-                    box-shadow: 0 0 2px 1px rgba(26, 26, 26, 238);
-                    border: 2px solid #fff;
-                }
-
-                .entry { /* I would center align the text, but GTK doesn't support it */
-                    border-bottom: 2px solid #fff;
-                    margin-bottom: 12px;
-                    padding: 6px;
-                    font-family: monospace;
-                }
-
-                .match {
-                    padding: 4px;
-                }
-
-                .match:selected,
-                .match:hover {
-                    background-color: rgba(255, 255, 255, .2);
-                }
-
-                label.match-title {
-                    font-weight: bold;
-                }
-            '';
-
         };
+
+        # Websearch plugin config
+        programs.anyrun.extraConfigFiles."websearch.ron".text = ''
+            Config(
+                prefix: "?",
+                engines: [DuckDuckGo]
+            )
+        '';
+
+        # CSS theming
+        programs.anyrun.extraCss = ''
+            * {
+                all: unset;
+                border-radius: 0;
+            }
+
+            window {
+                background: rgba(0, 0, 0, 0);
+                padding: 48px;
+            }
+
+            box.main {
+                margin: 48px;
+                padding: 24px;
+                background-color: rgba(31, 31, 31, .6);
+                box-shadow: 0 0 2px 1px rgba(26, 26, 26, 238);
+                border: 2px solid #fff;
+            }
+
+            text { /* I would center align the text, but GTK doesn't support it */
+                border-bottom: 2px solid #fff;
+                margin-bottom: 12px;
+                padding: 6px;
+                font-family: monospace;
+            }
+
+            .match {
+                padding: 4px;
+            }
+
+            .match:selected,
+            .match:hover {
+                background-color: rgba(255, 255, 255, .2);
+            }
+
+            label.match-title {
+                font-weight: bold;
+            }
+        '';
 
         # Enable day/night color temperature adjustment
         services.wlsunset = {
@@ -451,4 +448,3 @@
     };
 
 }
-
