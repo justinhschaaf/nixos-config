@@ -405,12 +405,12 @@
                     border-radius: 0;
                 }
 
-                #window {
+                window {
                     background: rgba(0, 0, 0, 0);
                     padding: 48px;
                 }
 
-                box#main {
+                box.main {
                     margin: 48px;
                     padding: 24px;
                     background-color: rgba(31, 31, 31, .6);
@@ -418,23 +418,23 @@
                     border: 2px solid #fff;
                 }
 
-                #entry { /* I would center align the text, but GTK doesn't support it */
+                .entry { /* I would center align the text, but GTK doesn't support it */
                     border-bottom: 2px solid #fff;
                     margin-bottom: 12px;
                     padding: 6px;
                     font-family: monospace;
                 }
 
-                #match {
+                .match {
                     padding: 4px;
                 }
 
-                #match:selected,
-                #match:hover {
+                .match:selected,
+                .match:hover {
                     background-color: rgba(255, 255, 255, .2);
                 }
 
-                label#match-title {
+                label.match-title {
                     font-weight: bold;
                 }
             '';
