@@ -8,20 +8,20 @@
 
         # Steam settings. Installing Steam here instead of as a Flatpak because
         # the Flatpak updates drivers based on the system drivers. Upon running
-        # a system update, if the system installs new drivers, Flatpak will 
+        # a system update, if the system installs new drivers, Flatpak will
         # only see the currently installed drivers and install a version to
         # match those, thus always being out of date.
         programs.steam = {
-        
+
             enable = true;
 
             # Let Steam use Gamescope by default. This also installs it.
             gamescopeSession.enable = true;
-            
+
             # Let Steam play nice with the firewall
             dedicatedServer.openFirewall = true;
             remotePlay.openFirewall = true;
-            
+
         };
 
         # Enable gamemode
@@ -31,9 +31,9 @@
         environment.systemPackages = with pkgs; [
             ffmpeg
             handbrake
-            #minecraft # currently broken
+            #minecraft # just use modrinth lol
             modrinth-app
-            olive-editor
+            #olive-editor # https://github.com/NixOS/nixpkgs/issues/452183
             protonup-qt
         ];
 
