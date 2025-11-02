@@ -126,12 +126,12 @@
 
                     # Handling overrides for xwaylandvideobridge
                     # https://wiki.hyprland.org/Useful-Utilities/Screen-Sharing/
-                    "opacity 0.0 override, class:^(xwaylandvideobridge)$"
-                    "noanim, class:^(xwaylandvideobridge)$"
-                    "noinitialfocus, class:^(xwaylandvideobridge)$"
-                    "maxsize 1 1, class:^(xwaylandvideobridge)$"
-                    "noblur, class:^(xwaylandvideobridge)$"
-                    "nofocus, class:^(xwaylandvideobridge)$"
+                    #"opacity 0.0 override, class:^(xwaylandvideobridge)$"
+                    #"noanim, class:^(xwaylandvideobridge)$"
+                    #"noinitialfocus, class:^(xwaylandvideobridge)$"
+                    #"maxsize 1 1, class:^(xwaylandvideobridge)$"
+                    #"noblur, class:^(xwaylandvideobridge)$"
+                    #"nofocus, class:^(xwaylandvideobridge)$"
                 ];
 
                 # See https://wiki.hyprland.org/Configuring/Variables/ for more
@@ -286,7 +286,6 @@
             polkit_gnome
             swww
             udiskie
-            kdePackages.xwaylandvideobridge
             # https://github.com/ErikReider/SwayOSD
 
             # Clipboard
