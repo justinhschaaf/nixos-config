@@ -65,10 +65,10 @@
                 pkgs.scientifica
                 pkgs.terminus_font
                 pkgs.the-neue-black
-                pkgs.ubuntu_font_family
+                pkgs.ubuntu-classic
                 pkgs.unifont
                 pkgs.victor-mono
-                pkgs.vistafonts
+                pkgs.vista-fonts
                 pkgs.vollkorn
                 pkgs.work-sans
                 pkgs.zilla-slab
