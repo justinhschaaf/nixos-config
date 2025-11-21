@@ -33,7 +33,7 @@
             handbrake
             #minecraft # just use modrinth lol
             modrinth-app
-            #olive-editor # https://github.com/NixOS/nixpkgs/issues/452183
+            olive-editor
             protonup-qt
         ];
 
