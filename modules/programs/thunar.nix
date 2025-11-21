@@ -1,8 +1,6 @@
 { inputs, lib, config, pkgs, ... }: {
 
-    options = {
-        js.programs.thunar.enable = lib.mkEnableOption "Thunar";
-    };
+    options.js.programs.thunar.enable = lib.mkEnableOption "Thunar";
 
     config = lib.mkIf config.js.programs.thunar.enable {
 
@@ -21,9 +19,12 @@
             ];
         };
 
-        # Download file thumbnailers
         environment.systemPackages = with pkgs; [
 
+            # extra file systems
+            sshfs
+
+            # Download file thumbnailers
             f3d
             ffmpegthumbnailer
             libgsf
