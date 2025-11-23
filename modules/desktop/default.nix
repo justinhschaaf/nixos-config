@@ -30,7 +30,14 @@
         services.libinput.enable = true;
 
         # Enable CUPS to print documents.
+        # https://wiki.nixos.org/wiki/Printing
         services.printing.enable = true;
+        services.printing.drivers = with pkgs; [
+            cups-browsed
+            cups-filters
+            foomatic-db-ppds
+            foomatic-filters
+        ];
 
         # Enable udisks2 for udiskie
         services.udisks2.enable = true;
