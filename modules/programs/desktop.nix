@@ -11,6 +11,7 @@
             # System Utils
             kitty
             gparted
+            naps2
             overskride
             pwvucontrol
             resources
