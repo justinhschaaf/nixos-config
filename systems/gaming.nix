@@ -33,12 +33,13 @@
     js.desktop.enable = true;
     js.desktop.hyprland.enable = true;
     js.desktop.hyprland.idle.enable = false;
-    js.desktop.hyprland.monitors = [
-        "DP-1,preferred,0x0,1"
-        "DP-2,preferred,1920x0,1"
-    ];
     js.desktop.hyprland.screenshot.output = "the_shit/Pictures/Screenshots";
     js.desktop.input.jp = true;
+
+    # Hyprland overrides
+    programs.hyprland.settings.general.layout = "master";
+    programs.hyprland.settings.master.orientation = "center";
+    programs.hyprland.settings.dwindle.single_window_aspect_ratio = "16 10";
 
     # Enable Intel CPU support and thunderbolt
     js.hardware.intel.cpu.enable = true;

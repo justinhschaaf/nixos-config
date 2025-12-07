@@ -157,7 +157,7 @@
                     gaps_out = "6, 12, 12, 12";
                     border_size = 2;
                     resize_on_border = true;
-                    layout = "dwindle";
+                    layout = lib.mkDefault "dwindle";
 
                     "col.active_border" = "rgba(ffffffff)";
                     "col.inactive_border" = "rgba(595959aa)";
@@ -189,7 +189,10 @@
 
                 # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
                 # https://github.com/hyprwm/Hyprland/pull/6479
-                master.new_status = "master";
+                master = {
+                    new_status = "inherit";
+                    center_master_fallback = "right";
+                };
 
                 # See https://wiki.hyprland.org/Configuring/Keywords/ for more
                 "$mainMod" = "SUPER";
@@ -224,6 +227,9 @@
                     "$mainMod, V, togglefloating,"
                     "$mainMod, P, pseudo," # dwindle
                     "$mainMod, J, togglesplit," # dwindle
+                    "$mainMod, M, layoutmsg, swapwithmaster" # master
+                    "$mainMod SHIFT, left, layoutmsg, swapprev" # master
+                    "$mainMod SHIFT, right, layoutmsg, swapnext" # master
 
                     # Move focus with mainMod + arrow keys
                     "$mainMod, left, movefocus, l"
