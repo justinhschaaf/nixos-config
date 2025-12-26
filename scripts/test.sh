@@ -13,7 +13,7 @@ fi
 
 # build the vm for the system
 # shellcheck disable=SC2086
-nixos-rebuild build-vm --flake path:./#$SYSTEM --fast
+nixos-rebuild build-vm --flake path:./#$SYSTEM --no-reexec
 
 # run the vm
 exec "result/bin/run-$SYSTEM-vm"
