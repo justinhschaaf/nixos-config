@@ -22,6 +22,7 @@
         libreoffice
         marktext
         pinta
+        solo2-cli
         tenacity
     ];
 
@@ -67,3 +68,4 @@
     programs.home-manager.enable = true;
 
 }
+
