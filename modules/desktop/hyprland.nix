@@ -1,4 +1,4 @@
-{ inputs, lib, config, pkgs, ... }: {
+{ inputs, lib, config, pkgs, system, ... }: {
 
     imports = [ inputs.hyprland.nixosModules.default ];
 
@@ -75,7 +75,7 @@
 
             # Add plugins for better multi-monitor support
             plugins = [
-                inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+                inputs.split-monitor-workspaces.packages.${system}.split-monitor-workspaces
             ];
 
             # Hyprland config

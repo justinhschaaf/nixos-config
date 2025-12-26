@@ -1,4 +1,4 @@
-{ inputs, lib, config, pkgs, modulesPath, ... }: {
+{ inputs, lib, config, pkgs, system, modulesPath, ... }: {
 
     # start with the minimal installer defaults
     # https://wiki.nixos.org/wiki/Creating_a_NixOS_live_CD
@@ -9,7 +9,7 @@
     ];
 
     # add the jsinstall command
-    environment.systemPackages = [ inputs.self.outputs.packages.${pkgs.system}.jsinstall ];
+    environment.systemPackages = [ inputs.self.outputs.packages.${system}.jsinstall ];
 
     # set nixpkgs platform
     nixpkgs.hostPlatform = "x86_64-linux";
