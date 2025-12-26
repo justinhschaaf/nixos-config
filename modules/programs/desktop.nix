@@ -61,6 +61,10 @@
         programs.localsend.enable = true;
         programs.localsend.openFirewall = true;
 
+        # obs for screen recording, must be system-level for virtual camera
+        programs.obs-studio.enable = true;
+        programs.obs-studio.enableVirtualCamera = true;
+
         # Firefox web browser
         programs.firefox = {
 

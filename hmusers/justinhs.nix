@@ -21,7 +21,6 @@
         inkscape
         libreoffice
         marktext
-        obs-studio
         pinta
         tenacity
     ];
@@ -68,4 +67,3 @@
     programs.home-manager.enable = true;
 
 }
-
