@@ -15,7 +15,7 @@
             gh
 
             # Editors
-            jetbrains.idea-community
+            jetbrains.idea
             jetbrains.rust-rover
             jetbrains.webstorm
 
