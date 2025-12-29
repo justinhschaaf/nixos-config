@@ -46,7 +46,6 @@
                 pkgs.junction-font
                 pkgs.lexend
                 pkgs.liberation_ttf
-                pkgs.manrope
                 pkgs.merriweather
                 pkgs.merriweather-sans
                 pkgs.monocraft
