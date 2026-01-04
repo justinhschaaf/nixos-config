@@ -12,7 +12,7 @@
         # see https://nixos.org/manual/nixos/stable/#sec-xfce-thunar-plugins
         programs.thunar = {
             enable = true;
-            plugins = with pkgs.xfce; [
+            plugins = with pkgs; [
                 thunar-archive-plugin
                 thunar-media-tags-plugin
                 thunar-volman
