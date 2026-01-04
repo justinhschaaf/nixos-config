@@ -31,8 +31,7 @@
         # mpv scripts
         nixpkgs.overlays = [
             (self: super: {
-                mpv = super.mpv-unwrapped.wrapper {
-                    mpv = pkgs.mpv-unwrapped;
+                mpv = super.mpv.override { # updated from mpv-unwrapped.wrapper in https://github.com/NixOS/nixpkgs/pull/474601
                     scripts = with self.mpvScripts; [
                         mpris
                         uosc
