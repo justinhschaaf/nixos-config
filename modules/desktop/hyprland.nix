@@ -140,6 +140,11 @@
                     no_donation_nag = true;
                 };
 
+                debug = {
+                    # move error messages to the bottom of the screen.
+                    error_position = 1;
+                };
+
                 input = {
                     kb_layout = "us";
                     follow_mouse = 1;
