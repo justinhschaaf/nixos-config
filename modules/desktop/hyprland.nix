@@ -116,22 +116,18 @@
                     "hypridle"
                 ];
 
-                windowrulev2 = [
+                windowrule = [
                     # Get KDE file picker to show up properly
                     # At least I can actually paste in a file path now
                     # https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
-                    "float,class:^(org.freedesktop.impl.portal.desktop.kde)$"
-                    "center,class:^(org.freedesktop.impl.portal.desktop.kde)$"
-                    "maximize,class:^(org.freedesktop.impl.portal.desktop.kde)$"
+                    "match:class ^(org.freedesktop.impl.portal.desktop.kde)$, float on, center on, maximize on"
 
-                    # Handling overrides for xwaylandvideobridge
-                    # https://wiki.hyprland.org/Useful-Utilities/Screen-Sharing/
-                    #"opacity 0.0 override, class:^(xwaylandvideobridge)$"
-                    #"noanim, class:^(xwaylandvideobridge)$"
-                    #"noinitialfocus, class:^(xwaylandvideobridge)$"
-                    #"maxsize 1 1, class:^(xwaylandvideobridge)$"
-                    #"noblur, class:^(xwaylandvideobridge)$"
-                    #"nofocus, class:^(xwaylandvideobridge)$"
+                    # float, center, maximize screenshot save window
+                    "match:class satty, match:title Save Image As, float on, center on, maximize on"
+
+                    # fix issues with steam repositioning itself for no fucking reason
+                    # https://thinglab.org/2026/01/hyprland_steam_windowrule/
+                    "match:class steam, match:initial_title Steam, match:float 1, float off, maximize on"
                 ];
 
                 # See https://wiki.hyprland.org/Configuring/Variables/ for more
