@@ -34,12 +34,12 @@
     # Configure DNSSEC with systemd-resolved to use Cloudflare and Quad9 https://wiki.nixos.org/wiki/Systemd-resolved
     networking.nameservers = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" "149.112.112.112" ];
 
-    services.resolved = {
-        enable = true;
-        dnssec = "true"; # yes, these are strings
-        dnsovertls = "true";
-        domains = [ "~." ];
-        fallbackDns = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" "149.112.112.112" ];
+    services.resolved.enable = true;
+    services.resolved.settings.Resolve = {
+        DNSSEC = "true"; # yes, these are strings
+        DNSOverTLS = "true";
+        Domains = [ "~." ];
+        FallbackDNS = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" "149.112.112.112" ];
     };
 
     # Enable Avahi for zeroconf networking, firewall is opened for it by default
