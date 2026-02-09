@@ -22,9 +22,27 @@
     config = lib.mkIf config.js.desktop.enable {
 
         # greetd, you can add multiple sessions as per https://github.com/apognu/tuigreet?tab=readme-ov-file#sessions
-        # ours are actually managed via uwsm
+        #
+        # you don't have to though, as any package which provides passthru.providedSessions, defines .desktop files
+        # for them, and is added to services.displayManager.sessionPackages will automatically show up here. where does
+        # that get passed to the command here? i don't fucking know i'm too beaten to check rn. either way, anything
+        # added to uwsm would automatically generate these .desktop files and use those; however, after
+        # https://github.com/NixOS/nixpkgs/pull/474174 this is no longer the case. instead, hyprland itself started
+        # providing a .desktop file for the uwsm session, and nixpkgs maintainers decided those were fine to use. the
+        # massive problem with this is both the uwsm and non-uwsm .desktop files are loaded by the greeter, and the
+        # default is the non-uwsm one (likely as it's first alphabetically, or malice idk fuck you). as far as i can
+        # tell, there is no way to revert this change for my own flake, no way to get rid of/hide that non-uwsm
+        # .desktop file, and no way to set the default wayland session .desktop file tuigreet (or most display managers)
+        # use. as such, we add --remember-session to (theoretically) remember your last selection, but you're still
+        # stuck having to change the session the first time you try to sign in. why? fuck you, i guess...
+        #
+        # why is it important we start hyprland with uwsm? good question. it properly starts systemd targets other
+        # services depend on (most importantly graphical-session.target, used by waybar and wlsunset)
+        #
+        # this took roughly 2 hours to figure out and i can't even fully fix it. fml.
         services.greetd.enable = true;
-        services.greetd.settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --asterisks --time --user-menu";
+        services.greetd.useTextGreeter = true;
+        services.greetd.settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --asterisks --time --user-menu --remember-session";
 
         # Enable touchpad support (enabled default in most desktopManager).
         services.libinput.enable = true;

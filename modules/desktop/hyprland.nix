@@ -56,13 +56,6 @@
         # https://forum.manjaro.org/t/link-in-flatpak-apps-wont-open-on-click-since-anymore-last-update/149907/22
         xdg.portal.config.common.default = [ "hyprland" "kde" ];
 
-        # Properly pass bin locations to systemd so desktop portals can access
-        # Mimetype handlers and let Flatpaks open the browser
-        # https://github.com/NixOS/nixpkgs/issues/189851#issuecomment-1759954096
-        systemd.user.extraConfig = ''
-            DefaultEnvironment="PATH=/run/wrappers/bin:/etc/profiles/per-user/%u/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin"
-        '';
-
         # Let us sign back in after locking the computer https://github.com/NixOS/nixpkgs/issues/143365
         # Using mkDefault so laptop can override it
         security.pam.services.swaylock = lib.mkDefault {};
