@@ -186,6 +186,7 @@
                 master = {
                     new_status = "inherit";
                     center_master_fallback = "right";
+                    allow_small_split = true;
                 };
 
                 # See https://wiki.hyprland.org/Configuring/Keywords/ for more

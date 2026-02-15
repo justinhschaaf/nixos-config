@@ -39,6 +39,7 @@
     # Hyprland overrides
     programs.hyprland.settings.general.layout = "master";
     programs.hyprland.settings.master.orientation = "center";
+    programs.hyprland.settings.master.mfact = 0.5;
     programs.hyprland.settings.dwindle.single_window_aspect_ratio = "16 10";
 
     # Enable Intel CPU support and thunderbolt
