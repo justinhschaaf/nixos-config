@@ -5,6 +5,8 @@
         ./caddy.nix
         ./grafana.nix
         ./kasmweb.nix
+        ./klipper.nix
+        ./moonraker.nix
         ./outline.nix
         ./pigweb.nix
         ./unifi.nix
