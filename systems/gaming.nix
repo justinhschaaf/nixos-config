@@ -1,18 +1,20 @@
 { inputs, lib, config, pkgs, ... }: {
 
-    imports = [ ./gaming-hardware.nix ];
+    # automatic drive partitioning
+    js.disks = {
+        enable = true;
+        device = "/dev/nvme0n1";
+        encrypt = true;
+        swap.enable = true;
+        swap.size = "32G";
+    };
 
     # configure limine Windows dual boot https://wiki.gentoo.org/wiki/Limine#Dual-booting_with_Windows_in_Limine_.28UEFI.29
     boot.loader.grub.enable = true;
     boot.loader.limine.enable = false;
-    boot.loader.limine.extraEntries = ''
-    /Windows 10
-        protocol: efi
-        path: boot():/EFI/Microsoft/bootmgfw.efi
-    '';
 
     js.backup = {
-        enable = true;
+        enable = false; # re-enable when file transfer to new internal ssd is complete
         src = /home/justinhs/the_shit;
         dest = /mnt/FATLIN/LITTLEBOY_BACKUPS/rsync;
         keep = 28;
@@ -66,7 +68,7 @@
             content = {
                 type = "filesystem";
                 format = "btrfs";
-                mountpoint = "/home/justinhs/the_shit";
+                mountpoint = "/home/justinhs/the_shit_DRIVE";
             };
         };
     };
