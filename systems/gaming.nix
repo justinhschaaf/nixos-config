@@ -14,7 +14,7 @@
     boot.loader.limine.enable = false;
 
     js.backup = {
-        enable = false; # re-enable when file transfer to new internal ssd is complete
+        enable = true;
         src = /home/justinhs/the_shit;
         dest = /mnt/FATLIN/LITTLEBOY_BACKUPS/rsync;
         keep = 28;
