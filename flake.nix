@@ -77,7 +77,7 @@
         #
 
         # Authentik Server
-        authentik-nix.url = "github:nix-community/authentik-nix/e929253deddb8398c7010b28187d9d43603db950";
+        authentik-nix.url = "github:nix-community/authentik-nix";
 
         # Hyprland (must use the nix flake for split-monitor-workspaces)
         hyprland.url = "github:hyprwm/Hyprland";
