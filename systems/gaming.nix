@@ -56,23 +56,6 @@
     js.programs.gaming.enable = true;
     js.programs.thunar.enable = true;
 
-    # Add Files
-    # context: 2TB drive is LITTLEBOY, 8TB is FATMAN
-    disko.devices.disk.littleboy = {
-        device = "/dev/sda";
-        type = "disk";
-        content.type = "gpt";
-        content.partitions.LITTLEBOY = {
-            label = "LITTLEBOY";
-            size = "100%";
-            content = {
-                type = "filesystem";
-                format = "btrfs";
-                mountpoint = "/home/justinhs/the_shit_DRIVE";
-            };
-        };
-    };
-
     # Set system name
     networking.hostName = "bucatini";
 
