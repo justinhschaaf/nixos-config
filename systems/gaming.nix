@@ -14,13 +14,13 @@
     boot.loader.limine.enable = false;
 
     js.backup = {
-        enable = false;
+        enable = true;
         src = /home/justinhs/the_shit;
         dest = /mnt/FATLIN/LITTLEBOY_BACKUPS/rsync;
         keep = 28;
         mount = {
             enable = true;
-            device = "/dev/sdb2";
+            device = "/dev/sda2";
             dir = "/mnt/FATLIN";
         };
         excludes = [
