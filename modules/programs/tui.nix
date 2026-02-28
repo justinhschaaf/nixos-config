@@ -12,6 +12,7 @@
 
             git
             nix-inspect
+            nix-tree
 
             # security tools
             lynis
