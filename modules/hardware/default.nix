@@ -18,6 +18,10 @@
         hardware.graphics.enable = true;
         hardware.graphics.enable32Bit = true;
 
+        # Increase memory for test VMs
+        virtualisation.vmVariant.virtualisation.memorySize = 6192;
+        virtualisation.vmVariantWithBootLoader.virtualisation.memorySize = 6192;
+
     };
 
 }
