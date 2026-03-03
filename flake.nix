@@ -132,6 +132,16 @@
             ];
         };
 
+        # Ender-3 3D Printer
+        nixosConfigurations.pastificio = nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs system jspkgs; };
+            modules = [
+                ./modules
+                ./systems/ender.nix
+                ./users/sysadmin.nix
+            ];
+        };
+
         # Homelab Server
         nixosConfigurations.tortelli = nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system jspkgs; };
