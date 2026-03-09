@@ -15,14 +15,29 @@
             name = "Posy_Cursor_Black";
         };
 
-        # Icons
+        # GTK/GNOME theming
         gtk = {
             enable = true;
+
+            # set icons
             iconTheme.package = pkgs.nordzy-icon-theme;
             iconTheme.name = "Nordzy-dark";
+
+            # be really aggressive about dark mode since it isn't fucking working rn
+            # https://github.com/NixOS/nixpkgs/issues/479501
+            # https://old.reddit.com/r/NixOS/comments/1ql3iog/gtk_not_honoring_dark/
+            colorScheme = "dark";
+            gtk3.colorScheme = "dark";
+            gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+            gtk4.colorScheme = "dark";
+            gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
+
+            # set dark theme here too
+            theme.name = "Adwaita-dark";
+            theme.package = pkgs.gnome-themes-extra;
         };
 
-        # Tell GNOME to use dark mode
+        # Tell GNOME to use dark mode via dconf config
         # https://wiki.nixos.org/wiki/GNOME#Dark_mode
         dconf = {
             enable = true;
