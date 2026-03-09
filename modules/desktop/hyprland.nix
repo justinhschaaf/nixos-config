@@ -221,7 +221,7 @@
                     "$mainMod, Q, killactive,"
                     "$mainMod, V, togglefloating,"
                     "$mainMod, P, pseudo," # dwindle
-                    "$mainMod, J, togglesplit," # dwindle
+                    "$mainMod, J, layoutmsg, togglesplit," # dwindle
                     "$mainMod, M, layoutmsg, swapwithmaster" # master
                     "$mainMod SHIFT, left, layoutmsg, swapprev" # master
                     "$mainMod SHIFT, right, layoutmsg, swapnext" # master
