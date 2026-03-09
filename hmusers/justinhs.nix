@@ -20,10 +20,10 @@
         collision
         inkscape
         libreoffice
-        marktext
         pinta
         solo2-cli
         tenacity
+        vivify
     ];
 
     # Flatpak config
