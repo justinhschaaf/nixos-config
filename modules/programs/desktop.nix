@@ -81,6 +81,103 @@
                 "browser.toolbars.bookmarks.visibility" = "never";
                 "browser.toolbars.bookmarks.showOtherBookmarks" = false;
 
+                # fuck gen ai
+                "browser.ai.control.linkPreviewKeyPoints" = "blocked";
+                "browser.ai.control.sidebarChatbot" = "blocked";
+                "browser.ai.control.smartTabGroups" = "blocked";
+
+                # set navbar and ui customization
+                /*"browser.uiCustomization.navBarWhenVerticalTabs" = [
+                    "back-button"
+                    "forward-button"
+                    "stop-reload-button"
+                    "home-button"
+                    "vertical-spacer"
+                    "urlbar-container"
+                    "downloads-button"
+                    "screenshot-button"
+                    "unified-extensions-button"
+                    "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
+                    "addon_simplelogin-browser-action"
+                    "sidebar-button"
+                ];
+
+                "browser.uiCustomization.state" = {
+                    "placements" = {
+                        "widget-overflow-fixed-list" = [];
+                        "unified-extensions-area" = [
+                            "jid1-mnnxcxisbpnsxq_jetpack-browser-action"
+                            "ublock0_raymondhill_net-browser-action"
+                            "_36d78ab3-8f38-444a-baee-cb4a0cadbf98_-browser-action"
+                            "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action"
+                            "text-fragment_example_com-browser-action"
+                            "gdpr_cavi_au_dk-browser-action"
+                            "_b0e3cc69-7193-42b1-a69b-f2d759f2599f_-browser-action"
+                            "_21f1ba12-47e1-4a9b-ad4e-3a0260bbeb26_-browser-action"
+                            "_169e0f20-b4d6-4670-a852-e78a56f68264_-browser-action"
+                            "_0d7cafdd-501c-49ca-8ebb-e3341caaa55e_-browser-action"
+                            "_c84d89d9-a826-4015-957b-affebd9eb603_-browser-action"
+                            "search_kagi_com-browser-action"
+                            "privacypass_kagi_com-browser-action"
+                        ];
+                        "nav-bar" = [
+                            "back-button"
+                            "forward-button"
+                            "stop-reload-button"
+                            "home-button"
+                            "vertical-spacer"
+                            "urlbar-container"
+                            "downloads-button"
+                            "screenshot-button"
+                            "unified-extensions-button"
+                            "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
+                            "addon_simplelogin-browser-action"
+                            "sidebar-button"
+                        ];
+                        "toolbar-menubar" = ["menubar-items"];
+                        "TabsToolbar" = [];
+                        "vertical-tabs" = ["tabbrowser-tabs"];
+                        "PersonalToolbar" = ["personal-bookmarks"];
+                    };
+                    "seen" = [
+                        "developer-button"
+                        "screenshot-button"
+                        "_36d78ab3-8f38-444a-baee-cb4a0cadbf98_-browser-action"
+                        "addon_simplelogin-browser-action"
+                        "ublock0_raymondhill_net-browser-action"
+                        "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action"
+                        "text-fragment_example_com-browser-action"
+                        "gdpr_cavi_au_dk-browser-action"
+                        "_b0e3cc69-7193-42b1-a69b-f2d759f2599f_-browser-action"
+                        "_21f1ba12-47e1-4a9b-ad4e-3a0260bbeb26_-browser-action"
+                        "_169e0f20-b4d6-4670-a852-e78a56f68264_-browser-action"
+                        "_0d7cafdd-501c-49ca-8ebb-e3341caaa55e_-browser-action"
+                        "jid1-mnnxcxisbpnsxq_jetpack-browser-action"
+                        "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
+                        "_c84d89d9-a826-4015-957b-affebd9eb603_-browser-action"
+                        "search_kagi_com-browser-action"
+                        "privacypass_kagi_com-browser-action"
+                    ];
+                    "dirtyAreaCache" = [
+                        "nav-bar"
+                        "vertical-tabs"
+                        "toolbar-menubar"
+                        "TabsToolbar"
+                        "PersonalToolbar"
+                        "unified-extensions-area"
+                        "widget-overflow-fixed-list"
+                    ];
+                    "currentVersion" = 23;
+                    "newElementCount" = 7;
+                };
+
+                # setup sidebar
+                "sidebar.new-sidebar.has-used" = true;
+                "sidebar.position_start" = false;
+                "sidebar.revamp" = true;
+                "sidebar.verticalTabs" = true;
+                "sidebar.verticalTabs.dragToPinPromo.dismissed" = true;*/
+
             };
 
             policies = {
@@ -100,6 +197,35 @@
 
                 # Disable Firefox Home on the new tab
                 NewTabPage = false;
+
+                # Pre-allow extensions in private windows
+                ExtensionSettings = {
+                    # Bitwarden
+                    "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+                        installation_mode = "allowed";
+                        private_browsing = true;
+                    };
+                    # Kagi Privacy Pass
+                    "privacypass@kagi.com" = {
+                        installation_mode = "allowed";
+                        private_browsing = true;
+                    };
+                    # Kagi Search for Firefox
+                    "search@kagi.com" = {
+                        installation_mode = "allowed";
+                        private_browsing = true;
+                    };
+                    # Privacy Badger
+                    "jid1-MnnxcxisBPnSXQ@jetpack" = {
+                        installation_mode = "allowed";
+                        private_browsing = true;
+                    };
+                    # uBlock Origin
+                    "uBlock0@raymondhill.net" = {
+                        installation_mode = "allowed";
+                        private_browsing = true;
+                    };
+                };
 
                 # Set Default Search Engine. Available in all versions of Firefox since 139
                 SearchEngines.Default = "DuckDuckGo";
@@ -121,9 +247,9 @@
                     Description = "Search for NixOS module options.";
                 } {
                     Name = "Home Manager Options";
-                    URLTemplate = "https://home-manager-options.extranix.com/?release=master&query={searchTerms}";
+                    URLTemplate = "https://marv963.github.io/hm-search/?release=master&query={searchTerms}";
                     Method = "GET";
-                    IconURL = "https://home-manager-options.extranix.com/images/favicon.png";
+                    IconURL = "https://search.nixos.org/favicon.png";
                     Alias = "@hm";
                     Description = "Search for Nix Home Manager module options.";
                 } {
@@ -134,6 +260,9 @@
                     Alias = "@nw";
                     Description = "Search the NixOS Wiki.";
                 }];
+
+                # Remove dumb search engines
+                SearchEngines.Remove = ["Amazon.com" "Bing" "eBay" "Google" "Perplexity"];
 
                 #
                 # PRIVACY
@@ -150,6 +279,12 @@
                     WebSuggestions = false;
                     SponsoredSuggestions = false;
                     ImproveSuggest = false;
+                };
+
+                # fuck gen ai
+                GenerativeAI = {
+                    Locked = true;
+                    Enabled = false;
                 };
 
                 #
@@ -189,6 +324,11 @@
                 #
 
                 HttpsOnlyMode = "force_enabled";
+
+                Permissions = {
+                    Location.BlockNewRequests = true;
+                    Notifications.BlockNewRequests = true;
+                };
 
             };
         };
