@@ -42,7 +42,7 @@
     programs.hyprland.settings.general.layout = "master";
     programs.hyprland.settings.master.orientation = "center";
     programs.hyprland.settings.master.mfact = 0.5;
-    programs.hyprland.settings.layout.single_window_aspect_ratio = "16 9";
+    programs.hyprland.settings.layout.single_window_aspect_ratio = "16 10";
 
     # Enable Intel CPU support and thunderbolt
     js.hardware.intel.cpu.enable = true;
