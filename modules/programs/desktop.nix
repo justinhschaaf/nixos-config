@@ -11,10 +11,10 @@
             # System Utils
             kitty
             gparted
+            mission-center
             naps2
             overskride
             pwvucontrol
-            resources
             wdisplays
 
             # File Viewers
