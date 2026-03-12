@@ -80,7 +80,7 @@
         authentik-nix.url = "github:nix-community/authentik-nix";
 
         # Hyprland (must use the nix flake for split-monitor-workspaces)
-        hyprland.url = "github:hyprwm/Hyprland/4152ac76d0813d9d0f67d2f04653a13fa6e17433";
+        hyprland.url = "github:hyprwm/Hyprland";
 
         # Hyprland Split Monitor Workspaces Plugin
         split-monitor-workspaces.url = "github:Duckonaut/split-monitor-workspaces";
