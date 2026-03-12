@@ -19,8 +19,12 @@
             vulnix
 
             # terminal utils
+            btop # performance monitor
+            dust # disk usage
+            fzf
             hyfetch
             micro
+            outfieldr # tldr man pages
             parted
             patool # zip util
             sops

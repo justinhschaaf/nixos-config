@@ -31,7 +31,7 @@
 
             # Misc
             activitywatch
-            usbimager
+            caligula # burn isos
             gnome-boxes
             nixd
             prusa-slicer
