@@ -32,7 +32,7 @@
         caddy.enable = true;
         caddy.openFirewall = true; # we want this to be true even when disabling everything else
 
-        waffles.lol.enable = true;
+        waffles.lol.enable = false;
         waffles.lol.hostName = "waffles.lol";
 
         authentik.enable = true;
@@ -45,10 +45,10 @@
         grafana.enable = true;
         grafana.hostName = "grafana.waffles.lol";
 
-        kasmweb.enable = true;
+        kasmweb.enable = false;
         kasmweb.hostName = "kasm.waffles.lol";
 
-        outline.enable = true;
+        outline.enable = false;
         outline.hostName = "kb.waffles.lol";
 
         pigweb.enable = true;
