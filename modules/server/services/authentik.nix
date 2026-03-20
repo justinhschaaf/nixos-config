@@ -66,9 +66,13 @@
         # my dumbass assumed it was a hdd issue and was surprised by the lack of read errors
         # https://unix.stackexchange.com/a/495013
         systemd.services.authentik.serviceConfig.CPUWeight = 20;
-        systemd.services.authentik.serviceConfig.CPUQuota = "65%";
+        systemd.services.authentik.serviceConfig.CPUQuota = "25%";
+        systemd.services.authentik.serviceConfig.IOWeight = 20;
+        systemd.services.authentik.serviceConfig.MemorySwapMax = 0;
         systemd.services.authentik-worker.serviceConfig.CPUWeight = 20;
-        systemd.services.authentik-worker.serviceConfig.CPUQuota = "80%";
+        systemd.services.authentik-worker.serviceConfig.CPUQuota = "25%";
+        systemd.services.authentik-worker.serviceConfig.IOWeight = 20;
+        systemd.services.authentik-worker.serviceConfig.MemorySwapMax = 0;
 
         # https://docs.goauthentik.io/docs/installation/reverse-proxy
         # Headers should already be set, see https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#defaults
