@@ -1215,11 +1215,11 @@
         "nix-filter": "nix-filter"
       },
       "locked": {
-        "lastModified": 1773341024,
-        "narHash": "sha256-9YZntjxs/M51VEIvg/vO76GMi9FF/gNYu5h9bXPGnXw=",
+        "lastModified": 1774123852,
+        "narHash": "sha256-i49keKn+Dmgk9QmuTxa3PFbE40OAUog0VHU1y57RYag=",
         "owner": "Duckonaut",
         "repo": "split-monitor-workspaces",
-        "rev": "34c266b732d8a063213098dc88369ac88b95dfa1",
+        "rev": "5738d255abde51a9e33897f7fae8dfa2772b8292",
         "type": "github"
       },
       "original": {
