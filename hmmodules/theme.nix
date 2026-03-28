@@ -38,7 +38,7 @@
 
             # home manager behavior updated so this is null by default instead of the global theme
             # so we have to set it manually
-            gtk.gtk4.theme = config.gtk.theme;
+            gtk4.theme = config.gtk.theme;
         };
 
         # Tell GNOME to use dark mode via dconf config
