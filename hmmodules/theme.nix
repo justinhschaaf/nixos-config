@@ -35,6 +35,10 @@
             # set dark theme here too
             theme.name = "Adwaita-dark";
             theme.package = pkgs.gnome-themes-extra;
+
+            # home manager behavior updated so this is null by default instead of the global theme
+            # so we have to set it manually
+            gtk4.theme = config.gtk.theme;
         };
 
         # Tell GNOME to use dark mode via dconf config
