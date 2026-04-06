@@ -39,6 +39,10 @@
 
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+        # firefox 149 completely fucked session restore, revert to 148.0.2 until latest is usable again
+        # https://nixos-and-flakes.thiscute.world/nixos-with-flakes/downgrade-or-upgrade-packages
+        nixpkgs-firefox148.url = "github:nixos/nixpkgs/ebfaacc11646050670bba899a886bf84cbd23ee9";
+
         # justinhs packages
         jspkgs.url = "github:justinhschaaf/nix-packages/main";
         jspkgs.inputs.nixpkgs.follows = "nixpkgs";

@@ -28,8 +28,8 @@
 
         ];
 
-        # mpv scripts
         nixpkgs.overlays = [
+            # mpv scripts
             (self: super: {
                 mpv = super.mpv.override { # updated from mpv-unwrapped.wrapper in https://github.com/NixOS/nixpkgs/pull/474601
                     scripts = with self.mpvScripts; [
@@ -40,6 +40,11 @@
                     ];
                     extraMakeWrapperArgs = [ "--add-flags" "--keep-open=always" ];
                 };
+            })
+            (self: super: let
+                pkgs-firefox148 = import inputs.nixpkgs-firefox148 { system = pkgs.stdenv.hostPlatform.system; };
+            in {
+                firefox = pkgs-firefox148.firefox;
             })
         ];
 

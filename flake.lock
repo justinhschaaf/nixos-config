@@ -903,6 +903,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-firefox148": {
+      "locked": {
+        "lastModified": 1773185398,
+        "narHash": "sha256-KrMlWpFa4x8OpFGRQdOACGFA5E+i1h5JEXmfBTiWKig=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "ebfaacc11646050670bba899a886bf84cbd23ee9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "ebfaacc11646050670bba899a886bf84cbd23ee9",
+        "type": "github"
+      }
+    },
     "nixpkgs-lib": {
       "locked": {
         "lastModified": 1769909678,
@@ -1163,6 +1179,7 @@
         "jspkgs": "jspkgs",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_6",
+        "nixpkgs-firefox148": "nixpkgs-firefox148",
         "pigweb": "pigweb",
         "sops-nix": "sops-nix",
         "split-monitor-workspaces": "split-monitor-workspaces",
