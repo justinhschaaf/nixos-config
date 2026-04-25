@@ -27,7 +27,7 @@
         };
 
         loki.enable = true;
-        loki.agents.promtail.enable = true;
+        loki.agents.fluent-bit.enable = true;
 
         caddy.enable = true;
         caddy.openFirewall = true; # we want this to be true even when disabling everything else
