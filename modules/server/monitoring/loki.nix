@@ -4,9 +4,7 @@
         js.server.loki = {
             enable = lib.mkEnableOption "Loki, like Prometheus, but for logs.";
             openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
-            agents.promtail.enable = lib.mkEnableOption "Promtail";
-            agents.promtail.client = lib.mkOption { default = "http://127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}"; };
-            agents.promtail.clients = lib.mkOption { default = [{ url = "${config.js.server.loki.agents.promtail.client}/loki/api/v1/push"; }]; };
+            agents.fluent-bit.enable = lib.mkEnableOption "Fluent Bit log collection automatically sent to Loki";
         };
     };
 
@@ -64,34 +62,23 @@
 
         };
 
-        services.promtail.enable = config.js.server.loki.agents.promtail.enable;
-        services.promtail.configuration = lib.mkIf config.js.server.loki.agents.promtail.enable {
-
-            # set random listen ports, we don't give a shit about these
-            server = {
-                http_listen_port = 0;
-                grpc_listen_port = 0;
-            };
-
-            clients = config.js.server.loki.agents.promtail.clients;
-
-            scrape_configs = [{
-
-                job_name = "journal";
-
-                journal.max_age = "12h";
-                journal.labels = {
-                    job = "systemd-journal";
-                    host = config.networking.hostName;
-                };
-
-                relabel_configs = [{
-                    source_labels = [ "__journal__systemd_unit" ];
-                    target_label = "unit";
+        services.fluent-bit.enable = config.js.server.loki.agents.fluent-bit.enable;
+        services.fluent-bit.settings = lib.mkIf config.js.server.loki.agents.fluent-bit.enable {
+            pipeline = {
+                inputs = [{
+                    name = "systemd";
+                    tag = "host.*";
                 }];
-
-            }];
-
+                outputs = [{
+                    name = "loki";
+                    match = "*";
+                    port = config.services.loki.configuration.server.http_listen_port;
+                }];
+            };
+            service = {
+                flush = 1;
+                grace = 30;
+            };
         };
 
     };
