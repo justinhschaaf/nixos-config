@@ -51,10 +51,9 @@
 
     };
 
-    # Hardened Linux kernel, this shouldn't work linuxPackages_hardened isn't a thing in nixpkgs
-    # https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=linuxPackages_hardened
-    # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/profiles/hardened.nix#L18
-    boot.kernelPackages = pkgs.linuxPackages_hardened;
+    # Hardened kernel linuxPackages_hardened was removed, see https://github.com/NixOS/nixpkgs/pull/502342
+    # Use Zen kernel instead https://github.com/zen-kernel/zen-kernel/wiki/Detailed-Feature-List
+    boot.kernelPackages = pkgs.linuxPackages_zen;
 
     # Enable nodev and nosuid on most file systems
     # Not enabling noexec on most since I'm a developer, I need to do dev stuff!
