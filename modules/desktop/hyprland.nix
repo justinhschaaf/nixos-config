@@ -102,7 +102,7 @@
                     "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
                     "udiskie -A -f thunar" # -A = no automount
                     "mako"
-                    "swww-daemon"
+                    "awww-daemon"
                     "fcitx5 -d" # -d = daemon
 
                     # System sleep
@@ -281,11 +281,11 @@
 
             # Hyprland Stuff/Basic System Functionality
             anyrun
+            awww
             brightnessctl
             libnotify
             mako
             polkit_gnome
-            swww
             udiskie
             # https://github.com/ErikReider/SwayOSD
 
