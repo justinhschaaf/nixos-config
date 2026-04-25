@@ -23,7 +23,6 @@
             maven
 
             # JS
-            nodePackages.nodejs
             yarn-berry
 
             # Rust
