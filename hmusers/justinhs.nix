@@ -19,7 +19,6 @@
         # other
         collision
         inkscape
-        libreoffice
         pinta
         solo2-cli
         tenacity
@@ -28,6 +27,7 @@
 
     # Flatpak config
     services.flatpak.packages = lib.mkIf osConfig.js.programs.desktop.enable [
+        "flathub:app/com.collaboraoffice.Office//stable"
         "flathub:app/dev.krtirtho.Flemozi//stable"
         "flathub:app/org.torproject.torbrowser-launcher//stable"
     ];
