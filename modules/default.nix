@@ -16,16 +16,25 @@
 
     ];
 
-    # Bootloader. If you wanna use systemd, it's boot.loader.systemd-boot.enable = true;
+    # Limine bootloader. will be the default when https://github.com/NixOS/nixpkgs/issues/443031 is fixed
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.limine = {
         enable = lib.mkDefault false;
         style.wallpapers = lib.mkForce [ ];
         style.graphicalTerminal.palette = "1d1f21;cc6666;b5bd68;de935f;81a2be;b294bb;8abeb7;c5c8c6";
+
+        # add memtest86
+        extraEntries = ''
+        /memtest86plus
+          protocol: chainload
+          path: boot():///efi/memtest86plus/mt86plus.efi
+        '';
+        additionalFiles = { "efi/memtest86plus/mt86plus.efi" = pkgs.memtest86plus.efi; };
     };
+
+    # Grub bootloader.
     boot.loader.grub = {
 
-        # GRUB deprecated in favor of Limine
         enable = lib.mkDefault true;
         device = "nodev";
         efiSupport = true;
@@ -43,7 +52,13 @@
                     fwsetup
                 }
             fi
+            menuentry "Memtest86+" {
+                linux @bootRoot@/memtest.bin
+            }
         '';
+
+        # add memtest86
+        extraFiles."memtest.bin" = pkgs.memtest86plus.efi;
 
         # Disable the NixOS theme
         theme = null;
