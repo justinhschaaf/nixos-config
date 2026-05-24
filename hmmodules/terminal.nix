@@ -10,10 +10,14 @@
 
         # Terminal toys
         home.packages = with pkgs; [
+            astroterm
             cmatrix
             dotacat
             jp2a
+            mapscii
             pipes-rs
+            sl
+            smassh
         ];
 
         # micro editor config https://github.com/zyedidia/micro/blob/master/runtime/help/options.md
