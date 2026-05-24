@@ -22,8 +22,9 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
         # set build dir to use freed space https://github.com/marketplace/actions/nothing-but-nix#configure-nix-to-use-nixbuild
-        extra-conf: |
-          build-dir = /nix/build
+        with:
+          extra-conf: |
+            build-dir = /nix/build
       - name: Get flake outputs
         # https://linuxsimply.com/bash-scripting-tutorial/redirection-and-piping/piping/#C_Bash_Pipe_to_Variable
         # https://docs.github.com/en/enterprise-cloud@latest/actions/reference/workflows-and-actions/workflow-commands#setting-an-environment-variable
@@ -50,8 +51,9 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
         # set build dir to use freed space https://github.com/marketplace/actions/nothing-but-nix#configure-nix-to-use-nixbuild
-        extra-conf: |
-          build-dir = /nix/build
+        with:
+          extra-conf: |
+            build-dir = /nix/build
       - name: Run build
         # make sure we're building the right thing if it's a nixosConfiguration, otherwise just build the package. we check this here to keep the matrix names shorter
         run: 'if [[ "${{ matrix.derivation }}" == "nixosConfigurations."* ]]; then nix build ./#${{ matrix.derivation }}.config.system.build.toplevel --no-update-lock-file; else nix build ./#${{ matrix.derivation }} --no-update-lock-file; fi'
