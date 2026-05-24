@@ -13,7 +13,7 @@ jobs:
   get-flake-derivations:
     runs-on: ubuntu-latest
     outputs:
-      derivations: ${{ fromJSON(steps.jq.outputs.output) }}
+      derivations: ${{ steps.jq.outputs.output }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -50,7 +50,7 @@ jobs:
     needs: get-flake-derivations
     strategy:
       matrix:
-        derivation: ${{ needs.get-flake-derivations.outputs.derivations }}
+        derivation: ${{ fromJSON(needs.get-flake-derivations.outputs.derivations) }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
