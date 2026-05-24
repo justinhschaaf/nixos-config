@@ -13,7 +13,7 @@ jobs:
   get-flake-derivations:
     runs-on: ubuntu-latest
     outputs:
-      derivations: ${{ fromJSON(steps.current.outputs.output) }}
+      derivations: ${{ steps.current.outputs.output }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,6 +28,7 @@ jobs:
       - name: Get flake outputs
         # https://linuxsimply.com/bash-scripting-tutorial/redirection-and-piping/piping/#C_Bash_Pipe_to_Variable
         # https://docs.github.com/en/enterprise-cloud@latest/actions/reference/workflows-and-actions/workflow-commands#setting-an-environment-variable
+        # https://github.com/nix-community/nix-github-actions/blob/f4158fa080ef4503c8f4c820967d946c2af31ec9/.github/workflows/cachix-install-nix-action.yml#L18
         run: |
             set -Eeu
             flake_json="$(nix flake show --json --no-pretty)"
@@ -46,7 +47,7 @@ jobs:
     needs: get-flake-derivations
     strategy:
       matrix:
-        derivation: ${{ needs.get-flake-derivations.outputs.derivations }}
+        derivation: ${{ fromJSON(needs.get-flake-derivations.outputs.derivations) }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
