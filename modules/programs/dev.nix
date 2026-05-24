@@ -29,7 +29,6 @@
             rustup # includes cargo
 
             # Misc
-            activitywatch
             caligula # burn isos
             gnome-boxes
             nixd
