@@ -13,7 +13,7 @@ jobs:
   get-flake-derivations:
     runs-on: ubuntu-latest
     outputs:
-      derivations: ${{ steps.current.outputs.output }}
+      derivations: ${{ fromJSON(steps.jq.outputs.output) }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -36,6 +36,7 @@ jobs:
 
       - name: Determine builds
         uses: cloudposse/github-action-jq@main
+        id: jq
         # uses jq to filter the flake json down to what we need to build. yes, this could be done as a command in the nix shell, but at this stage we can't trust if the shell builds
         with:
           compact: true
@@ -47,7 +48,7 @@ jobs:
     needs: get-flake-derivations
     strategy:
       matrix:
-        derivation: ${{ fromJSON(needs.get-flake-derivations.outputs.derivations) }}
+        derivation: ${{ needs.get-flake-derivations.outputs.derivations }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
