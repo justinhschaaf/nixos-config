@@ -17,8 +17,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Free disk space
-        uses: wimpysworld/nothing-but-nix@main
+      #- name: Free disk space
+      #  uses: wimpysworld/nothing-but-nix@main
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
         # set build dir to use freed space https://github.com/marketplace/actions/nothing-but-nix#configure-nix-to-use-nixbuild
