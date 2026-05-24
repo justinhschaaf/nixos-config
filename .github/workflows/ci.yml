@@ -28,7 +28,7 @@ jobs:
       - name: Get flake outputs
         # https://linuxsimply.com/bash-scripting-tutorial/redirection-and-piping/piping/#C_Bash_Pipe_to_Variable
         # https://docs.github.com/en/enterprise-cloud@latest/actions/reference/workflows-and-actions/workflow-commands#setting-an-environment-variable
-        run: nix flake show --json | { read flake_json; echo "flake_json=$flake_json" } >> "$GITHUB_ENV"
+        run: nix flake show --json --no-pretty | { read flake_json; echo "flake_json=$flake_json" } >> "$GITHUB_ENV"
         # uses jq to filter the flake json down to what we need to build. yes, this could be done as a command in the nix shell, but at this stage we can't trust if the shell builds
       - name: Determine builds
         uses: cloudposse/github-action-jq@main
