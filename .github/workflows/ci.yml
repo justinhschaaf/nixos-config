@@ -1,0 +1,57 @@
+name: nix-ci
+on:
+  # Runs on pushes targeting the main branch
+  push:
+    branches: [ "main" ]
+  # Runs on PRs targeting the main branch
+  pull_request:
+    branches: [ "main" ]
+  # Allow running this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  get-flake-derivations:
+    runs-on: ubuntu-latest
+    outputs:
+      derivations: ${{ fromJSON(steps.current.outputs.output) }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Free disk space
+        uses: wimpysworld/nothing-but-nix@main
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+        # set build dir to use freed space https://github.com/marketplace/actions/nothing-but-nix#configure-nix-to-use-nixbuild
+        extra-conf: |
+          build-dir = /nix/build
+      - name: Get flake outputs
+        # https://linuxsimply.com/bash-scripting-tutorial/redirection-and-piping/piping/#C_Bash_Pipe_to_Variable
+        # https://docs.github.com/en/enterprise-cloud@latest/actions/reference/workflows-and-actions/workflow-commands#setting-an-environment-variable
+        run: nix flake show --json | { read flake_json; echo "flake_json=$flake_json" } >> "$GITHUB_ENV"
+        # uses jq to filter the flake json down to what we need to build. yes, this could be done as a command in the nix shell, but at this stage we can't trust if the shell builds
+      - name: Determine builds
+        uses: cloudposse/github-action-jq@main
+        with:
+          compact: true
+          input: '${{ env.flake_json }}'
+          script: if .version == 2 then delpaths([["inventory", "homeManagerModules"], ["inventory", "nixosModules"]]) .inventory | to_entries | map(.value = (.value.output.children | to_entries | map(if .value | has("children") then .value = (.value.children | to_entries | map(.value = null) | from_entries) else .value = null end) | from_entries)) | from_entries | [paths(type == "null") | join(".")] else error("Unknown flake schema version!") end
+
+  nix-build-derivations:
+    runs-on: ubuntu-latest
+    needs: get-flake-derivations
+    strategy:
+      matrix:
+        derivation: ${{ needs.get-flake-derivations.outputs.derivations }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Free disk space
+        uses: wimpysworld/nothing-but-nix@main
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+        # set build dir to use freed space https://github.com/marketplace/actions/nothing-but-nix#configure-nix-to-use-nixbuild
+        extra-conf: |
+          build-dir = /nix/build
+      - name: Run build
+        # make sure we're building the right thing if it's a nixosConfiguration, otherwise just build the package. we check this here to keep the matrix names shorter
+        run: 'if [[ "${{ matrix.derivation }}" == "nixosConfigurations."* ]]; then nix build ./#${{ matrix.derivation }}.config.system.build.toplevel --no-update-lock-file; else nix build ./#${{ matrix.derivation }} --no-update-lock-file; fi'
