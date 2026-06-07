@@ -54,11 +54,6 @@
         pigweb.enable = true;
         pigweb.hostName = "pigs.waffles.lol";
 
-        unifi.enable = true;
-        unifi.hostName = "unifi.${config.services.avahi.hostName}.${config.services.avahi.domainName}";
-        unifi.openFirewallConsole = true;
-        unifi.openFirewallDiscovery = true;
-
         youtrack.enable = true;
         youtrack.hostName = "youtrack.waffles.lol";
 

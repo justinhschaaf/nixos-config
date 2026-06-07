@@ -7,7 +7,6 @@
         ./kasmweb.nix
         ./outline.nix
         ./pigweb.nix
-        ./unifi.nix
         ./waffles.lol.nix
         ./youtrack.nix
     ];
