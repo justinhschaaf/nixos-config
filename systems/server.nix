@@ -41,6 +41,8 @@
         authentik.ldap.enable = true;
         authentik.ldap.openFirewall = true;
         authentik.radius.enable = true;
+        authentik.radius.openFirewall = true;
+        authentik.rac.enable = true;
 
         grafana.enable = true;
         grafana.hostName = "grafana.waffles.lol";

@@ -13,6 +13,7 @@
         ldap.openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
         radius.enable = lib.mkEnableOption "Authentik RADIUS outpost";
         radius.openFirewall = lib.mkOption { default = config.js.server.openFirewall; };
+        rac.enable = lib.mkEnableOption "Authentik RAC outpost";
     };
 
     config = lib.mkIf config.js.server.authentik.enable {
@@ -30,6 +31,7 @@
         sops.secrets."authentik/authentik-env".sopsFile = ../../../secrets/server.yaml;
         sops.secrets."authentik/authentik-ldap-env".sopsFile = lib.mkIf config.js.server.authentik.ldap.enable ../../../secrets/server.yaml;
         sops.secrets."authentik/authentik-radius-env".sopsFile = lib.mkIf config.js.server.authentik.radius.enable ../../../secrets/server.yaml;
+        sops.secrets."authentik/authentik-rac-env".sopsFile = lib.mkIf config.js.server.authentik.rac.enable ../../../secrets/server.yaml;
 
         services.authentik = {
             enable = true;
@@ -62,6 +64,11 @@
             environmentFile = "/run/secrets/authentik/authentik-radius-env";
         };
 
+        services.authentik-rac = lib.mkIf config.js.server.authentik.rac.enable {
+            enable = true;
+            environmentFile = "/run/secrets/authentik/authentik-rac-env";
+        };
+
         # prevent authentik from swallowing the whole fucking cpu
         # my dumbass assumed it was a hdd issue and was surprised by the lack of read errors
         # https://unix.stackexchange.com/a/495013
@@ -71,12 +78,14 @@
         systemd.services.authentik.serviceConfig.MemoryHigh = "1G";
         systemd.services.authentik.serviceConfig.MemoryMax = "1.5G";
         systemd.services.authentik.serviceConfig.MemorySwapMax = 0;
+        systemd.services.authentik.environment.AUTHENTIK_LOG_LEVEL = "debug";
         systemd.services.authentik-worker.serviceConfig.CPUWeight = 20;
         systemd.services.authentik-worker.serviceConfig.CPUQuota = "25%";
         systemd.services.authentik-worker.serviceConfig.IOWeight = 20;
         systemd.services.authentik-worker.serviceConfig.MemoryHigh = "1G";
         systemd.services.authentik-worker.serviceConfig.MemoryMax = "1.5G";
         systemd.services.authentik-worker.serviceConfig.MemorySwapMax = 0;
+        systemd.services.authentik-worker.environment.AUTHENTIK_LOG_LEVEL = "debug";
 
         # https://docs.goauthentik.io/docs/installation/reverse-proxy
         # Headers should already be set, see https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#defaults
