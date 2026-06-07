@@ -8,7 +8,7 @@
     home.packages = with pkgs; [
         # bitwarden password/secrets manager
         bitwarden-cli
-        bitwarden-desktop
+        #bitwarden-desktop # https://github.com/NixOS/nixpkgs/issues/526914
         bws
 
         # communication
