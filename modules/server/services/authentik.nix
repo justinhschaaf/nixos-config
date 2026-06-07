@@ -68,10 +68,14 @@
         systemd.services.authentik.serviceConfig.CPUWeight = 20;
         systemd.services.authentik.serviceConfig.CPUQuota = "25%";
         systemd.services.authentik.serviceConfig.IOWeight = 20;
+        systemd.services.authentik.serviceConfig.MemoryHigh = "1G";
+        systemd.services.authentik.serviceConfig.MemoryMax = "1.5G";
         systemd.services.authentik.serviceConfig.MemorySwapMax = 0;
         systemd.services.authentik-worker.serviceConfig.CPUWeight = 20;
         systemd.services.authentik-worker.serviceConfig.CPUQuota = "25%";
         systemd.services.authentik-worker.serviceConfig.IOWeight = 20;
+        systemd.services.authentik-worker.serviceConfig.MemoryHigh = "1G";
+        systemd.services.authentik-worker.serviceConfig.MemoryMax = "1.5G";
         systemd.services.authentik-worker.serviceConfig.MemorySwapMax = 0;
 
         # https://docs.goauthentik.io/docs/installation/reverse-proxy
