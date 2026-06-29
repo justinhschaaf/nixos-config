@@ -41,11 +41,6 @@
                     extraMakeWrapperArgs = [ "--add-flags" "--keep-open=always" ];
                 };
             })
-            (self: super: let
-                pkgs-firefox148 = import inputs.nixpkgs-firefox148 { system = pkgs.stdenv.hostPlatform.system; };
-            in {
-                firefox = pkgs-firefox148.firefox;
-            })
         ];
 
         # Flatpak config
