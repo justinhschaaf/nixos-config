@@ -25,7 +25,7 @@
             sshfs
 
             # Download file thumbnailers
-            f3d
+            #f3d
             ffmpegthumbnailer
             libgsf
             poppler
