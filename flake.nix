@@ -180,7 +180,7 @@
 
             jstestvm = pkgs.writeShellApplication {
                 name = "jstestvm";
-                runtimeInputs = with pkgs; [ nixos-rebuild ];
+                runtimeInputs = with pkgs; [ nh ];
                 text = builtins.readFile ./scripts/test.sh;
             };
 

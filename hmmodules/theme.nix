@@ -11,6 +11,7 @@
         # Cursor
         # TODO - LONG TERM https://wiki.hyprland.org/Hypr-Ecosystem/hyprcursor/
         home.pointerCursor = {
+            enable = true;
             package = pkgs.posy-cursors;
             name = "Posy_Cursor_Black";
         };

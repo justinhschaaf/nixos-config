@@ -23,7 +23,7 @@
             maven
 
             # JS
-            yarn-berry
+            #yarn-berry
 
             # Rust
             rustup # includes cargo

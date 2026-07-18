@@ -11,9 +11,6 @@ else
     exit 1
 fi
 
-# build the vm for the system
+# build and run the vm for the system
 # shellcheck disable=SC2086
-nixos-rebuild build-vm --flake path:./#$SYSTEM --no-reexec
-
-# run the vm
-exec "result/bin/run-$SYSTEM-vm"
+nh os build-vm path:./#$SYSTEM --diff never --no-update-lock-file --with-bootloader --run
