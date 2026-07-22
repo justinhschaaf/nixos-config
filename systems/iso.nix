@@ -8,6 +8,9 @@
         (modulesPath + "/installer/cd-dvd/channel.nix")
     ];
 
+    # disable zfs, iso won't build without this
+    boot.supportedFilesystems.zfs = lib.mkForce false;
+
     # add the jsinstall command
     environment.systemPackages = [ inputs.self.outputs.packages.${system}.jsinstall ];
 
