@@ -13,4 +13,7 @@ fi
 
 # build and run the vm for the system
 # shellcheck disable=SC2086
-nh os build-vm path:./#$SYSTEM --hostname $SYSTEM --diff never --no-update-lock-file --run
+nh os build-vm path:./#$SYSTEM --hostname $SYSTEM --diff never --no-update-lock-file
+
+# run the vm
+exec "result/bin/run-$SYSTEM-vm"
