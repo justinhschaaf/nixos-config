@@ -11,7 +11,11 @@
     # Other hardware options
     boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "usbhid" "sd_mod" "sr_mod" ];
 
-    # Enable Hyprland
+    # Enable autologin, password is weak anyways
+    services.greetd.settings.initial_session.command = "${pkgs.kdePackages.plasma-workspace}/libexec/plasma-dbus-run-session-if-needed ${pkgs.kdePackages.plasma-bigscreen}/bin/plasma-bigscreen-wayland";
+    services.greetd.settings.initial_session.user = "marco";
+
+    # Enable Plasma Bigscreen
     js.desktop.enable = true;
     js.desktop.plasma-bigscreen.enable = true;
 
