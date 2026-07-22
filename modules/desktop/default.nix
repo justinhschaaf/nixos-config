@@ -12,6 +12,7 @@
         ./fonts.nix
         ./hyprland.nix
         ./jpkb.nix
+        ./plasma-bigscreen.nix
 
     ];
 

@@ -60,7 +60,11 @@
         # Using mkDefault so laptop can override it
         security.pam.services.swaylock = lib.mkDefault {};
 
-        # Enable Hyprland. It has to be enabled on the system level too
+        # Set UWSM Hyprland as the default session
+        # Unfortunately this has no effect on greetd tuigreet
+        services.displayManager.defaultSession = "hyprland-uwsm";
+
+        # Enable Hyprland
         programs.hyprland = {
             enable = true;
             xwayland.enable = true;

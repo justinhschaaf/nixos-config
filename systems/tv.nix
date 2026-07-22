@@ -3,7 +3,6 @@
     # Partition disk
     js.disks.enable = true;
     js.disks.device = "/dev/sda";
-    js.disks.esp.size = "512M";
 
     # Enable Intel CPU support
     js.hardware.intel.cpu.enable = true;
@@ -13,12 +12,7 @@
 
     # Enable Hyprland
     js.desktop.enable = true;
-    js.desktop.hyprland.enable = true;
-    js.desktop.hyprland.idle.enable = false;
-
-    # make sure colors are (almost) always warm
-    js.desktop.hyprland.sunrise = "12:00";
-    js.desktop.hyprland.sunset = "12:01";
+    js.desktop.plasma-bigscreen.enable = true;
 
     # Enable Thunar
     js.programs.thunar.enable = true;
