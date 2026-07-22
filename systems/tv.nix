@@ -3,6 +3,7 @@
     # Partition disk
     js.disks.enable = true;
     js.disks.device = "/dev/sda";
+    js.disks.swap.enable = true;
 
     # Enable Intel CPU support
     js.hardware.intel.cpu.enable = true;
