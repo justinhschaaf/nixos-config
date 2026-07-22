@@ -11,8 +11,12 @@
     # disable zfs, iso won't build without this
     boot.supportedFilesystems.zfs = lib.mkForce false;
 
-    # add the jsinstall command
-    environment.systemPackages = [ inputs.self.outputs.packages.${system}.jsinstall ];
+    environment.systemPackages = [
+        # add the jsinstall command
+        inputs.self.outputs.packages.${system}.jsinstall
+        # install disko for manual use
+        pkgs.disko
+    ];
 
     # set nixpkgs platform
     nixpkgs.hostPlatform = "x86_64-linux";
@@ -25,6 +29,10 @@
     users.users.nixos.initialHashedPassword = lib.mkForce null;
     users.users.root.password = "nixos";
     users.users.root.initialHashedPassword = lib.mkForce null;
+
+    # enable ssh in case you have to remote into the system
+    js.server.ssh.enable = true;
+    js.server.ssh.openFirewall = true;
 
     # Set system name
     networking.hostName = "nixos-iso";
