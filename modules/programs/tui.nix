@@ -52,6 +52,7 @@
         programs.fish.interactiveShellInit = ''
             fish_config theme choose tomorrow-night-bright
             tide configure --auto --style=Lean --prompt_colors='16 colors' --show_time='24-hour format' --lean_prompt_height='One line' --prompt_spacing=Compact --icons='Few icons' --transient=Yes
+            set -U tide_character_vi_icon_default "❯"
             set -U tide_cmd_duration_color brwhite
             set -U tide_time_color brwhite
             set -U fish_greeting
