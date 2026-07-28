@@ -11,6 +11,9 @@ else
     exit 1
 fi
 
+# clean up old vm disks
+rm ./*.qcow2
+
 # build and run the vm for the system
 # shellcheck disable=SC2086
 nh os build-vm path:./#$SYSTEM --hostname $SYSTEM --diff never --no-update-lock-file
