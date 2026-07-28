@@ -96,6 +96,7 @@
             useGlobalPkgs = true;
             useUserPackages = true;
             backupFileExtension = "BACKUP"; # fixes a bug where Home Manager refuses to start due to old files
+            overwriteBackup = true;
         };
 
         # GNOME apps depend on global config

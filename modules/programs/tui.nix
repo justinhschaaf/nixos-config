@@ -26,7 +26,7 @@
             micro
             outfieldr # tldr man pages
             parted
-            #patool # zip util
+            patool # zip util
             #py-spy
             sops
 
