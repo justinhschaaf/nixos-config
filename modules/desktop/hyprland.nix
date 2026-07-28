@@ -4,7 +4,13 @@
 
     options.js.desktop.hyprland = {
         enable = lib.mkEnableOption "Hyprland";
-        idle.enable = lib.mkEnableOption "automatically locking the display and turning it off";
+        bar.enable = lib.mkEnableOption "Waybar" // { default = true; };
+        bar.position = lib.mkOption {
+            type = lib.types.enum ["top" "bottom" "left" "right"];
+            description = "Where on the screen to position the status bar.";
+            default = "top";
+        };
+        idle.enable = lib.mkEnableOption "automatically locking the display and turning it off" // { default = true; };
         idle.lockTimeout = lib.mkOption {
             type = lib.types.ints.positive;
             description = "How long to wait before locking the computer when there's no activity, in seconds.";
@@ -152,7 +158,12 @@
 
                 general = {
                     gaps_in = 4;
-                    gaps_out = "6, 12, 12, 12";
+                    gaps_out = if config.js.desktop.hyprland.bar.enable then
+                            if config.js.desktop.hyprland.bar.position == "top" then "6, 12, 12, 12"
+                            else if config.js.desktop.hyprland.bar.position == "right" then "12, 6, 12, 12"
+                            else if config.js.desktop.hyprland.bar.position == "bottom" then "12, 12, 6, 12"
+                            else "12, 12, 12, 6"
+                        else "12, 12, 12, 12";
                     border_size = 2;
                     resize_on_border = true;
                     layout = lib.mkDefault "dwindle";
@@ -272,10 +283,9 @@
         };
 
         # start waybar with systemd
-        programs.waybar.enable = true;
+        programs.waybar.enable = config.js.desktop.hyprland.bar.enable;
 
         # enable hypridle
-        js.desktop.hyprland.idle.enable = lib.mkDefault true;
         services.hypridle.enable = config.js.desktop.hyprland.idle.enable;
 
         environment.systemPackages = with pkgs; [

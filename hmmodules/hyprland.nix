@@ -27,326 +27,350 @@
         };
 
         # setup waybar
-        programs.waybar.enable = true;
-        programs.waybar.settings.taskbar = {
+        programs.waybar = lib.mkIf osConfig.js.desktop.hyprland.bar.enable (let
+            # where on the screen the bar should be
+            pos = osConfig.js.desktop.hyprland.bar.position;
 
-            # where do we put it
-            layer = "bottom";
-            height = 32;
-            spacing = 0;
+            # whether the bar is horiziontal or vertical
+            horizontal = pos == "top" || pos == "bottom";
+            vertical = pos == "right" || pos == "left";
 
-            # what's in the bar?
-            # TODO add system resources/utilization group for easy monitoring?
-            modules-left = [ "hyprland/workspaces" ];
-            modules-center = [ "clock" ];
-            modules-right = [
-                "privacy"
-                "battery"
-                "group/controls"
-                "group/power"
-            ];
+            # margin around the entire bar
+            margin = if pos == "bottom" then "6px 12px 12px 12px"
+                else if pos == "left" then "12px 6px 12px 12px"
+                else if pos == "top" then "12px 12px 6px 12px"
+                else "12px 12px 12px 6px";
 
-            # hyprland workspace switcher
-            "hyprland/workspaces" = {
-                sort-by = "number";
-                persistent-workspaces."*" = 10;
-                format = "{icon}";
-                format-icons = {
-                    empty = "";
-                    default = "";
-                };
-            };
+            # padding and size of various ui elements
+            buttonPadding = if vertical then "6px 0" else "0 6px";
+            clockPadding = if vertical then "6px 3px" else "3px 6px";
+            clockSize = if vertical then "min-height: 192px;" else "min-width: 192px;";
+            trayPadding = if vertical then "4px 0" else "0 4px";
+        in {
+            enable = true;
+            settings.taskbar = {
+                # where do we put it
+                layer = "bottom";
+                position = pos;
+                height = lib.mkIf horizontal 32;
+                width = lib.mkIf vertical 32;
+                spacing = 0;
 
-            # date/time (centered). hover = calendar, scroll = change time zone
-            clock = {
-                interval = 1;
-                format = "{:%F %T (%Z)}";
-                tooltip-format = "<tt><small>{calendar}</small></tt>";
-                smooth-scrolling-threshold = 10;
-                timezones = [
-                    "America/Los_Angeles"
-                    "Etc/UTC"
-                    "Europe/Rome"
-                    "Asia/Tokyo"
+                # what's in the bar?
+                # TODO add system resources/utilization group for easy monitoring?
+                modules-left = [ "hyprland/workspaces" ];
+                modules-center = [ "clock" ];
+                modules-right = [
+                    "privacy"
+                    "battery"
+                    "group/controls"
+                    "group/power"
                 ];
-                calendar = {
-                    mode = "year";
-                    weeks-pos = "right";
-                    mode-mon-col = 4;
+
+                # hyprland workspace switcher
+                "hyprland/workspaces" = {
+                    sort-by = "number";
+                    persistent-workspaces."*" = 10;
+                    orientation = lib.mkIf vertical "vertical";
+                    format = "{icon}";
+                    format-icons = {
+                        empty = "";
+                        default = "";
+                    };
                 };
-                actions = {
-                    on-click = "shift_up";
-                    on-click-middle = "shift_reset";
-                    on-click-right = "shift_down";
-                    on-scroll-up = "tz_up";
-                    on-scroll-down = "tz_down";
+
+                # date/time (centered). hover = calendar, scroll = change time zone
+                clock = {
+                    interval = 1;
+                    rotate = if pos == "right" then 270 else if pos == "left" then 90 else 0;
+                    format = "{:%F %T (%Z)}";
+                    tooltip-format = "<tt><small>{calendar}</small></tt>";
+                    smooth-scrolling-threshold = 10;
+                    timezones = [
+                        "America/Los_Angeles"
+                        "Etc/UTC"
+                        "Europe/Rome"
+                        "Asia/Tokyo"
+                    ];
+                    calendar = {
+                        mode = "year";
+                        weeks-pos = "right";
+                        mode-mon-col = 4;
+                        first-day-of-week = 1;
+                    };
+                    actions = {
+                        on-click = "shift_up";
+                        on-click-middle = "shift_reset";
+                        on-click-right = "shift_down";
+                        on-scroll-up = "tz_up";
+                        on-scroll-down = "tz_down";
+                    };
+                };
+
+                # shows when screenshare, mic are in use
+                privacy = {
+                    icon-size = 16;
+                    icon-spacing = 6;
+                };
+
+                # i have the power
+                battery = {
+                    format = "{icon}";
+                    format-icons = [ "t" "v" "w" "u" ];
+                    tooltip-format = "{capacity}% ({timeTo})";
+                    states = { # used to change the color at these percentages
+                        warning = 25;
+                        critical = 10;
+                    };
+                };
+
+                # group all the control center stuff so it doesn't clutter the bar
+                "group/controls" = {
+                    orientation = "inherit";
+                    drawer = {
+                        transition-duration = 500;
+                        transition-left-to-right = false;
+                        click-to-reveal = true;
+                    };
+                    modules = [
+                        "custom/controls"
+                        "tray"
+                    ] ++ lib.optionals osConfig.js.desktop.hyprland.idle.enable [
+                        # only enable if the screen will idle itself
+                        # placed in the middle because i care about the order
+                        "idle_inhibitor"
+                    ] ++ [
+                        "network"
+                        "backlight"
+                        "wireplumber"
+                    ];
+                };
+
+                # dummy icon
+                "custom/controls" = {
+                    format = "";
+                    tooltip = false;
+                };
+
+                # system tray
+                tray = {
+                    icon-size = 16;
+                    spacing = 4;
+                };
+
+                # prevent the system from going to sleep when this is enabled
+                idle_inhibitor = {
+                    tooltip = false;
+                    format = "";
+                };
+
+                # network status. click = open nmtui
+                network = {
+                    on-click = "${pkgs.kitty}/bin/kitty --detach --directory='~' ${pkgs.networkmanager}/bin/nmtui";
+                    format = "";
+                    format-wifi = "";
+                    format-ethernet = "";
+                    format-linked = "";
+                    format-disconnected = "";
+                    tooltip-format = "{ifname} via {gwaddr}";
+                    tooltip-format-wifi = "{essid} ({signalStrength}%)";
+                    tooltip-format-disconnected = "Disconnected";
+                };
+
+                # display brightness. the builtin scroll to change it doesn't work so we reimplement it
+                # TODO click = toggle night light?
+                backlight = {
+                    format = "{icon}";
+                    format-icons = [ "F" "G" ];
+                    tooltip-format = "{percent}%";
+                    on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl set 1%+";
+                    on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl set 1%-";
+                };
+
+                # audio management. click = mute
+                wireplumber = {
+                    format = "{icon}";
+                    format-muted = "";
+                    format-icons = [ "" "" "" ];
+                    tooltip-format = "{volume}% ({node_name})";
+                    on-click = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+                    on-click-right = "${pkgs.pwvucontrol}/bin/pwvucontrol";
+                };
+
+                # power menu
+                "group/power" = {
+                    orientation = "inherit";
+                    drawer = {
+                        transition-duration = 500;
+                        transition-left-to-right = false;
+                    };
+                    modules = [
+                        "custom/power-shutdown"
+                        "custom/power-logout"
+                        "custom/power-sleep"
+                        "custom/power-restart"
+                    ];
+                };
+
+                "custom/power-shutdown" = {
+                    format = "";
+                    tooltip = false;
+                    on-click = "shutdown now";
+                };
+
+                "custom/power-logout" = {
+                    format = "=";
+                    tooltip = false;
+                    on-click = "loginctl terminate-user $USER";
+                };
+
+                "custom/power-sleep" = {
+                    format = "Y";
+                    tooltip = false;
+                    on-click = "systemctl suspend";
+                };
+
+                "custom/power-restart" = {
+                    format = "Z";
+                    tooltip = false;
+                    on-click = "shutdown now -r";
                 };
             };
 
-            # shows when screenshare, mic are in use
-            privacy = {
-                icon-size = 16;
-                icon-spacing = 6;
-            };
+            # formatting for waybar
+            style = ''
+                /* setup global formatting */
+                * {
+                    border-radius: 0;
+                    padding: 0;
+                    transition: .25s;
+                }
 
-            # i have the power
-            battery = {
-                format = "{icon}";
-                format-icons = [ "t" "v" "w" "u" ];
-                tooltip-format = "{capacity}% ({timeTo})";
-                states = { # used to change the color at these percentages
-                    warning = 25;
-                    critical = 10;
-                };
-            };
+                window#waybar { /* this has to be "waybar" */
+                    background: rgba(0, 0, 0, 0);
+                    font-size: 14px;
+                    font-family: sans-serif;
+                    color: #fff;
+                }
 
-            # group all the control center stuff so it doesn't clutter the bar
-            "group/controls" = {
-                orientation = "inherit";
-                drawer = {
-                    transition-duration = 500;
-                    transition-left-to-right = false;
-                    click-to-reveal = true;
-                };
-                modules = [
-                    "custom/controls"
-                    "tray"
-                ] ++ lib.optionals osConfig.js.desktop.hyprland.idle.enable [
-                    # only enable if the screen will idle itself
-                    # placed in the middle because i care about the order
-                    "idle_inhibitor"
-                ] ++ [
-                    "network"
-                    "backlight"
-                    "wireplumber"
-                ];
-            };
+                /* format backgrounds and drop shadow for each section */
+                .modules-left,
+                .modules-center,
+                .modules-right {
+                    background-color: rgba(31, 31, 31, .6);
+                    box-shadow: 0 0 2px 1px rgba(26, 26, 26, 238);
+                    border: 2px solid rgba(255, 255, 255, .2);
+                    margin: ${margin};
+                }
 
-            # dummy icon
-            "custom/controls" = {
-                format = "";
-                tooltip = false;
-            };
+                /* workspace switcher. nuke it because default styles fuck with everything else */
+                #workspaces button {
+                    all: unset;
+                    padding: ${buttonPadding};
+                    color: rgba(255, 255, 255, .2);
+                    font-size: 14px;
+                    font-family: "dripicons-v2", sans-serif;
+                    border-radius: 0;
+                    transition: .25s;
+                }
 
-            # system tray
-            tray = {
-                icon-size = 16;
-                spacing = 4;
-            };
+                /* workspace switcher on hover. nuke it because default styles fuck with everything else */
+                /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+                #workspaces button:hover {
+                    background: rgba(255, 255, 255, .2);
+                }
 
-            # prevent the system from going to sleep when this is enabled
-            idle_inhibitor = {
-                tooltip = false;
-                format = "";
-            };
+                /* the currently selected workspace */
+                #workspaces button.active {
+                    color: #fff;
+                }
 
-            # network status. click = open nmtui
-            network = {
-                on-click = "kitty --detach --directory='~' nmtui";
-                format = "";
-                format-wifi = "";
-                format-ethernet = "";
-                format-linked = "";
-                format-disconnected = "";
-                tooltip-format = "{ifname} via {gwaddr}";
-                tooltip-format-wifi = "{essid} ({signalStrength}%)";
-                tooltip-format-disconnected = "Disconnected";
-            };
+                /* what time is it. this widget is kinda used as an anchor to determine the height of the whole bar */
+                #clock {
+                    padding: ${clockPadding};
+                    ${clockSize} /* actual width/height doesn't exist, only min */
+                }
 
-            # display brightness. the builtin scroll to change it doesn't work so we reimplement it
-            # TODO click = toggle night light?
-            backlight = {
-                format = "{icon}";
-                format-icons = [ "F" "G" ];
-                tooltip-format = "{percent}%";
-                on-scroll-up = "brightnessctl set 1%+";
-                on-scroll-down = "brightnessctl set 1%-";
-            };
+                /* setup spacing for control center icons */
+                #battery,
+                #idle_inhibitor,
+                #network,
+                #backlight,
+                #wireplumber,
+                #custom-controls,
+                #custom-power-shutdown,
+                #custom-power-logout,
+                #custom-power-sleep,
+                #custom-power-restart {
+                    font-family: "dripicons-v2", sans-serif;
+                    padding: ${buttonPadding};
+                }
 
-            # audio management. click = mute
-            wireplumber = {
-                format = "{icon}";
-                format-muted = "";
-                format-icons = [ "" "" "" ];
-                tooltip-format = "{volume}% ({node_name})";
-                on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-                on-click-right = "pwvucontrol";
-            };
+                /* control center icons that can be hovered */
+                #idle_inhibitor:hover,
+                #network:hover,
+                #backlight:hover,
+                #wireplumber:hover,
+                #custom-controls:hover,
+                #custom-power-shutdown:hover,
+                #custom-power-logout:hover,
+                #custom-power-sleep:hover,
+                #custom-power-restart:hover {
+                    background-color: rgba(255, 255, 255, .2);
+                }
 
-            # power menu
-            "group/power" = {
-                orientation = "inherit";
-                drawer = {
-                    transition-duration = 500;
-                    transition-left-to-right = false;
-                };
-                modules = [
-                    "custom/power-shutdown"
-                    "custom/power-logout"
-                    "custom/power-sleep"
-                    "custom/power-restart"
-                ];
-            };
+                /* privacy bg = red. usually doesn't show up unless it's in use--exactly what we want */
+                #privacy {
+                    background-color: rgba(221, 51, 68, .2);
+                    padding: ${buttonPadding};
+                }
 
-            "custom/power-shutdown" = {
-                format = "";
-                tooltip = false;
-                on-click = "shutdown now";
-            };
+                /* battery charging = green */
+                #battery.charging {
+                    background-color: rgba(85, 187, 85, .2);
+                }
 
-            "custom/power-logout" = {
-                format = "=";
-                tooltip = false;
-                on-click = "loginctl terminate-user $USER";
-            };
+                /* battery <25% = yellow (except when charging) */
+                /* https://github.com/Alexays/Waybar/blob/master/resources/style.css#L138 */
+                #battery.warning:not(.charging) {
+                    background-color: rgba(246, 206, 61, .2);
+                }
 
-            "custom/power-sleep" = {
-                format = "Y";
-                tooltip = false;
-                on-click = "systemctl suspend";
-            };
+                /* battery <10% = red (except when charging) */
+                #battery.critical:not(.charging) {
+                    background-color: rgba(221, 51, 68, .2);
+                }
 
-            "custom/power-restart" = {
-                format = "Z";
-                tooltip = false;
-                on-click = "shutdown now -r";
-            };
+                #tray {
+                    padding: ${trayPadding};
+                }
 
-        };
+                /* idle inhibitor enabled = green */
+                #idle_inhibitor.activated {
+                    background-color: rgba(85, 187, 85, .2);
+                }
 
-        # formatting for waybar
-        programs.waybar.style = ''
-            /* setup global formatting */
-            * {
-                border-radius: 0;
-                padding: 0;
-                transition: .25s;
-            }
+                /* grey out the icon when network is disabled */
+                #network.disabled {
+                    color: rgba(255, 255, 255, .2);
+                }
 
-            window#waybar { /* this has to be "waybar" */
-                background: rgba(0, 0, 0, 0);
-                font-size: 14px;
-                font-family: sans-serif;
-                color: #fff;
-            }
+                /* disconnected = red */
+                #network.disconnected {
+                    background-color: rgba(221, 51, 68, .2);
+                }
 
-            /* format backgrounds and drop shadow for each section */
-            .modules-left,
-            .modules-center,
-            .modules-right {
-                background-color: rgba(31, 31, 31, .6);
-                box-shadow: 0 0 2px 1px rgba(26, 26, 26, 238);
-                border: 2px solid rgba(255, 255, 255, .2);
-                margin: 12px 12px 6px 12px;
-            }
+                /* connected & no internet = yellow */
+                #network.linked {
+                    background-color: rgba(246, 206, 61, .2);
+                }
 
-            /* workspace switcher. nuke it because default styles fuck with everything else */
-            #workspaces button {
-                all: unset;
-                padding: 0 6px;
-                color: rgba(255, 255, 255, .2);
-                font-size: 14px;
-                font-family: "dripicons-v2", sans-serif;
-                border-radius: 0;
-                transition: .25s;
-            }
-
-            /* workspace switcher on hover. nuke it because default styles fuck with everything else */
-            /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-            #workspaces button:hover {
-                background: rgba(255, 255, 255, .2);
-            }
-
-            /* the currently selected workspace */
-            #workspaces button.active {
-                color: #fff;
-            }
-
-            /* what time is it. this widget is kinda used as an anchor to determine the height of the whole bar */
-            #clock {
-                padding: 3px 6px;
-                min-width: 192px; /* actual width/height doesn't exist, only min */
-            }
-
-            /* setup spacing for control center icons */
-            #battery,
-            #idle_inhibitor,
-            #network,
-            #backlight,
-            #wireplumber,
-            #custom-controls,
-            #custom-power-shutdown,
-            #custom-power-logout,
-            #custom-power-sleep,
-            #custom-power-restart {
-                font-family: "dripicons-v2", sans-serif;
-                padding: 0 6px;
-            }
-
-            /* control center icons that can be hovered */
-            #idle_inhibitor:hover,
-            #network:hover,
-            #backlight:hover,
-            #wireplumber:hover,
-            #custom-controls:hover,
-            #custom-power-shutdown:hover,
-            #custom-power-logout:hover,
-            #custom-power-sleep:hover,
-            #custom-power-restart:hover {
-                background-color: rgba(255, 255, 255, .2);
-            }
-
-            /* privacy bg = red. usually doesn't show up unless it's in use--exactly what we want */
-            #privacy {
-                background-color: rgba(221, 51, 68, .2);
-                padding: 0 6px;
-            }
-
-            /* battery charging = green */
-            #battery.charging {
-                background-color: rgba(85, 187, 85, .2);
-            }
-
-            /* battery <25% = yellow (except when charging) */
-            /* https://github.com/Alexays/Waybar/blob/master/resources/style.css#L138 */
-            #battery.warning:not(.charging) {
-                background-color: rgba(246, 206, 61, .2);
-            }
-
-            /* battery <10% = red (except when charging) */
-            #battery.critical:not(.charging) {
-                background-color: rgba(221, 51, 68, .2);
-            }
-
-            #tray {
-                padding: 0 4px;
-            }
-
-            /* idle inhibitor enabled = green */
-            #idle_inhibitor.activated {
-                background-color: rgba(85, 187, 85, .2);
-            }
-
-            /* grey out the icon when network is disabled */
-            #network.disabled {
-                color: rgba(255, 255, 255, .2);
-            }
-
-            /* disconnected = red */
-            #network.disconnected {
-                background-color: rgba(221, 51, 68, .2);
-            }
-
-            /* connected & no internet = yellow */
-            #network.linked {
-                background-color: rgba(246, 206, 61, .2);
-            }
-
-            /* audio out muted = red */
-            #wireplumber.muted {
-                background-color: rgba(221, 51, 68, .2);
-            }
-        '';
+                /* audio out muted = red */
+                #wireplumber.muted {
+                    background-color: rgba(221, 51, 68, .2);
+                }
+            '';
+        });
 
         services.mako.enable = true;
         services.mako.settings = {
