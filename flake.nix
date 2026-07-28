@@ -78,10 +78,10 @@
         authentik-nix.url = "github:nix-community/authentik-nix";
 
         # Hyprland (must use the nix flake for split-monitor-workspaces)
-        hyprland.url = "github:hyprwm/Hyprland";
+        hyprland.url = "github:hyprwm/Hyprland/v0.56.1";
 
         # Hyprland Split Monitor Workspaces Plugin
-        split-monitor-workspaces.url = "github:Duckonaut/split-monitor-workspaces";
+        split-monitor-workspaces.url = "github:Duckonaut/split-monitor-workspaces/v0.56.1";
         split-monitor-workspaces.inputs.hyprland.follows = "hyprland";
 
         # Pig Web App

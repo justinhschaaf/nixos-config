@@ -488,15 +488,16 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1784897480,
-        "narHash": "sha256-m8Pl1y/VbL45ZzZtitjVEZWo20L3rQ7Egyzjn+b+hoA=",
+        "lastModified": 1785170029,
+        "narHash": "sha256-8CKDx282HhxlD1pwXPnC4uK29Abn1Jsnh7LgPzeIXxI=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "566ff8fa7208f7027cbc21b0b208d121ee80eb38",
+        "rev": "5c9377c15f85c50648f35ca5a213754f95b93ca0",
         "type": "github"
       },
       "original": {
         "owner": "hyprwm",
+        "ref": "v0.56.1",
         "repo": "Hyprland",
         "type": "github"
       }
@@ -1164,15 +1165,16 @@
         "nix-filter": "nix-filter"
       },
       "locked": {
-        "lastModified": 1785188714,
-        "narHash": "sha256-2sxPGolcu1kL734NuKNDZjz9+qFZaBmEMEf75v998wc=",
+        "lastModified": 1785172485,
+        "narHash": "sha256-uwkgqUhX3+t0KjzlC8IkvGYEk65SfI4syHBmI8yYXAI=",
         "owner": "Duckonaut",
         "repo": "split-monitor-workspaces",
-        "rev": "60a6f9126caa8e81addf424668ec3308aa5baa96",
+        "rev": "b28df0d0df6bc8b07389552c38f645bbba13008b",
         "type": "github"
       },
       "original": {
         "owner": "Duckonaut",
+        "ref": "v0.56.1",
         "repo": "split-monitor-workspaces",
         "type": "github"
       }
