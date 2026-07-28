@@ -429,8 +429,7 @@
                 padding: 4px;
             }
 
-            .match:selected,
-            .match:hover {
+            .match:selected {
                 background-color: rgba(255, 255, 255, .2);
             }
 
