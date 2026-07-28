@@ -12,7 +12,7 @@ else
 fi
 
 # clean up old vm disks
-rm ./*.qcow2
+rm ./*.qcow2 || true
 
 # build and run the vm for the system
 # shellcheck disable=SC2086
