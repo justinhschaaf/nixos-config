@@ -6,14 +6,15 @@
     js.disks.swap.enable = true;
 
     # Create shared dir for game roms
-    disko.devices.disk.main.content.partitions.root.content.subvolumes."/SHARE" = {
+    # this doesn't work, says option doesn't exist. fml lol
+    /*disko.devices.disk.main.content.partitions.root.content.subvolumes."/SHARE" = {
         mountOptions = [
             "compress=zstd"
             "noatime"
             "noacl"
         ];
         mountpoint = "/media";
-    };
+    };*/
 
     # Enable Intel CPU support
     js.hardware.intel.cpu.enable = true;
