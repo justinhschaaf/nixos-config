@@ -109,6 +109,17 @@
             ];
         };
 
+        # Living Room TV
+        nixosConfigurations.capellini = nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs system jspkgs; };
+            modules = [
+                ./modules
+                ./systems/classic.nix
+                ./users/sysadmin.nix
+                ./users/marco.nix
+            ];
+        };
+
         # Framework Laptop
         nixosConfigurations.farfalle = nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system jspkgs; };
