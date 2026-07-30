@@ -18,17 +18,17 @@
 
     # Mount shared dir for game roms
     # This is a manually-created btrfs subvolume
-    # btrfs create /media/SHARE
-    #fileSystems."/media/SHARE" = {
-    #    device = "/dev/nvme0n1p3";
-    #    fsType = "btrfs";
-    #    options = [
-    #        "subvol=media/SHARE"
-    #        "compress=zstd"
-    #        "noatime"
-    #        "noacl"
-    #    ];
-    #};
+    # btrfs subvolume create /media/SHARE
+    fileSystems."/media/SHARE" = {
+        device = "/dev/nvme0n1p3";
+        fsType = "btrfs";
+        options = [
+            "subvol=media/SHARE"
+            "compress=zstd"
+            "noatime"
+            "noacl"
+        ];
+    };
 
     # Enable Intel CPU support
     js.hardware.intel.cpu.enable = true;
