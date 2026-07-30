@@ -2,7 +2,7 @@
 
     # Partition disk
     js.disks.enable = true;
-    js.disks.device = "/dev/sda";
+    js.disks.device = "/dev/nvme0n1";
     js.disks.swap.enable = true;
 
     # Create shared dir for game roms
@@ -15,6 +15,20 @@
         ];
         mountpoint = "/media";
     };*/
+
+    # Mount shared dir for game roms
+    # This is a manually-created btrfs subvolume
+    # btrfs create /media/SHARE
+    #fileSystems."/media/SHARE" = {
+    #    device = "/dev/nvme0n1p3";
+    #    fsType = "btrfs";
+    #    options = [
+    #        "subvol=media/SHARE"
+    #        "compress=zstd"
+    #        "noatime"
+    #        "noacl"
+    #    ];
+    #};
 
     # Enable Intel CPU support
     js.hardware.intel.cpu.enable = true;
