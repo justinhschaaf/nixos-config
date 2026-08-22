@@ -41,9 +41,12 @@
         # services depend on (most importantly graphical-session.target, used by waybar and wlsunset)
         #
         # this took roughly 2 hours to figure out and i can't even fully fix it. fml.
+        #
+        # for actually adding the sessions, it usually reads the right dir but was broken in 0.11
+        # https://github.com/NixOS/nixpkgs/issues/553601#issuecomment-5315047132
         services.greetd.enable = true;
         services.greetd.useTextGreeter = true;
-        services.greetd.settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --asterisks --time --user-menu --remember-session";
+        services.greetd.settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --asterisks --time --user-menu --remember-session --user-menu-max-uid 30000 --sessions ${config.services.displayManager.sessionData.desktops}/share/wayland-sessions";
 
         # Enable touchpad support (enabled default in most desktopManager).
         services.libinput.enable = true;
