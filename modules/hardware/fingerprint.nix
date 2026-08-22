@@ -5,7 +5,7 @@
     };
 
     config = lib.mkIf config.js.hardware.fingerprint.enable {
-
+/*
         # Enable fingerprint scanner https://community.frame.work/t/framework-nixos-linux-users-self-help-firmware-fingerprint-discussion/46565/22
         services.fprintd.enable = true;
 
@@ -22,7 +22,7 @@
             "greetd"
             "swaylock"
         ];
-
+*/
     };
 
 }
