@@ -198,6 +198,7 @@
             killif = pkgs.writeShellApplication {
                 name = "killif";
                 runtimeInputs = with pkgs; [ coreutils gnugrep procps ];
+                bashOptions = [];
                 text = builtins.readFile ./scripts/killif.sh;
             };
 

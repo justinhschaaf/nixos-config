@@ -30,6 +30,7 @@
             (lib.strings.concatStrings (["killif-"] ++ (builtins.match "[^[:alnum:]]*([[:alnum:]]+)[^[:alnum:]]*([[:alnum:]]*)[^[:alnum:]]*([[:alnum:]]*)[^[:alnum:]]*([[:alnum:]]*)[^[:alnum:]]*" name)))
             {
                 script = "${inputs.self.outputs.packages.${system}.killif}/bin/killif \"${name}\" ${builtins.toString value}";
+                wantedBy = [ "multi-user.target" ];
                 serviceConfig = {
                     Type = "exec"; # https://man.archlinux.org/man/systemd.service.5#OPTIONS
                     User = "root";
