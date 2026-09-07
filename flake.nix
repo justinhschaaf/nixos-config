@@ -195,6 +195,12 @@
                 text = builtins.readFile ./scripts/test.sh;
             };
 
+            killif = pkgs.writeShellApplication {
+                name = "killif";
+                runtimeInputs = with pkgs; [ coreutils gnugrep procps ];
+                text = builtins.readFile ./scripts/killif.sh;
+            };
+
         };
 
     };

@@ -61,6 +61,10 @@
 
     };
 
+    # kill authentik workers when they get too hungry
+    js.killif.enable = true;
+    js.killif.targets."gunicorn: worke" = 1500;
+
     # Set system name
     networking.hostName = "tortelli";
 
