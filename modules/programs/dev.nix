@@ -30,11 +30,11 @@
 
             # Misc
             caligula # burn isos
-            gnome-boxes
             nixd
             prusa-slicer
             tio
             vial
+            virtualbox
 
         ];
 
@@ -47,4 +47,3 @@
     };
 
 }
-
