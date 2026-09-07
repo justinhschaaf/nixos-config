@@ -35,6 +35,7 @@
             tio
             vial
             virtualbox
+            winboat
 
         ];
 
@@ -47,3 +48,4 @@
     };
 
 }
+
