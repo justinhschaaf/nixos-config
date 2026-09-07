@@ -23,6 +23,7 @@
             dust # disk usage
             fzf
             hyfetch
+            lrzip # https://superuser.com/questions/6912/highest-compression-for-filesfor-web-transfer/525138#525138
             micro
             outfieldr # tldr man pages
             parted
