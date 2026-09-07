@@ -87,11 +87,6 @@
         # Enable flatpaks here, not anywhere else!
         services.flatpak.enable = true;
 
-        # Allow unprivileged users to create namespaces. It's recommended to keep
-        # this off when using linux_hardened for security, but it's necessary for
-        # Flatpaks to work. Previously found in core.
-        security.unprivilegedUsernsClone = true;
-
         # General Home Manager config
         home-manager = {
             extraSpecialArgs = { inherit inputs; };
