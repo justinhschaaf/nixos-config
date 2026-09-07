@@ -4,7 +4,7 @@
 
     options.js.update = {
         enable = lib.mkEnableOption "automatic updates";
-        gc.enable = lib.mkOption { default = config.js.update.enable; };
+        gc.enable = lib.mkEnableOption "weekly garbage collection" // { default = config.js.update.enable; };
     };
 
     # Fetch updates from GitHub using comin
@@ -18,13 +18,10 @@
     };
 
     # Clean up old generations weekly
-    # https://github.com/kjhoerr/dotfiles/blob/trunk/.config/nixos/os/upgrade.nix
-    # https://github.com/viperML/nh?tab=readme-ov-file#nixos-module
-    config.programs.nh.clean = lib.mkIf config.js.update.gc.enable {
-        enable = true;
+    config.nix.gc = lib.mkIf config.js.update.gc.enable {
+        automatic = true;
         dates = "weekly";
-        extraArgs = "--keep-since 30d";
+        options = "--delete-older-than 30d";
     };
 
 }
-
