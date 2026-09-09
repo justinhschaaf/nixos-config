@@ -17,17 +17,17 @@
         tarpits.enable = true;
         tarpits.openFirewall = true;
 
-        prometheus.enable = true;
-        prometheus.exporters.node.enable = true;
-        prometheus.scrapeFrom = { # local exporters
-            "node-${config.networking.hostName}" = "127.0.0.1:${toString config.services.prometheus.exporters.node.port}";
-            "comin-${config.networking.hostName}" = "127.0.0.1:${toString config.services.comin.exporter.port}";
-            "authentik-${config.networking.hostName}" = "127.0.0.1:9300";
-            "caddy-${config.networking.hostName}" = "127.0.0.1:2019";
-        };
+        prometheus.enable = false;
+        #prometheus.exporters.node.enable = true;
+        #prometheus.scrapeFrom = { # local exporters
+        #    "node-${config.networking.hostName}" = "127.0.0.1:${toString config.services.prometheus.exporters.node.port}";
+        #    "comin-${config.networking.hostName}" = "127.0.0.1:${toString config.services.comin.exporter.port}";
+        #    "authentik-${config.networking.hostName}" = "127.0.0.1:9300";
+        #    "caddy-${config.networking.hostName}" = "127.0.0.1:2019";
+        #};
 
-        loki.enable = true;
-        loki.agents.fluent-bit.enable = true;
+        loki.enable = false;
+        loki.agents.fluent-bit.enable = false;
 
         caddy.enable = true;
         caddy.openFirewall = true; # we want this to be true even when disabling everything else
