@@ -53,7 +53,7 @@
         outline.enable = false;
         outline.hostName = "kb.waffles.lol";
 
-        pigweb.enable = true;
+        pigweb.enable = false;
         pigweb.hostName = "pigs.waffles.lol";
 
         youtrack.enable = true;
