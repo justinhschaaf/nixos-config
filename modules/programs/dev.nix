@@ -45,7 +45,15 @@
             config.init.defaultBranch = "main";
         };
 
+        # enable podman, required for winboat
+        # more secure than docker since you can use it rootless
+        # https://wiki.nixos.org/wiki/Podman
+        virtualisation.podman = {
+            enable = true;
+            dockerCompat = true; # Creates a symlink from docker to podman
+            defaultNetwork.settings.dns_enabled = true; # Required for containers under podman-compose to be able to talk to each other.
+        };
+
     };
 
 }
-
