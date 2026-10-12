@@ -37,7 +37,7 @@
         enable = true;
         apps = {
             audio = [ "mpv.desktop" ];
-            docs = [ "xreader.desktop" ];
+            docs = [ "io.github.word_sys.word-sys-pdf-editor.desktop" ];
             browser = [ "firefox.desktop" ];
             image = [ "org.nomacs.ImageLounge.desktop" ];
             text = [ "js.micro.desktop" ];

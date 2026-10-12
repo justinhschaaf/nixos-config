@@ -19,7 +19,6 @@
 
             # File Viewers
             file-roller
-            xreader
             mpv
             nomacs
 
@@ -45,6 +44,9 @@
 
         # Flatpak config
         services.flatpak.remotes.flathub = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+        services.flatpak.packages = [
+            "flathub:app/io.github.word_sys.word-sys-pdf-editor//stable"
+        ];
 
         # Allow running AppImages https://wiki.nixos.org/wiki/Appimage
         boot.binfmt.registrations.appimage = {
