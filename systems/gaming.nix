@@ -40,10 +40,16 @@
     js.desktop.input.jp = true;
 
     # Hyprland overrides
-    programs.hyprland.settings.general.layout = "master";
-    programs.hyprland.settings.master.orientation = "center";
-    programs.hyprland.settings.master.mfact = 0.5;
-    programs.hyprland.settings.layout.single_window_aspect_ratio = "2 1"; # 20 11
+    js.desktop.hyprland.extraConfig = ''
+        hl.config({
+            general = { layout = "master" },
+            layout = { single_window_aspect_ratio = {2, 1} },
+            master = {
+                orientation = "center",
+                mfact = 0.5,
+            },
+        })
+        '';
 
     # Enable Intel CPU support and thunderbolt
     js.hardware.intel.cpu.enable = true;
