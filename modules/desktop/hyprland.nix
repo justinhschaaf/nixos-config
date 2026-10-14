@@ -1,7 +1,5 @@
 { inputs, lib, config, pkgs, system, ... }: {
 
-    imports = [ inputs.hyprland.nixosModules.default ];
-
     options.js.desktop.hyprland = {
         enable = lib.mkEnableOption "Hyprland";
         bar.enable = lib.mkEnableOption "Waybar" // { default = true; };
@@ -9,6 +7,11 @@
             type = lib.types.enum ["top" "bottom" "left" "right"];
             description = "Where on the screen to position the status bar.";
             default = "top";
+        };
+        extraConfig = lib.mkOption {
+            type = lib.types.lines;
+            description = "Extra configuration text added to the end of hyprland.lua.";
+            default = "";
         };
         idle.enable = lib.mkEnableOption "automatically locking the display and turning it off" // { default = true; };
         idle.lockTimeout = lib.mkOption {
@@ -28,9 +31,11 @@
             visible = false;
         };
         monitors = lib.mkOption { # https://wiki.hyprland.org/Configuring/Monitors/
-            type = lib.types.either lib.types.str (lib.types.listOf lib.types.str);
+            type = lib.types.lines;
             description = "The display configuration for this device.";
-            default = ",preferred,auto,auto";
+            default = ''
+                hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })
+                '';
         };
         screenshot.output = lib.mkOption {
             type = lib.types.str;
@@ -75,211 +80,6 @@
             enable = true;
             xwayland.enable = true;
             withUWSM = true;
-
-            # Add plugins for better multi-monitor support
-            plugins = [
-                inputs.split-monitor-workspaces.packages.${system}.split-monitor-workspaces
-            ];
-
-            # Hyprland config
-            settings = {
-
-                # Please note not all available settings / options are set here.
-                # For a full list, see the wiki
-
-                # See https://wiki.hyprland.org/Configuring/Monitors/
-                # Wdisplays exists and is installed, but config doesn't save between restarts
-                monitor = config.js.desktop.hyprland.monitors;
-
-                # This is necessary to force Hyprland to stfu about using 1.5 scale
-                # IT WAS WORKING FINE BEFORE V34
-                # https://github.com/hyprwm/Hyprland/issues/4225
-                debug.disable_scale_checks = true;
-
-                # Fix xwayland apps at 1.5 scale, nearest neighbor is not necessarily better
-                # https://wiki.hyprland.org/Configuring/Variables/#xwayland
-                xwayland.force_zero_scaling = true;
-
-                # Lock command https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
-                "$lock" = config.js.desktop.hyprland.lockcmd;
-
-                # Screenshot editor
-                "$satty" = "satty --filename - --fullscreen --copy-command 'wl-copy' --output-filename \"${config.js.desktop.hyprland.screenshot.output}/satty-$(date '+%Y%m%d-%H%M%S').png\"";
-
-                # Startup apps
-                # launch location for gnome polkit: https://wiki.nixos.org/wiki/Polkit
-                exec-once = [
-                    "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
-                    "udiskie -A -f thunar" # -A = no automount
-                    "mako"
-                    "awww-daemon"
-                    "fcitx5 -d" # -d = daemon
-
-                    # System sleep
-                    "hypridle"
-                ];
-
-                windowrule = [
-                    # Get KDE file picker to show up properly
-                    # At least I can actually paste in a file path now
-                    # https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
-                    "match:class ^(org.freedesktop.impl.portal.desktop.kde)$, float on, center on, maximize on"
-
-                    # float, center, maximize screenshot save window
-                    "match:class satty, match:title Save Image As, float on, center on, maximize on"
-
-                    # fix issues with steam repositioning itself for no fucking reason
-                    # https://thinglab.org/2026/01/hyprland_steam_windowrule/
-                    "match:class steam, match:initial_title Steam, match:float 1, float off, maximize on"
-                ];
-
-                # See https://wiki.hyprland.org/Configuring/Variables/ for more
-                gestures.workspace_swipe_touch = false;
-                misc.force_default_wallpaper = 0; # No more anime girl jumpscares
-
-                # Disable extra popups
-                ecosystem = {
-                    no_update_news = true;
-                    no_donation_nag = true;
-                };
-
-                debug = {
-                    # move error messages to the bottom of the screen.
-                    error_position = 1;
-                };
-
-                input = {
-                    kb_layout = "us";
-                    follow_mouse = 1;
-                    numlock_by_default = true;
-                    touchpad.natural_scroll = false;
-                    sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
-                };
-
-                general = {
-                    gaps_in = 4;
-                    gaps_out = if config.js.desktop.hyprland.bar.enable then
-                            if config.js.desktop.hyprland.bar.position == "top" then "6, 12, 12, 12"
-                            else if config.js.desktop.hyprland.bar.position == "right" then "12, 6, 12, 12"
-                            else if config.js.desktop.hyprland.bar.position == "bottom" then "12, 12, 6, 12"
-                            else "12, 12, 12, 6"
-                        else "12, 12, 12, 12";
-                    border_size = 2;
-                    resize_on_border = true;
-                    layout = lib.mkDefault "dwindle";
-
-                    "col.active_border" = "rgba(ffffffff)";
-                    "col.inactive_border" = "rgba(595959aa)";
-                };
-
-                decoration = {
-                    rounding = 0;
-
-                    blur = {
-                        enabled = true;
-                        size = 10;
-                        passes = 2;
-                        new_optimizations = true;
-                    };
-
-                    shadow = {
-                        enabled = true;
-                        range = 4;
-                        render_power = 3;
-                        color = "rgba(1a1a1aee)";
-                    };
-                };
-
-                # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-                dwindle.preserve_split = true; # you probably want this
-
-                # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-                # https://github.com/hyprwm/Hyprland/pull/6479
-                master = {
-                    new_status = "inherit";
-                    center_master_fallback = "right";
-                    allow_small_split = true;
-                };
-
-                # See https://wiki.hyprland.org/Configuring/Keywords/ for more
-                "$mainMod" = "SUPER";
-
-                bind = [
-
-                    # Application keybinds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-                    "$mainMod, space, exec, anyrun"
-                    "$mainMod, T, exec, kitty"
-                    "$mainMod, E, exec, thunar"
-                    "$mainMod, R, exec, missioncenter"
-                    "$mainMod, period, exec, flatpak run dev.krtirtho.Flemozi" # same as windows
-                    "$mainMod SHIFT, C, exec, notify-send -a 'hyprpicker' \"Color: $(hyprpicker -anr)\" 'The selected color has been copied to your clipboard.'" # same as powertoys
-
-                    # System keybinds
-                    "$mainMod, L, exec, $lock"
-
-                    # Screenshot
-                    ", Print, exec, grimblast --freeze save area - | $satty"
-                    "CTRL, Print, exec, grimblast --freeze save active - | $satty"
-                    "ALT, Print, exec, grimblast --freeze save output - | $satty"
-
-                    # Brightness and volume https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
-                    ", xf86monbrightnessup, exec, brightnessctl set 5%+"
-                    ", xf86monbrightnessdown, exec, brightnessctl set 5%-"
-                    ", xf86audioraisevolume, exec, wpctl set-volume -l 1.0 @DEFAULT_SINK@ 5%+"
-                    ", xf86audiolowervolume, exec, wpctl set-volume -l 1.0 @DEFAULT_SINK@ 5%-"
-                    ", xf86audiomute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
-
-                    # Application interactions
-                    "$mainMod, Q, killactive,"
-                    "$mainMod, V, togglefloating,"
-                    "$mainMod, P, pseudo," # dwindle
-                    "$mainMod, J, layoutmsg, togglesplit," # dwindle
-                    "$mainMod, M, layoutmsg, swapwithmaster" # master
-                    "$mainMod SHIFT, left, layoutmsg, swapprev" # master
-                    "$mainMod SHIFT, right, layoutmsg, swapnext" # master
-
-                    # Move focus with mainMod + arrow keys
-                    "$mainMod, left, movefocus, l"
-                    "$mainMod, right, movefocus, r"
-                    "$mainMod, up, movefocus, u"
-                    "$mainMod, down, movefocus, d"
-
-                    # Switch workspaces with mainMod + [0-9]
-                    "$mainMod, 1, split-workspace, 1"
-                    "$mainMod, 2, split-workspace, 2"
-                    "$mainMod, 3, split-workspace, 3"
-                    "$mainMod, 4, split-workspace, 4"
-                    "$mainMod, 5, split-workspace, 5"
-                    "$mainMod, 6, split-workspace, 6"
-                    "$mainMod, 7, split-workspace, 7"
-                    "$mainMod, 8, split-workspace, 8"
-                    "$mainMod, 9, split-workspace, 9"
-                    "$mainMod, 0, split-workspace, 10"
-
-                    # Move active window to a workspace with mainMod + SHIFT + [0-9]
-                    "$mainMod SHIFT, 1, split-movetoworkspace, 1"
-                    "$mainMod SHIFT, 2, split-movetoworkspace, 2"
-                    "$mainMod SHIFT, 3, split-movetoworkspace, 3"
-                    "$mainMod SHIFT, 4, split-movetoworkspace, 4"
-                    "$mainMod SHIFT, 5, split-movetoworkspace, 5"
-                    "$mainMod SHIFT, 6, split-movetoworkspace, 6"
-                    "$mainMod SHIFT, 7, split-movetoworkspace, 7"
-                    "$mainMod SHIFT, 8, split-movetoworkspace, 8"
-                    "$mainMod SHIFT, 9, split-movetoworkspace, 9"
-                    "$mainMod SHIFT, 0, split-movetoworkspace, 10"
-
-                    # Scroll through existing workspaces with mainMod + scroll
-                    "$mainMod, mouse_down, workspace, e+1"
-                    "$mainMod, mouse_up, workspace, e-1"
-
-                ];
-
-                bindm = [
-                    # Move/resize windows with mainMod + LMB/RMB and dragging
-                    "$mainMod, mouse:272, movewindow"
-                    "$mainMod, mouse:273, resizewindow"
-                ];
-            };
         };
 
         # start waybar with systemd
@@ -320,7 +120,311 @@
         ];
 
         # Set Hyprland environment variables
-        environment.sessionVariables = {
+        environment.sessionVariables = let
+            gapsOut = if config.js.desktop.hyprland.bar.enable then
+                    if config.js.desktop.hyprland.bar.position == "top" then "6, 12, 12, 12"
+                    else if config.js.desktop.hyprland.bar.position == "right" then "12, 6, 12, 12"
+                    else if config.js.desktop.hyprland.bar.position == "bottom" then "12, 12, 6, 12"
+                    else "12, 12, 12, 6"
+                else "12, 12, 12, 12";
+            hyprlandCfg = pkgs.writeText "hyprland.lua"
+                ''
+                -- Refer to the wiki for more information.
+                -- https://wiki.hypr.land/configuring/
+
+                -- Please note not all available settings / options are set here.
+                -- For a full list, see the wiki
+
+                ------------------
+                ---- MONITORS ----
+                ------------------
+
+                -- See https://wiki.hypr.land/configuring/core/monitors/
+                ${config.js.desktop.hyprland.monitors}
+
+                ---------------------
+                ---- MY PROGRAMS ----
+                ---------------------
+
+                local lock = "${config.js.desktop.hyprland.lockcmd}"
+                local satty = "satty --filename - --fullscreen --copy-command 'wl-copy' --output-filename \"${config.js.desktop.hyprland.screenshot.output}/satty-$(date '+%Y%m%d-%H%M%S').png\""
+
+                -------------------
+                ---- AUTOSTART ----
+                -------------------
+
+                -- See https://wiki.hypr.land/configuring/core/autostart/
+
+                hl.on("hyprland.start", function ()
+                  hl.exec_cmd("${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1")
+                  hl.exec_cmd("udiskie -A -f thunar") -- -A = no automount
+                  hl.exec_cmd("mako")
+                  hl.exec_cmd("awww-daemon")
+                  hl.exec_cmd("fcitx5 -d") -- -d = daemon
+                  hl.exec_cmd("hypridle")
+                end)
+
+                -----------------------
+                ----- PERMISSIONS -----
+                -----------------------
+
+                -- See https://wiki.hypr.land/configuring/core/advanced-configuration/permissions/
+                -- Please note permission changes here require a Hyprland restart and are not applied on-the-fly
+                -- for security reasons
+
+                -- hl.config({
+                --   ecosystem = {
+                --     enforce_permissions = true,
+                --   },
+                -- })
+
+                -- hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
+                -- hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
+                -- hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
+
+
+                ----------------
+                ---- CONFIG ----
+                ----------------
+
+                -- Refer to https://wiki.hypr.land/configuring/core/config-options/
+                hl.config({
+                    general = {
+                        gaps_in  = 4,
+                        gaps_out = ${gapsOut},
+
+                        border_size = 2,
+
+                        col = {
+                            active_border   = "rgba(ffffffff)",
+                            inactive_border = "rgba(595959aa)",
+                        },
+
+                        -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
+                        resize_on_border = true,
+
+                        -- Please see https://wiki.hypr.land/configuring/extra/tearing/ before you turn this on
+                        allow_tearing = false,
+
+                        layout = "dwindle",
+                    },
+
+                    decoration = {
+                        rounding = 0,
+
+                        -- Change transparency of focused and unfocused windows
+                        active_opacity   = 1.0,
+                        inactive_opacity = 1.0,
+
+                        shadow = {
+                            enabled      = true,
+                            range        = 4,
+                            render_power = 3,
+                            color        = 0xee1a1a1a,
+                        },
+
+                        blur = {
+                            enabled   = true,
+                            size      = 10,
+                            passes    = 2,
+                            vibrancy  = 0.1696,
+                        },
+                    },
+
+                    animations = {
+                        enabled = true,
+                    },
+
+                    -- See https://wiki.hypr.land/configuring/layouts/dwindle-layout/ for more
+                    dwindle = {
+                        preserve_split = true, -- You probably want this
+                    },
+
+                    -- See https://wiki.hypr.land/configuring/layouts/master-layout/ for more
+                    master = {
+                        allow_small_split = true,
+                        new_status = "slave",
+                        center_master_fallback = "right",
+                    },
+
+                    -- Fix xwayland apps at 1.5 scale, nearest neighbor is not necessarily better
+                    -- https://wiki.hyprland.org/Configuring/Variables/#xwayland
+                    xwayland = {
+                        force_zero_scaling = true,
+                    },
+
+                    debug = {
+                        -- This is necessary to force Hyprland to stfu about using 1.5 scale
+                        -- IT WAS WORKING FINE BEFORE V34
+                        -- https://github.com/hyprwm/Hyprland/issues/4225
+                        disable_scale_checks = true,
+
+                        -- move error messages to the bottom of the screen.
+                        error_position = 1,
+                    },
+
+                    -- Disable extra popups
+                    ecosystem = {
+                        no_update_news = true,
+                        no_donation_nag = true,
+                    },
+
+                    misc = {
+                        force_default_wallpaper = 0, -- Set to 0 or 1 to disable the anime mascot wallpapers
+                        disable_hyprland_logo = true, -- If true disables the random hyprland logo / anime girl background. :(
+                    },
+
+                    input = {
+                        kb_layout  = "us",
+                        follow_mouse = 1,
+                        numlock_by_default = true,
+                        sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
+                        touchpad = {
+                            natural_scroll = false,
+                        },
+                    },
+                })
+
+                ---------------------
+                ---- KEYBINDINGS ----
+                ---------------------
+
+                local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+
+                -- Application keybinds, see https://wiki.hypr.land/configuring/core/binds/ for more
+                hl.bind(mainMod .. " + space", hl.dsp.exec_cmd("anyrun"))
+                hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("kitty"))
+                hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("thunar"))
+                hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("missioncenter"))
+                hl.bind(mainMod .. " + period", hl.dsp.exec_cmd("flatpak run dev.krtirtho.Flemozi")) -- same as windows
+                hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("notify-send -a 'hyprpicker' \"Color: $(hyprpicker -anr)\" 'The selected color has been copied to your clipboard.'")) -- same as powertoys
+
+                -- System keybinds
+                hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(lock))
+
+                -- Screenshot
+                hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd("grimblast --freeze save area - | " .. satty))
+                hl.bind(mainMod .. " + CTRL + Print", hl.dsp.exec_cmd("grimblast --freeze save active - | " .. satty))
+                hl.bind(mainMod .. " + ALT + Print", hl.dsp.exec_cmd("grimblast --freeze save output - | " .. satty))
+
+                -- Application interactions
+                hl.bind(mainMod .. " + Q", hl.dsp.window.close())
+                hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+                hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
+                hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
+                hl.bind(mainMod .. " + M", hl.dsp.layout("swapwithmaster"))    -- master only
+                hl.bind(mainMod .. " + SHIFT + left", hl.dsp.layout("swapprev"))    -- master only
+                hl.bind(mainMod .. " + SHIFT + right ", hl.dsp.layout("swapnext"))    -- master only
+
+                -- Move focus with mainMod + arrow keys
+                hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
+                hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
+                hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
+                hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
+
+                -- Switch workspaces with mainMod + [0-9]
+                -- Move active window to a workspace with mainMod + SHIFT + [0-9]
+                for i = 1, 10 do
+                    local key = i % 10 -- 10 maps to key 0
+                    hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
+                    hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
+                end
+
+                -- Scroll through existing workspaces with mainMod + scroll
+                hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+                hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
+
+                -- Move/resize windows with mainMod + LMB/RMB and dragging
+                hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
+                hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+
+                -- Laptop multimedia keys for volume and LCD brightness
+                hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
+                hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
+                hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
+                hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
+                hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("brightnessctl set 5%+"),                  { locked = true, repeating = true })
+                hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl set 5%-"),                  { locked = true, repeating = true })
+
+                -- Requires playerctl
+                hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),       { locked = true })
+                hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+                hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+                hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
+
+                --------------------------------
+                ---- WINDOWS AND WORKSPACES ----
+                --------------------------------
+
+                -- See https://wiki.hypr.land/configuring/core/rules/
+
+                -- Example window rules that are useful
+
+                local suppressMaximizeRule = hl.window_rule({
+                    -- Ignore maximize requests from all apps. You'll probably like this.
+                    name  = "suppress-maximize-events",
+                    match = { class = ".*" },
+
+                    suppress_event = "maximize",
+                })
+                -- suppressMaximizeRule:set_enabled(false)
+
+                hl.window_rule({
+                    -- Fix some dragging issues with XWayland
+                    name  = "fix-xwayland-drags",
+                    match = {
+                        class      = "^$",
+                        title      = "^$",
+                        xwayland   = true,
+                        float      = true,
+                        fullscreen = false,
+                        pin        = false,
+                    },
+
+                    no_focus = true,
+                })
+
+                -- Get KDE file picker to show up properly
+                -- At least I can actually paste in a file path now
+                -- https://www.lorenzobettini.it/2023/07/hyprland-getting-started-part-2/
+                hl.window_rule({
+                    name  = "maximize-kde-fileportal",
+                    match = { class = "^(org.freedesktop.impl.portal.desktop.kde)$" },
+                    float = true,
+                    center = true,
+                    maximize = true,
+                })
+
+                -- float, center, maximize screenshot save window
+                hl.window_rule({
+                    name  = "maximize-satty",
+                    match = {
+                        class = "satty",
+                        title = "Save Image As",
+                    },
+                    float = true,
+                    center = true,
+                    maximize = true,
+                })
+
+                -- fix issues with steam repositioning itself for no fucking reason
+                -- https://thinglab.org/2026/01/hyprland_steam_windowrule/
+                hl.window_rule({
+                    name  = "fix-steam",
+                    match = {
+                        class = "steam",
+                        initial_title = "Steam",
+                        float = true,
+                    },
+                    float = false,
+                    maximize = true,
+                })
+
+                ${config.js.desktop.hyprland.extraConfig}
+                '';
+        in {
+
+            HYPRLAND_CONFIG = "${hyprlandCfg}";
 
             # Tell XDG we're on Wayland
             XDG_SESSION_TYPE = "wayland";

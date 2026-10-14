@@ -1,7 +1,5 @@
 { inputs, lib, osConfig, config, pkgs, ... }: {
 
-    imports = [ inputs.hyprland.homeManagerModules.default ];
-
     options.js.hm.hyprland.enable = lib.mkOption { default = osConfig.js.desktop.hyprland.enable; };
 
     # Hyprland and helper applications

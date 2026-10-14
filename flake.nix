@@ -18,13 +18,11 @@
         substituters = [
             "https://cache.nixos.org"
             "https://nix-community.cachix.org/"
-            "https://hyprland.cachix.org"
         ];
 
         trusted-public-keys = [
             "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
             "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-            "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         ];
 
     };
@@ -76,13 +74,6 @@
 
         # Authentik Server
         authentik-nix.url = "github:nix-community/authentik-nix";
-
-        # Hyprland (must use the nix flake for split-monitor-workspaces)
-        hyprland.url = "github:hyprwm/Hyprland/v0.56.1";
-
-        # Hyprland Split Monitor Workspaces Plugin
-        split-monitor-workspaces.url = "github:Duckonaut/split-monitor-workspaces/v0.56.1";
-        split-monitor-workspaces.inputs.hyprland.follows = "hyprland";
 
         # Pig Web App
         pigweb.url = "github:justinhschaaf/PigWebApp";
