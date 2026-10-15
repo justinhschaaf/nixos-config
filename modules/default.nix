@@ -41,14 +41,14 @@
         efiSupport = true;
         useOSProber = true;
 
-        # set maximum number of generations in the bootloader to 8.
+        # set maximum number of generations in the bootloader to 24.
         # if this is not set, nixos will keep too many prior kernels in the boot
         # partition, then fail to rebuild due to lack of space deleting them
         # manually then rebuilding used to work, but no longer does.
         # boot partition running out of space has been a problem since 2017
         # https://github.com/NixOS/nixpkgs/issues/23926
         # default is 100 btw, what the actual fuck
-        configurationLimit = 8;
+        configurationLimit = 24;
 
         # CA Keys Secure Boot support https://wiki.archlinux.org/title/GRUB#CA_Keys
         # Bootloader still doesn't like it, likely need UKI support before it works https://wiki.archlinux.org/title/Unified_kernel_image
