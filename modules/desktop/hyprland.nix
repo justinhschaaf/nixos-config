@@ -303,9 +303,9 @@
                 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(lock))
 
                 -- Screenshot
-                hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd("grimblast --freeze save area - | " .. satty))
-                hl.bind(mainMod .. " + CTRL + Print", hl.dsp.exec_cmd("grimblast --freeze save active - | " .. satty))
-                hl.bind(mainMod .. " + ALT + Print", hl.dsp.exec_cmd("grimblast --freeze save output - | " .. satty))
+                hl.bind("Print", hl.dsp.exec_cmd("grimblast --freeze save area - | " .. satty))
+                hl.bind("CTRL + Print", hl.dsp.exec_cmd("grimblast --freeze save active - | " .. satty))
+                hl.bind("ALT + Print", hl.dsp.exec_cmd("grimblast --freeze save output - | " .. satty))
 
                 -- Application interactions
                 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
