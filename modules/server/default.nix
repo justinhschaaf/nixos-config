@@ -20,7 +20,22 @@
         enable = true;
         ports = [ 2720 ];
         openFirewall = config.js.server.ssh.openFirewall;
-        settings.PermitRootLogin = "no";
+        settings = {
+            Banner = "/etc/issue";
+
+            # Hardening
+            # https://arciveo.com/en/blog/lynis-hardening-index#:~:text=SSH%20%28SSH%2D7408%29%2E
+            PermitRootLogin = "no";
+            #PasswordAuthentication = false; # TODO configure public key authentication
+            MaxAuthTries = 3;
+            MaxSessions = 2;
+            X11Forwarding = false;
+            AllowTcpForwarding = "no";
+            ClientAliveInterval = 300;
+            ClientAliveCountMax = 2;
+            LogLevel = "VERBOSE";
+            TCPKeepAlive = false;
+        };
     };
 
     # Tarpits to fuck with attackers

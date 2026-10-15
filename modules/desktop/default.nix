@@ -61,6 +61,10 @@
             foomatic-filters
         ];
 
+        # Enable auto-discovery of USB printers
+        # https://wiki.nixos.org/wiki/Printing#Enable_auto-discovery_of_USB_printers
+        services.ipp-usb.enable = true;
+
         # Enable udisks2 for udiskie
         services.udisks2.enable = true;
         services.udisks2.mountOnMedia = true;
