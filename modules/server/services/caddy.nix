@@ -20,7 +20,7 @@
         services.caddy.enable = true;
         services.caddy.package = pkgs.caddy.withPlugins {
             plugins = [ "github.com/caddy-dns/cloudflare@v0.2.4" ];
-            hash = "sha256-dQvk6ezY6TQ1J7PjhCXnThF/SqVgPwBO8/RXzHCY+js=";
+            hash = "sha256-xRJ5evsAJ2akg47j3Bt6YDXJOgX88B/rKNP50KSVyNY=";
         };
 
         # Add Cloudflare for DNS challenges
