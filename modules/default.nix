@@ -149,6 +149,19 @@
 
     '';
 
+    environment.etc."issue.net".source = pkgs.writeText "issue.net" ''
+
+        ┌─ ${config.system.nixos.distroName} ${config.system.nixos.label} (${pkgs.stdenv.hostPlatform.system}) ─ \l ───────────────────────────────────────────────────────┐
+        │                                                                                                            │
+        │                                                  WARNING!                                                  │
+        │                                                                                                            │
+        │  This system is restricted to authorized users only. All activities on this system may be monitored.       │
+        │  Unauthorized access will be fully investigated and reported to the appropriate law enforcement agencies.  │
+        │                                                                                                            │
+        └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+    '';
+
     # Add TUI programs and enable automatic updates by default
     js.programs.tui.enable = lib.mkDefault true;
     js.update.enable = lib.mkDefault true;

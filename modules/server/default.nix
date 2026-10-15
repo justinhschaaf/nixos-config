@@ -21,7 +21,7 @@
         ports = [ 2720 ];
         openFirewall = config.js.server.ssh.openFirewall;
         settings = {
-            Banner = "/etc/issue";
+            Banner = "/etc/issue.net";
 
             # Hardening
             # https://arciveo.com/en/blog/lynis-hardening-index#:~:text=SSH%20%28SSH%2D7408%29%2E
