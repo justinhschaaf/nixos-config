@@ -120,9 +120,6 @@
     security.sudo-rs.enable = true;
     security.sudo-rs.execWheelOnly = true;
 
-    # Use hardened_malloc
-    environment.memoryAllocator.provider = "graphene-hardened";
-
     # Prevent unpriviledged users from interacting with nix cmd
     # TODO configure comin to have its own account instead of using root
     nix.settings.allowed-users = [ "@wheel" ];
