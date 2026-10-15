@@ -10,6 +10,7 @@
     # Fetch updates from GitHub using comin
     config.services.comin = lib.mkIf config.js.update.enable {
         enable = true;
+        desktop.enable = config.js.desktop.enable;
         remotes = [{
             name = "github";
             url = "https://github.com/justinhschaaf/nixos-config.git";
