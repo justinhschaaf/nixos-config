@@ -300,7 +300,7 @@
                 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("notify-send -a 'hyprpicker' \"Color: $(hyprpicker -anr)\" 'The selected color has been copied to your clipboard.'")) -- same as powertoys
 
                 -- System keybinds
-                hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(lock))
+                hl.bind(mainMod .. " + L", hl.dsp.exec_cmd(lock))
 
                 -- Screenshot
                 hl.bind("Print", hl.dsp.exec_cmd("grimblast --freeze save area - | " .. satty))
