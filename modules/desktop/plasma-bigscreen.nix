@@ -8,6 +8,7 @@
         # Therefore, we enable it here, but remove most of the default apps we don't need.
         services.desktopManager.plasma6.enable = true;
         environment.plasma6.excludePackages = with pkgs.kdePackages; [
+            akonadi
             ark
             aurorae
             baloo-widgets
@@ -19,11 +20,18 @@
             gwenview
             kate
             khelpcenter
+            kinfocenter
+            kmail
             konsole
+            kontact
             krdp
             ktexteditor
-            kwin-x11
+            kwalletmanager
+            merkuro
             okular
+            qrca
+            skanpage
+            spectacle
         ];
 
         # Install Plasma Bigscreen
