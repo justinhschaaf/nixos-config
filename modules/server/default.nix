@@ -46,8 +46,8 @@
     };
 
     config.services.avahi = lib.mkIf config.js.server.enable {
-        publish.enable = true;
-        publish.domain = true;
+        settings.publish.disable-publishing = false;
+        settings.publish.publish-domain = true;
     };
 
 }

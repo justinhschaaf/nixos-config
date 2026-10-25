@@ -30,9 +30,9 @@
         # Other system packages
         environment.systemPackages = with pkgs; [
             ffmpeg
-            handbrake
+            #handbrake # https://github.com/NixOS/nixpkgs/issues/576333
             #minecraft # just use modrinth lol
-            #modrinth-app # https://github.com/NixOS/nixpkgs/pull/542808
+            modrinth-app
             protonup-qt
         ];
 
