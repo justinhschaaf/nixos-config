@@ -78,7 +78,16 @@
 
     # Hardened kernel linuxPackages_hardened was removed, see https://github.com/NixOS/nixpkgs/pull/502342
     # Use Zen kernel instead https://github.com/zen-kernel/zen-kernel/wiki/Detailed-Feature-List
-    boot.kernelPackages = pkgs.linuxPackages_zen;
+    # issues with v4l2loopback should be fixed by https://nixpkgs-tracker.ocfox.me/?pr=575861
+    boot.kernelPackages = pkgs.linuxPackages_zen.extend (_: prev: {
+        v4l2loopback = prev.v4l2loopback.overrideAttrs {
+            preBuild = "";
+            installFlags = [
+                "DEPMOD=true"
+                "INSTALL_MOD_PATH=${placeholder "out"}"
+            ];
+        };
+    });
 
     # Set your time zone. This is set to default since Authentik overrides it.
     time.timeZone = lib.mkDefault "America/Los_Angeles";
