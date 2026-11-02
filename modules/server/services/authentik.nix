@@ -29,8 +29,8 @@
         networking.firewall.allowedUDPPorts = lib.optionals config.js.server.authentik.radius.openFirewall [ 1812 ];
 
         sops.secrets."authentik/authentik-env".sopsFile = ../../../secrets/server.yaml;
-        sops.secrets."authentik/authentik-ldap-env".sopsFile = lib.mkIf config.js.server.authentik.ldap.enable ../../../secrets/server.yaml;
-        sops.secrets."authentik/authentik-radius-env".sopsFile = lib.mkIf config.js.server.authentik.radius.enable ../../../secrets/server.yaml;
+        #sops.secrets."authentik/authentik-ldap-env".sopsFile = lib.mkIf config.js.server.authentik.ldap.enable ../../../secrets/server.yaml;
+        #sops.secrets."authentik/authentik-radius-env".sopsFile = lib.mkIf config.js.server.authentik.radius.enable ../../../secrets/server.yaml;
         sops.secrets."authentik/authentik-rac-env".sopsFile = lib.mkIf config.js.server.authentik.rac.enable ../../../secrets/server.yaml;
 
         services.authentik = {

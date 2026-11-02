@@ -38,20 +38,10 @@
         authentik.enable = true;
         authentik.hostName = "auth.waffles.lol";
         authentik.openFirewall = true;
-        authentik.ldap.enable = true;
-        authentik.ldap.openFirewall = true;
-        authentik.radius.enable = true;
-        authentik.radius.openFirewall = true;
         authentik.rac.enable = true;
 
-        grafana.enable = true;
+        grafana.enable = false;
         grafana.hostName = "grafana.waffles.lol";
-
-        kasmweb.enable = false;
-        kasmweb.hostName = "kasm.waffles.lol";
-
-        outline.enable = false;
-        outline.hostName = "kb.waffles.lol";
 
         pigweb.enable = false;
         pigweb.hostName = "pigs.waffles.lol";
