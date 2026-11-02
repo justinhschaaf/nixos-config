@@ -69,6 +69,9 @@
             environmentFile = "/run/secrets/authentik/authentik-rac-env";
         };
 
+        # Set base url, will be required as of authentik v2026.11
+        systemd.services.authentik.environment.AUTHENTIK_WEB__BASE_URL = "https://${config.js.server.authentik.hostName}";
+
         # prevent authentik from swallowing the whole fucking cpu
         # my dumbass assumed it was a hdd issue and was surprised by the lack of read errors
         # https://unix.stackexchange.com/a/495013
