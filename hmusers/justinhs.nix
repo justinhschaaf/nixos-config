@@ -21,9 +21,9 @@
         inkscape
         libreoffice
         pinta
-        solo2-cli
         tenacity
         vivify
+        yubikey-manager
     ];
 
     # Flatpak config
