@@ -1,4 +1,4 @@
-{ inputs, lib, config, pkgs, jspkgs, ... }: {
+{ inputs, lib, config, pkgs, system, ... }: {
 
     options = {
         js.desktop.fonts.enable = lib.mkEnableOption "fonts";
@@ -17,12 +17,12 @@
             packages = [
 
                 # Personal package repo
-                jspkgs.bayon
-                jspkgs.dripicons
-                jspkgs.kenney-fonts
-                jspkgs.major-mono-display
-                jspkgs.typewithpride
-                jspkgs.vercetti
+                inputs.self.outputs.packages.${system}.bayon
+                inputs.self.outputs.packages.${system}.dripicons
+                inputs.self.outputs.packages.${system}.kenney-fonts
+                inputs.self.outputs.packages.${system}.major-mono-display
+                inputs.self.outputs.packages.${system}.typewithpride
+                inputs.self.outputs.packages.${system}.vercetti
 
                 # From nixpkgs
                 pkgs._0xproto

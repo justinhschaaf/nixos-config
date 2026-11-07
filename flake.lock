@@ -394,27 +394,6 @@
         "type": "github"
       }
     },
-    "jspkgs": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1723551068,
-        "narHash": "sha256-pHXU9DzDTCfGCotvxyht/W6e50y5pVX4gkYjVLGLUnM=",
-        "owner": "justinhschaaf",
-        "repo": "nix-packages",
-        "rev": "0b81efe76597be24abe2ff707e4a2df3f1dfd978",
-        "type": "github"
-      },
-      "original": {
-        "owner": "justinhschaaf",
-        "ref": "main",
-        "repo": "nix-packages",
-        "type": "github"
-      }
-    },
     "nix": {
       "inputs": {
         "bdwgc": "bdwgc",
@@ -718,7 +697,6 @@
         "disko": "disko",
         "flatpaks": "flatpaks",
         "home-manager": "home-manager",
-        "jspkgs": "jspkgs",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_6",
         "pigweb": "pigweb",

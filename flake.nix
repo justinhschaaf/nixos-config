@@ -35,10 +35,6 @@
 
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-        # justinhs packages
-        jspkgs.url = "github:justinhschaaf/nix-packages/main";
-        jspkgs.inputs.nixpkgs.follows = "nixpkgs";
-
         # Declarative flatpaks
         flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
 
@@ -87,12 +83,11 @@
     let
         system = "x86_64-linux";
         pkgs = import nixpkgs { inherit system; };
-        jspkgs = import inputs.jspkgs { inherit system; };
     in {
 
         # Gaming PC
         nixosConfigurations.bucatini = nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system jspkgs; };
+            specialArgs = { inherit inputs system; };
             modules = [
                 ./modules
                 ./systems/gaming.nix
@@ -102,7 +97,7 @@
 
         # Living Room TV
         nixosConfigurations.capellini = nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system jspkgs; };
+            specialArgs = { inherit inputs system; };
             modules = [
                 ./modules
                 ./systems/classic.nix
@@ -113,7 +108,7 @@
 
         # Framework Laptop
         nixosConfigurations.farfalle = nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system jspkgs; };
+            specialArgs = { inherit inputs system; };
             modules = [
                 ./modules
                 ./systems/laptop.nix
@@ -123,7 +118,7 @@
 
         # Bedroom TV
         nixosConfigurations.lasagna = nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system jspkgs; };
+            specialArgs = { inherit inputs system; };
             modules = [
                 ./modules
                 ./systems/tv.nix
@@ -134,7 +129,7 @@
 
         # Homelab Server
         nixosConfigurations.tortelli = nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system jspkgs; };
+            specialArgs = { inherit inputs system; };
             modules = [
                 ./modules
                 ./systems/server.nix
@@ -144,7 +139,7 @@
 
         # Installer ISO
         nixosConfigurations.iso = nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system jspkgs; };
+            specialArgs = { inherit inputs system; };
             modules = [
                 ./modules
                 ./systems/iso.nix
@@ -164,10 +159,11 @@
         # https://old.reddit.com/r/NixOS/comments/16p7ea2/dynamic_attribute_x86_64linux_already_defined/k1skjsf/
         packages.${system} = {
 
+            # iso
             iso = inputs.self.outputs.nixosConfigurations.iso.config.system.build.isoImage;
 
+            # utility scripts
             # Use trivial builders from https://ryantm.github.io/nixpkgs/builders/trivial-builders/
-
             jsbackup = pkgs.writeShellApplication {
                 name = "jsbackup";
                 runtimeInputs = with pkgs; [ rsync util-linux ];
@@ -192,6 +188,14 @@
                 bashOptions = [];
                 text = builtins.readFile ./scripts/killif.sh;
             };
+
+            # fonts
+            bayon = pkgs.callPackage ./pkgs/fonts/bayon {};
+            dripicons = pkgs.callPackage ./pkgs/fonts/dripicons {};
+            kenney-fonts = pkgs.callPackage ./pkgs/fonts/kenney-fonts {};
+            major-mono-display = pkgs.callPackage ./pkgs/fonts/major-mono-display {};
+            typewithpride = pkgs.callPackage ./pkgs/fonts/typewithpride {};
+            vercetti = pkgs.callPackage ./pkgs/fonts/vercetti {};
 
         };
 
