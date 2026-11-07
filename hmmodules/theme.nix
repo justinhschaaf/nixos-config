@@ -20,6 +20,9 @@
         gtk = {
             enable = true;
 
+            # set font
+            font.name = "Vercetti";
+
             # set icons
             iconTheme.package = pkgs.nordzy-icon-theme;
             iconTheme.name = "Nordzy-dark";
