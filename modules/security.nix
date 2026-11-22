@@ -59,7 +59,8 @@
     boot.kernel.sysctl."net.core.bpf_jit_enable" = false;
 
     # Disable ftrace debugging
-    boot.kernel.sysctl."kernel.ftrace_enabled" = false;
+    # for some reason this makes systemd-sysctl fail as of 2026-11-21, disabling for now
+    #boot.kernel.sysctl."kernel.ftrace_enabled" = false;
 
     # Disable the magic SysRq key
     # https://arciveo.com/en/blog/lynis-hardening-index#:~:text=Kernel%20parameters%20%28KRNL%2D6000%29%2E
