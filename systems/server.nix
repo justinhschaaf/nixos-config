@@ -17,6 +17,9 @@
         tarpits.enable = true;
         tarpits.openFirewall = true;
 
+        # gives us control over the postgres database as manual updates are required
+        postgres.enable = true;
+
         prometheus.enable = false;
         #prometheus.exporters.node.enable = true;
         #prometheus.scrapeFrom = { # local exporters
