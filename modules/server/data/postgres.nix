@@ -16,7 +16,7 @@
             enable = true;
 
             # package must be set to a fixed version as manual upgrades are required, see steps below
-            package = pkgs.postgresql_14;
+            package = pkgs.postgresql_15;
 
             ensureDatabases = lib.lists.forEach config.js.server.postgres.ensureApplications (x: "${x}_db");
             ensureUsers = lib.lists.forEach config.js.server.postgres.ensureApplications (x: {
@@ -33,11 +33,11 @@
         # - Login as root (sudo su -).
         # - Run upgrade-pg-cluster
         # - Change the package version above and rebuild
-        # - Run vacuumdb -a
+        # - Run vacuumdb --all --analyze-in-stages
         environment.systemPackages = [(
             let
                 # Specify the postgresql package to upgrade to.
-                newPostgres = pkgs.postgresql_15;
+                newPostgres = pkgs.postgresql_16;
                 cfg = config.services.postgresql;
             in pkgs.writeScriptBin "upgrade-pg-cluster" ''
                 set -eux
