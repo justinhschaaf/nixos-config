@@ -16,7 +16,7 @@
             enable = true;
 
             # package must be set to a fixed version as manual upgrades are required, see steps below
-            package = pkgs.postgresql_17;
+            package = pkgs.postgresql_18;
 
             ensureDatabases = lib.lists.forEach config.js.server.postgres.ensureApplications (x: "${x}_db");
             ensureUsers = lib.lists.forEach config.js.server.postgres.ensureApplications (x: {
