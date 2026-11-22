@@ -151,7 +151,7 @@
 
     environment.etc."issue.net".source = pkgs.writeText "issue.net" ''
 
-        ┌─ ${config.system.nixos.distroName} ${config.system.nixos.label} (${pkgs.stdenv.hostPlatform.system}) ─ \l ───────────────────────────────────────────────────────┐
+        ┌─ ${config.system.nixos.distroName} ${config.system.nixos.label} (${pkgs.stdenv.hostPlatform.system}) ──────────────────────────────────────────────────────────────┐
         │                                                                                                            │
         │                                                  WARNING!                                                  │
         │                                                                                                            │
